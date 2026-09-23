@@ -211,6 +211,44 @@
             transform: scale(1.08);
         }
         .scroll-arrow:active { transform: scale(0.96); }
+
+        /* ── PART 5: In-Clinic specialty cards ────────────────────── */
+        .clinic-card {
+            transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+                        box-shadow 0.22s ease,
+                        border-color 0.2s ease;
+        }
+        .clinic-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -8px rgba(14,165,233,0.15),
+                        0 8px 16px -4px rgba(0,0,0,0.06);
+        }
+        .clinic-card:active { transform: translateY(-2px); }
+
+        .clinic-icon-wrap {
+            transition: box-shadow 0.22s ease;
+        }
+        .clinic-card:hover .clinic-icon-wrap {
+            box-shadow: 0 0 0 6px rgba(14,165,233,0.12);
+        }
+
+        /* Book Now link chevron nudge */
+        .book-link .bchevron {
+            display: inline-block;
+            transition: transform 0.18s ease;
+        }
+        .book-link:hover .bchevron { transform: translateX(3px); }
+        .book-link:hover { color: #0369a1; }
+
+        /* ── PART 5: Footer ────────────────────────────────────────── */
+        .footer-link {
+            transition: color 0.15s ease;
+        }
+        .footer-link:hover { color: #38bdf8; }
+
+        .footer-divider {
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+        }
     </style>
 </head>
 
@@ -1230,7 +1268,450 @@ Chat Bot',
     <section id="for-providers" class="py-16 bg-gray-50           text-center text-gray-300 text-sm tracking-widest uppercase">For Providers &mdash; Placeholder</section>
     <section id="help"          class="py-16 bg-white            text-center text-gray-300 text-sm tracking-widest uppercase">Security &amp; Help &mdash; Placeholder</section>
 
+    {{-- ================================================================
+         PART 5 – SECTION 1: In-Clinic Consultation Specialty Cards
+         ================================================================ --}}
+    <section id="in-clinic" class="py-16 bg-white" aria-labelledby="clinic-heading">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- ── Section header ──────────────────────────────────────── --}}
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+
+                <div class="max-w-xl">
+                    {{-- Eyebrow --}}
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-6 h-0.5 bg-gradient-to-r from-sky-500 to-indigo-500 rounded-full"></div>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-sky-600">In-Clinic Appointments</span>
+                    </div>
+
+                    {{-- Headline --}}
+                    <h2 id="clinic-heading"
+                        class="text-2xl sm:text-3xl lg:text-[2.1rem] font-extrabold text-gray-900 leading-tight tracking-tight">
+                        Book an appointment for an<br class="hidden sm:block" />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-600">
+                            in-clinic consultation
+                        </span>
+                    </h2>
+
+                    {{-- Subtitle --}}
+                    <p class="mt-3 text-sm sm:text-base text-gray-500 leading-relaxed">
+                        Find experienced doctors across all specialties —
+                        <span class="font-medium text-gray-700">at a clinic near you.</span>
+                    </p>
+                </div>
+
+                {{-- Desktop CTA --}}
+                <div class="flex-shrink-0 self-start sm:self-end">
+                    <a href="#find-doctors"
+                       class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold
+                              text-sky-600 border-2 border-sky-200 hover:border-sky-400 hover:bg-sky-50
+                              rounded-full transition-all duration-200 group/cta whitespace-nowrap">
+                        View All Specialities
+                        <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/cta:translate-x-0.5"
+                             fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            {{-- ── 4 Specialty Cards ──────────────────────────────────────── --}}
+            @php
+                $clinicCards = [
+                    [
+                        'id'          => 'dentist',
+                        'specialty'   => 'Dentist',
+                        'tagline'     => 'Teething troubles? Schedule a dental checkup',
+                        'description' => 'From routine cleanings to advanced orthodontics, our verified dental specialists handle it all.',
+                        'badge'       => 'Oral Health',
+                        'emoji'       => '🦷',
+                        'bg_from'     => '#ecfdf5',   /* emerald-50  */
+                        'bg_to'       => '#d1fae5',   /* emerald-100 */
+                        'accent'      => '#059669',   /* emerald-600 */
+                        'badge_bg'    => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                        'dot'         => 'bg-emerald-400',
+                        'count'       => '175+ Dentists',
+                        'icon_path'   => 'M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18',
+                    ],
+                    [
+                        'id'          => 'gyno',
+                        'specialty'   => 'Gynecologist / Obstetrician',
+                        'tagline'     => 'Explore for women\'s health, pregnancy and infertility treatments',
+                        'description' => 'Trusted gynecologists for prenatal care, fertility consultations, and comprehensive women\'s health.',
+                        'badge'       => "Women's Health",
+                        'emoji'       => '🌸',
+                        'bg_from'     => '#fdf2f8',   /* pink-50  */
+                        'bg_to'       => '#fce7f3',   /* pink-100 */
+                        'accent'      => '#db2777',   /* pink-600 */
+                        'badge_bg'    => 'bg-pink-50 text-pink-700 border-pink-200',
+                        'dot'         => 'bg-pink-400',
+                        'count'       => '120+ Specialists',
+                        'icon_path'   => 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+                    ],
+                    [
+                        'id'          => 'dietitian',
+                        'specialty'   => 'Dietitian / Nutrition',
+                        'tagline'     => 'Get guidance on eating right, weight management and sports nutrition',
+                        'description' => 'Certified nutritionists craft personalised meal plans for your lifestyle, health goals and medical needs.',
+                        'badge'       => 'Nutrition',
+                        'emoji'       => '🥗',
+                        'bg_from'     => '#fffbeb',   /* amber-50  */
+                        'bg_to'       => '#fef3c7',   /* amber-100 */
+                        'accent'      => '#d97706',   /* amber-600 */
+                        'badge_bg'    => 'bg-amber-50 text-amber-700 border-amber-200',
+                        'dot'         => 'bg-amber-400',
+                        'count'       => '80+ Experts',
+                        'icon_path'   => 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+                    ],
+                    [
+                        'id'          => 'physio',
+                        'specialty'   => 'Physiotherapist',
+                        'tagline'     => 'Pulled a muscle? Get it treated by a trained physiotherapist',
+                        'description' => 'Expert physiotherapists for sports injuries, post-surgery rehab, back pain and mobility recovery.',
+                        'badge'       => 'Rehabilitation',
+                        'emoji'       => '🏃',
+                        'bg_from'     => '#eff6ff',   /* blue-50   */
+                        'bg_to'       => '#dbeafe',   /* blue-100  */
+                        'accent'      => '#2563eb',   /* blue-600  */
+                        'badge_bg'    => 'bg-blue-50 text-blue-700 border-blue-200',
+                        'dot'         => 'bg-blue-400',
+                        'count'       => '95+ Therapists',
+                        'icon_path'   => 'M13 10V3L4 14h7v7l9-11h-7z',
+                    ],
+                ];
+            @endphp
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+                @foreach ($clinicCards as $card)
+                <a href="{{ url('#find-doctors') }}?specialty={{ urlencode($card['specialty']) }}"
+                   class="clinic-card group relative flex flex-col bg-white border border-gray-100
+                          rounded-2xl overflow-hidden shadow-sm hover:border-sky-100 cursor-pointer"
+                   aria-label="Book {{ $card['specialty'] }} appointment">
+
+                    {{-- ── Top tinted illustration band ──────────────────── --}}
+                    <div class="relative h-36 flex items-center justify-center overflow-hidden flex-shrink-0"
+                         style="background: linear-gradient(135deg, {{ $card['bg_from'] }} 0%, {{ $card['bg_to'] }} 100%);">
+
+                        {{-- Decorative soft circle blob --}}
+                        <div class="absolute -bottom-6 -right-6 w-24 h-24 rounded-full opacity-40"
+                             style="background: radial-gradient(circle, {{ $card['bg_to'] }}, transparent);"
+                             aria-hidden="true"></div>
+
+                        {{-- Icon circle --}}
+                        <div class="clinic-icon-wrap relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm"
+                             style="background: white;">
+                            <span class="text-3xl select-none leading-none" role="img" aria-hidden="true">
+                                {{ $card['emoji'] }}
+                            </span>
+                        </div>
+
+                        {{-- Specialty badge top-left --}}
+                        <span class="absolute top-3 left-3 inline-flex items-center gap-1
+                                     text-[10px] font-semibold uppercase tracking-wider
+                                     px-2.5 py-1 rounded-full border {{ $card['badge_bg'] }}">
+                            <span class="w-1.5 h-1.5 rounded-full {{ $card['dot'] }} inline-block"></span>
+                            {{ $card['badge'] }}
+                        </span>
+
+                        {{-- Doctor count badge top-right --}}
+                        <span class="absolute top-3 right-3 text-[10px] font-semibold text-gray-500
+                                     bg-white/80 backdrop-blur-sm px-2 py-0.5 rounded-full border border-gray-100">
+                            {{ $card['count'] }}
+                        </span>
+                    </div>
+
+                    {{-- ── Card body ──────────────────────────────────────── --}}
+                    <div class="flex flex-col flex-1 p-5">
+
+                        {{-- Specialty name --}}
+                        <h3 class="font-bold text-base text-gray-900 leading-snug mb-1
+                                   group-hover:text-sky-700 transition-colors duration-200">
+                            {{ $card['specialty'] }}
+                        </h3>
+
+                        {{-- Tagline --}}
+                        <p class="text-[13px] text-gray-500 leading-relaxed mb-4 flex-1">
+                            {{ $card['tagline'] }}
+                        </p>
+
+                        {{-- Book Now CTA --}}
+                        <div class="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between">
+                            <span class="book-link inline-flex items-center gap-1
+                                         text-[11px] font-bold uppercase tracking-widest text-sky-500
+                                         transition-colors duration-150">
+                                Book Now
+                                <svg class="bchevron w-3.5 h-3.5 ml-0.5" fill="none" stroke="currentColor"
+                                     stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+
+                            {{-- Mini icon --}}
+                            <div class="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0
+                                        opacity-60 group-hover:opacity-100 transition-opacity duration-200"
+                                 style="background: {{ $card['bg_from'] }};">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="{{ $card['accent'] }}"
+                                     stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="{{ $card['icon_path'] }}" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+            </div>
+
+            {{-- ── Bottom reassurance strip ───────────────────────────────── --}}
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10
+                        text-sm text-gray-500">
+                @foreach([
+                    ['icon'=>'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', 'text'=>'Verified & credentialed doctors'],
+                    ['icon'=>'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',   'text'=>'Flexible appointment slots'],
+                    ['icon'=>'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z', 'text'=>'Zero booking fees'],
+                ] as $pill)
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-sky-500 flex-shrink-0" fill="none" stroke="currentColor"
+                         stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="{{ $pill['icon'] }}" />
+                    </svg>
+                    <span class="font-medium text-gray-600">{{ $pill['text'] }}</span>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
 </main>
+
+{{-- ===================================================================
+     PART 5 – FOOTER
+     =================================================================== --}}
+<footer class="bg-gray-900 text-gray-300" aria-label="Site footer">
+
+    {{-- ── Main footer grid ─────────────────────────────────────────── --}}
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            {{-- Col 1: Brand --}}
+            <div class="lg:col-span-1">
+                {{-- Logo --}}
+                <a href="{{ url('/') }}" class="inline-flex items-center gap-2.5 mb-4 group" aria-label="MediCare24 Home">
+                    <div class="relative w-8 h-8 flex-shrink-0">
+                        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"
+                             class="w-8 h-8 drop-shadow-sm group-hover:scale-105 transition-transform duration-200">
+                            <circle cx="18" cy="18" r="17" fill="url(#grad-footer)" />
+                            <rect x="15" y="8"  width="6" height="20" rx="2" fill="white" />
+                            <rect x="8"  y="15" width="20" height="6"  rx="2" fill="white" />
+                            <circle cx="18" cy="18" r="2.5" fill="url(#grad-footer)" />
+                            <line x1="18" y1="18" x2="18" y2="13.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                            <line x1="18" y1="18" x2="21.5" y2="18" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="grad-footer" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%"   stop-color="#0ea5e9" />
+                                    <stop offset="100%" stop-color="#6366f1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight leading-none select-none">
+                        <span class="text-sky-400">Medi</span><span class="text-indigo-400">Care</span><span class="text-white">24</span>
+                    </span>
+                </a>
+
+                <p class="text-[13px] text-gray-400 leading-relaxed mb-5 max-w-[220px]">
+                    Quality healthcare, anytime — connecting patients with verified doctors across Sri Lanka.
+                </p>
+
+                {{-- Emergency contact --}}
+                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-red-900/30 border border-red-800/50">
+                    <svg class="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                         stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <div>
+                        <p class="text-[10px] font-semibold uppercase tracking-widest text-red-400 mb-0.5">24/7 Emergency</p>
+                        <a href="tel:+94117123456"
+                           class="text-sm font-bold text-white hover:text-red-300 transition-colors duration-150">
+                            +94 117 123 456
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Col 2: Services --}}
+            <div>
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">Services</h3>
+                <ul class="space-y-2.5">
+                    @foreach([
+                        ['label' => 'Find Doctors',         'href' => '#find-doctors'],
+                        ['label' => 'Video Consultation',   'href' => '#video-consult'],
+                        ['label' => 'In-Clinic Booking',    'href' => '#in-clinic'],
+                        ['label' => 'Lab Tests at Home',    'href' => '#lab-tests'],
+                        ['label' => 'Surgeries & Procedures','href'=> '#surgeries'],
+                        ['label' => 'AI Health Chat Bot',   'href' => '#ai-chatbot'],
+                    ] as $lnk)
+                    <li>
+                        <a href="{{ $lnk['href'] }}"
+                           class="footer-link text-sm text-gray-400 hover:text-sky-400 flex items-center gap-1.5 group/fl">
+                            <svg class="w-3 h-3 text-gray-600 group-hover/fl:text-sky-500 transition-colors flex-shrink-0"
+                                 fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                            {{ $lnk['label'] }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            {{-- Col 3: Specialties --}}
+            <div>
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">Top Specialties</h3>
+                <ul class="space-y-2.5">
+                    @foreach([
+                        'General Physician', 'Cardiologist', 'Dermatologist',
+                        'Pediatrician', 'Orthopedic', 'Gynecologist',
+                    ] as $spec)
+                    <li>
+                        <a href="{{ url('#find-doctors') }}?specialty={{ urlencode($spec) }}"
+                           class="footer-link text-sm text-gray-400 hover:text-sky-400 flex items-center gap-1.5 group/fl">
+                            <svg class="w-3 h-3 text-gray-600 group-hover/fl:text-sky-500 transition-colors flex-shrink-0"
+                                 fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                            {{ $spec }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            {{-- Col 4: Company + Trust badges --}}
+            <div>
+                <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">Company</h3>
+                <ul class="space-y-2.5 mb-7">
+                    @foreach([
+                        ['label' => 'About Us',        'href' => '#about'],
+                        ['label' => 'For Providers',   'href' => '#for-providers'],
+                        ['label' => 'Careers',         'href' => '#careers'],
+                        ['label' => 'Privacy Policy',  'href' => '#privacy'],
+                        ['label' => 'Terms of Service','href' => '#terms'],
+                        ['label' => 'Security & Help', 'href' => '#help'],
+                    ] as $lnk)
+                    <li>
+                        <a href="{{ $lnk['href'] }}"
+                           class="footer-link text-sm text-gray-400 hover:text-sky-400 flex items-center gap-1.5 group/fl">
+                            <svg class="w-3 h-3 text-gray-600 group-hover/fl:text-sky-500 transition-colors flex-shrink-0"
+                                 fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                            {{ $lnk['label'] }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+
+                {{-- Trust badges --}}
+                <div class="flex flex-col gap-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700">
+                        <svg class="w-3.5 h-3.5 text-sky-400 flex-shrink-0" fill="none" stroke="currentColor"
+                             stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                        </svg>
+                        <span class="text-[11px] text-gray-300 font-medium">SSL Secured</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700">
+                        <svg class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor"
+                             stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" />
+                        </svg>
+                        <span class="text-[11px] text-gray-300 font-medium">1,200+ Verified Doctors</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700">
+                        <svg class="w-3.5 h-3.5 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor"
+                             stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                        <span class="text-[11px] text-gray-300 font-medium">Rated 4.9 / 5 by patients</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- ── Divider ─────────────────────────────────────────────────────── --}}
+    <div class="footer-divider h-px mx-8 my-0" aria-hidden="true"></div>
+
+    {{-- ── Bottom bar ──────────────────────────────────────────────────── --}}
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+
+            {{-- Copyright --}}
+            <p class="text-[12px] text-gray-500 text-center sm:text-left">
+                &copy; {{ date('Y') }} MediCare24. All rights reserved.
+                Made with
+                <svg class="w-3 h-3 inline-block text-red-400 -mt-0.5 mx-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
+                </svg>
+                for better healthcare in Sri Lanka.
+            </p>
+
+            {{-- Social / utility links --}}
+            <div class="flex items-center gap-4">
+                <a href="#privacy"
+                   class="text-[12px] text-gray-500 hover:text-sky-400 transition-colors duration-150">
+                    Privacy
+                </a>
+                <a href="#terms"
+                   class="text-[12px] text-gray-500 hover:text-sky-400 transition-colors duration-150">
+                    Terms
+                </a>
+                <a href="#help"
+                   class="text-[12px] text-gray-500 hover:text-sky-400 transition-colors duration-150">
+                    Help
+                </a>
+
+                {{-- Social icons --}}
+                <div class="flex items-center gap-2 ml-2">
+                    {{-- Facebook --}}
+                    <a href="#" aria-label="Facebook"
+                       class="w-7 h-7 rounded-full bg-gray-800 hover:bg-sky-500 flex items-center justify-center
+                              transition-colors duration-150 group/soc border border-gray-700 hover:border-sky-500">
+                        <svg class="w-3.5 h-3.5 text-gray-400 group-hover/soc:text-white transition-colors"
+                             fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    {{-- Twitter / X --}}
+                    <a href="#" aria-label="Twitter"
+                       class="w-7 h-7 rounded-full bg-gray-800 hover:bg-sky-500 flex items-center justify-center
+                              transition-colors duration-150 group/soc border border-gray-700 hover:border-sky-500">
+                        <svg class="w-3.5 h-3.5 text-gray-400 group-hover/soc:text-white transition-colors"
+                             fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    {{-- Instagram --}}
+                    <a href="#" aria-label="Instagram"
+                       class="w-7 h-7 rounded-full bg-gray-800 hover:bg-pink-500 flex items-center justify-center
+                              transition-colors duration-150 group/soc border border-gray-700 hover:border-pink-500">
+                        <svg class="w-3.5 h-3.5 text-gray-400 group-hover/soc:text-white transition-colors"
+                             fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
 
 {{-- ===================================================================
      JAVASCRIPT: Hamburger Menu Toggle (zero dependencies)
