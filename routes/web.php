@@ -7,6 +7,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Patient portal entry point — CTA on the landing page points here.
+// Authenticated users are redirected to their dashboard automatically
+// by Laravel's RedirectIfAuthenticated middleware on the register page.
+Route::get('/home', function () {
+    return redirect()->route('register');
+})->name('home');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
