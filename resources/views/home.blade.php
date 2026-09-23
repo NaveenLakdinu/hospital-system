@@ -120,6 +120,35 @@
         .trust-stat:nth-child(2) { animation-delay: 0.1s; }
         .trust-stat:nth-child(3) { animation-delay: 0.2s; }
         .trust-stat:nth-child(4) { animation-delay: 0.3s; }
+        /* ── PART 3: Service shortcut cards ───────────────────────── */
+        .service-card {
+            transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+                        box-shadow 0.22s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: 0 20px 40px -8px rgba(14,165,233,0.18),
+                        0 8px 16px -4px rgba(0,0,0,0.06);
+        }
+        .service-card:active { transform: translateY(-2px) scale(1.005); }
+
+        /* Illustration ring glow on card hover */
+        .service-card:hover .illus-ring { opacity: 1; }
+        .illus-ring {
+            opacity: 0;
+            transition: opacity 0.22s ease;
+        }
+
+        /* Consult section specialty pill chips */
+        .spec-chip {
+            transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+        }
+        .spec-chip:hover {
+            background: #f0f9ff;
+            border-color: #7dd3fc;
+            color: #0369a1;
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 
@@ -640,8 +669,273 @@
     </section>
 
 
-    <section id="find-doctors"  class="py-16 bg-white            text-center text-gray-300 text-sm tracking-widest uppercase">Find Doctors &mdash; Placeholder</section>
-    <section id="video-consult" class="py-16 bg-gray-50           text-center text-gray-300 text-sm tracking-widest uppercase">Video Consult &mdash; Placeholder</section>
+    {{-- ================================================================
+         PART 3 – SECTION 1: Four Primary Service Shortcuts
+         ================================================================ --}}
+    <section id="services" class="py-16 bg-white" aria-labelledby="services-heading">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- Section label --}}
+            <p id="services-heading" class="sr-only">Primary Healthcare Services</p>
+
+            {{-- 4-column card grid --}}
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6">
+
+                @php
+                    $services = [
+
+                        /* ─── 1. Online Video Consultation ─── */
+                        [
+                            'id'       => 'video-consult',
+                            'href'     => '#video-consult',
+                            'label'    => 'Online Video
+Consultation',
+                            'badge'    => 'Available 24/7',
+                            'badge_color' => 'emerald',
+                            'from'     => '#dbeafe',   /* blue-100  */
+                            'to'       => '#bfdbfe',   /* blue-200  */
+                            'icon_bg'  => '#3b82f6',   /* blue-500  */
+                            'icon_path'=> 'M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z',
+                            /* decorative mini illustration paths */
+                            'deco_fill'=> '#93c5fd',
+                        ],
+
+                        /* ─── 2. Book Appointment ─── */
+                        [
+                            'id'       => 'book-appt',
+                            'href'     => '#find-doctors',
+                            'label'    => 'Book
+Appointment',
+                            'badge'    => 'Instant Booking',
+                            'badge_color' => 'sky',
+                            'from'     => '#e0e7ff',   /* indigo-100 */
+                            'to'       => '#c7d2fe',   /* indigo-200 */
+                            'icon_bg'  => '#6366f1',   /* indigo-500 */
+                            'icon_path'=> 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+                            'deco_fill'=> '#a5b4fc',
+                        ],
+
+                        /* ─── 3. Lab Tests ─── */
+                        [
+                            'id'       => 'lab',
+                            'href'     => '#lab-tests',
+                            'label'    => 'Lab Tests
+at Home',
+                            'badge'    => 'Home Collection',
+                            'badge_color' => 'cyan',
+                            'from'     => '#cffafe',   /* cyan-100  */
+                            'to'       => '#a5f3fc',   /* cyan-200  */
+                            'icon_bg'  => '#06b6d4',   /* cyan-500  */
+                            'icon_path'=> 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+                            'deco_fill'=> '#67e8f9',
+                        ],
+
+                        /* ─── 4. AI Chat Bot ─── */
+                        [
+                            'id'       => 'ai',
+                            'href'     => '#ai-chatbot',
+                            'label'    => 'AI Health
+Chat Bot',
+                            'badge'    => 'NEW',
+                            'badge_color' => 'violet',
+                            'from'     => '#ede9fe',   /* violet-100 */
+                            'to'       => '#ddd6fe',   /* violet-200 */
+                            'icon_bg'  => '#8b5cf6',   /* violet-500 */
+                            'icon_path'=> 'M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15M14.25 3.104c.251.023.501.05.75.082M19.8 15l-3.6 3.6a2.25 2.25 0 01-3.182 0L9.4 15M19.8 15l.9-.9m-11.3.9-.9-.9M12 12.75a.75.75 0 100-1.5.75.75 0 000 1.5z',
+                            'deco_fill'=> '#c4b5fd',
+                        ],
+                    ];
+                @endphp
+
+                @foreach ($services as $svc)
+                <a href="{{ $svc['href'] }}"
+                   class="service-card group relative flex flex-col items-center text-center
+                          bg-white border border-gray-100 rounded-2xl p-6 sm:p-7
+                          shadow-sm cursor-pointer select-none overflow-hidden"
+                   aria-label="{{ str_replace(chr(10), ' ', $svc['label']) }}">
+
+                    {{-- Subtle corner gradient tint --}}
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
+                         style="background: radial-gradient(ellipse at 50% 0%, {{ $svc['from'] }}55, transparent 70%);"
+                         aria-hidden="true"></div>
+
+                    {{-- Illustration container --}}
+                    <div class="relative mb-5 w-[88px] h-[88px] sm:w-24 sm:h-24 flex-shrink-0">
+
+                        {{-- Ambient glow ring --}}
+                        <div class="illus-ring absolute inset-0 rounded-full"
+                             style="box-shadow: 0 0 0 8px {{ $svc['from'] }}, 0 0 0 14px {{ $svc['to'] }}40;"
+                             aria-hidden="true"></div>
+
+                        {{-- Gradient circle background --}}
+                        <div class="relative w-full h-full rounded-full flex items-center justify-center"
+                             style="background: linear-gradient(135deg, {{ $svc['from'] }} 0%, {{ $svc['to'] }} 100%);">
+
+                            {{-- Decorative inner ring --}}
+                            <div class="absolute inset-2 rounded-full border-2 border-white/60" aria-hidden="true"></div>
+
+                            {{-- Service icon --}}
+                            <svg class="relative w-9 h-9 sm:w-10 sm:h-10 drop-shadow-sm"
+                                 fill="none" stroke="{{ $svc['icon_bg'] }}" stroke-width="1.7"
+                                 viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $svc['icon_path'] }}" />
+                            </svg>
+                        </div>
+
+                        {{-- AI badge shimmer for the AI card --}}
+                        @if($svc['id'] === 'ai')
+                        <span class="badge-ai absolute -top-1 -right-1 text-white text-[9px] font-bold
+                                     tracking-wide px-1.5 py-0.5 rounded-full leading-none shadow-sm">
+                            NEW
+                        </span>
+                        @endif
+                    </div>
+
+                    {{-- Title --}}
+                    <h3 class="font-bold text-sm sm:text-base text-gray-800 leading-snug
+                               group-hover:text-sky-700 transition-colors duration-200 whitespace-pre-line">{{ $svc['label'] }}</h3>
+
+                    {{-- Badge pill --}}
+                    <span class="mt-2.5 inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold
+                                 @if($svc['badge_color'] === 'emerald') bg-emerald-50 text-emerald-700
+                                 @elseif($svc['badge_color'] === 'sky')    bg-sky-50    text-sky-700
+                                 @elseif($svc['badge_color'] === 'cyan')   bg-cyan-50   text-cyan-700
+                                 @elseif($svc['badge_color'] === 'violet') bg-violet-50 text-violet-700
+                                 @else bg-gray-100 text-gray-600 @endif">
+                        @if($svc['badge_color'] === 'emerald')
+                            <span class="mr-1 inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        @endif
+                        {{ $svc['badge'] }}
+                    </span>
+
+                    {{-- Hover arrow indicator --}}
+                    <div class="mt-3 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-1 group-hover:translate-y-0">
+                        <svg class="w-4 h-4 text-sky-500 mx-auto" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </div>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- ================================================================
+         PART 3 – SECTION 2: Consult Top Doctors Header + Specialties
+         ================================================================ --}}
+    <section id="video-consult" class="py-16 bg-gradient-to-b from-gray-50 to-white" aria-labelledby="consult-heading">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- ── Header row: headline + CTA button ───────────────────── --}}
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-10">
+
+                <div class="max-w-xl">
+                    {{-- Eyebrow --}}
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-6 h-0.5 bg-gradient-to-r from-sky-500 to-indigo-500 rounded-full"></div>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-sky-600">Online Consultations</span>
+                    </div>
+
+                    {{-- Main headline --}}
+                    <h2 id="consult-heading"
+                        class="text-2xl sm:text-3xl lg:text-[2.1rem] font-extrabold text-gray-900 leading-tight tracking-tight">
+                        Consult top doctors online<br class="hidden sm:block" />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-600">
+                            for any health concern
+                        </span>
+                    </h2>
+
+                    {{-- Subtitle --}}
+                    <p class="mt-3 text-sm sm:text-base text-gray-500 leading-relaxed">
+                        Private online consultations with verified doctors in all specialties —
+                        <span class="font-medium text-gray-700">results in minutes, not days.</span>
+                    </p>
+                </div>
+
+                {{-- CTA — desktop: right-aligned, mobile: below subtitle --}}
+                <div class="flex-shrink-0 self-start sm:mt-2">
+                    <a href="#find-doctors"
+                       class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold
+                              text-sky-600 border-2 border-sky-200 hover:border-sky-400 hover:bg-sky-50
+                              rounded-full transition-all duration-200 group/cta whitespace-nowrap">
+                        View All Specialities
+                        <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/cta:translate-x-0.5"
+                             fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            {{-- ── Specialty chips grid ──────────────────────────────────── --}}
+            @php
+                $specialties = [
+                    ['label'=>'🩺 General Physician',  'count'=>'280+ Doctors'],
+                    ['label'=>'❤️  Cardiologist',       'count'=>'95+ Doctors'],
+                    ['label'=>'🧠 Neurologist',         'count'=>'60+ Doctors'],
+                    ['label'=>'🦷 Dentist',             'count'=>'175+ Doctors'],
+                    ['label'=>'👶 Pediatrician',        'count'=>'130+ Doctors'],
+                    ['label'=>'🧬 Dermatologist',       'count'=>'88+ Doctors'],
+                    ['label'=>'👁  Eye Specialist',     'count'=>'72+ Doctors'],
+                    ['label'=>'🦴 Orthopedic',          'count'=>'65+ Doctors'],
+                    ['label'=>'🏃 Physiotherapist',     'count'=>'54+ Doctors'],
+                    ['label'=>'🌿 Ayurveda',            'count'=>'42+ Doctors'],
+                    ['label'=>'🧪 Pathologist',         'count'=>'38+ Doctors'],
+                    ['label'=>'🔬 Oncologist',          'count'=>'29+ Doctors'],
+                ];
+            @endphp
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                @foreach ($specialties as $spec)
+                <a href="{{ url('#find-doctors') }}?specialty={{ urlencode($spec['label']) }}"
+                   class="spec-chip flex items-center justify-between gap-3 px-4 py-3.5
+                          bg-white border border-gray-100 rounded-xl shadow-sm
+                          cursor-pointer group/spec">
+                    <span class="text-sm font-semibold text-gray-800 leading-tight">{{ $spec['label'] }}</span>
+                    <span class="text-[11px] font-medium text-gray-400 whitespace-nowrap group-hover/spec:text-sky-600 transition-colors">
+                        {{ $spec['count'] }}
+                    </span>
+                </a>
+                @endforeach
+            </div>
+
+            {{-- ── Bottom promo strip ───────────────────────────────────── --}}
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4
+                        bg-gradient-to-r from-sky-50 via-indigo-50 to-sky-50
+                        border border-sky-100 rounded-2xl px-6 py-4">
+
+                <div class="flex items-center gap-3">
+                    {{-- Stacked avatar dots --}}
+                    <div class="flex -space-x-2" aria-hidden="true">
+                        @foreach(['#bae6fd','#c7d2fe','#99f6e4','#fde68a'] as $color)
+                        <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center"
+                             style="background:{{ $color }};">
+                        </div>
+                        @endforeach
+                        <div class="w-8 h-8 rounded-full border-2 border-white bg-gradient-to-br from-sky-400 to-indigo-500
+                                    flex items-center justify-center text-white text-[9px] font-bold">
+                            +496
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">
+                        <span class="font-semibold text-gray-900">500+ doctors</span> available right now for instant consultation
+                    </p>
+                </div>
+
+                <a href="#find-doctors"
+                   class="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white
+                          bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700
+                          rounded-full shadow-sm hover:shadow-md transition-all duration-200">
+                    <span class="relative flex h-2 w-2" aria-hidden="true">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                    </span>
+                    Consult Now
+                </a>
+            </div>
+
+        </div>
+    </section>
     <section id="lab-tests"     class="py-16 bg-white            text-center text-gray-300 text-sm tracking-widest uppercase">Lab Tests &mdash; Placeholder</section>
     <section id="surgeries"     class="py-16 bg-gray-50           text-center text-gray-300 text-sm tracking-widest uppercase">Surgeries &mdash; Placeholder</section>
     <section id="ai-chatbot"    class="py-16 bg-white            text-center text-gray-300 text-sm tracking-widest uppercase">AI Chat Bot &mdash; Placeholder</section>
