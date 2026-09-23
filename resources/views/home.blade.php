@@ -149,6 +149,68 @@
             color: #0369a1;
             transform: translateY(-1px);
         }
+
+        /* ── PART 4: Symptoms carousel ────────────────────────────── */
+
+        /* Hide scrollbar cross-browser while keeping scroll */
+        .symptom-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .symptom-scroll::-webkit-scrollbar { display: none; }
+
+        /* Each card snaps into place on mobile */
+        .symptom-card { scroll-snap-align: start; }
+
+        /* Circle image container */
+        .symptom-avatar {
+            transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+                        box-shadow 0.2s ease;
+        }
+        .symptom-card:hover .symptom-avatar {
+            transform: translateY(-5px) scale(1.04);
+        }
+
+        /* Fade-in gradient left/right edge on desktop to hint scroll */
+        .symptom-track-wrap { position: relative; }
+        .symptom-track-wrap::before,
+        .symptom-track-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 48px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .symptom-track-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, #f9fafb, transparent);
+        }
+        .symptom-track-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, #f9fafb, transparent);
+        }
+
+        /* "CONSULT NOW" hover chevron nudge */
+        .consult-link .chevron {
+            display: inline-block;
+            transition: transform 0.18s ease;
+        }
+        .consult-link:hover .chevron { transform: translateX(3px); }
+        .consult-link:hover { color: #0369a1; }
+
+        /* Scroll arrow buttons */
+        .scroll-arrow {
+            transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+        }
+        .scroll-arrow:hover {
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(14,165,233,0.18);
+            transform: scale(1.08);
+        }
+        .scroll-arrow:active { transform: scale(0.96); }
     </style>
 </head>
 
@@ -936,6 +998,232 @@ Chat Bot',
 
         </div>
     </section>
+
+    {{-- ================================================================
+         PART 4 – Common Symptoms & Health Concerns Carousel
+         ================================================================ --}}
+    <section id="symptoms" class="py-14 bg-gray-50" aria-labelledby="symptoms-heading">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- ── Section header ─────────────────────────────────────── --}}
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    {{-- Eyebrow --}}
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-6 h-0.5 bg-gradient-to-r from-sky-500 to-indigo-500 rounded-full"></div>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-sky-600">
+                            Common Health Concerns
+                        </span>
+                    </div>
+                    <h2 id="symptoms-heading"
+                        class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight leading-tight">
+                        What are you dealing with
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-600">today?</span>
+                    </h2>
+                </div>
+
+                {{-- Desktop scroll arrows --}}
+                <div class="hidden sm:flex items-center gap-2" aria-label="Scroll symptoms">
+                    <button id="sym-prev"
+                            class="scroll-arrow w-9 h-9 rounded-full border border-gray-200 bg-white
+                                   flex items-center justify-center text-gray-500"
+                            aria-label="Scroll left">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button id="sym-next"
+                            class="scroll-arrow w-9 h-9 rounded-full border border-gray-200 bg-white
+                                   flex items-center justify-center text-gray-500"
+                            aria-label="Scroll right">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            {{-- ── Scroll track wrapper ─────────────────────────────────── --}}
+            <div class="symptom-track-wrap">
+                <div id="symptom-track"
+                     class="symptom-scroll flex gap-5 overflow-x-auto pb-4"
+                     role="list"
+                     aria-label="Symptom categories">
+
+                    @php
+                        $symptoms = [
+                            [
+                                'label'    => 'Pregnancy',
+                                'href'     => '#find-doctors',
+                                'bg_from'  => '#fce7f3',  /* pink-100  */
+                                'bg_to'    => '#fbcfe8',  /* pink-200  */
+                                'icon_stroke' => '#ec4899',
+                                /* Simplified inline SVG path for the illustration */
+                                'svg_paths' => [
+                                    /* Body silhouette — simple pregnant figure */
+                                    ['d'=>'M12 3a3 3 0 110 6 3 3 0 010-6z', 'stroke'=>'#ec4899', 'fill'=>'none'],
+                                    ['d'=>'M7 21v-2a5 5 0 015-5h.5a5.5 5.5 0 015.5 5.5V21', 'stroke'=>'#ec4899', 'fill'=>'none'],
+                                    ['d'=>'M13 13c1.5 0 3 1.5 3 4', 'stroke'=>'#f9a8d4', 'fill'=>'none'],
+                                ],
+                                'emoji' => '🤰',
+                                'dot_color' => '#f472b6',
+                            ],
+                            [
+                                'label'    => 'Acne & Skin Issues',
+                                'href'     => '#find-doctors',
+                                'bg_from'  => '#fef9c3',  /* yellow-100 */
+                                'bg_to'    => '#fef08a',  /* yellow-200 */
+                                'icon_stroke' => '#eab308',
+                                'svg_paths' => [
+                                    ['d'=>'M12 2a10 10 0 100 20A10 10 0 0012 2z', 'stroke'=>'#eab308','fill'=>'none'],
+                                    ['d'=>'M8.5 10a.5.5 0 110 1 .5.5 0 010-1z', 'stroke'=>'#ca8a04','fill'=>'#ca8a04'],
+                                    ['d'=>'M15.5 9a.5.5 0 110 1 .5.5 0 010-1z', 'stroke'=>'#ca8a04','fill'=>'#ca8a04'],
+                                ],
+                                'emoji' => '🧴',
+                                'dot_color' => '#facc15',
+                            ],
+                            [
+                                'label'    => 'Joint Pain',
+                                'href'     => '#find-doctors',
+                                'bg_from'  => '#fee2e2',  /* red-100   */
+                                'bg_to'    => '#fecaca',  /* red-200   */
+                                'icon_stroke' => '#ef4444',
+                                'svg_paths' => [
+                                    ['d'=>'M4 16l4-4 4 4 4-4 4 4', 'stroke'=>'#ef4444','fill'=>'none'],
+                                    ['d'=>'M12 8a2 2 0 110 4 2 2 0 010-4z', 'stroke'=>'#ef4444','fill'=>'#fecaca'],
+                                ],
+                                'emoji' => '🦴',
+                                'dot_color' => '#f87171',
+                            ],
+                            [
+                                'label'    => 'Cold, Cough or Fever',
+                                'href'     => '#find-doctors',
+                                'bg_from'  => '#dbeafe',  /* blue-100  */
+                                'bg_to'    => '#bfdbfe',  /* blue-200  */
+                                'icon_stroke' => '#3b82f6',
+                                'svg_paths' => [
+                                    ['d'=>'M12 2a10 10 0 100 20A10 10 0 0012 2z', 'stroke'=>'#3b82f6','fill'=>'none'],
+                                    ['d'=>'M8 14s1.5 2 4 2 4-2 4-2', 'stroke'=>'#3b82f6','fill'=>'none'],
+                                    ['d'=>'M9 9h.01M15 9h.01', 'stroke'=>'#3b82f6','fill'=>'none'],
+                                ],
+                                'emoji' => '🤧',
+                                'dot_color' => '#60a5fa',
+                            ],
+                            [
+                                'label'    => 'Child Not Feeling Well',
+                                'href'     => '#find-doctors',
+                                'bg_from'  => '#d1fae5',  /* emerald-100 */
+                                'bg_to'    => '#a7f3d0',  /* emerald-200 */
+                                'icon_stroke' => '#10b981',
+                                'svg_paths' => [
+                                    ['d'=>'M12 3a3 3 0 110 6 3 3 0 010-6z', 'stroke'=>'#10b981','fill'=>'none'],
+                                    ['d'=>'M5 21v-1a7 7 0 0114 0v1', 'stroke'=>'#10b981','fill'=>'none'],
+                                    ['d'=>'M9 14c0 0 1 2 3 2s3-2 3-2', 'stroke'=>'#6ee7b7','fill'=>'none'],
+                                ],
+                                'emoji' => '👶',
+                                'dot_color' => '#34d399',
+                            ],
+                            [
+                                'label'    => 'Depression or Anxiety',
+                                'href'     => '#find-doctors',
+                                'bg_from'  => '#ede9fe',  /* violet-100 */
+                                'bg_to'    => '#ddd6fe',  /* violet-200 */
+                                'icon_stroke' => '#8b5cf6',
+                                'svg_paths' => [
+                                    ['d'=>'M12 2a10 10 0 100 20A10 10 0 0012 2z', 'stroke'=>'#8b5cf6','fill'=>'none'],
+                                    ['d'=>'M8 15s1-2 4-2 4 2 4 2', 'stroke'=>'#8b5cf6','fill'=>'none'],
+                                    ['d'=>'M9 9.5h.01M15 9.5h.01', 'stroke'=>'#8b5cf6','fill'=>'none'],
+                                ],
+                                'emoji' => '🧠',
+                                'dot_color' => '#a78bfa',
+                            ],
+                        ];
+                    @endphp
+
+                    @foreach ($symptoms as $sym)
+                    <div class="symptom-card flex-shrink-0 flex flex-col items-center text-center
+                                w-[148px] sm:w-[160px] group cursor-pointer"
+                         role="listitem">
+                        <a href="{{ $sym['href'] }}?symptom={{ urlencode($sym['label']) }}"
+                           class="flex flex-col items-center gap-0 w-full"
+                           aria-label="Consult for {{ $sym['label'] }}">
+
+                            {{-- Circular avatar --}}
+                            <div class="symptom-avatar relative w-28 h-28 sm:w-32 sm:h-32 rounded-full
+                                        flex items-center justify-center mb-4 flex-shrink-0
+                                        ring-2 ring-transparent group-hover:ring-2 group-hover:ring-sky-400
+                                        ring-offset-2 ring-offset-gray-50
+                                        transition-all duration-300"
+                                 style="background: linear-gradient(145deg, {{ $sym['bg_from'] }}, {{ $sym['bg_to'] }});">
+
+                                {{-- Inner soft ring --}}
+                                <div class="absolute inset-2 rounded-full border border-white/70"></div>
+
+                                {{-- Dot accent --}}
+                                <div class="absolute top-3 right-3 w-2.5 h-2.5 rounded-full border-2 border-white"
+                                     style="background: {{ $sym['dot_color'] }};" aria-hidden="true"></div>
+
+                                {{-- Emoji illustration (large, centered) --}}
+                                <span class="relative text-4xl sm:text-5xl select-none leading-none"
+                                      role="img" aria-hidden="true">
+                                    {{ $sym['emoji'] }}
+                                </span>
+                            </div>
+
+                            {{-- Label --}}
+                            <p class="text-sm font-semibold text-gray-800 leading-snug
+                                       group-hover:text-sky-700 transition-colors duration-200 px-1">
+                                {{ $sym['label'] }}
+                            </p>
+
+                            {{-- CONSULT NOW CTA --}}
+                            <span class="consult-link mt-2 inline-flex items-center gap-0.5
+                                          text-[11px] font-bold uppercase tracking-widest text-sky-500
+                                          transition-colors duration-150">
+                                Consult Now
+                                <svg class="chevron w-3 h-3 ml-0.5" fill="none" stroke="currentColor"
+                                     stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    @endforeach
+
+                    {{-- "View All" terminal card --}}
+                    <div class="symptom-card flex-shrink-0 flex flex-col items-center justify-center text-center
+                                w-[148px] sm:w-[160px]" role="listitem">
+                        <a href="#find-doctors"
+                           class="group flex flex-col items-center gap-3"
+                           aria-label="View all symptoms">
+                            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full flex items-center justify-center
+                                        bg-gradient-to-br from-sky-50 to-indigo-100
+                                        border-2 border-dashed border-sky-300
+                                        group-hover:border-sky-500 group-hover:from-sky-100
+                                        transition-all duration-200">
+                                <svg class="w-8 h-8 text-sky-500 group-hover:text-sky-700 transition-colors"
+                                     fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M4 6h16M4 10h16M4 14h10M4 18h6"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-sky-600 group-hover:text-sky-800 transition-colors leading-snug">
+                                View All<br/>Symptoms
+                            </p>
+                        </a>
+                    </div>
+
+                </div>{{-- /symptom-track --}}
+            </div>{{-- /symptom-track-wrap --}}
+
+            {{-- ── Mobile swipe hint ──────────────────────────────────── --}}
+            <p class="mt-3 text-center text-[11px] text-gray-400 sm:hidden select-none" aria-hidden="true">
+                ← Swipe to explore more →
+            </p>
+
+        </div>
+    </section>
+
     <section id="lab-tests"     class="py-16 bg-white            text-center text-gray-300 text-sm tracking-widest uppercase">Lab Tests &mdash; Placeholder</section>
     <section id="surgeries"     class="py-16 bg-gray-50           text-center text-gray-300 text-sm tracking-widest uppercase">Surgeries &mdash; Placeholder</section>
     <section id="ai-chatbot"    class="py-16 bg-white            text-center text-gray-300 text-sm tracking-widest uppercase">AI Chat Bot &mdash; Placeholder</section>
@@ -980,6 +1268,31 @@ Chat Bot',
         }
     });
 })();
+
+    // ── PART 4: Symptom carousel arrow scroll ──────────────────────────
+    (function () {
+        const track = document.getElementById('symptom-track');
+        const prev  = document.getElementById('sym-prev');
+        const next  = document.getElementById('sym-next');
+        if (!track || !prev || !next) return;
+
+        const SCROLL_BY = 340;
+
+        next.addEventListener('click', function () {
+            track.scrollBy({ left: SCROLL_BY, behavior: 'smooth' });
+        });
+        prev.addEventListener('click', function () {
+            track.scrollBy({ left: -SCROLL_BY, behavior: 'smooth' });
+        });
+
+        function syncArrows() {
+            prev.style.opacity = track.scrollLeft > 10 ? '1' : '0.4';
+            next.style.opacity = (track.scrollLeft + track.clientWidth < track.scrollWidth - 10) ? '1' : '0.4';
+        }
+        track.addEventListener('scroll', syncArrows, { passive: true });
+        syncArrows();
+    })();
+
 </script>
 
 </body>
