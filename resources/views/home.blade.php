@@ -53,6 +53,73 @@
             overflow: hidden;
         }
         #mobile-menu.open { max-height: 600px; opacity: 1; }
+        /* ── Hero floating search bar ─────────────────────────────── */
+        .hero-search-bar {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(226,232,240,0.8);
+            box-shadow:
+                0 4px 6px -1px rgba(0,0,0,0.05),
+                0 20px 40px -8px rgba(14,165,233,0.12),
+                0 0 0 1px rgba(255,255,255,0.6) inset;
+        }
+        .hero-search-bar:focus-within {
+            box-shadow:
+                0 4px 6px -1px rgba(0,0,0,0.05),
+                0 20px 50px -8px rgba(14,165,233,0.22),
+                0 0 0 2px rgba(14,165,233,0.18) inset;
+        }
+        .search-divider {
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #cbd5e1, transparent);
+        }
+        .location-dropdown option { font-size: 0.875rem; }
+        .hero-search-input::placeholder { color: #94a3b8; }
+        .hero-search-input:focus { outline: none; }
+
+        /* search button pulse ring on hover */
+        .search-btn-ring {
+            position: relative;
+        }
+        .search-btn-ring::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.2s;
+        }
+        .search-btn-ring:hover::after { opacity: 0.25; }
+
+        /* Quick tag pills */
+        .quick-tag {
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+        }
+        .quick-tag:hover {
+            background: #e0f2fe;
+            border-color: #7dd3fc;
+            color: #0369a1;
+        }
+
+        /* Floating ambient blobs */
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33%       { transform: translate(18px, -22px) scale(1.04); }
+            66%       { transform: translate(-14px, 10px) scale(0.97); }
+        }
+        .blob { animation: blobFloat 9s ease-in-out infinite; }
+        .blob-2 { animation-delay: -4s; animation-duration: 11s; }
+        .blob-3 { animation-delay: -7s; animation-duration: 13s; }
+
+        /* Trust pill counter animation */
+        @keyframes countUp { from { opacity:0; transform:translateY(4px);} to {opacity:1; transform:translateY(0);} }
+        .trust-stat { animation: countUp 0.6s ease both; }
+        .trust-stat:nth-child(2) { animation-delay: 0.1s; }
+        .trust-stat:nth-child(3) { animation-delay: 0.2s; }
+        .trust-stat:nth-child(4) { animation-delay: 0.3s; }
     </style>
 </head>
 
@@ -306,27 +373,272 @@
      =================================================================== --}}
 <main id="main-content">
 
-    {{-- Hero Section Placeholder --}}
-    <section id="hero" class="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-br from-sky-50 via-white to-indigo-50">
-        <div class="text-center px-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-xs font-medium text-sky-700 bg-sky-100 border border-sky-200 rounded-full">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-                </span>
-                PART 1 Complete &mdash; Navigation Bar Rendered
-            </div>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4">
-                Hero Section
-                <span class="block bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">
-                    Coming in PART 2
+    {{-- ================================================================
+         HERO SECTION — PART 2: Elevated Search Module
+         ================================================================ --}}
+    <section id="hero" class="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden
+                               bg-gradient-to-br from-sky-50 via-white to-indigo-50 px-4 pt-12 pb-20">
+
+        {{-- ── Ambient floating blobs (decorative) ─────────────────── --}}
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+            <div class="blob absolute -top-24 -left-24 w-[480px] h-[480px] rounded-full opacity-[0.35]"
+                 style="background: radial-gradient(circle, #bae6fd 0%, transparent 70%);"></div>
+            <div class="blob blob-2 absolute top-1/3 -right-32 w-[420px] h-[420px] rounded-full opacity-[0.28]"
+                 style="background: radial-gradient(circle, #c7d2fe 0%, transparent 70%);"></div>
+            <div class="blob blob-3 absolute -bottom-20 left-1/3 w-[380px] h-[380px] rounded-full opacity-[0.22]"
+                 style="background: radial-gradient(circle, #a5f3fc 0%, transparent 70%);"></div>
+        </div>
+
+        {{-- ── Pre-headline badge ────────────────────────────────────── --}}
+        <div class="relative z-10 inline-flex items-center gap-2 px-3.5 py-1.5 mb-5
+                    text-xs font-semibold text-sky-700 bg-sky-100 border border-sky-200/80
+                    rounded-full shadow-sm select-none">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+            </span>
+            Trusted by 500,000+ patients across Sri Lanka
+        </div>
+
+        {{-- ── Headline ──────────────────────────────────────────────── --}}
+        <div class="relative z-10 text-center max-w-3xl mx-auto mb-10">
+            <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight text-gray-900 leading-[1.12]">
+                Find the Right Doctor,
+                <span class="relative inline-block">
+                    <span class="bg-gradient-to-r from-sky-500 via-cyan-400 to-indigo-600 bg-clip-text text-transparent">
+                        Right Now
+                    </span>
+                    {{-- Underline squiggle --}}
+                    <svg class="absolute -bottom-1.5 left-0 w-full" viewBox="0 0 300 8" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M1 5.5 Q37 1 75 5.5 Q113 10 150 5.5 Q188 1 225 5.5 Q262 10 299 5.5"
+                              stroke="url(#squiggle-grad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <defs>
+                            <linearGradient id="squiggle-grad" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#0ea5e9"/>
+                                <stop offset="100%" stop-color="#6366f1"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </span>
             </h1>
-            <p class="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
-                The hero, search bar, feature cards, and trust indicators will be built here next.
+            <p class="mt-5 text-base sm:text-lg text-gray-500 font-normal leading-relaxed">
+                Book verified doctors, instant video consults, lab tests &amp; surgeries —
+                <span class="font-medium text-gray-700">all in one place.</span>
             </p>
         </div>
+
+        {{-- ═══════════════════════════════════════════════════════════
+             ELEVATED SEARCH BAR
+             ═══════════════════════════════════════════════════════════ --}}
+        <div class="relative z-10 w-full max-w-4xl mx-auto">
+
+            {{-- ── Desktop search bar (rounded-full pill) ─────────────── --}}
+            <form action="#" method="GET"
+                  class="hero-search-bar hidden sm:flex items-stretch rounded-2xl overflow-hidden"
+                  role="search"
+                  aria-label="Search doctors and clinics">
+
+                {{-- Location Selector --}}
+                <div class="flex items-center gap-2 px-5 py-0 min-w-[185px] max-w-[210px] flex-shrink-0 group/loc">
+                    {{-- Pin icon --}}
+                    <svg class="w-4 h-4 text-sky-500 flex-shrink-0 group-focus-within/loc:text-sky-600 transition-colors"
+                         fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+
+                    <select name="location"
+                            class="w-full py-4 bg-transparent text-sm font-medium text-gray-700
+                                   appearance-none cursor-pointer focus:outline-none
+                                   location-dropdown"
+                            aria-label="Select your location">
+                        <option value="sri-lanka"  selected>Sri Lanka</option>
+                        <option value="colombo">Colombo</option>
+                        <option value="kandy">Kandy</option>
+                        <option value="galle">Galle</option>
+                        <option value="jaffna">Jaffna</option>
+                        <option value="negombo">Negombo</option>
+                        <option value="kurunegala">Kurunegala</option>
+                        <option value="ratnapura">Ratnapura</option>
+                        <option value="matara">Matara</option>
+                        <option value="badulla">Badulla</option>
+                        <option value="anuradhapura">Anuradhapura</option>
+                    </select>
+
+                    {{-- Chevron icon (decorative — since select has native arrow) --}}
+                    <svg class="w-3.5 h-3.5 text-gray-400 flex-shrink-0 pointer-events-none -ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+
+                {{-- Vertical Divider --}}
+                <div class="search-divider self-stretch my-3 flex-shrink-0" aria-hidden="true"></div>
+
+                {{-- Doctor / Specialty Search Input --}}
+                <div class="flex items-center flex-1 px-5 gap-3 min-w-0 group/srch">
+                    {{-- Search icon --}}
+                    <svg class="w-4.5 h-4.5 text-gray-400 flex-shrink-0 group-focus-within/srch:text-sky-500 transition-colors"
+                         style="width:1.125rem;height:1.125rem"
+                         fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+
+                    <input type="search"
+                           name="query"
+                           id="hero-search-input"
+                           class="hero-search-input flex-1 py-4 bg-transparent text-sm text-gray-800 font-normal min-w-0"
+                           placeholder="Search doctors, clinics, hospitals, or specialties..."
+                           autocomplete="off"
+                           spellcheck="false"
+                           aria-label="Search doctors, clinics, hospitals, or specialties" />
+                </div>
+
+                {{-- Search CTA Button --}}
+                <div class="p-2 flex-shrink-0">
+                    <button type="submit"
+                            class="search-btn-ring h-full px-7 flex items-center gap-2 font-semibold text-sm text-white
+                                   bg-gradient-to-br from-sky-500 to-indigo-600
+                                   hover:from-sky-600 hover:to-indigo-700
+                                   rounded-xl shadow-sm hover:shadow-md
+                                   transition-all duration-200 active:scale-[0.97]"
+                            aria-label="Search">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <span>Search</span>
+                    </button>
+                </div>
+            </form>
+
+            {{-- ── Mobile search bar (stacked card) ───────────────────── --}}
+            <form action="#" method="GET"
+                  class="sm:hidden flex flex-col gap-0 rounded-2xl overflow-hidden
+                         bg-white border border-gray-200/80 shadow-lg shadow-sky-100/40"
+                  role="search"
+                  aria-label="Search doctors and clinics">
+
+                {{-- Location row --}}
+                <div class="flex items-center gap-2.5 px-4 py-3.5 border-b border-gray-100">
+                    <svg class="w-4 h-4 text-sky-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <select name="location"
+                            class="flex-1 bg-transparent text-sm font-medium text-gray-700 appearance-none focus:outline-none"
+                            aria-label="Select your location">
+                        <option value="sri-lanka" selected>Sri Lanka</option>
+                        <option value="colombo">Colombo</option>
+                        <option value="kandy">Kandy</option>
+                        <option value="galle">Galle</option>
+                        <option value="jaffna">Jaffna</option>
+                        <option value="negombo">Negombo</option>
+                        <option value="kurunegala">Kurunegala</option>
+                    </select>
+                    <svg class="w-3.5 h-3.5 text-gray-400 flex-shrink-0 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+
+                {{-- Search input row --}}
+                <div class="flex items-center gap-2.5 px-4 py-3.5">
+                    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="search"
+                           name="query"
+                           class="hero-search-input flex-1 bg-transparent text-sm text-gray-800"
+                           placeholder="Search doctors, clinics, hospitals..."
+                           autocomplete="off"
+                           aria-label="Search doctors" />
+                </div>
+
+                {{-- Mobile submit button --}}
+                <div class="px-4 pb-4">
+                    <button type="submit"
+                            class="w-full py-3 flex items-center justify-center gap-2 font-semibold text-sm text-white
+                                   bg-gradient-to-r from-sky-500 to-indigo-600
+                                   hover:from-sky-600 hover:to-indigo-700
+                                   rounded-xl shadow-sm active:scale-[0.98]
+                                   transition-all duration-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        Search Doctors
+                    </button>
+                </div>
+            </form>
+
+            {{-- ── Quick-access tag pills ───────────────────────────────── --}}
+            <div class="mt-4 flex items-center flex-wrap gap-2 justify-center" aria-label="Popular searches">
+                <span class="text-xs text-gray-400 font-medium mr-1">Popular:</span>
+
+                @php
+                    $quickTags = [
+                        ['label' => '🩺 General Physician', 'q' => 'general+physician'],
+                        ['label' => '🦷 Dentist',           'q' => 'dentist'],
+                        ['label' => '❤️ Cardiologist',      'q' => 'cardiologist'],
+                        ['label' => '🧒 Pediatrician',      'q' => 'pediatrician'],
+                        ['label' => '🧠 Neurologist',       'q' => 'neurologist'],
+                        ['label' => '👁 Eye Specialist',    'q' => 'eye+specialist'],
+                    ];
+                @endphp
+
+                @foreach ($quickTags as $tag)
+                    <a href="?query={{ $tag['q'] }}"
+                       class="quick-tag inline-flex items-center px-3 py-1 text-xs font-medium
+                              text-gray-600 bg-white border border-gray-200 rounded-full
+                              hover:shadow-sm transition-all duration-150 cursor-pointer select-none">
+                        {{ $tag['label'] }}
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- ── Trust stats row ──────────────────────────────────────── --}}
+        <div class="relative z-10 mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
+             aria-label="Platform statistics">
+
+            @php
+                $trustStats = [
+                    ['icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0',
+                     'value' => '1,200+', 'label' => 'Verified Doctors', 'color' => 'sky'],
+                    ['icon' => 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+                     'value' => '350+', 'label' => 'Clinics & Hospitals', 'color' => 'indigo'],
+                    ['icon' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+                     'value' => '500K+', 'label' => 'Appointments Booked', 'color' => 'cyan'],
+                    ['icon' => 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z',
+                     'value' => '4.9 / 5', 'label' => 'Average Rating', 'color' => 'amber'],
+                ];
+            @endphp
+
+            @foreach ($trustStats as $i => $stat)
+            <div class="trust-stat flex items-center gap-2.5 group">
+                <div class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center
+                            @if($stat['color'] === 'sky')    bg-sky-100   @elseif($stat['color'] === 'indigo') bg-indigo-100
+                            @elseif($stat['color'] === 'cyan') bg-cyan-100 @else                               bg-amber-100 @endif">
+                    <svg class="w-4 h-4
+                                @if($stat['color'] === 'sky')    text-sky-600   @elseif($stat['color'] === 'indigo') text-indigo-600
+                                @elseif($stat['color'] === 'cyan') text-cyan-600 @else                               text-amber-500 @endif"
+                         fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="{{ $stat['icon'] }}" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-gray-800 leading-none">{{ $stat['value'] }}</p>
+                    <p class="text-xs text-gray-500 mt-0.5">{{ $stat['label'] }}</p>
+                </div>
+                @if (!$loop->last)
+                <div class="hidden sm:block w-px h-7 bg-gray-200 ml-5" aria-hidden="true"></div>
+                @endif
+            </div>
+            @endforeach
+        </div>
+
     </section>
+
 
     <section id="find-doctors"  class="py-16 bg-white            text-center text-gray-300 text-sm tracking-widest uppercase">Find Doctors &mdash; Placeholder</section>
     <section id="video-consult" class="py-16 bg-gray-50           text-center text-gray-300 text-sm tracking-widest uppercase">Video Consult &mdash; Placeholder</section>
