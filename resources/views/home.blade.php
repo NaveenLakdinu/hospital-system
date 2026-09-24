@@ -25,95 +25,135 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white text-slate-900 antialiased" x-data="{ mobileOpen: false }">
+<body class="bg-white text-slate-900 antialiased" x-data="{ mobileOpen: false }" >
 
     {{-- ============================================================ --}}
     {{-- 1. STICKY NAVIGATION                                          --}}
     {{-- ============================================================ --}}
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
-        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-8">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-8">
 
-            {{-- Logo --}}
-            <a href="{{ url('/') }}" class="flex items-center gap-2.5 shrink-0">
-                {{-- PRIMARY token: from-emerald-600 to-sky-400 (was from-blue-600 to-teal-500) --}}
-                <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-600 to-sky-400 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C9 2 6.5 4.5 6.5 7.5C6.5 11 9 13 12 16C15 13 17.5 11 17.5 7.5C17.5 4.5 15 2 12 2Z" fill="currentColor"/>
-                        <path d="M4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                    </svg>
-                </span>
-                <span class="font-display font-bold text-lg tracking-tight">
-                    {{-- ACCENT token: text-sky-400 (was text-teal-500) --}}
-                    Medi<span class="text-sky-400">Care</span>24
-                </span>
-            </a>
+        {{-- Logo --}}
+        <a href="{{ url('/') }}" class="flex items-center gap-2.5 shrink-0">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-600 to-sky-400 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C9 2 6.5 4.5 6.5 7.5C6.5 11 9 13 12 16C15 13 17.5 11 17.5 7.5C17.5 4.5 15 2 12 2Z" fill="currentColor"/>
+                    <path d="M4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span class="font-display font-bold text-lg tracking-tight">
+                Medi<span class="text-sky-400">Care</span>24
+            </span>
+        </a>
 
-            {{-- Main links (desktop) --}}
-            <ul class="hidden md:flex items-center gap-8 flex-1">
-                {{-- PRIMARY token: hover:text-emerald-600 (was hover:text-blue-600) --}}
-                <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Find Doctors</a></li>
-                <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Video Consult</a></li>
-                <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Lab Tests</a></li>
-                <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Surgeries</a></li>
-                <li>
-                    <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">
-                        AI Chat Bot
-                        <span class="relative inline-flex items-center">
-                            {{-- ACCENT token: bg-sky-300 (was bg-teal-400) --}}
-                            <span class="absolute inline-flex h-full w-full rounded-full bg-sky-300 opacity-60 animate-ping"></span>
-                            {{-- PRIMARY+ACCENT token: from-emerald-600 to-sky-400 (was from-blue-600 to-teal-500) --}}
-                            <span class="relative rounded-full bg-gradient-to-r from-emerald-600 to-sky-400 text-white text-[10px] font-bold px-1.5 py-0.5 tracking-wide">NEW</span>
-                        </span>
-                    </a>
-                </li>
-            </ul>
+        {{-- Main links (desktop) --}}
+        <ul class="hidden md:flex items-center gap-8 flex-1">
+            <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Find Doctors</a></li>
+            <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Video Consult</a></li>
+            <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Lab Tests</a></li>
+            <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Surgeries</a></li>
+            <li>
+                <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">
+                    AI Chat Bot
+                    <span class="relative inline-flex items-center">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-sky-300 opacity-60 animate-ping"></span>
+                        <span class="relative rounded-full bg-gradient-to-r from-emerald-600 to-sky-400 text-white text-[10px] font-bold px-1.5 py-0.5 tracking-wide">NEW</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
 
-            {{-- Right utilities (desktop) --}}
-            <div class="hidden md:flex items-center gap-6 shrink-0">
-                <a href="#" class="hidden lg:inline text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors">For Providers</a>
-                <a href="#" class="hidden lg:inline text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors">Security &amp; Help</a>
+        {{-- Right utilities (desktop) --}}
+        <div class="hidden md:flex items-center gap-6 shrink-0">
+            <a href="#" class="hidden lg:inline text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors">For Providers</a>
+            <a href="#" class="hidden lg:inline text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors">Security &amp; Help</a>
+
+            {{-- LOGGED OUT (GUEST) --}}
+            @guest
                 <div class="flex items-center gap-2">
-                    {{-- PRIMARY token: hover:text-emerald-600 hover:bg-emerald-50 (was hover:text-blue-600 hover:bg-blue-50) --}}
                     <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-600 hover:text-emerald-600 px-4 py-2 rounded-full hover:bg-emerald-50 transition-all">
                         Sign In
                     </a>
-                    {{-- PRIMARY token: bg-emerald-600 hover:bg-emerald-700 hover:shadow-emerald-500/20 (was bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/20) --}}
                     <a href="{{ route('register') }}" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-full font-medium shadow-sm hover:shadow-md hover:shadow-emerald-500/20 text-sm transition-all">
                         Sign Up
                     </a>
                 </div>
-            </div>
+            @endguest
 
-            {{-- Mobile hamburger --}}
-            <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 -mr-2 text-slate-700" aria-label="Toggle menu">
-                <svg x-show="!mobileOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                <svg x-show="mobileOpen" x-cloak class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-        </nav>
+            {{-- LOGGED IN (AUTH USER) --}}
+            @auth
+                <div class="flex items-center gap-4 bg-slate-50 border border-slate-200/80 px-3.5 py-1.5 rounded-full">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-full bg-gradient-to-br from-emerald-600 to-sky-400 text-white font-bold flex items-center justify-center text-xs shadow-sm">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        </span>
+                        <span class="text-sm font-semibold text-slate-800">
+                            {{ Auth::user()->name }}
+                        </span>
+                    </div>
 
-        {{-- Mobile menu panel --}}
-        <div x-show="mobileOpen" x-cloak x-transition class="md:hidden border-t border-slate-100 bg-white px-6 py-5 space-y-4">
-            <a href="#" class="block text-sm font-medium text-slate-700">Find Doctors</a>
-            <a href="#" class="block text-sm font-medium text-slate-700">Video Consult</a>
-            <a href="#" class="block text-sm font-medium text-slate-700">Lab Tests</a>
-            <a href="#" class="block text-sm font-medium text-slate-700">Surgeries</a>
-            <a href="#" class="block text-sm font-medium text-slate-700">AI Chat Bot</a>
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                <a href="#" class="text-xs font-medium text-slate-400">For Providers</a>
-                <a href="#" class="text-xs font-medium text-slate-400">Security &amp; Help</a>
-            </div>
+                    <div class="w-px h-4 bg-slate-200"></div>
+
+                    {{-- Logout Action --}}
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors">
+                            Log Out
+                        </button>
+                    </form>
+                </div>
+            @endauth
+        </div>
+
+        {{-- Mobile hamburger --}}
+        <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 -mr-2 text-slate-700" aria-label="Toggle menu">
+            <svg x-show="!mobileOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg x-show="mobileOpen" x-cloak class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+    </nav>
+
+    {{-- Mobile menu panel --}}
+    <div x-show="mobileOpen" x-cloak x-transition class="md:hidden border-t border-slate-100 bg-white px-6 py-5 space-y-4">
+        <a href="#" class="block text-sm font-medium text-slate-700">Find Doctors</a>
+        <a href="#" class="block text-sm font-medium text-slate-700">Video Consult</a>
+        <a href="#" class="block text-sm font-medium text-slate-700">Lab Tests</a>
+        <a href="#" class="block text-sm font-medium text-slate-700">Surgeries</a>
+        <a href="#" class="block text-sm font-medium text-slate-700">AI Chat Bot</a>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <a href="#" class="text-xs font-medium text-slate-400">For Providers</a>
+            <a href="#" class="text-xs font-medium text-slate-400">Security &amp; Help</a>
+        </div>
+
+        {{-- Mobile Guest vs Auth --}}
+        @guest
             <div class="flex gap-3 pt-1">
-                {{-- PRIMARY token: hover:border-emerald-400 hover:text-emerald-600 (was hover:border-blue-400 hover:text-blue-600) --}}
                 <a href="{{ route('login') }}" class="flex-1 text-center border border-slate-200 text-slate-700 hover:border-emerald-400 hover:text-emerald-600 text-sm font-semibold px-4 py-2.5 rounded-full transition-all">
                     Sign In
                 </a>
-                {{-- PRIMARY token: bg-emerald-600 hover:bg-emerald-700 (was bg-blue-600 hover:bg-blue-700) --}}
                 <a href="{{ route('register') }}" class="flex-1 text-center bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-all">
                     Sign Up
                 </a>
             </div>
-        </div>
-    </header>
+        @endguest
+
+        @auth
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-600 to-sky-400 text-white font-bold flex items-center justify-center text-xs">
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    </span>
+                    <span class="text-sm font-bold text-slate-800">{{ Auth::user()->name }}</span>
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="text-xs font-semibold text-red-500 hover:text-red-700 py-1 px-3 rounded-lg bg-red-50">
+                        Log Out
+                    </button>
+                </form>
+            </div>
+        @endauth
+    </div>
+</header>
 
     {{-- ============================================================ --}}
     {{-- 2. HERO + SEARCH BAR MODULE                                   --}}
