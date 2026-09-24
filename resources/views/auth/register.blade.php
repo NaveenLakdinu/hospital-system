@@ -55,7 +55,38 @@
                     Appointment Confirmed
                 </div>
             </div>
-            
+            <div class="max-w-[190px] bg-white text-slate-900 rounded-xl shadow-xl shadow-black/30 p-3.5 mt-4 ml-10 -rotate-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-blue-500"></span>
+                    <div>
+                        <div class="font-display font-bold text-xs">Dr. Kasun Silva</div>
+                        <div class="text-[10px] text-slate-500">Available now</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="relative z-10">
+            <p class="font-display text-2xl font-bold leading-snug max-w-sm">
+                Join 5,000+ clinics already simplifying healthcare with MediCare24.
+            </p>
+            <div class="flex items-center gap-8 mt-8">
+                <div>
+                    <div class="font-display text-xl font-bold">10,000+</div>
+                    <div class="text-xs text-white/60 mt-0.5">Verified Doctors</div>
+                </div>
+                <div class="w-px h-8 bg-white/15"></div>
+                <div>
+                    <div class="font-display text-xl font-bold">500+</div>
+                    <div class="text-xs text-white/60 mt-0.5">Partner Clinics</div>
+                </div>
+                <div class="w-px h-8 bg-white/15"></div>
+                <div>
+                    <div class="font-display text-xl font-bold">Free</div>
+                    <div class="text-xs text-white/60 mt-0.5">Forever Plan</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- RIGHT — Form Panel Container --}}
