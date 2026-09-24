@@ -35,6 +35,27 @@
             </span>
             <span class="font-display font-bold text-lg">Medi<span class="text-teal-400">Care</span>24</span>
         </a>
+
+        <div class="relative z-10 my-auto">
+            <div class="max-w-sm bg-white text-slate-900 rounded-2xl shadow-2xl shadow-black/30 p-5">
+                <div class="flex items-center gap-3">
+                    <span class="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-teal-400"></span>
+                    <div>
+                        <div class="font-display font-bold text-sm">Dr. Anjali Perera</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Cardiologist · 12 yrs exp</div>
+                    </div>
+                    <span class="ml-auto text-[10px] font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded-full">Online</span>
+                </div>
+                <div class="flex gap-2 mt-5">
+                    <span class="flex-1 text-center text-xs font-semibold py-2 rounded-lg bg-slate-50 text-slate-500">2:00pm</span>
+                    <span class="flex-1 text-center text-xs font-semibold py-2 rounded-lg bg-blue-600 text-white">3:30pm</span>
+                    <span class="flex-1 text-center text-xs font-semibold py-2 rounded-lg bg-slate-50 text-slate-500">5:00pm</span>
+                </div>
+                <div class="mt-4 text-center bg-teal-400 text-slate-900 text-xs font-bold py-2.5 rounded-lg">
+                    Appointment Confirmed
+                </div>
+            </div>
+            
     </div>
 
     {{-- RIGHT — Form Panel Container --}}
