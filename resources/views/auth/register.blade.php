@@ -92,6 +92,29 @@
     {{-- RIGHT — Form Panel Container --}}
     <div class="flex items-center justify-center px-6 py-12 sm:px-12">
         <div class="w-full max-w-sm">
+            {{-- mobile-only logo --}}
+            <a href="{{ url('/') }}" class="lg:hidden flex items-center gap-2.5 mb-10">
+                <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-teal-500 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C9 2 6.5 4.5 6.5 7.5C6.5 11 9 13 12 16C15 13 17.5 11 17.5 7.5C17.5 4.5 15 2 12 2Z" fill="currentColor"/>
+                        <path d="M4 15C4 19 7.5 22 12 22C16.5 22 20 19 20 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <span class="font-display font-bold text-lg">Medi<span class="text-teal-500">Care</span>24</span>
+            </a>
+
+            {{-- login / register segmented switch --}}
+            <div class="inline-flex bg-slate-100 rounded-full p-1 mb-8">
+                <a href="{{ route('login') }}" class="px-5 py-2 rounded-full text-sm font-semibold text-slate-500 hover:text-slate-700 transition-all">
+                    Login
+                </a>
+                <span class="px-5 py-2 rounded-full text-sm font-semibold bg-white shadow-sm text-slate-900">
+                    Register
+                </span>
+            </div>
+
+            <h1 class="font-display text-2xl font-extrabold text-slate-900">Join MediCare24</h1>
+            <p class="text-slate-500 text-sm mt-1.5">Create your free account — no card required.</p>
         </div>
     </div>
 
