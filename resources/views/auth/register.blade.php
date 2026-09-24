@@ -159,6 +159,40 @@
                     </div>
                     <p class="text-[11px] text-slate-400 mt-1.5">Use 8+ characters with a mix of letters &amp; numbers.</p>
                 </div>
+                {{-- terms --}}
+                <label class="flex items-start gap-2.5 text-xs text-slate-600 cursor-pointer pt-1">
+                    <input type="checkbox" name="terms" required
+                           class="w-4 h-4 mt-0.5 rounded border-slate-300 text-blue-600 focus:ring-blue-500/30 shrink-0">
+                    <span>
+                        By signing up, I agree to MediCare24's
+                        <a href="#" class="font-semibold text-blue-600 hover:text-blue-700">Terms of Service</a>
+                        and
+                        <a href="#" class="font-semibold text-blue-600 hover:text-blue-700">Privacy Policy</a>.
+                    </span>
+                </label>
+
+                <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm py-3.5 rounded-xl shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/25 transition-all">
+                    Create Account
+                </button>
+            </form>
+
+            {{-- divider --}}
+            <div class="flex items-center gap-3 my-7">
+                <div class="flex-1 h-px bg-slate-200"></div>
+                <span class="text-xs text-slate-400 font-medium">or continue with</span>
+                <div class="flex-1 h-px bg-slate-200"></div>
+            </div>
+
+            <button type="button" class="w-full flex items-center justify-center gap-2.5 border border-slate-200 rounded-xl py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">
+                <svg class="w-4.5 h-4.5" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.63h6.47a5.54 5.54 0 01-2.4 3.63v3.02h3.88c2.27-2.09 3.57-5.17 3.57-8.83z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.9l-3.88-3.02c-1.08.72-2.45 1.15-4.05 1.15-3.11 0-5.75-2.1-6.69-4.93H1.3v3.11A12 12 0 0012 24z"/><path fill="#FBBC05" d="M5.31 14.3a7.2 7.2 0 010-4.6V6.59H1.3a12 12 0 000 10.82l4.01-3.11z"/><path fill="#EA4335" d="M12 4.77c1.76 0 3.34.6 4.59 1.8l3.44-3.44C17.94 1.19 15.24 0 12 0A12 12 0 001.3 6.59l4.01 3.11C6.25 6.87 8.89 4.77 12 4.77z"/></svg>
+                Continue with Google
+            </button>
+
+            <p class="text-center text-sm text-slate-500 mt-8">
+                Already have an account?
+                <a href="{{ route('login') }}" class="font-semibold text-blue-600 hover:text-blue-700">Log in</a>
+            </p>
         </div>
     </div>
 
