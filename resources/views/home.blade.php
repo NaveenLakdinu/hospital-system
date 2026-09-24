@@ -25,7 +25,7 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white text-slate-900 antialiased" x-data="{ mobileOpen: false }" x-data="{ showAuthModal: false }">
+<body class="bg-white text-slate-900 antialiased" x-data="{ mobileOpen: false, showAuthModal: false }">
 
     {{-- ============================================================ --}}
     {{-- 1. STICKY NAVIGATION                                          --}}
@@ -212,7 +212,9 @@
 
             {{-- Card 1: Video Consult — PRIMARY (emerald) --}}
             {{-- PRIMARY token: hover:border-emerald-200 (was hover:border-blue-200) --}}
-            <a href="#" class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
+            <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+               @guest @click.prevent="showAuthModal = true" @endguest
+               class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
                 {{-- PRIMARY token: bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 (was bg-blue-50 text-blue-600 group-hover:bg-blue-100) --}}
                 <span class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:bg-emerald-100 transition-colors">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
@@ -223,7 +225,9 @@
 
             {{-- Card 2: Book Appointment — ACCENT (sky) --}}
             {{-- PRIMARY token: hover:border-emerald-200 (was hover:border-blue-200) --}}
-            <a href="#" class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
+            <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+               @guest @click.prevent="showAuthModal = true" @endguest
+               class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
                 {{-- ACCENT token: bg-sky-50 text-sky-500 group-hover:bg-sky-100 (was bg-teal-50 text-teal-600 group-hover:bg-teal-100) --}}
                 <span class="w-12 h-12 rounded-xl bg-sky-50 text-sky-500 flex items-center justify-center mb-4 group-hover:bg-sky-100 transition-colors">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9.5 15.5l1.5 1.5 3-3"/></svg>
@@ -233,7 +237,9 @@
             </a>
 
             {{-- Card 3: Lab Tests — amber (unchanged, harmonizes with emerald/sky palette) --}}
-            <a href="#" class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
+            <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+               @guest @click.prevent="showAuthModal = true" @endguest
+               class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
                 <span class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 group-hover:bg-amber-100 transition-colors">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 3h6M10 3v6.5L4.5 18a1.8 1.8 0 001.5 2.8h12a1.8 1.8 0 001.5-2.8L14 9.5V3"/></svg>
                 </span>
@@ -242,7 +248,9 @@
             </a>
 
             {{-- Card 4: AI Chat Bot — violet (unchanged, harmonizes with emerald/sky palette) --}}
-            <a href="#" class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
+            <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+               @guest @click.prevent="showAuthModal = true" @endguest
+               class="group bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-200 transition-all duration-300">
                 <span class="w-12 h-12 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-4 group-hover:bg-violet-100 transition-colors">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                 </span>
@@ -251,6 +259,7 @@
             </a>
         </div>
     </section>
+
 
     {{-- ============================================================ --}}
     {{-- 4. CONSULT TOP DOCTORS + SYMPTOMS ROW                         --}}
@@ -281,7 +290,9 @@
                 @endphp
 
                 @foreach ($symptoms as $s)
-                    <a href="#" class="group shrink-0 w-28 flex flex-col items-center text-center gap-2.5">
+                    <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+                       @guest @click.prevent="showAuthModal = true" @endguest
+                       class="group shrink-0 w-28 flex flex-col items-center text-center gap-2.5">
                         {{-- PRIMARY token: group-hover:ring-emerald-100 (was group-hover:ring-blue-100) --}}
                         <span class="{{ $s['bg'] }} p-1.5 rounded-full ring-2 ring-white group-hover:ring-4 group-hover:ring-emerald-100 transition-all duration-200">
                             <img src="{{ $s['img'] }}" alt="{{ $s['name'] }}" class="w-16 h-16 rounded-full object-cover">
