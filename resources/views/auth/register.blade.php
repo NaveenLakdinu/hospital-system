@@ -18,5 +18,19 @@
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased">
+
+    <div x-data="{ showPw: false }" class="min-h-screen grid lg:grid-cols-2">
+
+    {{-- LEFT — Brand Panel Container --}}
+    <div class="hidden lg:flex relative flex-col justify-between overflow-hidden bg-gradient-to-br from-[#0E1B2C] to-[#16304f] p-12 text-white">
+    </div>
+
+    {{-- RIGHT — Form Panel Container --}}
+    <div class="flex items-center justify-center px-6 py-12 sm:px-12">
+        <div class="w-full max-w-sm">
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
