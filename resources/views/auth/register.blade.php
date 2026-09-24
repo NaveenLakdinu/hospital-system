@@ -23,6 +23,8 @@
 
     {{-- LEFT — Brand Panel Container --}}
     <div class="hidden lg:flex relative flex-col justify-between overflow-hidden bg-gradient-to-br from-[#0E1B2C] to-[#16304f] p-12 text-white">
+        <span class="absolute w-80 h-80 rounded-full bg-teal-400 opacity-20 blur-[100px] -top-20 -left-16"></span>
+        <span class="absolute w-72 h-72 rounded-full bg-blue-500 opacity-20 blur-[100px] bottom-0 right-0"></span>
     </div>
 
     {{-- RIGHT — Form Panel Container --}}
