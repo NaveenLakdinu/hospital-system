@@ -437,5 +437,80 @@
         </div>
     </footer>
 
+    {{-- ============================================================ --}}
+    {{-- AUTH REQUIRED MODAL                                           --}}
+    {{-- Controlled by showAuthModal (Alpine.js state on <body>)       --}}
+    {{-- ============================================================ --}}
+    <div x-show="showAuthModal"
+         x-cloak
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center px-4"
+         @keydown.escape.window="showAuthModal = false">
+
+        {{-- Backdrop --}}
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+             @click="showAuthModal = false"></div>
+
+        {{-- Modal panel --}}
+        <div x-show="showAuthModal"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="relative bg-white rounded-2xl shadow-2xl shadow-slate-900/20 w-full max-w-sm p-8 text-center">
+
+            {{-- Close button --}}
+            <button @click="showAuthModal = false"
+                    class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                    aria-label="Close">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            {{-- Lock icon --}}
+            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-50 to-sky-50 border border-slate-100 mb-5">
+                <svg class="w-7 h-7 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </span>
+
+            {{-- Title --}}
+            <h2 class="font-display text-xl font-extrabold text-slate-900">Sign in to continue</h2>
+
+            {{-- Description --}}
+            <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                Create a free account or sign in to book appointments, consult doctors, and manage your health records.
+            </p>
+
+            {{-- Actions --}}
+            <div class="flex flex-col gap-3 mt-7">
+                <a href="{{ route('login') }}"
+                   class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-3 rounded-xl shadow-md shadow-emerald-600/20 hover:shadow-lg hover:shadow-emerald-600/25 transition-all">
+                    Sign In
+                </a>
+                <a href="{{ route('register') }}"
+                   class="w-full border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50 text-slate-700 font-semibold text-sm py-3 rounded-xl transition-all">
+                    Create Free Account
+                </a>
+            </div>
+
+            {{-- Trust line --}}
+            <p class="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 mt-5">
+                <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                Free forever · No credit card required
+            </p>
+        </div>
+    </div>
+
 </body>
 </html>
