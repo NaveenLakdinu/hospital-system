@@ -329,42 +329,51 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 {{-- Specialty 1: Dentist — PRIMARY (emerald, was blue) --}}
-                <div class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+                   @guest @click.prevent="showAuthModal = true" @endguest
+                   class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                     {{-- PRIMARY token: from-emerald-50 to-emerald-100 text-emerald-600 (was from-blue-50 to-blue-100 text-blue-600) --}}
                     <span class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-600 flex items-center justify-center mb-5">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 3C9 3 8 5 8 8c0 3 2 4 4 4s4-1 4-4c0-3-1-5-1-5M6 21c0-5 2.5-8 6-8s6 3 6 8"/></svg>
                     </span>
                     <h3 class="font-display font-bold text-slate-900">Dentist</h3>
                     <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">Teething troubles? Schedule a dental checkup</p>
-                </div>
+                </a>
 
                 {{-- Specialty 2: Gynecologist — pink (unchanged, harmonizes) --}}
-                <div class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+                   @guest @click.prevent="showAuthModal = true" @endguest
+                   class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                     <span class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-50 to-pink-100 text-pink-600 flex items-center justify-center mb-5">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="8" r="4" stroke-width="1.6"/><path stroke-linecap="round" stroke-width="1.6" d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg>
                     </span>
                     <h3 class="font-display font-bold text-slate-900">Gynecologist / Obstetrician</h3>
                     <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">Explore women's health, pregnancy &amp; fertility treatments</p>
-                </div>
+                </a>
 
                 {{-- Specialty 3: Dietitian — emerald (already in new palette, unchanged) --}}
-                <div class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+                   @guest @click.prevent="showAuthModal = true" @endguest
+                   class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                     <span class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-600 flex items-center justify-center mb-5">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 12h4l2-6 4 12 2-6h4"/></svg>
                     </span>
                     <h3 class="font-display font-bold text-slate-900">Dietitian / Nutrition</h3>
                     <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">Guidance on healthy eating, weight management &amp; sports nutrition</p>
-                </div>
+                </a>
 
                 {{-- Specialty 4: Physiotherapist — amber (unchanged, harmonizes) --}}
-                <div class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <a href="{{ auth()->check() ? url('/appointments') : '#' }}"
+                   @guest @click.prevent="showAuthModal = true" @endguest
+                   class="bg-white rounded-2xl border border-slate-100 p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                     <span class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-50 to-amber-100 text-amber-600 flex items-center justify-center mb-5">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/></svg>
                     </span>
                     <h3 class="font-display font-bold text-slate-900">Physiotherapist</h3>
                     <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">Overcome muscle pain, joint stiffness &amp; post-op recovery</p>
-                </div>
+                </a>
             </div>
+
         </div>
     </section>
 
