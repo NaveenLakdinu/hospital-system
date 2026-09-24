@@ -25,7 +25,7 @@
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white text-slate-900 antialiased" x-data="{ mobileOpen: false }" >
+<body class="bg-white text-slate-900 antialiased" x-data="{ mobileOpen: false }" x-data="{ showAuthModal: false }">
 
     {{-- ============================================================ --}}
     {{-- 1. STICKY NAVIGATION                                          --}}
