@@ -27,5 +27,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password123'),
             'role' => 'doctor',
         ]);
+
+        // 3. Pharmacist
+        User::updateOrCreate(['email' => 'pharmacist@familycare.com'], [
+            'name' => 'Chief Pharmacist',
+            'password' => Hash::make('password123'),
+            'role' => 'pharmacist',
+        ]);
     }
 }
