@@ -24,7 +24,27 @@ Route::get('/home', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Authenticated dashboard
+| Role-Protected Portals & Dashboards (CAMS)
+|--------------------------------------------------------------------------
+*/
+// 1. Admin Dashboard (Admin පමණි)
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+
+// 2. Doctor Dashboard (Doctor පමණි)
+Route::get('/doctor/dashboard', function () {
+    return view('doctor.dashboard');
+})->middleware(['auth', 'role:doctor'])->name('doctor.dashboard');
+
+// 3. Pharmacist Dashboard (Pharmacist පමණි)
+Route::get('/pharmacist/dashboard', function () {
+    return view('pharmacist.dashboard');
+})->middleware(['auth', 'role:pharmacist'])->name('pharmacist.dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Authenticated dashboard & Profile
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard', function () {
@@ -50,7 +70,4 @@ Route::middleware('guest')->group(function () {
         ->name('social.callback');
 });
 
-
-
 require __DIR__.'/auth.php';
-
