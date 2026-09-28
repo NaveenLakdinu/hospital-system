@@ -45,11 +45,14 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 4. Sample Patient
-        User::updateOrCreate(['email' => 'patient@familycare.com'], [
-            'name' => 'Nimal Perera',
-            'password' => Hash::make('password123'),
-            'role' => 'patient',
-        ]);
+        // 4. Sample Patient Account
+        User::updateOrCreate(
+            ['email' => 'patient@familycare.com'],
+            [
+                'name' => 'Nimal Perera',
+                'password' => bcrypt('password123'),
+                'role' => 'patient',
+            ]
+        );
     }
 }
