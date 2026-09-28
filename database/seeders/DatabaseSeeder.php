@@ -15,12 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Admin
-        User::updateOrCreate(['email' => 'admin@familycare.com'], [
-            'name' => 'System Admin',
-            'password' => Hash::make('password123'),
-            'role' => 'admin',
-        ]);
+        // 1. Admin Account
+        User::updateOrCreate(
+            ['email' => 'admin@familycare.com'],
+            [
+                'name' => 'System Admin',
+                'password' => bcrypt('password123'),
+                'role' => 'admin',
+            ]
+        );
 
         User::updateOrCreate(['email' => 'doctor@familycare.com'], [
             'name' => 'Dr. Suresh Kasthuriarachchi',
