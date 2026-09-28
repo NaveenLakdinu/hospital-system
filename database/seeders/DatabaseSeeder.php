@@ -35,12 +35,15 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 3. Pharmacist
-        User::updateOrCreate(['email' => 'pharmacist@familycare.com'], [
-            'name' => 'Chief Pharmacist',
-            'password' => Hash::make('password123'),
-            'role' => 'pharmacist',
-        ]);
+        // 3. Pharmacist Account
+        User::updateOrCreate(
+            ['email' => 'pharmacist@familycare.com'],
+            [
+                'name' => 'Chief Pharmacist',
+                'password' => bcrypt('password123'),
+                'role' => 'pharmacist',
+            ]
+        );
 
         // 4. Sample Patient
         User::updateOrCreate(['email' => 'patient@familycare.com'], [
