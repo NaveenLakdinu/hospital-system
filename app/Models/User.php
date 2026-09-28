@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->role === 'doctor';
     }
+
+    public function isPharmacist(): bool
+    {
+        return $this->role === 'pharmacist';
+    }
 }
