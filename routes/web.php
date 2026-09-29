@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DoctorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,9 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
+
+// Doctor Search & Listing (Public / Patient)
+Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');
 
 /*
 |--------------------------------------------------------------------------
