@@ -41,7 +41,12 @@ class DoctorController extends Controller
             });
         }
 
+        $doctors = $query->latest()->paginate(9)->withQueryString();
 
+        // Unique specializations for filter dropdown
+        $specializations = Doctor::select('specialization')->distinct()->pluck('specialization');
+
+        return view('doctors.index', compact('doctors', 'specializations'));
 
     }
 }
