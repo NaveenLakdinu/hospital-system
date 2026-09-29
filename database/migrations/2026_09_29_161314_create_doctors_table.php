@@ -12,9 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('doctors', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        $table->id();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Doctor  Login user account 
+        $table->string('specialization'); // e.g. General Physician, Cardiologist, Pediatrician
+        $table->string('license_number')->unique(); // SLMC Registration No (e.g. SLMC-34912)
+        $table->string('qualification'); // e.g. MBBS (Sri Lanka)
+        $table->decimal('consultation_fee', 8, 2); // e.g. 1500.00
+        $table->string('room_number')->nullable(); // e.g. Room 02
+        $table->text('bio')->nullable();
+        $table->timestamps();
+    });
     }
 
     /**
