@@ -113,7 +113,7 @@
             @endif
 
             @php
-                $initials = collect(explode(' ', $doctor->user->name))
+                $initials = collect(explode(' ', $doctor->user?->name ?? 'Doctor'))
                     ->map(fn($n) => strtoupper(substr($n, 0, 1)))
                     ->take(2)
                     ->implode('');
@@ -127,7 +127,7 @@
                         {{ $initials }}
                     </span>
                     <div class="min-w-0">
-                        <h3 class="font-display font-bold text-slate-900 text-base truncate">{{ $doctor->user->name }}</h3>
+                        <h3 class="font-display font-bold text-slate-900 text-base truncate">{{ $doctor->user?->name ?? 'Doctor' }}</h3>
                         <span class="inline-block mt-1 bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full">
                             {{ $doctor->specialization }}
                         </span>

@@ -12,7 +12,7 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Doctor::with(['user', 'schedules' => function ($q) {
+        $query = Doctor::has('user')->with(['user', 'schedules' => function ($q) {
             $q->where('is_active', true);
         }]);
 
