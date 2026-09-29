@@ -28,6 +28,11 @@ class DoctorController extends Controller
             });
         }
 
+        // 2. Filter by Specific Specialization
+        if ($request->filled('specialty')) {
+            $query->where('specialization', 'like', "%{$request->input('specialty')}%");
+        }
+
 
 
 
