@@ -71,4 +71,12 @@ class User extends Authenticatable
     {
         return $this->role === 'patient';
     }
+
+    /**
+     * Get the doctor profile if user is a doctor.
+     */
+    public function doctor(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Doctor::class);
+    }
 }
