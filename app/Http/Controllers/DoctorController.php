@@ -33,7 +33,13 @@ class DoctorController extends Controller
             $query->where('specialization', 'like', "%{$request->input('specialty')}%");
         }
 
-
+        // 3. Filter by Day of Week
+        if ($request->filled('day')) {
+            $query->whereHas('schedules', function ($scheduleQuery) use ($request) {
+                $scheduleQuery->where('day_of_week', $request->input('day'))
+                              ->where('is_active', true);
+            });
+        }
 
 
 
