@@ -79,4 +79,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Doctor::class);
     }
+
+    /**
+     * Get all appointments booked by this patient.
+     */
+    public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Appointment::class, 'patient_id');
+    }
 }
