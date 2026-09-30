@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,18 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback'])
         ->name('social.callback');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Patient Appointment Booking & Management (Auth Required)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/appointments/book/{doctor}', [AppointmentController::class, 'create'])->name('appointments.book');
+    Route::post('/appointments/book/{doctor}', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.my');
+    Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
 });
 
 require __DIR__.'/auth.php';
