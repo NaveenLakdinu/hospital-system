@@ -72,8 +72,20 @@ class AppointmentController extends Controller
             'reason_for_visit' => $request->reason_for_visit,
             'status' => 'Confirmed',
         ]);
-        
+        return redirect()->route('appointments.my')->with('success', "Appointment booked successfully! Your Token Number is #{$tokenNumber}.");
         }
 
+        /**
+        * Display authenticated patient's appointments.
+        */
+        public function myAppointments()
+        {
+            $appointments = Appointment::where('patient_id', auth()->id())
+                ->with('doctor.user')
+                ->latest('appointment_date')
+                ->paginate(10);
+
+        return view('appointments.index', compact('appointments'));
+    }
 
 }
