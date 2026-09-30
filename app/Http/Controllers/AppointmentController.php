@@ -46,6 +46,20 @@ class AppointmentController extends Controller
                 'appointment_date' => "Dr. {$doctor->user->name} is not available on {$dayOfWeek}s. Please choose an available clinic day.",
             ]);
         }
+        // 2. Check maximum patient capacity for the selected session
+        $activeAppointmentsCount = Appointment::where('doctor_id', $doctor->id)
+            ->where('appointment_date', $request->appointment_date)
+            ->where('status', '!=', 'Cancelled')
+            ->count();
+
+        if ($activeAppointmentsCount >= $schedule->max_patients) {
+            return back()->withInput()->withErrors([
+                'appointment_date' => "All appointment tokens for this date are fully booked ({$schedule->max_patients}/{$schedule->max_patients}). Please pick another date.",
+            ]);
+        }
+
+
+
         }
 
 
