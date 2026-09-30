@@ -61,7 +61,18 @@ class AppointmentController extends Controller
         $tokenNumber = $activeAppointmentsCount + 1;
         $appointmentNumber = 'APP-' . date('Ymd') . '-' . strtoupper(Str::random(4));
 
-
+        // 4. Save Appointment
+        Appointment::create([
+            'appointment_number' => $appointmentNumber,
+            'patient_id' => auth()->id(),
+            'doctor_id' => $doctor->id,
+            'appointment_date' => $request->appointment_date,
+            'appointment_time' => $schedule->start_time,
+            'token_number' => $tokenNumber,
+            'reason_for_visit' => $request->reason_for_visit,
+            'status' => 'Confirmed',
+        ]);
+        
         }
 
 
