@@ -83,7 +83,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/appointments/book/{doctor}', [AppointmentController::class, 'create'])->name('appointments.book');
     Route::post('/appointments/book/{doctor}', [AppointmentController::class, 'store'])->name('appointments.store');
-    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.my');
+    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.index');
     Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
 });
 

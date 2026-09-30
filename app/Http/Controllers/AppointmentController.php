@@ -76,7 +76,7 @@ class AppointmentController extends Controller
             'status' => 'Confirmed',
         ]);
 
-        return redirect()->route('appointments.my')->with('success', "Appointment booked successfully! Your Token Number is #{$tokenNumber}.");
+        return redirect()->route('appointments.index')->with('success', "Appointment booked successfully! Your Token Number is #{$tokenNumber}.");
     }
 
     /**
