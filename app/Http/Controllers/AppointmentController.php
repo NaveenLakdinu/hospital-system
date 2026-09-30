@@ -22,6 +22,21 @@ class AppointmentController extends Controller
         return view('appointments.book', compact('doctor'));
     }
 
+    /**
+     * Store a newly created appointment in database.
+     */
+    public function store(Request $request, Doctor $doctor)
+    {
+        $request->validate([
+            'appointment_date' => ['required', 'date', 'after_or_equal:today'],
+            'reason_for_visit' => ['nullable', 'string', 'max:500'],
+        ]);
+
+        $bookingDate = Carbon::parse($request->appointment_date);
+        $dayOfWeek = $bookingDate->format('l'); // e.g. "Monday"
+
+        
+        }
 
 
 }
