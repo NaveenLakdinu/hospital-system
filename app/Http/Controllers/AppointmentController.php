@@ -57,7 +57,9 @@ class AppointmentController extends Controller
                 'appointment_date' => "All appointment tokens for this date are fully booked ({$schedule->max_patients}/{$schedule->max_patients}). Please pick another date.",
             ]);
         }
-
+        // 3. Issue Next Token Number and Unique Reference
+        $tokenNumber = $activeAppointmentsCount + 1;
+        $appointmentNumber = 'APP-' . date('Ymd') . '-' . strtoupper(Str::random(4));
 
 
         }
