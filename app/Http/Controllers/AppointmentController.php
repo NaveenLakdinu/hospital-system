@@ -78,14 +78,28 @@ class AppointmentController extends Controller
         /**
         * Display authenticated patient's appointments.
         */
-        public function myAppointments()
-        {
-            $appointments = Appointment::where('patient_id', auth()->id())
-                ->with('doctor.user')
-                ->latest('appointment_date')
-                ->paginate(10);
+    public function myAppointments()
+    {
+        $appointments = Appointment::where('patient_id', auth()->id())
+            ->with('doctor.user')
+            ->latest('appointment_date')
+            ->paginate(10);
 
         return view('appointments.index', compact('appointments'));
+    }
+
+    /**
+     * Cancel an appointment.
+     */
+    public function cancel(Appointment $appointment)
+    {
+        if ($appointment->patient_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $appointment->update(['status' => 'Cancelled']);
+
+        return back()->with('success', 'Appointment cancelled successfully.');
     }
 
 }
