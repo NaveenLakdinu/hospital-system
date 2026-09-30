@@ -21,6 +21,12 @@ class Appointment extends Model
         'status',
     ];
 
-    
+    /**
+     * Get the patient (User) who booked the appointment.
+     */
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'patient_id');
+    }
 
 }
