@@ -35,7 +35,17 @@ class AppointmentController extends Controller
         $bookingDate = Carbon::parse($request->appointment_date);
         $dayOfWeek = $bookingDate->format('l'); // e.g. "Monday"
 
-        
+        // 1. Check if the doctor is available on this day
+        $schedule = $doctor->schedules()
+            ->where('day_of_week', $dayOfWeek)
+            ->where('is_active', true)
+            ->first();
+
+        if (! $schedule) {
+            return back()->withInput()->withErrors([
+                'appointment_date' => "Dr. {$doctor->user->name} is not available on {$dayOfWeek}s. Please choose an available clinic day.",
+            ]);
+        }
         }
 
 
