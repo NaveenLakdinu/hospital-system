@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
         'provider',
         'provider_id',
         'avatar',
@@ -49,5 +50,41 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isDoctor(): bool
+    {
+        return $this->role === 'doctor';
+    }
+
+    public function isPharmacist(): bool
+    {
+        return $this->role === 'pharmacist';
+    }
+
+    public function isPatient(): bool
+    {
+        return $this->role === 'patient';
+    }
+
+    /**
+     * Get the doctor profile if user is a doctor.
+     */
+    public function doctor(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Doctor::class);
+    }
+
+    /**
+     * Get all appointments booked by this patient.
+     */
+    public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Appointment::class, 'patient_id');
     }
 }

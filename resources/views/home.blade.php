@@ -48,7 +48,7 @@
 
         {{-- Main links (desktop) --}}
         <ul class="hidden md:flex items-center gap-8 flex-1">
-            <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Find Doctors</a></li>
+            <li><a href="{{ route('doctors.index') }}" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Find Doctors</a></li>
             <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Video Consult</a></li>
             <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Lab Tests</a></li>
             <li><a href="#" class="text-sm font-medium text-slate-700 hover:text-emerald-600 transition-colors">Surgeries</a></li>
@@ -114,7 +114,7 @@
 
     {{-- Mobile menu panel --}}
     <div x-show="mobileOpen" x-cloak x-transition class="md:hidden border-t border-slate-100 bg-white px-6 py-5 space-y-4">
-        <a href="#" class="block text-sm font-medium text-slate-700">Find Doctors</a>
+        <a href="{{ route('doctors.index') }}" class="block text-sm font-medium text-slate-700">Find Doctors</a>
         <a href="#" class="block text-sm font-medium text-slate-700">Video Consult</a>
         <a href="#" class="block text-sm font-medium text-slate-700">Lab Tests</a>
         <a href="#" class="block text-sm font-medium text-slate-700">Surgeries</a>
@@ -178,7 +178,7 @@
         {{-- Floating search card --}}
         {{-- PRIMARY token: shadow-emerald-500/5 (was shadow-blue-500/5) --}}
         <div class="max-w-5xl mx-auto shadow-xl shadow-emerald-500/5 rounded-2xl border border-slate-200 bg-white p-2 sm:p-3">
-            <div class="flex flex-col sm:flex-row items-stretch">
+            <form method="GET" action="{{ route('doctors.index') }}" class="flex flex-col sm:flex-row items-stretch">
 
                 {{-- Location --}}
                 <button type="button" class="flex items-center gap-2.5 px-4 py-3 sm:py-2 sm:w-48 shrink-0 rounded-xl hover:bg-slate-50 transition-colors">
@@ -192,17 +192,17 @@
                 {{-- Search --}}
                 <div class="flex items-center gap-2.5 px-4 py-3 sm:py-2 flex-1 min-w-0">
                     <svg class="w-5 h-5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
-                    <input type="text" placeholder="Search doctors, clinics, specialties, or symptoms…"
+                    <input type="text" name="query" value="{{ request('query') }}" placeholder="Search doctors, clinics, specialties, or symptoms…"
                            class="w-full text-sm text-slate-700 placeholder-slate-400 border-none focus:ring-0 p-0 bg-transparent">
                 </div>
 
                 {{-- Search button --}}
                 {{-- PRIMARY token: bg-emerald-600 hover:bg-emerald-700 (was bg-blue-600 hover:bg-blue-700) --}}
-                <button type="button" class="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl px-6 py-3 font-semibold shadow-md flex items-center justify-center gap-2 m-1 transition-colors">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl px-6 py-3 font-semibold shadow-md flex items-center justify-center gap-2 m-1 transition-colors">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
                     Search
                 </button>
-            </div>
+            </form>
         </div>
 
         {{-- ============================================================ --}}
@@ -272,7 +272,7 @@
                     <p class="text-slate-500 mt-2 text-sm sm:text-base">Private online consultations with verified doctors across all specialties</p>
                 </div>
                 {{-- PRIMARY token: border-emerald-600 text-emerald-600 hover:bg-emerald-600 (was border-blue-600 text-blue-600 hover:bg-blue-600) --}}
-                <a href="#" class="shrink-0 inline-flex items-center justify-center border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white font-semibold text-sm px-6 py-2.5 rounded-full transition-colors">
+                <a href="{{ route('doctors.index') }}" class="shrink-0 inline-flex items-center justify-center border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white font-semibold text-sm px-6 py-2.5 rounded-full transition-colors">
                     View All Specialities
                 </a>
             </div>
