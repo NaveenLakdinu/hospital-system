@@ -26,7 +26,7 @@
 
 
 
-        /* ---------- Hero ---------- */
+        /* ---------- Hero Group---------- */
         .hero {
             position: relative;
             min-height: 100vh;
