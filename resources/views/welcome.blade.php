@@ -24,7 +24,9 @@
             background: var(--ink);
         }
 
-        /* ---------- Hero ---------- */
+
+
+        /* ---------- Hero Group---------- */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -161,9 +163,7 @@
 
         /* ---------- Responsive ---------- */
         @media (max-width: 860px) {
-            .nav { padding: 18px 20px; }
-            .nav__links { display: none; }
-            .hero__content { padding: 20px 24px 90px; }
+            .hero__content { padding: 40px 24px 90px; }
             .hero__headline { font-size: 36px; }
             .hero__sub { font-size: 16px; }
             .hero__bg { background-position: 70% center; }
@@ -178,10 +178,9 @@
 </head>
 <body>
 
+    <!-- ========== HERO ========== -->
     <section class="hero">
         <div class="hero__bg" role="img" aria-label="Doctor in white coat with stethoscope"></div>
-
-
 
         <div class="hero__content">
             <div class="hero__inner">
@@ -192,7 +191,7 @@
                     Streamline your practice with intelligent booking, electronic medical records, telemedicine, and digital prescriptions — all in one HIPAA-ready platform.
                 </p>
                 <div class="hero__actions">
-                    <a href="{{ route('register') }}" class="btn-primary">Sign up for a free account</a>
+                    <a href="{{ url('/home') }}" class="btn-primary">Get Started</a>
                     <a href="#how-it-works" class="btn-secondary">See how it works</a>
                 </div>
                 <div class="hero__trust">
