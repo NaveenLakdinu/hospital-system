@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('category');
+            $table->integer('stock_quantity');
+            $table->decimal('unit_price', 8, 2);
+            $table->date('expiry_date');
+            $table->timestamps();
         });
     }
 
