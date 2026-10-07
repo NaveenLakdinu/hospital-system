@@ -5,6 +5,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AppointmentController;
+//dashboard routes
+use App\Http\Controllers\Doctor\DashboardController;
+
+
+//dashboard
+Route::get('/doctor/dashboard', [DashboardController::class, 'dashboard'])
+    ->name('doctor.dashboard');
 
 /*
 |--------------------------------------------------------------------------
