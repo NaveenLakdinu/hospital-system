@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-
     public function dashboard()
     {
         $appointments = [
@@ -38,6 +37,9 @@ class DashboardController extends Controller
                 'status' => 'Completed',
             ],
         ];
-           return view('doctor.dashboard', compact('appointments'));
+
+      
+
+        return view('doctor.dashboard', compact('appointments'));
     }
 }
