@@ -8,6 +8,8 @@ use App\Http\Controllers\AppointmentController;
 //dashboard routes
 use App\Http\Controllers\Doctor\DashboardController;
 
+use App\Http\Controllers\Doctor\DashboardController;
+
 
 //dashboard
 Route::get('/doctor/dashboard', [DashboardController::class, 'dashboard'])
