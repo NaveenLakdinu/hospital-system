@@ -35,5 +35,42 @@
         </tbody>
     </table>
 </div>
+<div class="modal fade" id="addMedicineModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('pharmacist.medicines.store') }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Medicine</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Category</label>
+                        <input type="text" name="category" class="form-control" placeholder="Tablet/Syrup" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Stock Quantity</label>
+                        <input type="number" name="stock_quantity" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Unit Price</label>
+                        <input type="number" step="0.01" name="unit_price" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Expiry Date</label>
+                        <input type="date" name="expiry_date" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @endcontent
