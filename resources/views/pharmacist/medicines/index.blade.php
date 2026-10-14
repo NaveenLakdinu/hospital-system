@@ -31,7 +31,7 @@
         + Add Medicine
     </button>
 
-    <!-- Medicine Stock Table -->
+    <!-- Medicine Stock is Table -->
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table table-hover table-striped align-middle">
