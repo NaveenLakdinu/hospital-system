@@ -8,13 +8,26 @@ use App\Http\Controllers\AppointmentController;
 //dashboard routes
 use App\Http\Controllers\Doctor\DashboardController;
 
+//consultations
+use App\Http\Controllers\Doctor\ConsultationController;
+
+// Doctor Portal
+Route::middleware(['auth', 'role:doctor'])->group(function () {
+
+    Route::get('/doctor/dashboard', [DashboardController::class, 'dashboard'])
+        ->name('doctor.dashboard');
+
+    Route::get('/doctor/consultations/{appointment}', [ConsultationController::class, 'show'])
+        ->name('doctor.consultation.show');
+
+});
 
 
 
 
 
 
-//dashboard
+
 
 
 /*
@@ -48,10 +61,7 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'role:admin'])->name('admin.dashboard');
 
-// 2. Doctor Dashboard (Doctor පමණි)
-Route::get('/doctor/dashboard', [DashboardController::class, 'dashboard'])
-    ->middleware(['auth', 'role:doctor'])
-    ->name('doctor.dashboard');
+
 
 // 3. Pharmacist Dashboard (Pharmacist පමණි)
 Route::get('/pharmacist/dashboard', function () {
