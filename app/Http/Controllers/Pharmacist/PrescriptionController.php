@@ -17,4 +17,24 @@ class PrescriptionController extends Controller
 
         return view('pharmacist.prescriptions.index', compact('prescriptions'));
     }
+    public function dispense($id)
+    {
+        DB::transaction(function () use ($id) {
+            $prescription = Prescription::with('items.medicine')->findOrFail($id);
+
+            foreach ($prescription->items as $item) {
+                $medicine = $item->medicine;
+
+                if ($medicine->stock_quantity >= $item->quantity) {
+                    $medicine->decrement('stock_quantity', $item->quantity);
+                } else {
+                    throw new \Exception("Stock insufficient for " . $medicine->name);
+                }
+            }
+
+            $prescription->update(['status' => 'fulfilled']);
+        });
+
+        return redirect()->back()->with('success', 'Prescription dispensed and stock updated successfully!');
+    }
 }
