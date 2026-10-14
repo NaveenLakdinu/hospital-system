@@ -5,8 +5,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\Pharmacist\MedicineController;
-use App\Http\Controllers\Pharmacist\PrescriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +38,9 @@ Route::get('/admin/dashboard', function () {
 })->middleware(['auth', 'role:admin'])->name('admin.dashboard');
 
 // 2. Doctor Dashboard (Doctor පමණි)
-Route::get('/doctor/dashboard', function () {
-    return view('doctor.dashboard');
-})->middleware(['auth', 'role:doctor'])->name('doctor.dashboard');
+Route::get('/doctor/dashboard', [DashboardController::class, 'dashboard'])
+    ->middleware(['auth', 'role:doctor'])
+    ->name('doctor.dashboard');
 
 // 3. Pharmacist Dashboard (Pharmacist පමණි)
 Route::get('/pharmacist/dashboard', function () {
