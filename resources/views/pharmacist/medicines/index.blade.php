@@ -98,7 +98,7 @@
                         <label class="form-label">Stock Quantity</label>
                         <input type="number" name="stock_quantity" class="form-control" min="0" placeholder="e.g. 100" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label class="form-label">Unit Price (LKR)</label>
                         <input type="number" step="0.01" name="unit_price" class="form-control" min="0" placeholder="e.g. 15.00" required>
                     </div>
