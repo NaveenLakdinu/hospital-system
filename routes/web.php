@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Pharmacist\MedicineController;
+use App\Http\Controllers\Pharmacist\PrescriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +87,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/appointments/book/{doctor}', [AppointmentController::class, 'store'])->name('appointments.store');
     Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.index');
     Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
+});
+
+Route::middleware(['auth'])->prefix('pharmacist')->group(function () {
+    Route::get('/medicines', [MedicineController::class, 'index'])->name('pharmacist.medicines.index');
+    Route::post('/medicines', [MedicineController::class, 'store'])->name('pharmacist.medicines.store');
+
+    Route::get('/prescriptions', [PrescriptionController::class, 'index'])->name('pharmacist.prescriptions.index');
+    Route::post('/prescriptions/{id}/dispense', [PrescriptionController::class, 'dispense'])->name('pharmacist.prescriptions.dispense');
 });
 
 require __DIR__.'/auth.php';
