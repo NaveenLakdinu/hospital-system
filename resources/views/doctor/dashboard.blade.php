@@ -143,7 +143,8 @@
 
                         @if($appointment['status'] == 'Waiting')
 
-                            <a href="#" class="btn">
+                            <a href="{{ route('doctor.consultation.show', $appointment->id) }}"
+                            class="btn">
                                 Start Consultation
                             </a>
 
