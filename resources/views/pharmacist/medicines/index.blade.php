@@ -105,7 +105,7 @@
                     <div class="mb-3">
                         <label class="form-label">Expiry Date</label>
                         <input type="date" name="expiry_date" class="form-control" required>
-                    </div>
+                    </div>>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
