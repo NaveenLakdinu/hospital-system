@@ -29,6 +29,7 @@
                     </div>
                 </div>
             </div>
+            
         @empty
             <div class="col-12"><div class="alert alert-info">No pending prescriptions.</div></div>
         @endforelse
