@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@content
+@section('content')
 <div class="container mt-4">
     <h2>Pharmacy Medicine Inventory</h2>
 
