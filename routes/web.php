@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Pharmacist Module Routes
+| Pharmacist Module Routes create
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->prefix('pharmacist')->group(function () {
