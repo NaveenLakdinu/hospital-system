@@ -31,7 +31,7 @@
         + Add Medicine
     </button>
 
-    <!-- Medicine Stock Table -->
+    <!-- Medicine Stock is Table -->
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table table-hover table-striped align-middle">
@@ -116,6 +116,6 @@
     </div>
 </div>
 
-<!-- Bootstrap JS Bundle (Modal එක Pop-up එකක් විදිහට වැඩ කිරීමට) -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
