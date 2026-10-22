@@ -17,5 +17,18 @@ class DashboardController extends Controller
         $totalPatients = User::where('role', 'patient')->count();
         $todayAppointmentsCount = Appointment::whereDate('appointment_date', Carbon::today())->count();
         $totalAppointmentsCount = Appointment::count();
+
+        $recentAppointments = Appointment::with(['patient', 'doctor.user'])
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('admin.dashboard', compact(
+            'totalDoctors',
+            'totalPatients',
+            'todayAppointmentsCount',
+            'totalAppointmentsCount',
+            'recentAppointments'
+        ));
     }
 }
