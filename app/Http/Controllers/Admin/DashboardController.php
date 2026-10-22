@@ -13,6 +13,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        
+        $totalDoctors = Doctor::count();
+        $totalPatients = User::where('role', 'patient')->count();
+        $todayAppointmentsCount = Appointment::whereDate('appointment_date', Carbon::today())->count();
+        $totalAppointmentsCount = Appointment::count();
     }
 }
