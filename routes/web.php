@@ -33,10 +33,10 @@ Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'
 | Role-Protected Portals & Dashboards (CAMS)
 |--------------------------------------------------------------------------
 */
-// 1. Admin Dashboard (Admin පමණි)
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+// Admin Portal Dashboard
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
 
 // 2. Doctor Dashboard (Doctor පමණි)
 Route::get('/doctor/dashboard', function () {
