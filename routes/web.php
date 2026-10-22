@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,18 @@ Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Administrator Doctor Management (FR-14)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/doctors', [AdminDoctorController::class, 'index'])->name('doctors.index');
+    Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
+    Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
+    Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
+});
 
 // 2. Doctor Dashboard (Doctor පමණි)
 Route::get('/doctor/dashboard', function () {
