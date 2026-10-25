@@ -977,7 +977,7 @@
 
                                     {{-- Doctor --}}
                                     <td class="px-5 py-4 whitespace-nowrap">
-                                        <p class="text-[13px] font-semibold text-slate-800">Dr. {{ $docName }}</p>
+                                        <p class="text-[13px] font-semibold text-slate-800">{{ $docName }}</p>
                                         <span class="inline-block mt-0.5 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10.5px] font-semibold border border-blue-100">{{ $spec }}</span>
                                     </td>
 
