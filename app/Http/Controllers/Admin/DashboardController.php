@@ -13,22 +13,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalDoctors = Doctor::count();
-        $totalPatients = User::where('role', 'patient')->count();
-        $todayAppointmentsCount = Appointment::whereDate('appointment_date', Carbon::today())->count();
-        $totalAppointmentsCount = Appointment::count();
-
-        $recentAppointments = Appointment::with(['patient', 'doctor.user'])
+        $doctors = Doctor::has('user')
+            ->with(['user', 'schedules'])
             ->latest()
-            ->take(5)
-            ->get();
+            ->paginate(10);
 
-        return view('admin.dashboard', compact(
-            'totalDoctors',
-            'totalPatients',
-            'todayAppointmentsCount',
-            'totalAppointmentsCount',
-            'recentAppointments'
-        ));
+        return view('admin.doctors.index', compact('doctors'));
     }
 }
