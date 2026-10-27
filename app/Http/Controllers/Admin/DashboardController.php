@@ -41,7 +41,12 @@ class DashboardController extends Controller
         ]);
 
         DB::transaction(function () use ($validated) {
-            
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password']),
+                'role' => 'doctor',
+            ]);
         });
 
         return redirect()
