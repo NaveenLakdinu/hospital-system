@@ -59,6 +59,14 @@ class DoctorController extends Controller
 
     public function destroy(Doctor $doctor)
     {
-        // Next step
+        if ($doctor->user) {
+            $doctor->user->delete();
+        } else {
+            $doctor->delete();
+        }
+
+        return redirect()
+            ->route('admin.doctors.index')
+            ->with('success', 'Doctor account removed successfully.');
     }
 }
