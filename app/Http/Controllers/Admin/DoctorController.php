@@ -21,7 +21,25 @@ class DoctorController extends Controller
 
     public function store(Request $request)
     {
-        // Next step
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8'],
+            'specialization' => ['required', 'string', 'max:255'],
+            'license_number' => ['required', 'string', 'max:100', 'unique:doctors,license_number'],
+            'qualification' => ['required', 'string', 'max:255'],
+            'consultation_fee' => ['required', 'numeric', 'min:0'],
+            'room_number' => ['nullable', 'string', 'max:50'],
+            'bio' => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        DB::transaction(function () use ($validated) {
+           
+        });
+
+        return redirect()
+            ->route('admin.doctors.index')
+            ->with('success', 'Doctor onboarded and account created successfully!');
     }
 
     public function destroy(Doctor $doctor)
