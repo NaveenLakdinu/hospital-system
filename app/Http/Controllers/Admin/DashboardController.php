@@ -63,4 +63,17 @@ class DashboardController extends Controller
             ->route('admin.doctors.index')
             ->with('success', 'New doctor onboarded and account created successfully!');
     }
+
+    public function destroy(Doctor $doctor)
+    {
+        if ($doctor->user) {
+            $doctor->user->delete(); // Cascades and deletes the doctor record too
+        } else {
+            $doctor->delete();
+        }
+
+        return redirect()
+            ->route('admin.doctors.index')
+            ->with('success', 'Doctor account removed successfully.');
+    }
 }
