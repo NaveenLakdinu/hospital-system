@@ -20,4 +20,9 @@ class DashboardController extends Controller
 
         return view('admin.doctors.index', compact('doctors'));
     }
+
+    public function create()
+    {
+        return view('admin.doctors.create');
+    }
 }
