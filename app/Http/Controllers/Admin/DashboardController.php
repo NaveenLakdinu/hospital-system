@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\User;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Password;
 
-class DashboardController extends Controller
+class DoctorController extends Controller
 {
+    /**
+     * Display a listing of all clinic doctors.
+     */
     public function index()
     {
         $doctors = Doctor::has('user')
@@ -21,11 +24,17 @@ class DashboardController extends Controller
         return view('admin.doctors.index', compact('doctors'));
     }
 
+    /**
+     * Show the form for onboarding a new doctor.
+     */
     public function create()
     {
         return view('admin.doctors.create');
     }
 
+    /**
+     * Store a newly onboarded doctor and their user account.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -41,6 +50,7 @@ class DashboardController extends Controller
         ]);
 
         DB::transaction(function () use ($validated) {
+            // 1. Create Login User Account with 'doctor' role
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
@@ -48,6 +58,7 @@ class DashboardController extends Controller
                 'role' => 'doctor',
             ]);
 
+            // 2. Create Doctor Profile linked to the User
             Doctor::create([
                 'user_id' => $user->id,
                 'specialization' => $validated['specialization'],
@@ -64,6 +75,9 @@ class DashboardController extends Controller
             ->with('success', 'New doctor onboarded and account created successfully!');
     }
 
+    /**
+     * Remove the specified doctor and their user account.
+     */
     public function destroy(Doctor $doctor)
     {
         if ($doctor->user) {
