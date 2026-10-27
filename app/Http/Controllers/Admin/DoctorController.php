@@ -4,21 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DoctorController extends Controller
 {
+    /**
+     * Display a listing of all doctors.
+     */
     public function index()
     {
-        $doctors = Doctor::with(['user', 'schedules'])->latest()->paginate(10);
+        $doctors = Doctor::has('user')
+            ->with(['user', 'schedules'])
+            ->latest()
+            ->paginate(10);
+
         return view('admin.doctors.index', compact('doctors'));
     }
 
+    /**
+     * Show the form for onboarding a new doctor.
+     */
     public function create()
     {
         return view('admin.doctors.create');
     }
 
+    /**
+     * Store a newly onboarded doctor and create their user login account.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -34,13 +49,15 @@ class DoctorController extends Controller
         ]);
 
         DB::transaction(function () use ($validated) {
-           $user = User::create([
+            // 1. Create Login User Account with role 'doctor'
+            $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => bcrypt($validated['password']),
                 'role' => 'doctor',
             ]);
 
+            // 2. Create Doctor Profile linked to this user
             Doctor::create([
                 'user_id' => $user->id,
                 'specialization' => $validated['specialization'],
@@ -57,6 +74,9 @@ class DoctorController extends Controller
             ->with('success', 'Doctor onboarded and account created successfully!');
     }
 
+    /**
+     * Remove the specified doctor.
+     */
     public function destroy(Doctor $doctor)
     {
         if ($doctor->user) {
