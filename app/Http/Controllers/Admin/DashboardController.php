@@ -47,6 +47,16 @@ class DashboardController extends Controller
                 'password' => bcrypt($validated['password']),
                 'role' => 'doctor',
             ]);
+
+            Doctor::create([
+                'user_id' => $user->id,
+                'specialization' => $validated['specialization'],
+                'license_number' => $validated['license_number'],
+                'qualification' => $validated['qualification'],
+                'consultation_fee' => $validated['consultation_fee'],
+                'room_number' => $validated['room_number'] ?? null,
+                'bio' => $validated['bio'] ?? null,
+            ]);
         });
 
         return redirect()
