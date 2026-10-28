@@ -16,6 +16,10 @@ class AppointmentController extends Controller
             $query->whereDate('appointment_date', $request->input('date'));
         }
 
+        // Filter by Doctor
+        if ($request->filled('doctor_id')) {
+            $query->where('doctor_id', $request->input('doctor_id'));
+        }
 
 
         ));
