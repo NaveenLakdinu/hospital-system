@@ -21,6 +21,11 @@ class AppointmentController extends Controller
             $query->where('doctor_id', $request->input('doctor_id'));
         }
 
+        // Filter by Status
+        if ($request->filled('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
 
         ));
     }
