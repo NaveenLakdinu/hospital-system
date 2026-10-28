@@ -7,5 +7,14 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    //
+    public function index(Request $request)
+    {
+        $query = Appointment::with(['patient', 'doctor.user']);
+
+        
+
+
+
+        ));
+    }
 }
