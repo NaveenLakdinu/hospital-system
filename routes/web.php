@@ -50,6 +50,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
     Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
     Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
+
+    // Clinic Appointments Monitoring
+    Route::get('/appointments', [AdminAppointmentController::class, 'index'])->name('appointments.index');
+    Route::patch('/appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])->name('appointments.updateStatus');
 });
 
 // 2. Doctor Dashboard (Doctor පමණි)
