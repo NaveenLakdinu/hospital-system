@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
+    /**
+     * Display all clinic appointments with dynamic filters.
+     */
     public function index(Request $request)
     {
         $query = Appointment::with(['patient', 'doctor.user']);
@@ -25,6 +30,7 @@ class AppointmentController extends Controller
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
         }
+
         $appointments = $query->latest('appointment_date')
             ->latest('appointment_time')
             ->paginate(15)
@@ -35,6 +41,9 @@ class AppointmentController extends Controller
         return view('admin.appointments.index', compact('appointments', 'doctors'));
     }
 
+    /**
+     * Update appointment status (e.g. Completed or Cancelled).
+     */
     public function updateStatus(Request $request, Appointment $appointment)
     {
         $request->validate([
