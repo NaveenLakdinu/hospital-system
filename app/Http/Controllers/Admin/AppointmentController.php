@@ -11,7 +11,10 @@ class AppointmentController extends Controller
     {
         $query = Appointment::with(['patient', 'doctor.user']);
 
-        
+        // Filter by Specific Date
+        if ($request->filled('date')) {
+            $query->whereDate('appointment_date', $request->input('date'));
+        }
 
 
 
