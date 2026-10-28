@@ -25,8 +25,26 @@ class AppointmentController extends Controller
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
         }
+        $appointments = $query->latest('appointment_date')
+            ->latest('appointment_time')
+            ->paginate(15)
+            ->withQueryString();
 
+        $doctors = Doctor::has('user')->with('user')->get();
 
-        ));
+        return view('admin.appointments.index', compact('appointments', 'doctors'));
+    }
+
+    public function updateStatus(Request $request, Appointment $appointment)
+    {
+        $request->validate([
+            'status' => ['required', 'in:Pending,Confirmed,Completed,Cancelled'],
+        ]);
+
+        $appointment->update([
+            'status' => $request->status,
+        ]);
+
+        return back()->with('success', "Appointment #{$appointment->appointment_number} status updated to {$request->status}.");
     }
 }
