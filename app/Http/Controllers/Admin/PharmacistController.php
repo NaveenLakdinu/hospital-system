@@ -50,4 +50,21 @@ class PharmacistController extends Controller
             ->route('admin.pharmacists.index')
             ->with('success', 'Pharmacist onboarded and login account created successfully!');
     }
+
+    /**
+     * Remove the specified pharmacist account.
+     */
+    public function destroy(User $pharmacist)
+    {
+        if ($pharmacist->role !== 'pharmacist') {
+            abort(403);
+        }
+
+        $pharmacist->delete();
+
+        return redirect()
+            ->route('admin.pharmacists.index')
+            ->with('success', 'Pharmacist account removed successfully.');
+    }
+
 }
