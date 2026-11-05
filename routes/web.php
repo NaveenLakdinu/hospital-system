@@ -55,6 +55,17 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // Clinic Appointments Monitoring
     Route::get('/appointments', [AdminAppointmentController::class, 'index'])->name('appointments.index');
     Route::patch('/appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])->name('appointments.updateStatus');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Administrator Pharmacist Management (FR-14)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/pharmacists', [AdminPharmacistController::class, 'index'])->name('pharmacists.index');
+    Route::get('/pharmacists/create', [AdminPharmacistController::class, 'create'])->name('pharmacists.create');
+    Route::post('/pharmacists', [AdminPharmacistController::class, 'store'])->name('pharmacists.store');
+    Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])->name('pharmacists.destroy');
 });
 
 // 2. Doctor Dashboard (Doctor පමණි)
