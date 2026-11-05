@@ -19,4 +19,12 @@ class PharmacistController extends Controller
 
         return view('admin.pharmacists.index', compact('pharmacists'));
     }
+
+    /**
+     * Show the form for onboarding a new pharmacist.
+     */
+    public function create()
+    {
+        return view('admin.pharmacists.create');
+    }
 }
