@@ -39,3 +39,22 @@ class ReportController extends Controller
             }])
             ->orderByDesc('appointments_count')
             ->get();
+
+            // 3. Daily Booking Breakdown
+        $dailyBreakdown = (clone $baseQuery)
+            ->select('appointment_date', DB::raw('count(*) as count'))
+            ->groupBy('appointment_date')
+            ->orderBy('appointment_date')
+            ->get();
+
+        return view('admin.reports.index', compact(
+            'startDate',
+            'endDate',
+            'totalAppointments',
+            'confirmedCount',
+            'completedCount',
+            'cancelledCount',
+            'doctorStats',
+            'dailyBreakdown'
+        ));
+    }
