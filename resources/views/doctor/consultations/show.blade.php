@@ -56,6 +56,8 @@
             padding: 10px 18px;
             text-decoration: none;
             border-radius: 6px;
+            border: none;
+            cursor: pointer;
         }
 
         .back {
@@ -112,25 +114,39 @@
 
         </div>
 
-        <label>Diagnosis</label>
+        <form
+    method="POST"
+    action="{{ route('doctor.consultation.store', $appointment->id) }}"
+>
+    @csrf
 
-        <textarea
-            name="diagnosis"
-            placeholder="Enter diagnosis..."
-        ></textarea>
+    <label>Diagnosis</label>
+
+    <textarea
+        name="diagnosis"
+        placeholder="Enter diagnosis..."
+    >{{ old('diagnosis') }}</textarea>
+
+    @error('diagnosis')
+        <p style="color: red;">
+            {{ $message }}
+        </p>
+    @enderror
 
 
-        <label>Consultation Notes</label>
+    <label>Consultation Notes</label>
 
-        <textarea
-            name="consultation_notes"
-            placeholder="Enter consultation notes..."
-        ></textarea>
+    <textarea
+        name="consultation_notes"
+        placeholder="Enter consultation notes..."
+    >{{ old('consultation_notes') }}</textarea>
 
 
-        <a href="#" class="btn">
-            Create Prescription
-        </a>
+    <button type="submit" class="btn">
+        Save Consultation
+    </button>
+
+</form>
 
     </div>
 

@@ -19,6 +19,11 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
 
     Route::get('/doctor/consultations/{appointment}', [ConsultationController::class, 'show'])
         ->name('doctor.consultation.show');
+    
+    Route::post(
+    '/doctor/consultations/{appointment}',
+    [ConsultationController::class, 'store']
+)->name('doctor.consultation.store');
 
 });
 

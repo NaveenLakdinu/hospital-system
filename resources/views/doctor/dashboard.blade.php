@@ -82,6 +82,18 @@
         Today's Patient Queue
     </p>
 
+@if(session('success'))
+    <div style="
+        background: #d1fae5;
+        color: #065f46;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    ">
+        {{ session('success') }}
+    </div>
+@endif
+
     <div class="card">
 
         <table>
