@@ -58,3 +58,54 @@ class ReportController extends Controller
             'dailyBreakdown'
         ));
     }
+
+    /**
+     * Export the appointment report as a downloadable CSV.
+     */
+    public function exportCsv(Request $request)
+    {
+        $startDate = $request->input('start_date', Carbon::now()->startOfMonth()->toDateString());
+        $endDate = $request->input('end_date', Carbon::now()->endOfMonth()->toDateString());
+
+        $appointments = Appointment::with(['patient', 'doctor.user'])
+            ->whereBetween('appointment_date', [$startDate, $endDate])
+            ->orderBy('appointment_date')
+            ->get();
+
+        $fileName = "FamilyCare_Report_{$startDate}_to_{$endDate}.csv";
+
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $columns = ['Token', 'Ref Number', 'Date', 'Time', 'Patient Name', 'Patient Email', 'Doctor Name', 'Specialization', 'Status', 'Reason'];
+
+        $callback = function () use ($appointments, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($appointments as $apt) {
+                fputcsv($file, [
+                    $apt->token_number,
+                    $apt->appointment_number,
+                    $apt->appointment_date,
+                    $apt->appointment_time,
+                    $apt->patient?->name ?? 'N/A',
+                    $apt->patient?->email ?? 'N/A',
+                    $apt->doctor?->user?->name ?? 'N/A',
+                    $apt->doctor?->specialization ?? 'N/A',
+                    $apt->status,
+                    $apt->reason_for_visit ?? 'N/A',
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+}
