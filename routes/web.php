@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 use App\Http\Controllers\Admin\PharmacistController as AdminPharmacistController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Doctor\ConsultationController as DoctorConsultationController;
+use App\Http\Controllers\Pharmacist\MedicineController;
+use App\Http\Controllers\Pharmacist\PrescriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,22 +80,30 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])->name('pharmacists.destroy');
 });
 
-// 2. Doctor Dashboard (Doctor පමණි)
-Route::get('/doctor/dashboard', function () {
-    $doctor = Auth::user()->doctor;
+/*
+|--------------------------------------------------------------------------
+| Doctor Portal Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->name('doctor.')->group(function () {
+    Route::get('/dashboard', [DoctorDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/consultations/{appointment}', [DoctorConsultationController::class, 'show'])->name('consultation.show');
+});
 
-    // Doctor ට අදාළ සියලුම Appointments සහ Patient විස්තර Database එකෙන් ලබා ගැනීම
-    $appointments = $doctor
-        ? $doctor->appointments()->with('patient')->latest('appointment_date')->latest('appointment_time')->get()
-        : collect();
-
-    return view('doctor.dashboard', compact('appointments', 'doctor'));
-})->middleware(['auth', 'role:doctor'])->name('doctor.dashboard');
-
-// 3. Pharmacist Dashboard (Pharmacist පමණි)
-Route::get('/pharmacist/dashboard', function () {
-    return view('pharmacist.dashboard');
-})->middleware(['auth', 'role:pharmacist'])->name('pharmacist.dashboard');
+/*
+|--------------------------------------------------------------------------
+| Pharmacist Portal Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:pharmacist'])->prefix('pharmacist')->name('pharmacist.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pharmacist.dashboard');
+    })->name('dashboard');
+    Route::get('/medicines', [MedicineController::class, 'index'])->name('medicines.index');
+    Route::post('/medicines', [MedicineController::class, 'store'])->name('medicines.store');
+    Route::get('/prescriptions', [PrescriptionController::class, 'index'])->name('prescriptions.index');
+    Route::post('/prescriptions/{id}/dispense', [PrescriptionController::class, 'dispense'])->name('prescriptions.dispense');
+});
 
 /*
 |--------------------------------------------------------------------------
