@@ -43,17 +43,16 @@ Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'
 |--------------------------------------------------------------------------
 */
 
-// Admin Portal Dashboard
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
-    ->middleware(['auth', 'role:admin'])
-    ->name('admin.dashboard');
-
 /*
 |--------------------------------------------------------------------------
-| Administrator Doctor Management (FR-14)
+| Administrator Routes (Dashboard + Doctor/Pharmacist/Appointment/Reports)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Admin Portal Dashboard
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Doctor Management (FR-14)
     Route::get('/doctors', [AdminDoctorController::class, 'index'])->name('doctors.index');
     Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
     Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
@@ -63,30 +62,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/appointments', [AdminAppointmentController::class, 'index'])->name('appointments.index');
     Route::patch('/appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])->name('appointments.updateStatus');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Administrator Reports & Analytics (FR-15 & Section 4.3)
-    |--------------------------------------------------------------------------
-    */
+    // Reports & Analytics (FR-15 & Section 4.3)
     Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/export', [AdminReportController::class, 'exportCsv'])->name('reports.export');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Administrator Pharmacist Management (FR-14)
-    |--------------------------------------------------------------------------
-    */
+    // Pharmacist Management (FR-14)
     Route::get('/pharmacists', [AdminPharmacistController::class, 'index'])->name('pharmacists.index');
     Route::get('/pharmacists/create', [AdminPharmacistController::class, 'create'])->name('pharmacists.create');
     Route::post('/pharmacists', [AdminPharmacistController::class, 'store'])->name('pharmacists.store');
     Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])->name('pharmacists.destroy');
 });
-
-// 1. Admin Dashboard
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
-
 
 // 2. Doctor Dashboard
 Route::get('/doctor/dashboard', function () {
