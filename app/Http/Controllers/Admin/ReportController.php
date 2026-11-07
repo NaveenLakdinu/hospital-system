@@ -27,3 +27,15 @@ class ReportController extends Controller
         $confirmedCount = (clone $baseQuery)->where('status', 'Confirmed')->count();
         $completedCount = (clone $baseQuery)->where('status', 'Completed')->count();
         $cancelledCount = (clone $baseQuery)->where('status', 'Cancelled')->count();
+
+        // 2. Doctor Utilisation (Most Booked Doctors)
+        $doctorStats = Doctor::with('user')
+            ->withCount(['appointments' => function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('appointment_date', [$startDate, $endDate]);
+            }])
+            ->withCount(['appointments as completed_appointments_count' => function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('appointment_date', [$startDate, $endDate])
+                      ->where('status', 'Completed');
+            }])
+            ->orderByDesc('appointments_count')
+            ->get();
