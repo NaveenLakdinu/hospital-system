@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Doctor\PrescriptionController;
+
+
 //dashboard routes
 use App\Http\Controllers\Doctor\DashboardController;
 
@@ -25,7 +28,29 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
     [ConsultationController::class, 'store']
 )->name('doctor.consultation.store');
 
+Route::get(
+    '/doctor/prescriptions/create/{appointment}',
+    [PrescriptionController::class, 'create']
+)->name('doctor.prescription.create');
+
+Route::post(
+    '/doctor/prescriptions/{appointment}',
+    [PrescriptionController::class, 'store']
+)->name('doctor.prescription.store');
+
+Route::get(
+    '/doctor/prescriptions/create/{appointment}',
+    [PrescriptionController::class, 'create']
+)->name('doctor.prescription.create');
+
+
+Route::post(
+    '/doctor/prescriptions/{appointment}',
+    [PrescriptionController::class, 'store']
+)->name('doctor.prescription.store');
+
 });
+
 
 
 
