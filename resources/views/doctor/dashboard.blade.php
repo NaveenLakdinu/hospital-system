@@ -87,17 +87,10 @@
         <table>
 
             <thead>
-                <tr>
-                    <th>Token No</th>
-                    <th>Patient Name</th>
-                    <th>Age / Gender</th>
-                    <th>Reason</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
+               
             </thead>
 
-   <tbody>
+  <tbody>
 
 @forelse($appointments as $appointment)
 
@@ -116,32 +109,30 @@
         </td>
 
         <td>
-            @if(strtolower($appointment->status) == 'waiting')
-
-                <span class="waiting">
-                    Waiting
-                </span>
-
-            @else
-
-                <span class="completed">
-                    {{ ucfirst($appointment->status) }}
-                </span>
-
-            @endif
+            <span class="{{ strtolower($appointment->status) }}">
+                {{ ucfirst($appointment->status) }}
+            </span>
         </td>
 
         <td>
-            @if(strtolower($appointment->status) == 'waiting')
+
+            @if(in_array(strtolower($appointment->status), ['waiting', 'confirmed']))
 
                 <a href="{{ route('doctor.consultation.show', $appointment->id) }}"
                    class="btn">
                     Start Consultation
                 </a>
 
+            @elseif(strtolower($appointment->status) == 'completed')
+
+                Completed
+
             @else
+
                 {{ ucfirst($appointment->status) }}
+
             @endif
+
         </td>
 
     </tr>
@@ -149,7 +140,7 @@
 @empty
 
     <tr>
-        <td colspan="5" style="text-align:center;">
+        <td colspan="5" style="text-align: center; padding: 30px;">
             No appointments available.
         </td>
     </tr>
@@ -157,7 +148,6 @@
 @endforelse
 
 </tbody>
-
         </table>
 
     </div>
