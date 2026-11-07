@@ -78,7 +78,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 // 2. Doctor Dashboard (Doctor පමණි)
 Route::get('/doctor/dashboard', function () {
-    return view('doctor.dashboard');
+    $doctor = Auth::user()->doctor;
+
+    // Doctor ට අදාළ සියලුම Appointments සහ Patient විස්තර Database එකෙන් ලබා ගැනීම
+    $appointments = $doctor
+        ? $doctor->appointments()->with('patient')->latest('appointment_date')->latest('appointment_time')->get()
+        : collect();
+
+    return view('doctor.dashboard', compact('appointments', 'doctor'));
 })->middleware(['auth', 'role:doctor'])->name('doctor.dashboard');
 
 // 3. Pharmacist Dashboard (Pharmacist පමණි)
