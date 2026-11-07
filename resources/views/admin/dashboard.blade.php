@@ -304,6 +304,17 @@
             <span :class="wide ? 'opacity-100' : 'opacity-0 pointer-events-none'" class="transition-opacity duration-150 text-sm whitespace-nowrap overflow-hidden">Manage Doctors</span>
         </a>
 
+        {{-- Pharmacy Staff --}}
+        <a href="{{ $pharmacistsIndexUrl }}" title="Pharmacy Staff"
+           class="group flex items-center gap-3 px-[9px] py-2.5 rounded-xl text-slate-500 font-medium hover:bg-slate-100/70 hover:text-slate-700 transition-all duration-150">
+            <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center group-hover:bg-slate-200 group-hover:scale-105 transition-all text-teal-600">
+                <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                </svg>
+            </span>
+            <span :class="wide ? 'opacity-100' : 'opacity-0 pointer-events-none'" class="transition-opacity duration-150 text-sm whitespace-nowrap overflow-hidden">Pharmacy Staff</span>
+        </a>
+
         {{-- Appointments --}}
         <a href="{{ $appointmentsUrl }}" title="Appointments"
            class="group flex items-center gap-3 px-[9px] py-2.5 rounded-xl text-slate-500 font-medium hover:bg-slate-100/70 hover:text-slate-700 transition-all duration-150">
