@@ -206,6 +206,8 @@
     /* ── Linked Routes with Safe Fallbacks ── */
     $dashboardUrl    = Route::has('admin.dashboard')          ? route('admin.dashboard')          : url('/admin/dashboard');
     $doctorsIndexUrl = Route::has('admin.doctors.index')      ? route('admin.doctors.index')      : url('/admin/doctors');
+    $pharmacistsIndexUrl = Route::has('admin.pharmacists.index') ? route('admin.pharmacists.index') : url('/admin/pharmacists');
+    $pharmacistCreateUrl = Route::has('admin.pharmacists.create') ? route('admin.pharmacists.create') : url('/admin/pharmacists/create');
     $doctorCreateUrl = Route::has('admin.doctors.create')     ? route('admin.doctors.create')     : url('/admin/doctors/create');
     $appointmentsUrl = Route::has('admin.appointments.index') ? route('admin.appointments.index') : url('/admin/appointments');
     $settingsUrl     = Route::has('admin.settings.index')     ? route('admin.settings.index')     : '#';
