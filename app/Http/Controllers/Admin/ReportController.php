@@ -16,3 +16,8 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
+        // Default to current month if no dates selected
+        $startDate = $request->input('start_date', Carbon::now()->startOfMonth()->toDateString());
+        $endDate = $request->input('end_date', Carbon::now()->endOfMonth()->toDateString());
+
+        $baseQuery = Appointment::whereBetween('appointment_date', [$startDate, $endDate]);
