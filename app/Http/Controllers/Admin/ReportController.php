@@ -21,3 +21,9 @@ class ReportController extends Controller
         $endDate = $request->input('end_date', Carbon::now()->endOfMonth()->toDateString());
 
         $baseQuery = Appointment::whereBetween('appointment_date', [$startDate, $endDate]);
+
+        // 1. Overall Volume Statistics
+        $totalAppointments = (clone $baseQuery)->count();
+        $confirmedCount = (clone $baseQuery)->where('status', 'Confirmed')->count();
+        $completedCount = (clone $baseQuery)->where('status', 'Completed')->count();
+        $cancelledCount = (clone $baseQuery)->where('status', 'Cancelled')->count();
