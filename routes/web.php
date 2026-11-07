@@ -57,6 +57,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/appointments', [AdminAppointmentController::class, 'index'])->name('appointments.index');
     Route::patch('/appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])->name('appointments.updateStatus');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Administrator Reports & Analytics (FR-15 & Section 4.3)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/export', [AdminReportController::class, 'exportCsv'])->name('reports.export');
 
     /*
     |--------------------------------------------------------------------------
