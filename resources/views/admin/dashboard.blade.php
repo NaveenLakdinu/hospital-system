@@ -814,6 +814,19 @@
                         <svg class="tile-arrow w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                     </a>
 
+                    {{-- Add New Pharmacist --}}
+                    <a href="{{ $pharmacistCreateUrl }}"
+                       class="action-tile group flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/60 hover:border-teal-400/60 hover:bg-teal-50/50 hover:shadow-md hover:shadow-teal-500/10 transition-all">
+                        <span class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center flex-shrink-0 shadow-md shadow-teal-600/28 group-hover:scale-105 transition-transform">
+                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16m8-8H4"/></svg>
+                        </span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[13px] font-semibold text-slate-700">Add Pharmacist</p>
+                            <p class="text-[11px] text-slate-400">Onboard pharmacy staff</p>
+                        </div>
+                        <svg class="tile-arrow w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+
                     {{-- View All Doctors --}}
                     <a href="{{ $doctorsIndexUrl }}"
                        class="action-tile group flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/60 hover:border-sky-400/60 hover:bg-sky-50/50 hover:shadow-md hover:shadow-sky-500/10 transition-all">
