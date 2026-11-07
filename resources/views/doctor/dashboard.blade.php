@@ -97,70 +97,66 @@
                 </tr>
             </thead>
 
-            <tbody>
+   <tbody>
 
-            @foreach($appointments as $appointment)
+@forelse($appointments as $appointment)
 
-                <tr>
+    <tr>
 
-                    <td>
-                        #{{ $appointment['token'] }}
-                    </td>
+        <td>
+            #{{ $appointment->token_number }}
+        </td>
 
-                    <td>
-                        {{ $appointment['name'] }}
-                    </td>
+        <td>
+            {{ $appointment->patient->name }}
+        </td>
 
-                    <td>
-                        {{ $appointment['age'] }}
-                        /
-                        {{ $appointment['gender'] }}
-                    </td>
+        <td>
+            {{ $appointment->reason_for_visit }}
+        </td>
 
-                    <td>
-                        {{ $appointment['reason'] }}
-                    </td>
+        <td>
+            @if(strtolower($appointment->status) == 'waiting')
 
-                    <td>
+                <span class="waiting">
+                    Waiting
+                </span>
 
-                        @if($appointment['status'] == 'Waiting')
+            @else
 
-                            <span class="waiting">
-                                Waiting
-                            </span>
+                <span class="completed">
+                    {{ ucfirst($appointment->status) }}
+                </span>
 
-                        @else
+            @endif
+        </td>
 
-                            <span class="completed">
-                                Completed
-                            </span>
+        <td>
+            @if(strtolower($appointment->status) == 'waiting')
 
-                        @endif
+                <a href="{{ route('doctor.consultation.show', $appointment->id) }}"
+                   class="btn">
+                    Start Consultation
+                </a>
 
-                    </td>
+            @else
+                {{ ucfirst($appointment->status) }}
+            @endif
+        </td>
 
-                    <td>
+    </tr>
 
-                        @if($appointment['status'] == 'Waiting')
+@empty
 
-                            <a href="{{ route('doctor.consultation.show', $appointment['id'])}}"
-                            class="btn">
-                                Start Consultation
-                            </a>
+    <tr>
+        <td colspan="5" style="text-align:center;">
+            No appointments available.
+        </td>
+    </tr>
 
-                        @else
+@endforelse
 
-                            Completed
-
-                        @endif
-
-                    </td>
-
-                </tr>
-
-            @endforeach
-
-            </tbody>
+</tbody>
 
         </table>
 
