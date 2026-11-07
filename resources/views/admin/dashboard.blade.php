@@ -211,7 +211,7 @@
     $doctorCreateUrl = Route::has('admin.doctors.create')     ? route('admin.doctors.create')     : url('/admin/doctors/create');
     $appointmentsUrl = Route::has('admin.appointments.index') ? route('admin.appointments.index') : url('/admin/appointments');
     $settingsUrl     = Route::has('admin.settings.index')     ? route('admin.settings.index')     : '#';
-    $reportUrl       = Route::has('admin.reports.monthly')    ? route('admin.reports.monthly')    : '#';
+    $reportUrl = Route::has('admin.reports.index') ? route('admin.reports.index') : url('/admin/reports');
 
     /* ── Admin identity ── */
     $adminName = Auth::user()->name ?? 'Administrator';
