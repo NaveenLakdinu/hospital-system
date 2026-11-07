@@ -5,8 +5,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AppointmentController;
+
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
+use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
+use App\Http\Controllers\Admin\PharmacistController as AdminPharmacistController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
+
 use App\Http\Controllers\Pharmacist\MedicineController;
 use App\Http\Controllers\Pharmacist\PrescriptionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +42,51 @@ Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index'
 | Role-Protected Portals & Dashboards (CAMS)
 |--------------------------------------------------------------------------
 */
+
+// Admin Portal Dashboard
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Administrator Doctor Management (FR-14)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/doctors', [AdminDoctorController::class, 'index'])->name('doctors.index');
+    Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
+    Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
+    Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
+
+    // Clinic Appointments Monitoring
+    Route::get('/appointments', [AdminAppointmentController::class, 'index'])->name('appointments.index');
+    Route::patch('/appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])->name('appointments.updateStatus');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Administrator Reports & Analytics (FR-15 & Section 4.3)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/export', [AdminReportController::class, 'exportCsv'])->name('reports.export');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Administrator Pharmacist Management (FR-14)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/pharmacists', [AdminPharmacistController::class, 'index'])->name('pharmacists.index');
+    Route::get('/pharmacists/create', [AdminPharmacistController::class, 'create'])->name('pharmacists.create');
+    Route::post('/pharmacists', [AdminPharmacistController::class, 'store'])->name('pharmacists.store');
+    Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])->name('pharmacists.destroy');
+});
+
 // 1. Admin Dashboard
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+
 
 // 2. Doctor Dashboard
 Route::get('/doctor/dashboard', function () {
