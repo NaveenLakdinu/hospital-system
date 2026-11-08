@@ -103,11 +103,14 @@ Route::middleware(['auth'])->prefix('pharmacist')->group(function () {
     Route::post('/prescriptions/{id}/dispense', [PrescriptionController::class, 'dispense'])->name('pharmacist.prescriptions.dispense');
 });
 
-
+/*
+|--------------------------------------------------------------------------
+| Pharmacist Module Routes 
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['auth'])->group(function () {
     Route::post('/chatbot/ask', [ChatbotController::class, 'ask'])->name('chatbot.ask');
 });
-
 
 require __DIR__.'/auth.php';
 
