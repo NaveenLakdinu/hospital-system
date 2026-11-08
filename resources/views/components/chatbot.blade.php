@@ -23,6 +23,7 @@
     <button class="btn btn-primary rounded-circle shadow" style="width: 50px; height: 50px;" onclick="toggleChat()">
         💬
     </button>
+    
 </div>
 
 <script>
