@@ -32,5 +32,10 @@
                  @yield('content')
             </main>
         </div>
+
+@include('components.chatbot')
+</body>
+</html>
+
     </body>
 </html>
