@@ -105,7 +105,7 @@ Route::middleware(['auth'])->prefix('pharmacist')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Pharmacist Module Routes 
+| Chatbot Module Routes 
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
