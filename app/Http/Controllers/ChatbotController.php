@@ -29,7 +29,9 @@ class ChatbotController extends Controller
                     ]
                 ]
             ]);
+
             
+
             if ($response->successful()) {
                 $reply = $response->json('candidates.0.content.parts.0.text') ?? 'සමාවන්න, මට පිළිතුරක් සපයා ගැනීමට නොහැකි විය.';
                 return response()->json(['reply' => $reply]);
