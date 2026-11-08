@@ -29,5 +29,16 @@ class ChatbotController extends Controller
                     ]
                 ]
             ]);
+            
+            if ($response->successful()) {
+                $reply = $response->json('candidates.0.content.parts.0.text') ?? 'සමාවන්න, මට පිළිතුරක් සපයා ගැනීමට නොහැකි විය.';
+                return response()->json(['reply' => $reply]);
+            }
 
- 
+            return response()->json(['reply' => 'API සම්බන්ධතාවයේ දෝෂයක් පවතී.'], 500);
+
+        } catch (\Exception $e) {
+            return response()->json(['reply' => 'Error: ' . $e->getMessage()], 500);
+        }
+    }
+}
