@@ -16,7 +16,7 @@ class ChatbotController extends Controller
         $apiKey = config('services.gemini.key');
         $userMessage = $request->input('message');
 
-        // Clinic එක ගැන AI එක දැනුවත් කරන System Prompt එක
+        // Clinic System Prompt 
         $systemPrompt = "You are an AI assistant for Family Care Medical Center & Pharmacy clinic. Answer patient queries politely and concisely in Sinhala or English.";
 
         try {
