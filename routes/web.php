@@ -104,3 +104,9 @@ Route::middleware(['auth'])->prefix('pharmacist')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+use App\Http\Controllers\ChatbotController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/chatbot/ask', [ChatbotController::class, 'ask'])->name('chatbot.ask');
+});
