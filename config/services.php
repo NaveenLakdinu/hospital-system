@@ -59,5 +59,10 @@ return [
     //     'redirect'      => env('GITHUB_REDIRECT_URL', '/auth/github/callback'),
     // ],
 
+
+    'gemini' => [
+    'key' => env('GEMINI_API_KEY'),
+],
+
 ];
 
