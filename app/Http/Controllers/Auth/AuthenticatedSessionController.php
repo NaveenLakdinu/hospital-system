@@ -32,11 +32,11 @@ class AuthenticatedSessionController extends Controller
 
         // Role එක අනුව අදාළ Dashboard එකට Redirect කිරීම
         return match ($user->role) {
-            'admin' => redirect()->intended(route('admin.dashboard')),
-            'doctor' => redirect()->intended(route('doctor.dashboard')),
-            'pharmacist' => redirect()->intended(route('pharmacist.dashboard')),
-            default => redirect()->intended(route('home')),
-        };
+        'admin' => redirect()->route('admin.dashboard'),
+        'doctor' => redirect()->route('doctor.dashboard'),
+        'pharmacist' => redirect()->route('pharmacist.dashboard'),
+        default => redirect()->route('home'),
+    };
     }
 
     /**
