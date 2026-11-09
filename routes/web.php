@@ -111,6 +111,14 @@ Route::middleware(['auth'])->prefix('pharmacist')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/chatbot/ask', [ChatbotController::class, 'ask'])->name('chatbot.ask');
 });
+Route::middleware(['auth'])->group(function () {
+    // ඩිරෙක්ට් පිටුවෙන් Chatbot UI එක බලන්න:
+    Route::get('/chatbot', function () {
+        return view('chatbot.index');
+    })->name('chatbot.index');
+});
+
+
 
 require __DIR__.'/auth.php';
 
