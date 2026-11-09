@@ -197,7 +197,8 @@
     >{{ old('consultation_notes') }}</textarea>
 
     <button type="submit" class="btn">
-        Save & Continue to Prescription
+        Save & Continue to 
+        Prescription
     </button>
 
 </form>
