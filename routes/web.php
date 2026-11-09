@@ -14,6 +14,7 @@ use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController
 use App\Http\Controllers\Doctor\ConsultationController as DoctorConsultationController;
 use App\Http\Controllers\Pharmacist\MedicineController;
 use App\Http\Controllers\Pharmacist\PrescriptionController;
+use App\Http\Controllers\ChatbotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,4 +146,38 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Pharmacist Module Routes 
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('pharmacist')->group(function () {
+    Route::get('/medicines', [MedicineController::class, 'index'])->name('pharmacist.medicines.index');
+    Route::post('/medicines', [MedicineController::class, 'store'])->name('pharmacist.medicines.store');
+
+    Route::get('/prescriptions', [PrescriptionController::class, 'index'])->name('pharmacist.prescriptions.index');
+    Route::post('/prescriptions/{id}/dispense', [PrescriptionController::class, 'dispense'])->name('pharmacist.prescriptions.dispense');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Chatbot Module Routes 
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::post('/chatbot/ask', [ChatbotController::class, 'ask'])->name('chatbot.ask');
+});
+Route::middleware(['auth'])->group(function () {
+    // ඩිරෙක්ට් පිටුවෙන් Chatbot UI එක බලන්න:
+    Route::get('/chatbot', function () {
+        return view('chatbot.index');
+    })->name('chatbot.index');
+});
+
+
+
 require __DIR__.'/auth.php';
+
+
+require __DIR__.'/auth.php';
+
