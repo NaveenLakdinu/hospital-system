@@ -2409,31 +2409,6 @@ pregnancy-page {
     </div>
 
 
-    <!-- FOOTER -->
-
-    <div class="pregnancy-footer">
-
-        <div class="d-flex align-items-center gap-3">
-
-            <i class="bi bi-heart-pulse-fill fs-1"></i>
-
-            <div>
-
-                <h5>
-                    A Healthy Pregnancy Leads to a Healthier Tomorrow.
-                </h5>
-
-                <p>
-                    Take care, stay informed and enjoy this special journey.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
 </div>
 </div>
 </div>
