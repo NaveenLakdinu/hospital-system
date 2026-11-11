@@ -18,3 +18,47 @@
     --muted: #72819a;
     --background: #f5f8fd;
 }
+pregnancy-page {
+    font-family: 'Inter', sans-serif;
+    background: var(--background);
+    padding: 28px 0 65px;
+    color: var(--dark);
+    min-height: 100vh;
+}
+
+.pregnancy-container {
+    max-width: 1250px;
+}
+
+.pregnancy-wrapper {
+    background: white;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 12px 45px rgba(31, 59, 100, .07);
+}
+
+.pregnancy-header {
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #edf0f7;
+}
+
+.pregnancy-brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.brand-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background: #ffe7f0;
+    color: #e94f8c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
