@@ -15,3 +15,30 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Reference No</th>
+                        <th>Category</th>
+                        <th>Test Name</th>
+                        <th>Booking Date</th>
+                        <th>Status</th>
+                        <th class="text-end pe-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($bookings as $booking)
+                    <tr>
+                        <td class="ps-4"><span class="badge bg-primary fs-6">{{ $booking->reference_no }}</span></td>
+                        <td><span class="badge bg-secondary">{{ $booking->category }}</span></td>
+                        <td class="fw-bold">{{ $booking->test_name }}</td>
+                        <td>{{ $booking->booking_date }}</td>
+                        <td>
+                            @if($booking->status === 'Confirmed')
+                                <span class="badge bg-success">Confirmed</span>
+                            @else
+                                <span class="badge bg-danger">Cancelled</span>
+                            @endif
