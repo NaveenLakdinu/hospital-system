@@ -1559,4 +1559,423 @@ pregnancy-page {
 
 
 
-2. අවසානයේ ක
+ <!-- PREGNANCY STAGES -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">PREGNANCY JOURNEY</span>
+            <h3>Three Stages of Pregnancy</h3>
+            <p>Understand the changes that happen during each trimester.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="trimester-card">
+
+                    <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=800&q=85"
+                         alt="First trimester pregnancy">
+
+                    <div class="trimester-content">
+
+                        <span class="badge bg-danger-subtle text-danger mb-3">
+                            WEEKS 1–12
+                        </span>
+
+                        <h5>First Trimester</h5>
+
+                        <p>
+                            The early stage of pregnancy. The baby's
+                            basic organs and body structures begin
+                            developing. Hormonal changes may cause
+                            tiredness, nausea and breast tenderness.
+                        </p>
+
+                        <ul class="pregnancy-list">
+                            <li><i class="bi bi-check-circle-fill"></i> Arrange early prenatal care.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Discuss folic acid with your doctor.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Eat small, balanced meals.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Get enough rest.</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="trimester-card">
+
+                    <img src="https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=800&q=85"
+                         alt="Second trimester pregnancy">
+
+                    <div class="trimester-content">
+
+                        <span class="badge bg-primary-subtle text-primary mb-3">
+                            WEEKS 13–27
+                        </span>
+
+                        <h5>Second Trimester</h5>
+
+                        <p>
+                            During this stage, the baby continues to
+                            grow. Many mothers begin noticing baby
+                            movements. Regular prenatal appointments
+                            help monitor development.
+                        </p>
+
+                        <ul class="pregnancy-list">
+                            <li><i class="bi bi-check-circle-fill"></i> Attend scheduled scans.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Maintain nutritious meals.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Stay gently active if approved.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Discuss any new symptoms.</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="trimester-card">
+
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&q=85"
+                         alt="Third trimester medical care">
+
+                    <div class="trimester-content">
+
+                        <span class="badge bg-success-subtle text-success mb-3">
+                            WEEKS 28–40
+                        </span>
+
+                        <h5>Third Trimester</h5>
+
+                        <p>
+                            The baby gains weight and prepares for birth.
+                            The mother may experience increased tiredness
+                            and physical discomfort as the baby grows.
+                        </p>
+
+                        <ul class="pregnancy-list">
+                            <li><i class="bi bi-check-circle-fill"></i> Attend regular checkups.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Learn about labour signs.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Prepare hospital essentials.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Monitor baby movements.</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BABY DEVELOPMENT -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">BABY DEVELOPMENT</span>
+            <h3>Understanding Your Baby's Growth</h3>
+            <p>Learn about the important developmental milestones.</p>
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1578496781379-7dcfb995293d?w=600&q=80"
+                         alt="Early prenatal development">
+
+                    <div class="photo-content">
+                        <h6>Early Development</h6>
+                        <p>
+                            The embryo begins developing important
+                            structures during the early weeks.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600&q=80"
+                         alt="Pregnancy ultrasound">
+
+                    <div class="photo-content">
+                        <h6>Ultrasound Monitoring</h6>
+                        <p>
+                            Ultrasound examinations can help healthcare
+                            professionals assess baby development.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80"
+                         alt="Pregnant mother">
+
+                    <div class="photo-content">
+                        <h6>Baby Movements</h6>
+                        <p>
+                            Mothers generally begin feeling movements
+                            during the second trimester.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=80"
+                         alt="Newborn baby">
+
+                    <div class="photo-content">
+                        <h6>Preparing for Birth</h6>
+                        <p>
+                            During the final weeks, the baby continues
+                            preparing for life outside the womb.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NUTRITION GUIDE -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">HEALTHY NUTRITION</span>
+            <h3>Pregnancy Nutrition Guide</h3>
+            <p>A balanced diet provides important nutrients for mother and baby.</p>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+
+            <div class="col">
+                <div class="food-card">
+                    <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&q=80"
+                         alt="Fresh fruits">
+                    <h6>Fresh Fruits</h6>
+                    <p>Vitamins, minerals and fibre.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="food-card">
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80"
+                         alt="Green vegetables">
+                    <h6>Vegetables</h6>
+                    <p>Folate, fibre and nutrients.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="food-card">
+                    <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&q=80"
+                         alt="Milk">
+                    <h6>Dairy Products</h6>
+                    <p>Calcium and protein.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="food-card">
+                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80"
+                         alt="Whole grains">
+                    <h6>Whole Grains</h6>
+                    <p>Energy and fibre.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="food-card">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80"
+                         alt="Healthy protein foods">
+                    <h6>Protein Foods</h6>
+                    <p>Eggs, beans and well-cooked fish.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="food-card">
+                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&q=80"
+                         alt="Drinking water">
+                    <h6>Water</h6>
+                    <p>Maintain hydration.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- IMPORTANT NUTRIENTS -->
+
+    <div class="gallery-section">
+
+        <div class="row g-3">
+
+            <div class="col-lg-6">
+
+                <div class="info-card info-green">
+
+                    <div class="info-icon green-text">
+                        <i class="bi bi-capsule"></i>
+                    </div>
+
+                    <h5>Important Pregnancy Nutrients</h5>
+
+                    <ul class="pregnancy-list">
+
+                        <li><i class="bi bi-check-circle-fill"></i>
+                            <span><strong>Folic Acid:</strong> Helps reduce the risk of neural tube defects.</span>
+                        </li>
+
+                        <li><i class="bi bi-check-circle-fill"></i>
+                            <span><strong>Iron:</strong> Helps support healthy red blood cell production.</span>
+                        </li>
+
+                        <li><i class="bi bi-check-circle-fill"></i>
+                            <span><strong>Calcium:</strong> Supports the development of baby's bones and teeth.</span>
+                        </li>
+
+                        <li><i class="bi bi-check-circle-fill"></i>
+                            <span><strong>Vitamin D:</strong> Helps the body absorb calcium.</span>
+                        </li>
+
+                        <li><i class="bi bi-check-circle-fill"></i>
+                            <span><strong>Protein:</strong> Supports growth and tissue development.</span>
+                        </li>
+
+                    </ul>
+
+                    <p class="mt-3">
+                        Supplement requirements and doses should be
+                        discussed with a qualified healthcare professional.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="info-card info-yellow">
+
+                    <div class="info-icon" style="color:#d18b16;">
+                        <i class="bi bi-exclamation-circle"></i>
+                    </div>
+
+                    <h5>Foods and Drinks to Avoid or Limit</h5>
+
+                    <ul class="pregnancy-list">
+
+                        <li><i class="bi bi-x-circle-fill text-danger"></i>
+                            Raw or undercooked meat and eggs.
+                        </li>
+
+                        <li><i class="bi bi-x-circle-fill text-danger"></i>
+                            Unpasteurized milk and dairy products.
+                        </li>
+
+                        <li><i class="bi bi-x-circle-fill text-danger"></i>
+                            High-mercury fish.
+                        </li>
+
+                        <li><i class="bi bi-x-circle-fill text-danger"></i>
+                            Alcohol during pregnancy.
+                        </li>
+
+                        <li><i class="bi bi-x-circle-fill text-danger"></i>
+                            Excessive caffeine.
+                        </li>
+
+                    </ul>
+
+                    <p class="mt-3">
+                        Follow local food-safety advice and your
+                        healthcare professional's recommendations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HEALTHY LIFESTYLE -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">DAILY WELLNESS</span>
+            <h3>Healthy Lifestyle During Pregnancy</h3>
+            <p>Small daily habits can support maternal wellbeing.</p>
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="photo-card">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80"
+                         alt="Relaxation and wellness">
+                    <div class="photo-content">
+                        <h6>Rest and Relaxation</h6>
+                        <p>Get enough sleep and make time for relaxation.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="photo-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80"
+                         alt="Gentle exercise">
+                    <div class="photo-content">
+                        <h6>Gentle Exercise</h6>
+                        <p>Walking and suitable activities may support wellbeing when approved by your doctor.</p>
+                    </div>
+                </div>
