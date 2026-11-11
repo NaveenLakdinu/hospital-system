@@ -17,4 +17,7 @@
                     <option selected>Sri Lanka</option>
                 </select>
             </div>
-   
+   @extends('layouts.app')
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+@endsection
