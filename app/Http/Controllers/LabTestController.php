@@ -50,7 +50,7 @@ class LabTestController extends Controller
         return view('lab_tests.my_bookings', compact('bookings'));
     }
 
-    // Cancel Booking
+    // cancel Booking
     public function cancel($id)
     {
         $booking = LabTestBooking::where('user_id', Auth::id())
