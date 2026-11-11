@@ -9,6 +9,8 @@ class LabTestBooking extends Model
 {
     use HasFactory;
 
+    protected $table = 'lab_test_bookings';
+
     protected $fillable = [
         'user_id',
         'reference_no',
@@ -18,8 +20,7 @@ class LabTestBooking extends Model
         'status',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $casts = [
+        'booking_date' => 'date',
+    ];
 }
