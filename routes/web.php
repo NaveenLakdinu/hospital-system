@@ -24,6 +24,11 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/lab-tests/{id}/cancel', [LabTestController::class, 'cancel'])->name('lab.cancel');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pregnancy-info', function () {
+        return view('pregnancy.info');
+    })->name('pregnancy.info');
+});
 /*
 |--------------------------------------------------------------------------
 | Public welcome / landing page
