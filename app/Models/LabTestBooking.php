@@ -8,3 +8,5 @@ class LabTestBooking extends Model
 {
     //
 }
+
+
