@@ -120,3 +120,63 @@ pregnancy-page {
     position: relative;
     z-index: 2;
 }
+.hero-content p {
+    color: #536d91;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 510px;
+}
+
+.hero-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: #ffe1f0;
+    color: #d83e83;
+    padding: 11px 18px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+/* COMMON SECTIONS */
+
+.gallery-section {
+    padding: 15px 28px 25px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 7px;
+}
+
+.section-heading p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+}
+
+.section-label {
+    color: var(--pink);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* INFORMATION CARDS */
+
+.info-card {
+    border-radius: 20px;
+    padding: 23px;
+    height: 100%;
+    border: 1px solid transparent;
+}
