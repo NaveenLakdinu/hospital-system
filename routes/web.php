@@ -24,6 +24,14 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/lab-tests/{id}/cancel', [LabTestController::class, 'cancel'])->name('lab.cancel');
 });
 
+
+
+
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Public welcome / landing page
