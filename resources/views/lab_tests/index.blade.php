@@ -1048,7 +1048,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const categoryInput = document.getElementById('modal-category');
     const searchInput = document.getElementById('search-input');
 
-    // OPEN BOOKING MODAL
+    // OPEN BOOKING MODAL function
 
     window.openBooking = function(testName, category) {
 
