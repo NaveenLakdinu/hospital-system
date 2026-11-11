@@ -1979,3 +1979,463 @@ pregnancy-page {
                         <p>Walking and suitable activities may support wellbeing when approved by your doctor.</p>
                     </div>
                 </div>
+
+                <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">PRENATAL CARE</span>
+            <h3>Important Medical Checkups</h3>
+            <p>Regular appointments help healthcare professionals monitor pregnancy.</p>
+        </div>
+
+        <div class="row align-items-center g-4">
+
+            <div class="col-lg-6">
+
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&q=85"
+                     alt="Pregnancy medical consultation"
+                     class="w-100 rounded-4"
+                     style="height:330px;object-fit:cover;">
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="info-card info-blue">
+
+                    <h5>
+                        <i class="bi bi-heart-pulse-fill blue-text me-2"></i>
+                        Prenatal Health Monitoring
+                    </h5>
+
+                    <ul class="pregnancy-list">
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Blood pressure monitoring.
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Blood and urine tests as recommended.
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Ultrasound examinations when indicated.
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Monitoring baby's growth.
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Screening for pregnancy-related conditions.
+                        </li>
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Discussing symptoms and medications.
+                        </li>
+
+                    </ul>
+
+                    <p class="mt-3">
+                        Your antenatal appointment schedule should be
+                        planned with your healthcare provider.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMMON SYMPTOMS -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">MATERNAL WELLNESS</span>
+            <h3>Common Pregnancy Discomforts</h3>
+            <p>Some physical changes are common during pregnancy.</p>
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="info-card info-pink">
+                    <div class="info-icon pink-text">
+                        <i class="bi bi-emoji-dizzy"></i>
+                    </div>
+                    <h5>Morning Sickness</h5>
+                    <p>Nausea can occur at different times of the day. Small meals may help. Seek medical advice if you cannot keep fluids down.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="info-card info-blue">
+                    <div class="info-icon blue-text">
+                        <i class="bi bi-person-walking"></i>
+                    </div>
+                    <h5>Back Pain</h5>
+                    <p>Body changes can cause back discomfort. Ask your healthcare provider about suitable posture and gentle movement.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="info-card info-green">
+                    <div class="info-icon green-text">
+                        <i class="bi bi-moon-stars"></i>
+                    </div>
+                    <h5>Fatigue</h5>
+                    <p>Feeling tired can be common. Rest regularly and discuss severe or unusual tiredness with your doctor.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="info-card info-purple">
+                    <div class="info-icon" style="color:#8957d9;">
+                        <i class="bi bi-heart"></i>
+                    </div>
+                    <h5>Heartburn</h5>
+                    <p>Digestive changes may cause heartburn. Discuss safe ways to manage persistent symptoms with your healthcare provider.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- WARNING SIGNS -->
+
+    <div class="gallery-section">
+
+        <div class="warning-banner">
+
+            <div class="row align-items-center g-0">
+
+                <div class="col-lg-7">
+
+                    <div class="warning-content">
+
+                        <h4>
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Pregnancy Warning Signs
+                        </h4>
+
+                        <p class="small text-secondary">
+                            Seek urgent medical assessment if you experience:
+                        </p>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <ul class="list-unstyled">
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Vaginal bleeding</li>
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Severe abdominal pain</li>
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Severe or persistent headache</li>
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Blurred vision</li>
+                                </ul>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <ul class="list-unstyled">
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Sudden swelling of face or hands</li>
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Reduced baby movements</li>
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Fever or serious illness</li>
+                                    <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Difficulty breathing</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <p class="small fw-bold text-danger mb-0">
+                            Do not wait for symptoms to disappear. Contact
+                            a healthcare professional or seek emergency care.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-5">
+
+                    <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=800&q=85"
+                         alt="Pregnancy maternal care"
+                         class="warning-image">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PREPARING FOR DELIVERY -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">GETTING READY</span>
+            <h3>Preparing for Your Baby's Arrival</h3>
+            <p>Plan ahead for a comfortable and supported birth experience.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-6">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=85"
+                         alt="Baby preparation">
+
+                    <div class="photo-content">
+
+                        <h6>Prepare Baby Essentials</h6>
+
+                        <p>
+                            Prepare suitable baby clothes, nappies,
+                            blankets and essential newborn supplies.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="info-card info-blue">
+
+                    <div class="info-icon blue-text">
+                        <i class="bi bi-bag-heart"></i>
+                    </div>
+
+                    <h5>Hospital Bag Checklist</h5>
+
+                    <ul class="pregnancy-list">
+
+                        <li><i class="bi bi-check-circle-fill"></i> Comfortable clothing for mother.</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Baby clothes and nappies.</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Personal hygiene items.</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Medical records and identification.</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Important contact information.</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Safe transport arrangements.</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- AFTER DELIVERY -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+            <span class="section-label">POSTNATAL CARE</span>
+            <h3>Mother and Baby Care After Delivery</h3>
+            <p>Care continues after birth for both mother and newborn.</p>
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=700&q=85"
+                         alt="Newborn baby">
+
+                    <div class="photo-content">
+                        <h6>Newborn Care</h6>
+                        <p>Follow professional guidance about feeding, safe sleep, hygiene and newborn health checks.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=700&q=85"
+                         alt="Postnatal healthcare">
+
+                    <div class="photo-content">
+                        <h6>Postnatal Checkups</h6>
+                        <p>Attend follow-up appointments to monitor physical recovery and maternal wellbeing.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="photo-card">
+
+                    <img src="https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=700&q=85"
+                         alt="Mother and baby bonding">
+
+                    <div class="photo-content">
+                        <h6>Mother and Baby Bonding</h6>
+                        <p>Skin-to-skin contact and responsive care can support bonding and newborn wellbeing.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FINAL IMAGE GALLERY -->
+
+    <div class="gallery-section">
+
+        <div class="section-heading">
+
+            <span class="section-label">PHOTO COLLECTION</span>
+
+            <h3>Pregnancy & Motherhood Gallery</h3>
+
+            <p>
+                A collection of pregnancy, maternity care and newborn moments.
+            </p>
+
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-6 col-lg-4">
+                <div class="gallery-photo">
+                    <img class="gallery-image"
+                         src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=700&q=85"
+                         alt="Pregnancy motherhood">
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4">
+                <div class="gallery-photo">
+                    <img class="gallery-image"
+                         src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=700&q=85"
+                         alt="Maternal healthcare">
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4">
+                <div class="gallery-photo">
+                    <img class="gallery-image"
+                         src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=700&q=85"
+                         alt="Healthy nutrition">
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4">
+                <div class="gallery-photo">
+                    <img class="gallery-image"
+                         src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=700&q=85"
+                         alt="Baby">
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4">
+                <div class="gallery-photo">
+                    <img class="gallery-image"
+                         src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=700&q=85"
+                         alt="Medical care">
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4">
+                <div class="gallery-photo">
+                    <img class="gallery-image"
+                         src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=700&q=85"
+                         alt="Motherhood">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MEDICAL INFORMATION DISCLAIMER -->
+
+    <div class="gallery-section">
+
+        <div class="info-card info-blue">
+
+            <h5>
+                <i class="bi bi-info-circle-fill blue-text me-2"></i>
+                Important Health Information
+            </h5>
+
+            <p>
+                This pregnancy gallery is provided for general
+                educational purposes only. It does not replace
+                professional medical advice, diagnosis or treatment.
+                Always consult your qualified doctor, midwife or
+                healthcare provider for advice based on your
+                individual pregnancy and health needs.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="pregnancy-footer">
+
+        <div class="d-flex align-items-center gap-3">
+
+            <i class="bi bi-heart-pulse-fill fs-1"></i>
+
+            <div>
+
+                <h5>
+                    A Healthy Pregnancy Leads to a Healthier Tomorrow.
+                </h5>
+
+                <p>
+                    Take care, stay informed and enjoy this special journey.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+</div>
+</div>
+
+@endsection
