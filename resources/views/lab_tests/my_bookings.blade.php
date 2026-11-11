@@ -42,3 +42,29 @@
                             @else
                                 <span class="badge bg-danger">Cancelled</span>
                             @endif
+                        </td>
+                        <td class="text-end pe-4">
+                            @if($booking->status === 'Confirmed')
+                                <form action="{{ route('lab.cancel', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to cancel this lab test booking?')">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                        Cancel Booking
+                                    </button>
+                                </form>
+                            @else
+                                <span class="text-muted small">Cancelled</span>
+                            @endif
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center py-4 text-muted">No lab test bookings found.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
