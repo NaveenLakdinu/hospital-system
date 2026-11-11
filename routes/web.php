@@ -15,6 +15,14 @@ use App\Http\Controllers\Doctor\ConsultationController as DoctorConsultationCont
 use App\Http\Controllers\Pharmacist\MedicineController;
 use App\Http\Controllers\Pharmacist\PrescriptionController;
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\LabTestController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/lab-tests', [LabTestController::class, 'index'])->name('lab.index');
+    Route::post('/lab-tests/book', [LabTestController::class, 'store'])->name('lab.store');
+    Route::get('/my-lab-bookings', [LabTestController::class, 'myBookings'])->name('lab.my_bookings');
+    Route::patch('/lab-tests/{id}/cancel', [LabTestController::class, 'cancel'])->name('lab.cancel');
+});
 
 /*
 |--------------------------------------------------------------------------
