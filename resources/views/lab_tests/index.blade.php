@@ -1059,7 +1059,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     };
 
-    // SEARCH BOOKING
+    // SEARCH BOOKING function
 
     window.setTestFromSearch = function() {
 
