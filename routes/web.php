@@ -15,6 +15,9 @@ use App\Http\Controllers\Doctor\ConsultationController as DoctorConsultationCont
 use App\Http\Controllers\Pharmacist\MedicineController;
 use App\Http\Controllers\Pharmacist\PrescriptionController;
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\LabTestController;
+
+
 
 /*
 |--------------------------------------------------------------------------
