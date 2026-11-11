@@ -33,28 +33,7 @@
             </div>
         </div>
     </div>
-
-            <div class="card border-0 shadow-sm rounded-4 p-3 h-100 hover-card cursor-pointer" onclick="openBooking('Fever Profile Test', 'Fever')" data-bs-toggle="modal" data-bs-target="#bookingModal">
-                <div class="bg-danger-subtle rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 80px; height: 80px;">
-                    <i class="bi bi-thermometer-high fs-1 text-danger"></i>
-                </div>
-                <span class="fw-bold text-dark">Fever</span>
-            </div>
-        </div>
-        <!-- Diabetes -->
-        <div class="col">
-            <div class="card border-0 shadow-sm rounded-4 p-3 h-100 hover-card cursor-pointer" onclick="openBooking('Diabetes Blood Sugar Test', 'Diabetes')" data-bs-toggle="modal" data-bs-target="#bookingModal">
-                <div class="bg-info-subtle rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 80px; height: 80px;">
-                    <i class="bi bi-droplet-half fs-1 text-primary"></i>
-                </div>
-                <span class="fw-bold text-dark">Diabetes</span>
-            </div>
-        </div>
-        <!-- Skin -->
-        <div class="col">
-            <div class="card border-0 shadow-sm rounded-4 p-3 h-100 hover-card cursor-pointer" onclick="openBooking('Skin Infection & Allergy Test', 'Skin')" data-bs-toggle="modal" data-bs-target="#bookingModal">
-                <div class="bg-purple-subtle rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 80px; height: 80px; background-color: #e0d4f7;">
-                    <i class="bi bi-person-fill-exclamation fs-1 text-purple" style="color: #6f42c1;"></i>
+on-fill-exclamation fs-1 text-purple" style="color: #6f42c1;"></i>
                 </div>
                 <span class="fw-bold text-dark">Skin</span>
             </div>
