@@ -180,3 +180,31 @@ pregnancy-page {
     height: 100%;
     border: 1px solid transparent;
 }
+.info-card p {
+    font-size: 12px;
+    color: #5f708a;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.info-blue { background: #edf5ff; border-color: #dceaff; }
+.info-pink { background: #fff0f6; border-color: #ffe0ed; }
+.info-green { background: #eaf9f1; border-color: #d5f0e1; }
+.info-yellow { background: #fff8e8; border-color: #f8edcf; }
+.info-purple { background: #f5efff; border-color: #e9ddff; }
+
+.info-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+}
+
+.pink-text { color: #e74e8c; }
+.blue-text { color: #2778ed; }
+.green-text { color: #20aa77; }
