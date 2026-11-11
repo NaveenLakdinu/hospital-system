@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('lab_test_bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('reference_no')->unique();
+            $table->string('test_name');
+            $table->string('category');
+            $table->date('booking_date');
+            $table->enum('status', ['Pending', 'Confirmed', 'Cancelled'])->default('Confirmed');
             $table->timestamps();
         });
     }
@@ -24,8 +30,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('lab_test_bookings');
     }
-
-
-
-    
 };
