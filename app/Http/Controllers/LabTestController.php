@@ -6,6 +6,8 @@ use App\Models\LabTestBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+
 class LabTestController extends Controller
 {
     // 1. Lab Tests Online Main Page (UI Page matching reference design)
