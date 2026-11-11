@@ -93,3 +93,30 @@ pregnancy-page {
     background: var(--pink);
     color: white;
 }
+/* HERO */
+
+.pregnancy-hero {
+    margin: 24px;
+    border-radius: 23px;
+    overflow: hidden;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background:
+        linear-gradient(90deg,
+        rgba(240, 247, 255, .98) 0%,
+        rgba(240, 247, 255, .93) 43%,
+        rgba(240, 247, 255, .12) 100%),
+        url('https://images.unsplash.com/photo-1544126592-807ade215a0b?q=85&w=1600&auto=format&fit=crop');
+    background-position: center;
+    background-size: cover;
+    border: 1px solid #dce9ff;
+}
+
+.hero-content {
+    padding: 45px;
+    max-width: 660px;
+    position: relative;
+    z-index: 2;
+}
