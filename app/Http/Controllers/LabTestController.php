@@ -40,7 +40,7 @@ class LabTestController extends Controller
             ->with('success', 'Lab Test booked successfully! Ref No: ' . $refNo);
     }
 
-    // 
+    // My Lab Bookings
     public function myBookings()
     {
         $bookings = LabTestBooking::where('user_id', Auth::id())
