@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -18,7 +19,8 @@
     --muted: #72819a;
     --background: #f5f8fd;
 }
-pregnancy-page {
+
+.pregnancy-page {
     font-family: 'Inter', sans-serif;
     background: var(--background);
     padding: 28px 0 65px;
@@ -62,6 +64,7 @@ pregnancy-page {
     justify-content: center;
     font-size: 24px;
 }
+
 .pregnancy-brand h4 {
     font-weight: 800;
     font-size: 18px;
@@ -93,6 +96,7 @@ pregnancy-page {
     background: var(--pink);
     color: white;
 }
+
 /* HERO */
 
 .pregnancy-hero {
@@ -108,7 +112,7 @@ pregnancy-page {
         rgba(240, 247, 255, .98) 0%,
         rgba(240, 247, 255, .93) 43%,
         rgba(240, 247, 255, .12) 100%),
-        url('https://images.unsplash.com/photo-1544126592-807ade215a0b?q=85&w=1600&auto=format&fit=crop');
+        url('https://images.unsplash.com/photo-1773243086593-d36487e39a0b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
     background-position: center;
     background-size: cover;
     border: 1px solid #dce9ff;
@@ -120,6 +124,30 @@ pregnancy-page {
     position: relative;
     z-index: 2;
 }
+
+.hero-badge {
+    background: white;
+    color: #20a978;
+    border-radius: 50px;
+    padding: 9px 17px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 22px;
+}
+
+.hero-content h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -1.7px;
+    color: #142c56;
+}
+
+.hero-content h1 span {
+    color: #a343cc;
+}
+
 .hero-content p {
     color: #536d91;
     font-size: 15px;
@@ -180,6 +208,13 @@ pregnancy-page {
     height: 100%;
     border: 1px solid transparent;
 }
+
+.info-card h5 {
+    font-weight: 800;
+    font-size: 17px;
+    margin-bottom: 13px;
+}
+
 .info-card p {
     font-size: 12px;
     color: #5f708a;
@@ -208,6 +243,17 @@ pregnancy-page {
 .pink-text { color: #e74e8c; }
 .blue-text { color: #2778ed; }
 .green-text { color: #20aa77; }
+
+/* IMAGE CARDS */
+
+.photo-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid #edf0f6;
+    transition: .3s;
+}
 
 .photo-card:hover {
     transform: translateY(-5px);
@@ -279,6 +325,22 @@ pregnancy-page {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.pregnancy-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 12px;
+    color: #53647d;
+    line-height: 1.7;
+    margin-bottom: 11px;
+}
+
+.pregnancy-list i {
+    color: #24b477;
+    font-size: 15px;
+    margin-top: 2px;
 }
 
 /* TRIMESTER */
@@ -693,7 +755,7 @@ pregnancy-page {
 
                 <div class="trimester-card">
 
-                    <img src="https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=800&q=85"
+                    <img src="https://images.unsplash.com/photo-1654931800911-7a9cfb3b7c17?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Second trimester pregnancy">
 
                     <div class="trimester-content">
@@ -729,7 +791,7 @@ pregnancy-page {
 
                 <div class="trimester-card">
 
-                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&q=85"
+                    <img src="https://images.unsplash.com/photo-1457342813143-a1ae27448a82?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Third trimester medical care">
 
                     <div class="trimester-content">
@@ -1550,311 +1612,6 @@ pregnancy-page {
 
     </div>
 
-
-</div>
-</div>
-</div>
-
-@endsection
-
-
-
- <!-- PREGNANCY STAGES -->
-
-    <div class="gallery-section">
-
-        <div class="section-heading">
-            <span class="section-label">PREGNANCY JOURNEY</span>
-            <h3>Three Stages of Pregnancy</h3>
-            <p>Understand the changes that happen during each trimester.</p>
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="trimester-card">
-
-                    <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=800&q=85"
-                         alt="First trimester pregnancy">
-
-                    <div class="trimester-content">
-
-                        <span class="badge bg-danger-subtle text-danger mb-3">
-                            WEEKS 1–12
-                        </span>
-
-                        <h5>First Trimester</h5>
-
-                        <p>
-                            The early stage of pregnancy. The baby's
-                            basic organs and body structures begin
-                            developing. Hormonal changes may cause
-                            tiredness, nausea and breast tenderness.
-                        </p>
-
-                        <ul class="pregnancy-list">
-                            <li><i class="bi bi-check-circle-fill"></i> Arrange early prenatal care.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Discuss folic acid with your doctor.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Eat small, balanced meals.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Get enough rest.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="trimester-card">
-
-                    <img src="https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=800&q=85"
-                         alt="Second trimester pregnancy">
-
-                    <div class="trimester-content">
-
-                        <span class="badge bg-primary-subtle text-primary mb-3">
-                            WEEKS 13–27
-                        </span>
-
-                        <h5>Second Trimester</h5>
-
-                        <p>
-                            During this stage, the baby continues to
-                            grow. Many mothers begin noticing baby
-                            movements. Regular prenatal appointments
-                            help monitor development.
-                        </p>
-
-                        <ul class="pregnancy-list">
-                            <li><i class="bi bi-check-circle-fill"></i> Attend scheduled scans.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Maintain nutritious meals.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Stay gently active if approved.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Discuss any new symptoms.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-lg-4 col-md-6">
-
-                <div class="trimester-card">
-
-                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&q=85"
-                         alt="Third trimester medical care">
-
-                    <div class="trimester-content">
-
-                        <span class="badge bg-success-subtle text-success mb-3">
-                            WEEKS 28–40
-                        </span>
-
-                        <h5>Third Trimester</h5>
-
-                        <p>
-                            The baby gains weight and prepares for birth.
-                            The mother may experience increased tiredness
-                            and physical discomfort as the baby grows.
-                        </p>
-
-                        <ul class="pregnancy-list">
-                            <li><i class="bi bi-check-circle-fill"></i> Attend regular checkups.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Learn about labour signs.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Prepare hospital essentials.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Monitor baby movements.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- BABY DEVELOPMENT -->
-
-    <div class="gallery-section">
-
-        <div class="section-heading">
-            <span class="section-label">BABY DEVELOPMENT</span>
-            <h3>Understanding Your Baby's Growth</h3>
-            <p>Learn about the important developmental milestones.</p>
-        </div>
-
-        <div class="row g-3">
-
-            <div class="col-md-6 col-lg-3">
-
-                <div class="photo-card">
-
-                    <img src="https://images.unsplash.com/photo-1578496781379-7dcfb995293d?w=600&q=80"
-                         alt="Early prenatal development">
-
-                    <div class="photo-content">
-                        <h6>Early Development</h6>
-                        <p>
-                            The embryo begins developing important
-                            structures during the early weeks.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-
-                <div class="photo-card">
-
-                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600&q=80"
-                         alt="Pregnancy ultrasound">
-
-                    <div class="photo-content">
-                        <h6>Ultrasound Monitoring</h6>
-                        <p>
-                            Ultrasound examinations can help healthcare
-                            professionals assess baby development.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-
-                <div class="photo-card">
-
-                    <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&q=80"
-                         alt="Pregnant mother">
-
-                    <div class="photo-content">
-                        <h6>Baby Movements</h6>
-                        <p>
-                            Mothers generally begin feeling movements
-                            during the second trimester.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-
-                <div class="photo-card">
-
-                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=80"
-                         alt="Newborn baby">
-
-                    <div class="photo-content">
-                        <h6>Preparing for Birth</h6>
-                        <p>
-                            During the final weeks, the baby continues
-                            preparing for life outside the womb.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- NUTRITION GUIDE -->
-
-    <div class="gallery-section">
-
-        <div class="section-heading">
-            <span class="section-label">HEALTHY NUTRITION</span>
-            <h3>Pregnancy Nutrition Guide</h3>
-            <p>A balanced diet provides important nutrients for mother and baby.</p>
-        </div>
-
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
-
-            <div class="col">
-                <div class="food-card">
-                    <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&q=80"
-                         alt="Fresh fruits">
-                    <h6>Fresh Fruits</h6>
-                    <p>Vitamins, minerals and fibre.</p>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="food-card">
-                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80"
-                         alt="Green vegetables">
-                    <h6>Vegetables</h6>
-                    <p>Folate, fibre and nutrients.</p>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="food-card">
-                    <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&q=80"
-                         alt="Milk">
-                    <h6>Dairy Products</h6>
-                    <p>Calcium and protein.</p>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="food-card">
-                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80"
-                         alt="Whole grains">
-                    <h6>Whole Grains</h6>
-                    <p>Energy and fibre.</p>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="food-card">
-                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80"
-                         alt="Healthy protein foods">
-                    <h6>Protein Foods</h6>
-                    <p>Eggs, beans and well-cooked fish.</p>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="food-card">
-                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&q=80"
-                         alt="Drinking water">
-                    <h6>Water</h6>
-                    <p>Maintain hydration.</p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- IMPORTANT NUTRIENTS -->
-
-    <div class="gallery-section">
-
-        <div class="row g-3">
-
-            <div class="col-lg-6">
-
-                <div class="info-card info-green">
 
 </div>
 </div>
