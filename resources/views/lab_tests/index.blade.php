@@ -8,4 +8,13 @@
     <!-- Title -->
     <h3 class="fw-bold mb-4 text-dark">Book Lab Tests Online</h3>
 
-    
+    <!-- Search Bar Section (Matching Image 1) -->
+    <div class="card border-0 shadow-sm rounded-pill p-2 mb-4 bg-light">
+        <div class="row align-items-center g-2 px-3">
+            <div class="col-md-3 d-flex align-items-center border-end">
+                <i class="bi bi-geo-alt fs-5 text-secondary me-2"></i>
+                <select class="form-select border-0 bg-transparent fw-semibold text-dark shadow-none">
+                    <option selected>Sri Lanka</option>
+                </select>
+            </div>
+   
