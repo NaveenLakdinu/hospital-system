@@ -62,3 +62,34 @@ pregnancy-page {
     justify-content: center;
     font-size: 24px;
 }
+.pregnancy-brand h4 {
+    font-weight: 800;
+    font-size: 18px;
+    margin: 0;
+}
+
+.pregnancy-brand p {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 3px 0 0;
+}
+
+.close-gallery {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #e7ebf3;
+    border-radius: 50%;
+    background: white;
+    color: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.close-gallery:hover {
+    background: var(--pink);
+    color: white;
+}
