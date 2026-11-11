@@ -463,6 +463,7 @@
 
     .how-step {
         min-width: 100px;
+        
     }
 }
 
