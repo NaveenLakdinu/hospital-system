@@ -462,8 +462,7 @@
     }
 
     .how-step {
-        min-width: 100px;
-        
+        min-width: 100px; 
     }
 }
 
@@ -481,11 +480,6 @@
         height: 62px;
         font-size: 26px;
     }
-
-
-
-
-
 
 
 /* HERO WITH REAL LABORATORY BACKGROUND IMAGE */
