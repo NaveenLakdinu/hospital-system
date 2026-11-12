@@ -8,22 +8,27 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        $appointments = Appointment::with([
-            'patient',
-            'doctor.user',
-            'vitalSign'
-        ])
-            ->orderBy('appointment_date')
-            ->orderBy('token_number')
-            ->get();
+   public function index()
+{
+    $appointments = Appointment::with([
+        'patient',
+        'doctor.user',
+        'vitalSign'
+    ])
+        ->whereDate(
+            'appointment_date',
+            '>=',
+            now()->toDateString()
+        )
+        ->orderBy('appointment_date', 'asc')
+        ->orderBy('token_number', 'asc')
+        ->get();
 
-        return view(
-            'nurse.dashboard',
-            compact('appointments')
-        );
-    }
+    return view(
+        'nurse.dashboard',
+        compact('appointments')
+    );
+}
 
 
     public function profile()
