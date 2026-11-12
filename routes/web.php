@@ -23,6 +23,29 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-lab-bookings', [LabTestController::class, 'myBookings'])->name('lab.my_bookings');
     Route::patch('/lab-tests/{id}/cancel', [LabTestController::class, 'cancel'])->name('lab.cancel');
 });
+
+/*
+|--------------------------------------------------------------------------
+|cold-cough-fever-info
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cold-cough-fever-info', function () {
+        return view('cold_cough_fever.info');
+    })->name('cold_cough_fever.info');
+});
+/*
+|--------------------------------------------------------------------------
+| joint_pain.info
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/joint-pain-info', function () {
+        return view('joint_pain.info');
+    })->name('joint_pain.info');
+});
+
 /*
 |--------------------------------------------------------------------------
 | skin-info
