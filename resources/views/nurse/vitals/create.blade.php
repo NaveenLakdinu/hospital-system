@@ -266,6 +266,60 @@
         </a>
     </div>
 
+    @if(session('success'))
+
+    <div style="
+        background:#def8ea;
+        color:#086b4b;
+        border:1px solid #c3ead7;
+        border-radius:12px;
+        padding:15px 17px;
+        margin-bottom:18px;
+        font-weight:600;
+    ">
+        ✓ {{ session('success') }}
+    </div>
+
+@endif
+
+
+@if(session('temporary_password'))
+
+    <div style="
+        background:#eef6ff;
+        border:1px solid #d5e7fb;
+        border-radius:14px;
+        padding:17px;
+        margin-bottom:20px;
+        color:#344054;
+    ">
+
+        <strong>New Patient Login Details</strong>
+
+        <br><br>
+
+        Email:
+        <strong>
+            {{ session('new_patient_email') }}
+        </strong>
+
+        <br>
+
+        Temporary Password:
+        <strong>
+            {{ session('temporary_password') }}
+        </strong>
+
+        <br><br>
+
+        <small style="color:#758197;">
+            Give these temporary login details to the patient.
+        </small>
+
+    </div>
+
+@endif
+
     <div class="card patient-card">
         <h2 class="section-title" style="margin-bottom: 18px;">Patient Overview</h2>
 
