@@ -41,5 +41,9 @@ class Appointment extends Model
 {
     return $this->hasOne(Prescription::class, 'appointment_id');
 }
+public function vitalSign()
+{
+    return $this->hasOne(VitalSign::class);
+}
 
 }

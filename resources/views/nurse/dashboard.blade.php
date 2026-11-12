@@ -15,8 +15,9 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 40px auto;
+            padding: 0 20px;
         }
 
         .card {
@@ -26,7 +27,8 @@
         }
 
         h1 {
-            margin-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 5px;
         }
 
         .subtitle {
@@ -44,6 +46,7 @@
             padding: 14px;
             border-bottom: 1px solid #ddd;
             text-align: left;
+            vertical-align: middle;
         }
 
         th {
@@ -66,12 +69,30 @@
             color: #198754;
         }
 
+        .cancelled {
+            color: #dc3545;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #198754;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #157347;
+        }
+
         .empty {
             text-align: center;
             color: #777;
             padding: 30px;
         }
     </style>
+
 </head>
 
 <body>
@@ -96,6 +117,7 @@
                     <th>Time</th>
                     <th>Reason</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -110,11 +132,11 @@
                     </td>
 
                     <td>
-                        {{ $appointment->patient->name }}
+                        {{ $appointment->patient?->name ?? 'Unknown Patient' }}
                     </td>
 
                     <td>
-                        {{ $appointment->doctor->user->name }}
+                        {{ $appointment->doctor?->user?->name ?? 'Unknown Doctor' }}
                     </td>
 
                     <td>
@@ -131,12 +153,31 @@
                         </span>
                     </td>
 
+                    <td>
+
+                        @if(strtolower($appointment->status) !== 'completed')
+
+                            <a
+                                href="{{ route('nurse.vitals.create', $appointment->id) }}"
+                                class="btn"
+                            >
+                                Add Vitals
+                            </a>
+
+                        @else
+
+                            Completed
+
+                        @endif
+
+                    </td>
+
                 </tr>
 
             @empty
 
                 <tr>
-                    <td colspan="6" class="empty">
+                    <td colspan="7" class="empty">
                         No appointments available for today.
                     </td>
                 </tr>

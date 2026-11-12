@@ -14,6 +14,8 @@ use App\Http\Controllers\Doctor\PrescriptionController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Nurse\DashboardController as NurseDashboardController;
 
+use App\Http\Controllers\Nurse\VitalSignController;
+
 /*
 |--------------------------------------------------------------------------
 | Public Welcome Page
@@ -136,6 +138,18 @@ Route::get(
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.dashboard');
 
+    Route::get(
+    '/nurse/appointments/{appointment}/vitals',
+    [VitalSignController::class, 'create']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.vitals.create');
+Route::post(
+    '/nurse/appointments/{appointment}/vitals',
+    [VitalSignController::class, 'store']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.vitals.store');
 
     /*
 |--------------------------------------------------------------------------

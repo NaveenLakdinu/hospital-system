@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Nurse;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
-use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -14,7 +13,7 @@ class DashboardController extends Controller
             'patient',
             'doctor.user'
         ])
-        ->whereDate('appointment_date', Carbon::today())
+        ->orderBy('appointment_date')
         ->orderBy('token_number')
         ->get();
 
