@@ -88,6 +88,11 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
         [PrescriptionController::class, 'store']
     )->name('doctor.prescription.store');
 
+    Route::get(
+    '/doctor/prescriptions/{prescription}/summary',
+    [PrescriptionController::class, 'summary']
+)->name('doctor.prescription.summary');
+
 });
 
 

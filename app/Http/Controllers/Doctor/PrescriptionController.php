@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 class PrescriptionController extends Controller
 {
+    /**
+     * Show prescription creation page.
+     */
     public function create($consultationId)
     {
         $doctor = Auth::user()->doctor;
@@ -32,6 +35,9 @@ class PrescriptionController extends Controller
         );
     }
 
+    /**
+     * Save prescription.
+     */
     public function store(Request $request, $consultationId)
     {
         $request->validate([
@@ -44,10 +50,20 @@ class PrescriptionController extends Controller
 
         $doctor = Auth::user()->doctor;
 
-        $consultation = Consultation::where('doctor_id', $doctor->id)
-            ->findOrFail($consultationId);
+        if (!$doctor) {
+            abort(403, 'Doctor profile not found.');
+        }
 
-        DB::transaction(function () use ($request, $consultation, $doctor) {
+        $consultation = Consultation::where(
+            'doctor_id',
+            $doctor->id
+        )->findOrFail($consultationId);
+
+        $prescription = DB::transaction(function () use (
+            $request,
+            $consultation,
+            $doctor
+        ) {
 
             $prescription = Prescription::create([
                 'appointment_id' => $consultation->appointment_id,
@@ -65,10 +81,45 @@ class PrescriptionController extends Controller
                 'duration' => $request->duration,
                 'instructions' => $request->instructions,
             ]);
+
+            return $prescription;
         });
 
         return redirect()
-            ->route('doctor.dashboard')
-            ->with('success', 'Prescription created successfully.');
+            ->route(
+                'doctor.prescription.summary',
+                $prescription->id
+            )
+            ->with(
+                'success',
+                'Prescription saved successfully.'
+            );
+    }
+
+    /**
+     * Show saved prescription summary.
+     */
+    public function summary($prescriptionId)
+    {
+        $doctor = Auth::user()->doctor;
+
+        if (!$doctor) {
+            abort(403, 'Doctor profile not found.');
+        }
+
+        $prescription = Prescription::with([
+            'patient',
+            'doctor.user',
+            'appointment',
+            'consultation',
+            'items'
+        ])
+            ->where('doctor_id', $doctor->id)
+            ->findOrFail($prescriptionId);
+
+        return view(
+            'doctor.prescriptions.summary',
+            compact('prescription')
+        );
     }
 }
