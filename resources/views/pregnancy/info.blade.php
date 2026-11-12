@@ -821,7 +821,7 @@
 
                 <div class="trimester-card">
 
-                    <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=800&q=85"
+                    <img src="https://images.unsplash.com/photo-1634856434683-6da6493a936f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Second trimester pregnancy">
 
                     <div class="trimester-content">
@@ -906,7 +906,7 @@
 
                 <div class="photo-card">
 
-                    <img src="https://images.unsplash.com/photo-1578496781379-7dcfb995293d?w=600&q=80"
+                    <img src="https://images.unsplash.com/photo-1617331140180-e8262094733a?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Early prenatal development">
 
                     <div class="photo-content">
@@ -1607,7 +1607,7 @@
             <div class="col-6 col-lg-4">
                 <div class="gallery-photo">
                     <img class="gallery-image"
-                         src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=700&q=85"
+                         src="https://images.unsplash.com/photo-1552819289-824d37ca69d2?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Motherhood">
                 </div>
             </div>
