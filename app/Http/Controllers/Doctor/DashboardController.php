@@ -16,7 +16,10 @@ class DashboardController extends Controller
             abort(403, 'Doctor profile not found.');
         }
 
-        $appointments = Appointment::with('patient')
+      $appointments = Appointment::with([
+    'patient',
+    'prescription'
+])
             ->where('doctor_id', $doctor->id)
             ->orderBy('appointment_date')
             ->orderBy('token_number')
