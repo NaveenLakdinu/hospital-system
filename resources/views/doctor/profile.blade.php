@@ -81,6 +81,35 @@
             background: #078b63;
         }
 
+        .logout-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #fff0f1;
+            color: #d0333f;
+
+            padding: 11px 17px;
+            border-radius: 11px;
+            border: 1px solid #f5c6c9;
+
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .logout-form {
+            margin: 0;
+        }
+
 
         /* HERO */
 
@@ -516,6 +545,27 @@
                 Dashboard
 
             </a>
+
+            <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                @csrf
+                <button type="submit" class="logout-btn">
+
+                    <svg width="17" height="17"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+
+                    Logout
+
+                </button>
+            </form>
 
         </div>
 
