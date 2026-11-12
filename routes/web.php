@@ -100,6 +100,10 @@ Route::delete(
     [PrescriptionController::class, 'destroy']
 )->name('doctor.consultation.destroy');
 
+Route::get(
+    '/doctor/profile',
+    [DashboardController::class, 'profile']
+)->name('doctor.profile');
 });
 
 
