@@ -136,6 +136,91 @@
             overflow: hidden;
         }
 
+        .walkin-btn {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+    max-width: 430px;
+
+    padding: 16px 18px;
+
+    margin: 0 0 22px;
+
+    background: linear-gradient(
+        135deg,
+        #0a9368,
+        #0bb783
+    );
+
+    color: white;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 25px rgba(10, 147, 104, 0.20);
+
+    transition: 0.2s ease;
+}
+
+.walkin-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(10, 147, 104, 0.28);
+
+    background: linear-gradient(
+        135deg,
+        #087553,
+        #0aa676
+    );
+}
+
+.walkin-icon {
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,0.18);
+
+    border-radius: 13px;
+}
+
+.walkin-text {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+}
+
+.walkin-title {
+    font-size: 16px;
+    font-weight: 800;
+
+    margin-bottom: 4px;
+}
+
+.walkin-subtitle {
+    font-size: 11px;
+
+    color: rgba(255,255,255,0.82);
+
+    line-height: 1.4;
+}
+
+.walkin-arrow {
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
         .nurse-badge {
             display: inline-flex;
             align-items: center;
@@ -880,6 +965,8 @@
                 grid-column: 2;
             }
 
+            
+
         }
     </style>
 
@@ -978,11 +1065,51 @@
     <div style="display:flex; gap:10px;">
 
     <a
-        href="{{ route('nurse.walkins.create') }}"
-        class="profile-btn"
+    href="{{ route('nurse.walkins.create') }}"
+    class="walkin-btn"
+>
+    <div class="walkin-icon">
+
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+        </svg>
+
+    </div>
+
+    <div class="walkin-text">
+
+        <span class="walkin-title">
+            Add Walk-in Patient
+        </span>
+
+        <span class="walkin-subtitle">
+            Register a patient without a prior appointment
+        </span>
+
+    </div>
+
+    <svg
+        class="walkin-arrow"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
     >
-        + Add Walk-in Patient
-    </a>
+        <path d="M5 12h14"></path>
+        <path d="M13 6l6 6-6 6"></path>
+    </svg>
+
+</a>
 
   
 
