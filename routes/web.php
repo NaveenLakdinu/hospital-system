@@ -195,6 +195,10 @@ Route::post(
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.profile');
 
+    Route::get('/nurse/profile', [App\Http\Controllers\Nurse\DashboardController::class, 'profile'])
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.profile');
+
     /*
 |--------------------------------------------------------------------------
 | Default Authenticated Dashboard
