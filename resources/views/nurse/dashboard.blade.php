@@ -111,6 +111,155 @@
             color: white;
         }
 
+        .main-navbar {
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border: 1px solid #e7edf1;
+    border-radius: 20px;
+
+    padding: 16px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 8px 28px rgba(31, 41, 55, 0.04);
+}
+
+
+/* LEFT SIDE */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-logo {
+    width: 165px;
+    height: 62px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    display: block;
+}
+
+.navbar-divider {
+    width: 1px;
+    height: 58px;
+
+    background: #e4e9ed;
+}
+
+.navbar-portal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navbar-title {
+    font-size: 20px;
+    font-weight: 800;
+
+    color: #182236;
+}
+
+.navbar-subtitle {
+    margin-top: 5px;
+
+    color: #8a95a6;
+
+    font-size: 13px;
+}
+
+
+/* RIGHT SIDE */
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+}
+
+.profile-nav-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 19px;
+
+    background: #effaf6;
+    color: #0a9368;
+
+    border: 1px solid #c8e9dc;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.profile-nav-btn:hover {
+    background: #0a9368;
+    color: white;
+
+    border-color: #0a9368;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 16px rgba(10, 147, 104, 0.16);
+}
+
+
+/* MOBILE */
+
+@media(max-width: 750px) {
+
+    .main-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-logo {
+        width: 145px;
+        height: auto;
+    }
+
+    .navbar-divider {
+        display: none;
+    }
+
+    .navbar-portal {
+        display: none;
+    }
+
+    .navbar-actions {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .profile-nav-btn {
+        width: 100%;
+    }
+}
+
         /* HERO */
 
         .nurse-header {
@@ -1023,26 +1172,41 @@
 
     <!-- TOP BAR -->
 
-    <div class="topbar">
+   <div class="main-navbar">
 
-        <div>
+    <!-- LEFT SIDE -->
+    <div class="navbar-brand">
 
-            <div class="brand-title">
-                Family Care Medical Center
+        <img
+            src="{{ asset('images/medicare24-logo.png') }}"
+            alt="MediCare24"
+            class="navbar-logo"
+        >
+
+        <div class="navbar-divider"></div>
+
+        <div class="navbar-portal">
+
+            <div class="navbar-title">
+                Nurse Portal
             </div>
 
-            <div class="brand-subtitle">
-                Nurse Workspace
+            <div class="navbar-subtitle">
+                Patient Preparation & Clinical Support
             </div>
 
         </div>
 
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="navbar-actions">
 
         <a
             href="{{ route('nurse.profile') }}"
-            class="profile-btn"
+            class="profile-nav-btn"
         >
-
             <svg
                 width="18"
                 height="18"
@@ -1056,11 +1220,11 @@
             </svg>
 
             My Profile
-
         </a>
 
-        
     </div>
+
+</div>
 
     <div style="display:flex; gap:10px;">
 

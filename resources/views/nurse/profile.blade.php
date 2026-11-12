@@ -35,26 +35,66 @@
             margin: 0 auto;
             padding: 28px;
         }
+/* =========================
+   NURSE PROFILE NAVBAR
+========================= */
 
-       .topbar {
-    background: rgba(255, 255, 255, 0.96);
+.profile-topbar {
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.97);
 
     border: 1px solid #e7edf1;
-    border-radius: 18px;
+    border-radius: 20px;
 
-    padding: 18px 24px;
+    padding: 16px 22px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    gap: 24px;
+
     margin-bottom: 24px;
 
-    box-shadow: 0 8px 28px rgba(31, 41, 55, 0.04);
+    box-shadow:
+        0 8px 28px rgba(31, 41, 55, 0.04);
+}
+
+
+/* LEFT SIDE */
+
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand-logo {
+    width: 165px;
+    height: 62px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    display: block;
+}
+
+.navbar-divider {
+    width: 1px;
+    height: 58px;
+
+    background: #e4e9ed;
+}
+
+.portal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .topbar-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
 
     color: #182236;
@@ -68,17 +108,39 @@
     font-size: 13px;
 }
 
-.dashboard-btn {
+
+/* RIGHT SIDE */
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-left: auto;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+
+/* NURSE WORKSPACE BUTTON */
+
+.workspace-btn {
+    height: 48px;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    gap: 8px;
+    gap: 9px;
+
+    padding: 0 19px;
 
     background: #08a67a;
     color: white;
-
-    padding: 12px 18px;
 
     border-radius: 12px;
 
@@ -89,32 +151,106 @@
 
     transition: 0.2s ease;
 
-    box-shadow: 0 6px 16px rgba(8, 166, 122, 0.18);
+    box-shadow:
+        0 6px 16px rgba(8, 166, 122, 0.14);
 }
 
-.dashboard-btn:hover {
+.workspace-btn:hover {
     background: #078b67;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(8, 166, 122, 0.20);
+}
+
+
+/* LOGOUT */
+
+.logout-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 18px;
+
+    background: #fff5f5;
+    color: #dc3545;
+
+    border: 1px solid #f0b8bd;
+    border-radius: 12px;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #dc3545;
+    color: white;
+
+    border-color: #dc3545;
 
     transform: translateY(-1px);
 }
 
-.dashboard-btn svg {
-    flex-shrink: 0;
-}
 
-@media(max-width: 700px) {
+/* MOBILE */
 
-    .topbar {
+@media(max-width: 850px) {
+
+    .profile-topbar {
         flex-direction: column;
         align-items: flex-start;
-
-        gap: 14px;
     }
 
-    .dashboard-btn {
+    .topbar-actions {
+        margin-left: 0;
         width: 100%;
     }
 }
+
+@media(max-width: 600px) {
+
+    .brand-area {
+        width: 100%;
+    }
+
+    .brand-logo {
+        width: 140px;
+        height: auto;
+    }
+
+    .navbar-divider {
+        display: none;
+    }
+
+    .portal-info {
+        display: none;
+    }
+
+    .topbar-actions {
+        width: 100%;
+    }
+
+    .workspace-btn,
+    .logout-form {
+        flex: 1;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+}
+
         .back-btn:hover {
             background: var(--primary);
             color: white;
@@ -365,39 +501,91 @@
 
 <div class="page">
 
-    <div class="topbar">
+   <div class="profile-topbar">
 
-    <div>
-        <div class="topbar-title">
-            Nurse Portal
+    <!-- LEFT SIDE -->
+    <div class="brand-area">
+
+        <img
+            src="{{ asset('images/medicare24-logo.png') }}"
+            alt="MediCare24"
+            class="brand-logo"
+        >
+
+        <div class="navbar-divider"></div>
+
+        <div class="portal-info">
+
+            <div class="topbar-title">
+                Nurse Portal
+            </div>
+
+            <div class="topbar-subtitle">
+                Patient Preparation & Clinical Support
+            </div>
+
         </div>
 
-        <div class="topbar-subtitle">
-            Nursing profile & clinical support information
-        </div>
     </div>
 
 
-    <a
-        href="{{ route('nurse.dashboard') }}"
-        class="dashboard-btn"
-    >
-        <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-        >
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-        </svg>
+    <!-- RIGHT SIDE -->
+    <div class="topbar-actions">
 
-        Dashboard
-    </a>
+        <a
+            href="{{ route('nurse.dashboard') }}"
+            class="workspace-btn"
+        >
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+            </svg>
+
+            Nurse Workspace
+        </a>
+
+
+        <form
+            method="POST"
+            action="{{ route('logout') }}"
+            class="logout-form"
+        >
+            @csrf
+
+            <button
+                type="submit"
+                class="logout-btn"
+            >
+                <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+
+                Logout
+            </button>
+
+        </form>
+
+    </div>
 
 </div>
 
