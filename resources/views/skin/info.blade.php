@@ -1166,7 +1166,7 @@
 
             <div class="col">
                 <div class="skin-type">
-                    <img src="https://images.unsplash.com/photo-1505576399270-565b52d4ac71?w=300&q=80"
+                    <img src="https://images.unsplash.com/photo-1621470626377-dd2757ae6216?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          class="rounded-circle mb-3"
                          style="width:95px;height:95px;object-fit:cover;"
                          alt="Healthy nuts">
