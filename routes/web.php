@@ -23,7 +23,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-lab-bookings', [LabTestController::class, 'myBookings'])->name('lab.my_bookings');
     Route::patch('/lab-tests/{id}/cancel', [LabTestController::class, 'cancel'])->name('lab.cancel');
 });
-
+/*
+|--------------------------------------------------------------------------
+|child_feeding.info
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/child-feeding-info', function () {
+        return view('child_feeding.info');
+    })->name('child_feeding.info');
+});
 /*
 |--------------------------------------------------------------------------
 |cold-cough-fever-info
