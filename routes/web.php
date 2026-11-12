@@ -16,6 +16,8 @@ use App\Http\Controllers\Nurse\DashboardController as NurseDashboardController;
 
 use App\Http\Controllers\Nurse\VitalSignController;
 
+use App\Http\Controllers\Nurse\WalkInController;
+
 /*
 |--------------------------------------------------------------------------
 | Public Welcome Page
@@ -198,6 +200,21 @@ Route::post(
     Route::get('/nurse/profile', [App\Http\Controllers\Nurse\DashboardController::class, 'profile'])
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.profile');
+
+    Route::get(
+    '/nurse/walk-ins/create',
+    [WalkInController::class, 'create']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.walkins.create');
+
+
+Route::post(
+    '/nurse/walk-ins',
+    [WalkInController::class, 'store']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.walkins.store');
 
     /*
 |--------------------------------------------------------------------------

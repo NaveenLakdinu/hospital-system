@@ -972,7 +972,21 @@
 
         </a>
 
+        
     </div>
+
+    <div style="display:flex; gap:10px;">
+
+    <a
+        href="{{ route('nurse.walkins.create') }}"
+        class="profile-btn"
+    >
+        + Add Walk-in Patient
+    </a>
+
+  
+
+</div>
 
 
     <!-- NURSE HEADER -->
@@ -1322,17 +1336,36 @@
 
                         <!-- PATIENT -->
 
-                        <div>
+                       <div>
 
-                            <div class="patient-name">
-                                {{ $appointment->patient?->name ?? 'Unknown Patient' }}
-                            </div>
+    <div class="patient-name">
+        {{ $appointment->patient?->name ?? 'Unknown Patient' }}
+    </div>
 
-                            <div class="patient-sub">
-                                Patient
-                            </div>
+    @if($appointment->is_walk_in)
 
-                        </div>
+        <span style="
+            display:inline-block;
+            margin-top:5px;
+            padding:4px 7px;
+            background:#fff3df;
+            color:#d97808;
+            border-radius:20px;
+            font-size:10px;
+            font-weight:700;
+        ">
+            WALK-IN
+        </span>
+
+    @else
+
+        <div class="patient-sub">
+            Patient
+        </div>
+
+    @endif
+
+</div>
 
 
                         <!-- REASON -->
