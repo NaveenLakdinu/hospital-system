@@ -1,141 +1,212 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AppointmentController;
+
+use App\Http\Controllers\Doctor\DashboardController;
+use App\Http\Controllers\Doctor\ConsultationController;
 use App\Http\Controllers\Doctor\PrescriptionController;
 
-
-//dashboard routes
-use App\Http\Controllers\Doctor\DashboardController;
-
-//consultations
-use App\Http\Controllers\Doctor\ConsultationController;
-
-// Doctor Portal
-Route::middleware(['auth', 'role:doctor'])->group(function () {
-
-    Route::get('/doctor/dashboard', [DashboardController::class, 'dashboard'])
-        ->name('doctor.dashboard');
-
-    Route::get('/doctor/consultations/{appointment}', [ConsultationController::class, 'show'])
-        ->name('doctor.consultation.show');
-    
-    Route::post(
-    '/doctor/consultations/{appointment}',
-    [ConsultationController::class, 'store']
-)->name('doctor.consultation.store');
-
-Route::get(
-    '/doctor/prescriptions/create/{appointment}',
-    [PrescriptionController::class, 'create']
-)->name('doctor.prescription.create');
-
-Route::post(
-    '/doctor/prescriptions/{appointment}',
-    [PrescriptionController::class, 'store']
-)->name('doctor.prescription.store');
-
-Route::get(
-    '/doctor/prescriptions/create/{appointment}',
-    [PrescriptionController::class, 'create']
-)->name('doctor.prescription.create');
-
-
-Route::post(
-    '/doctor/prescriptions/{appointment}',
-    [PrescriptionController::class, 'store']
-)->name('doctor.prescription.store');
-
-});
-
-
-
-
-
-
-
-
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 
 /*
 |--------------------------------------------------------------------------
-| Public welcome / landing page
+| Public Welcome Page
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
 /*
 |--------------------------------------------------------------------------
-| Main home page (patient-facing hub)
+| Main Home Page
 |--------------------------------------------------------------------------
 */
+
 Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-// Doctor Search & Listing (Public / Patient)
-Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');
 
 /*
 |--------------------------------------------------------------------------
-| Role-Protected Portals & Dashboards (CAMS)
+| Doctor Search - Public / Patient
 |--------------------------------------------------------------------------
 */
-// 1. Admin Dashboard (Admin පමණි)
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+
+Route::get('/doctors', [DoctorController::class, 'index'])
+    ->name('doctors.index');
 
 
+/*
+|--------------------------------------------------------------------------
+| Doctor Portal
+|--------------------------------------------------------------------------
+*/
 
-// 3. Pharmacist Dashboard (Pharmacist පමණි)
+Route::middleware(['auth', 'role:doctor'])->group(function () {
+
+    // Doctor Dashboard
+    Route::get(
+        '/doctor/dashboard',
+        [DashboardController::class, 'dashboard']
+    )->name('doctor.dashboard');
+
+
+    // View Consultation
+    Route::get(
+        '/doctor/consultations/{appointment}',
+        [ConsultationController::class, 'show']
+    )->name('doctor.consultation.show');
+
+
+    // Save Consultation
+    Route::post(
+        '/doctor/consultations/{appointment}',
+        [ConsultationController::class, 'store']
+    )->name('doctor.consultation.store');
+
+
+    // Create Prescription using Consultation ID
+    Route::get(
+        '/doctor/prescriptions/create/{consultation}',
+        [PrescriptionController::class, 'create']
+    )->name('doctor.prescription.create');
+
+
+    // Save Prescription using Consultation ID
+    Route::post(
+        '/doctor/prescriptions/{consultation}',
+        [PrescriptionController::class, 'store']
+    )->name('doctor.prescription.store');
+
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin Dashboard
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/admin/dashboard',
+    [AdminDashboardController::class, 'index']
+)
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
+
+
+/*
+|--------------------------------------------------------------------------
+| Pharmacist Dashboard
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/pharmacist/dashboard', function () {
     return view('pharmacist.dashboard');
-})->middleware(['auth', 'role:pharmacist'])->name('pharmacist.dashboard');
+})
+    ->middleware(['auth', 'role:pharmacist'])
+    ->name('pharmacist.dashboard');
+
 
 /*
 |--------------------------------------------------------------------------
-| Authenticated dashboard & Profile
+| Default Authenticated Dashboard
 |--------------------------------------------------------------------------
 */
+
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+
+/*
+|--------------------------------------------------------------------------
+| Profile
+|--------------------------------------------------------------------------
+*/
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get(
+        '/profile',
+        [ProfileController::class, 'edit']
+    )->name('profile.edit');
+
+    Route::patch(
+        '/profile',
+        [ProfileController::class, 'update']
+    )->name('profile.update');
+
+    Route::delete(
+        '/profile',
+        [ProfileController::class, 'destroy']
+    )->name('profile.destroy');
+
 });
+
 
 /*
 |--------------------------------------------------------------------------
-| Social OAuth (Socialite)
+| Social Login
 |--------------------------------------------------------------------------
 */
+
 Route::middleware('guest')->group(function () {
-    Route::get('/auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])
-        ->name('social.redirect');
 
-    Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback'])
-        ->name('social.callback');
+    Route::get(
+        '/auth/{provider}/redirect',
+        [SocialLoginController::class, 'redirect']
+    )->name('social.redirect');
+
+    Route::get(
+        '/auth/{provider}/callback',
+        [SocialLoginController::class, 'callback']
+    )->name('social.callback');
+
 });
+
 
 /*
 |--------------------------------------------------------------------------
-| Patient Appointment Booking & Management (Auth Required)
+| Patient Appointment Booking & Management
 |--------------------------------------------------------------------------
 */
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/appointments/book/{doctor}', [AppointmentController::class, 'create'])->name('appointments.book');
-    Route::post('/appointments/book/{doctor}', [AppointmentController::class, 'store'])->name('appointments.store');
-    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])->name('appointments.index');
-    Route::patch('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
+
+    Route::get(
+        '/appointments/book/{doctor}',
+        [AppointmentController::class, 'create']
+    )->name('appointments.book');
+
+    Route::post(
+        '/appointments/book/{doctor}',
+        [AppointmentController::class, 'store']
+    )->name('appointments.store');
+
+    Route::get(
+        '/my-appointments',
+        [AppointmentController::class, 'myAppointments']
+    )->name('appointments.index');
+
+    Route::patch(
+        '/appointments/{appointment}/cancel',
+        [AppointmentController::class, 'cancel']
+    )->name('appointments.cancel');
+
 });
+
 
 require __DIR__.'/auth.php';

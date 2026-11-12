@@ -109,6 +109,12 @@
             font-weight: bold;
             text-transform: capitalize;
         }
+
+        button.btn {
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+}
     </style>
 </head>
 
@@ -177,7 +183,7 @@
 
 
         {{-- Consultation Form --}}
-        <form
+       <form
     method="POST"
     action="{{ route('doctor.consultation.store', $appointment->id) }}"
 >
@@ -187,18 +193,27 @@
 
     <textarea
         name="diagnosis"
+        placeholder="Enter diagnosis..."
         required
     >{{ old('diagnosis') }}</textarea>
+
+    @error('diagnosis')
+        <p style="color:red;">
+            {{ $message }}
+        </p>
+    @enderror
+
 
     <label>Consultation Notes</label>
 
     <textarea
         name="consultation_notes"
+        placeholder="Enter consultation notes..."
     >{{ old('consultation_notes') }}</textarea>
 
+
     <button type="submit" class="btn">
-        Save & Continue to 
-        Prescription
+        Save & Create Prescription
     </button>
 
 </form>

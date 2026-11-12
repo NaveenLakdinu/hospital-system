@@ -32,6 +32,10 @@
             margin-bottom: 25px;
         }
 
+        .patient-info p {
+            margin: 8px 0;
+        }
+
         label {
             display: block;
             font-weight: bold;
@@ -60,18 +64,34 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #157347;
         }
 
         .back {
             display: inline-block;
             margin-bottom: 20px;
             text-decoration: none;
+            color: #198754;
+            font-weight: bold;
         }
 
         .error {
             color: red;
             margin-top: -15px;
             margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .success {
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -81,7 +101,7 @@
 <div class="container">
 
     <a
-        href="{{ route('doctor.consultation.show', $appointment->id) }}"
+        href="{{ route('doctor.consultation.show', $consultation->appointment_id) }}"
         class="back"
     >
         ← Back to Consultation
@@ -91,97 +111,175 @@
 
         <h1>Create Prescription</h1>
 
+        @if(session('success'))
+            <div class="success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="patient-info">
 
             <p>
                 <strong>Patient:</strong>
-                {{ $appointment->patient->name }}
+                {{ $consultation->appointment->patient->name }}
             </p>
 
             <p>
-                <strong>Reason:</strong>
-                {{ $appointment->reason_for_visit }}
+                <strong>Reason for Visit:</strong>
+                {{ $consultation->appointment->reason_for_visit }}
+            </p>
+
+            <p>
+                <strong>Diagnosis:</strong>
+                {{ $consultation->diagnosis }}
+            </p>
+
+            <p>
+                <strong>Consultation Notes:</strong>
+                {{ $consultation->consultation_notes ?? 'No notes added' }}
             </p>
 
         </div>
 
         <form
             method="POST"
-            action="{{ route('doctor.prescription.store', $appointment->id) }}"
+            action="{{ route('doctor.prescription.store', $consultation->id) }}"
         >
 
             @csrf
 
-            <label>Medicine Name</label>
+            <label for="medicine_name">
+                Medicine Name
+            </label>
 
             <input
+                id="medicine_name"
                 type="text"
                 name="medicine_name"
                 value="{{ old('medicine_name') }}"
                 placeholder="Example: Paracetamol"
+                required
             >
 
             @error('medicine_name')
-                <div class="error">{{ $message }}</div>
+                <div class="error">
+                    {{ $message }}
+                </div>
             @enderror
 
 
-            <label>Dosage</label>
+            <label for="dosage">
+                Dosage
+            </label>
 
             <input
+                id="dosage"
                 type="text"
                 name="dosage"
                 value="{{ old('dosage') }}"
                 placeholder="Example: 1 tablet"
+                required
             >
 
+            @error('dosage')
+                <div class="error">
+                    {{ $message }}
+                </div>
+            @enderror
 
-            <label>Frequency</label>
 
-            <select name="frequency">
+            <label for="frequency">
+                Frequency
+            </label>
+
+            <select
+                id="frequency"
+                name="frequency"
+                required
+            >
 
                 <option value="">
                     Select frequency
                 </option>
 
-                <option value="Once a day">
+                <option
+                    value="Once a day"
+                    {{ old('frequency') == 'Once a day' ? 'selected' : '' }}
+                >
                     Once a day
                 </option>
 
-                <option value="Twice a day">
+                <option
+                    value="Twice a day"
+                    {{ old('frequency') == 'Twice a day' ? 'selected' : '' }}
+                >
                     Twice a day
                 </option>
 
-                <option value="3 times a day">
+                <option
+                    value="3 times a day"
+                    {{ old('frequency') == '3 times a day' ? 'selected' : '' }}
+                >
                     3 times a day
                 </option>
 
-                <option value="4 times a day">
+                <option
+                    value="4 times a day"
+                    {{ old('frequency') == '4 times a day' ? 'selected' : '' }}
+                >
                     4 times a day
                 </option>
 
             </select>
 
+            @error('frequency')
+                <div class="error">
+                    {{ $message }}
+                </div>
+            @enderror
 
-            <label>Duration</label>
+
+            <label for="duration">
+                Duration
+            </label>
 
             <input
+                id="duration"
                 type="text"
                 name="duration"
                 value="{{ old('duration') }}"
                 placeholder="Example: 5 days"
+                required
             >
 
+            @error('duration')
+                <div class="error">
+                    {{ $message }}
+                </div>
+            @enderror
 
-            <label>Instructions</label>
+
+            <label for="instructions">
+                Instructions
+            </label>
 
             <textarea
+                id="instructions"
                 name="instructions"
                 placeholder="Example: Take after meals"
             >{{ old('instructions') }}</textarea>
 
+            @error('instructions')
+                <div class="error">
+                    {{ $message }}
+                </div>
+            @enderror
 
-            <button type="submit" class="btn">
+
+            <button
+                type="submit"
+                class="btn"
+            >
                 Save Prescription
             </button>
 
