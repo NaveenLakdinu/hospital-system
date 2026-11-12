@@ -311,6 +311,41 @@
             .main-title {
                 font-size: 24px;
             }
+
+            .abnormal-warning {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 20px;
+    padding: 15px 17px;
+
+    background: #fff4e7;
+
+    border: 1px solid #ffd8a8;
+    border-radius: 14px;
+
+    color: #a85900;
+}
+
+.warning-icon {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #ff9e2c;
+    color: white;
+
+    font-size: 19px;
+    font-weight: 900;
+}
         }
     </style>
 </head>
@@ -374,6 +409,37 @@
             </div>
         </div>
     </div>
+
+    @if(
+    $appointment->vitalSign &&
+    $appointment->vitalSign->hasAbnormalVitals()
+)
+
+    <div class="abnormal-warning">
+
+        <div class="warning-icon">
+            !
+        </div>
+
+        <div>
+
+            <strong>
+                Abnormal Vital Signs Detected
+            </strong>
+
+            <div>
+                Please review:
+                {{ implode(
+                    ', ',
+                    $appointment->vitalSign->abnormalFlags()
+                ) }}
+            </div>
+
+        </div>
+
+    </div>
+
+@endif
 
     @if($vital)
         <div class="card">

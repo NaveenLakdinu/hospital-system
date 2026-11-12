@@ -18,6 +18,8 @@ use App\Http\Controllers\Nurse\VitalSignController;
 
 use App\Http\Controllers\Nurse\WalkInController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Public Welcome Page
@@ -221,6 +223,36 @@ Route::post(
 )
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.walkins.store');
+
+    Route::middleware([
+    'auth',
+    'role:nurse'
+])->group(function () {
+
+    Route::get(
+        '/nurse/appointments/{appointment}/vitals',
+        [VitalSignController::class, 'create']
+    )->name('nurse.vitals.create');
+
+
+    Route::post(
+        '/nurse/appointments/{appointment}/vitals',
+        [VitalSignController::class, 'store']
+    )->name('nurse.vitals.store');
+
+
+    Route::get(
+        '/nurse/appointments/{appointment}/vitals/summary',
+        [VitalSignController::class, 'summary']
+    )->name('nurse.vitals.summary');
+
+
+    Route::delete(
+        '/nurse/appointments/{appointment}/vitals',
+        [VitalSignController::class, 'destroy']
+    )->name('nurse.vitals.destroy');
+
+});
 
     /*
 |--------------------------------------------------------------------------

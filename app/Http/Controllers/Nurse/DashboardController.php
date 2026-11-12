@@ -4,44 +4,140 @@ namespace App\Http\Controllers\Nurse;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-   public function index()
-{
-    $appointments = Appointment::with([
-        'patient',
-        'doctor.user',
-        'vitalSign'
-    ])
-        ->whereDate(
-            'appointment_date',
-            '>=',
-            now()->toDateString()
-        )
-        ->orderBy('appointment_date', 'asc')
-        ->orderBy('token_number', 'asc')
-        ->get();
-
-    return view(
-        'nurse.dashboard',
-        compact('appointments')
-    );
-}
-
-
-    public function profile()
+    /**
+     * Nurse Dashboard
+     */
+    public function index(Request $request)
     {
-        $nurse = Auth::user();
+        $search = trim(
+            $request->get('search', '')
+        );
 
-        if (!$nurse || $nurse->role !== 'nurse') {
-            abort(403, 'Nurse profile not found.');
+        $sort = $request->get(
+            'sort',
+            'token'
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Base Appointment Query
+        |--------------------------------------------------------------------------
+        */
+
+        $query = Appointment::with([
+            'patient',
+            'doctor.user',
+            'vitalSign',
+        ])
+            ->whereDate(
+                'appointment_date',
+                '>=',
+                now()->toDateString()
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Patient Search
+        |--------------------------------------------------------------------------
+        */
+
+        if ($search !== '') {
+
+            $query->where(function ($appointmentQuery) use ($search) {
+
+                $appointmentQuery
+
+                    ->where(
+                        'appointment_number',
+                        'like',
+                        "%{$search}%"
+                    )
+
+                    ->orWhereHas(
+                        'patient',
+                        function ($patientQuery) use ($search) {
+
+                            $patientQuery
+                                ->where(
+                                    'name',
+                                    'like',
+                                    "%{$search}%"
+                                )
+                                ->orWhere(
+                                    'email',
+                                    'like',
+                                    "%{$search}%"
+                                );
+                        }
+                    );
+            });
         }
 
-        return view(
-            'nurse.profile',
-            compact('nurse')
+
+        /*
+        |--------------------------------------------------------------------------
+        | Queue Sorting
+        |--------------------------------------------------------------------------
+        */
+
+        $query->orderBy(
+            'appointment_date',
+            'asc'
         );
+
+
+        if ($sort === 'time') {
+
+            $query
+                ->orderBy(
+                    'appointment_time',
+                    'asc'
+                )
+                ->orderBy(
+                    'token_number',
+                    'asc'
+                );
+
+        } else {
+
+            $query
+                ->orderBy(
+                    'token_number',
+                    'asc'
+                )
+                ->orderBy(
+                    'appointment_time',
+                    'asc'
+                );
+        }
+
+
+        $appointments = $query->get();
+
+
+        return view(
+            'nurse.dashboard',
+            compact(
+                'appointments',
+                'search',
+                'sort'
+            )
+        );
+    }
+
+
+    /**
+     * Nurse Profile
+     */
+    public function profile()
+    {
+        return view('nurse.profile');
     }
 }

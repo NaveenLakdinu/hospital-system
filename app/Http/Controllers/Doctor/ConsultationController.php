@@ -15,9 +15,14 @@ class ConsultationController extends Controller
     {
         $doctor = Auth::user()->doctor;
 
-        if (!$doctor) {
-            abort(403, 'Doctor profile not found.');
-        }
+        if (
+    $appointment->status === 'waiting' &&
+    !$appointment->consultation_started_at
+) {
+    $appointment->update([
+        'consultation_started_at' => now(),
+    ]);
+}
 
         $appointment = Appointment::with([
             'patient',
