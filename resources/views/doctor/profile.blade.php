@@ -415,23 +415,45 @@
         }
 
         .avatar {
-            width: 115px;
-            height: 115px;
-            border-radius: 28px;
+    width: 115px;
+    height: 115px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    min-width: 115px;
 
-            background: linear-gradient(145deg, #0ba87a, #087f68);
-            color: white;
+    border-radius: 28px;
 
-            font-size: 42px;
-            font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            box-shadow: 0 15px 35px rgba(10, 162, 115, 0.24);
-            border: 5px solid rgba(255,255,255,0.8);
-        }
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        #0ba87a,
+        #087f68
+    );
+
+    color: white;
+
+    font-size: 42px;
+    font-weight: 700;
+
+    box-shadow:
+        0 15px 35px rgba(10, 162, 115, 0.24);
+
+    border: 5px solid rgba(255,255,255,0.8);
+}
+
+.doctor-profile-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+}
 
         .online-badge {
             display: inline-flex;
@@ -887,11 +909,31 @@
 
         <div class="doctor-main">
 
-            <div class="avatar">
+           <div class="avatar">
 
-                {{ strtoupper(substr($doctor->user->name, 0, 1)) }}
+    @if($doctor->profile_photo)
 
-            </div>
+        <img
+            src="{{ asset('storage/' . $doctor->profile_photo) }}"
+            alt="{{ $doctor->user->name }}"
+            class="doctor-profile-image"
+        >
+
+    @else
+
+        <span>
+            {{ strtoupper(
+                substr(
+                    str_replace('Dr. ', '', $doctor->user->name),
+                    0,
+                    1
+                )
+            ) }}
+        </span>
+
+    @endif
+
+</div>
 
 
             <div>

@@ -33,8 +33,16 @@
             color: var(--text);
 
             background:
-                radial-gradient(circle at top left, #ddfaf1 0%, transparent 25%),
-                radial-gradient(circle at top right, #edf4ff 0%, transparent 28%),
+                radial-gradient(
+                    circle at top left,
+                    #ddfaf1 0%,
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at top right,
+                    #edf4ff 0%,
+                    transparent 28%
+                ),
                 var(--background);
         }
 
@@ -48,12 +56,15 @@
             padding: 28px;
         }
 
-        /* NAVBAR */
+
+        /* =========================
+           NAVBAR
+        ========================== */
 
         .main-navbar {
             width: 100%;
 
-            background: rgba(255,255,255,.97);
+            background: rgba(255, 255, 255, .97);
 
             border: 1px solid var(--border);
             border-radius: 20px;
@@ -69,7 +80,7 @@
             margin-bottom: 24px;
 
             box-shadow:
-                0 8px 28px rgba(31,41,55,.04);
+                0 8px 28px rgba(31, 41, 55, .04);
         }
 
         .navbar-brand {
@@ -123,6 +134,8 @@
 
             font-size: 13px;
             font-weight: 700;
+
+            transition: .2s;
         }
 
         .back-btn:hover {
@@ -130,15 +143,18 @@
             color: white;
         }
 
-        /* HERO */
+
+        /* =========================
+           HERO
+        ========================== */
 
         .hero {
             background:
                 linear-gradient(
                     120deg,
-                    rgba(222,250,241,.98),
-                    rgba(237,247,255,.98),
-                    rgba(247,243,255,.95)
+                    rgba(222, 250, 241, .98),
+                    rgba(237, 247, 255, .98),
+                    rgba(247, 243, 255, .95)
                 );
 
             border: 1px solid #dcefe8;
@@ -208,7 +224,7 @@
             align-items: center;
             justify-content: center;
 
-            background: rgba(255,255,255,.75);
+            background: rgba(255, 255, 255, .75);
 
             border: 1px solid #dcebe6;
             border-radius: 25px;
@@ -216,7 +232,10 @@
             color: var(--primary);
         }
 
-        /* LAYOUT */
+
+        /* =========================
+           LAYOUT
+        ========================== */
 
         .layout {
             display: grid;
@@ -237,12 +256,13 @@
             padding: 26px;
 
             box-shadow:
-                0 8px 30px rgba(31,41,55,.035);
+                0 8px 30px rgba(31, 41, 55, .035);
         }
 
         .section-heading {
             display: flex;
             align-items: flex-start;
+
             gap: 11px;
 
             margin-bottom: 22px;
@@ -275,11 +295,103 @@
             margin-top: 4px;
         }
 
-        /* FORM */
+
+        /* =========================
+           PROFILE PHOTO
+        ========================== */
+
+        .photo-upload-area {
+            display: flex;
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 18px;
+
+            margin-bottom: 22px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #f8fbfa,
+                    #f7faff
+                );
+
+            border: 1px solid #e1ece7;
+            border-radius: 15px;
+        }
+
+        .current-photo {
+            flex-shrink: 0;
+        }
+
+        .current-photo img,
+        .photo-placeholder {
+            width: 100px;
+            height: 100px;
+
+            border-radius: 24px;
+
+            object-fit: cover;
+            object-position: center;
+
+            border: 4px solid white;
+
+            box-shadow:
+                0 8px 22px rgba(10, 147, 104, 0.12);
+        }
+
+        .photo-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #12b887,
+                    #087d68
+                );
+
+            color: white;
+
+            font-size: 38px;
+            font-weight: 800;
+        }
+
+        .photo-upload-info {
+            flex: 1;
+        }
+
+        .photo-upload-info input[type="file"] {
+            width: 100%;
+
+            padding: 11px;
+
+            background: white;
+
+            border: 1px solid #dbe3e8;
+            border-radius: 10px;
+        }
+
+        .photo-help {
+            margin-top: 8px;
+
+            color: #8792a3;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================== */
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+
+            grid-template-columns:
+                repeat(2, 1fr);
 
             gap: 17px;
         }
@@ -333,7 +445,7 @@
             background: white;
 
             box-shadow:
-                0 0 0 4px rgba(10,147,104,.07);
+                0 0 0 4px rgba(10, 147, 104, .07);
         }
 
         .input-prefix {
@@ -367,62 +479,10 @@
             margin-top: 6px;
         }
 
-        /* READ ONLY */
 
-        .readonly-title {
-            font-size: 16px;
-            font-weight: 800;
-
-            margin-bottom: 18px;
-        }
-
-        .readonly-row {
-            padding: 15px 0;
-
-            border-bottom: 1px solid #edf1f3;
-        }
-
-        .readonly-row:first-of-type {
-            padding-top: 0;
-        }
-
-        .readonly-label {
-            color: var(--muted);
-
-            font-size: 11px;
-            font-weight: 700;
-
-            text-transform: uppercase;
-
-            margin-bottom: 6px;
-        }
-
-        .readonly-value {
-            font-size: 15px;
-            font-weight: 800;
-        }
-
-        .verified {
-            color: var(--primary);
-        }
-
-        .notice {
-            margin-top: 20px;
-
-            padding: 14px;
-
-            background: #f0faf6;
-
-            border: 1px solid #d9ede4;
-            border-radius: 12px;
-
-            color: #627084;
-
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        /* FOOTER */
+        /* =========================
+           FORM FOOTER
+        ========================== */
 
         .form-footer {
             display: flex;
@@ -483,7 +543,7 @@
             cursor: pointer;
 
             box-shadow:
-                0 7px 18px rgba(10,147,104,.15);
+                0 7px 18px rgba(10, 147, 104, .15);
         }
 
         .save-btn:hover {
@@ -495,12 +555,76 @@
                 );
         }
 
+
+        /* =========================
+           READ ONLY
+        ========================== */
+
+        .readonly-title {
+            font-size: 16px;
+            font-weight: 800;
+
+            margin-bottom: 18px;
+        }
+
+        .readonly-row {
+            padding: 15px 0;
+
+            border-bottom:
+                1px solid #edf1f3;
+        }
+
+        .readonly-row:first-of-type {
+            padding-top: 0;
+        }
+
+        .readonly-label {
+            color: var(--muted);
+
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            margin-bottom: 6px;
+        }
+
+        .readonly-value {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .verified {
+            color: var(--primary);
+        }
+
+        .notice {
+            margin-top: 20px;
+
+            padding: 14px;
+
+            background: #f0faf6;
+
+            border: 1px solid #d9ede4;
+            border-radius: 12px;
+
+            color: #627084;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
         @media(max-width: 900px) {
 
             .layout {
                 grid-template-columns: 1fr;
             }
-
         }
 
         @media(max-width: 700px) {
@@ -544,16 +668,28 @@
                 grid-column: auto;
             }
 
+            .photo-upload-area {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .photo-upload-info {
+                width: 100%;
+            }
         }
     </style>
 
 </head>
 
+
 <body>
 
 <div class="page">
 
-    <!-- NAVBAR -->
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
     <div class="main-navbar">
 
@@ -606,7 +742,9 @@
     </div>
 
 
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+    ========================== -->
 
     <div class="hero">
 
@@ -640,7 +778,11 @@
                 stroke-width="1.8"
             >
                 <circle cx="12" cy="7" r="4"></circle>
-                <path d="M5 21v-2a7 7 0 0 1 14 0v2"></path>
+
+                <path
+                    d="M5 21v-2a7 7 0 0 1 14 0v2">
+                </path>
+
                 <path d="M8 14v2"></path>
                 <path d="M16 14v2"></path>
             </svg>
@@ -650,12 +792,19 @@
     </div>
 
 
+    <!-- =========================
+         MAIN LAYOUT
+    ========================== -->
+
     <div class="layout">
 
 
-        <!-- EDIT FORM -->
+        <!-- =========================
+             EDIT PROFILE CARD
+        ========================== -->
 
         <div class="card">
+
 
             <div class="section-heading">
 
@@ -676,14 +825,110 @@
             </div>
 
 
+            <!-- IMPORTANT:
+                 PROFILE PHOTO IS INSIDE THIS FORM -->
+
             <form
                 method="POST"
                 action="{{ route('doctor.profile.update') }}"
+                enctype="multipart/form-data"
             >
 
                 @csrf
                 @method('PUT')
 
+
+                <!-- =========================
+                     PROFILE PHOTO
+                ========================== -->
+
+                <div class="form-group full">
+
+                    <label for="profile_photo">
+                        Profile Photo
+                    </label>
+
+
+                    <div class="photo-upload-area">
+
+
+                        <div class="current-photo">
+
+                            @if($doctor->profile_photo)
+
+                                <img
+                                    src="{{ asset('storage/' . $doctor->profile_photo) }}"
+                                    alt="{{ $doctor->user->name }}"
+                                    id="photoPreview"
+                                >
+
+                            @else
+
+                                <div
+                                    class="photo-placeholder"
+                                    id="photoPlaceholder"
+                                >
+                                    {{ strtoupper(
+                                        substr(
+                                            str_replace(
+                                                'Dr. ',
+                                                '',
+                                                $doctor->user->name
+                                            ),
+                                            0,
+                                            1
+                                        )
+                                    ) }}
+                                </div>
+
+
+                                <img
+                                    id="photoPreview"
+                                    style="display:none;"
+                                    alt="Doctor Profile Preview"
+                                >
+
+                            @endif
+
+                        </div>
+
+
+                        <div class="photo-upload-info">
+
+                            <input
+                                type="file"
+                                name="profile_photo"
+                                id="profile_photo"
+                                accept="image/jpeg,image/png,image/jpg,image/webp"
+                                onchange="previewDoctorPhoto(event)"
+                            >
+
+
+                            <div class="photo-help">
+                                JPG, PNG or WEBP.
+                                Maximum file size: 5 MB.
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    @error('profile_photo')
+
+                        <div class="error">
+                            {{ $message }}
+                        </div>
+
+                    @enderror
+
+                </div>
+
+
+                <!-- =========================
+                     FORM FIELDS
+                ========================== -->
 
                 <div class="form-grid">
 
@@ -705,9 +950,11 @@
                         >
 
                         @error('email')
+
                             <div class="error">
                                 {{ $message }}
                             </div>
+
                         @enderror
 
                     </div>
@@ -730,9 +977,11 @@
                         >
 
                         @error('qualification')
+
                             <div class="error">
                                 {{ $message }}
                             </div>
+
                         @enderror
 
                     </div>
@@ -755,9 +1004,11 @@
                         >
 
                         @error('specialization')
+
                             <div class="error">
                                 {{ $message }}
                             </div>
+
                         @enderror
 
                     </div>
@@ -780,15 +1031,17 @@
                         >
 
                         @error('room_number')
+
                             <div class="error">
                                 {{ $message }}
                             </div>
+
                         @enderror
 
                     </div>
 
 
-                    <!-- FEE -->
+                    <!-- CONSULTATION FEE -->
 
                     <div class="form-group">
 
@@ -815,9 +1068,11 @@
                         </div>
 
                         @error('consultation_fee')
+
                             <div class="error">
                                 {{ $message }}
                             </div>
+
                         @enderror
 
                     </div>
@@ -838,15 +1093,21 @@
                         >{{ old('bio', $doctor->bio) }}</textarea>
 
                         @error('bio')
+
                             <div class="error">
                                 {{ $message }}
                             </div>
+
                         @enderror
 
                     </div>
 
                 </div>
 
+
+                <!-- =========================
+                     BUTTONS
+                ========================== -->
 
                 <div class="form-footer">
 
@@ -862,6 +1123,7 @@
                         type="submit"
                         class="save-btn"
                     >
+
                         <svg
                             width="17"
                             height="17"
@@ -870,12 +1132,21 @@
                             stroke="currentColor"
                             stroke-width="2"
                         >
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
+                            <path
+                                d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z">
+                            </path>
+
+                            <polyline
+                                points="17 21 17 13 7 13 7 21">
+                            </polyline>
+
+                            <polyline
+                                points="7 3 7 8 15 8">
+                            </polyline>
                         </svg>
 
                         Save Changes
+
                     </button>
 
                 </div>
@@ -885,7 +1156,9 @@
         </div>
 
 
-        <!-- PROTECTED INFO -->
+        <!-- =========================
+             PROTECTED CREDENTIALS
+        ========================== -->
 
         <div class="card">
 
@@ -948,9 +1221,10 @@
 
             <div class="notice">
 
-                Medical license, account role, name and verification
-                status are protected administrative information and
-                cannot be changed from the doctor portal.
+                Medical license, account role,
+                name and verification status are
+                protected administrative information
+                and cannot be changed from the doctor portal.
 
             </div>
 
@@ -960,6 +1234,52 @@
 
 </div>
 
-</body>
 
+<!-- =========================
+     IMAGE PREVIEW
+========================== -->
+
+<script>
+
+    function previewDoctorPhoto(event)
+    {
+        const file = event.target.files[0];
+
+        if (!file) {
+            return;
+        }
+
+
+        const preview =
+            document.getElementById(
+                'photoPreview'
+            );
+
+
+        const placeholder =
+            document.getElementById(
+                'photoPlaceholder'
+            );
+
+
+        preview.src =
+            URL.createObjectURL(file);
+
+
+        preview.style.display =
+            'block';
+
+
+        if (placeholder) {
+
+            placeholder.style.display =
+                'none';
+
+        }
+    }
+
+</script>
+
+
+</body>
 </html>
