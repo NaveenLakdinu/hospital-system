@@ -11,7 +11,7 @@ class DashboardController extends Controller
     /**
      * Doctor Dashboard
      */
-    public function dashboard()
+   public function dashboard()
 {
     $doctor = Auth::user()->doctor;
 
@@ -26,11 +26,15 @@ class DashboardController extends Controller
     ])
         ->where('doctor_id', $doctor->id)
 
-        // Today + future appointments
-        ->whereDate('appointment_date', '>=', now()->toDateString())
+        ->whereDate(
+            'appointment_date',
+            '>=',
+            now()->toDateString()
+        )
 
         ->orderBy('appointment_date', 'asc')
         ->orderBy('token_number', 'asc')
+
         ->get();
 
     return view(
@@ -38,7 +42,6 @@ class DashboardController extends Controller
         compact('appointments')
     );
 }
-
 
     /**
      * Doctor Profile
