@@ -229,6 +229,37 @@
     transform: translateY(-1px);
 }
 
+.edit-profile-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 0 18px;
+
+    background: #eef6ff;
+    color: #2589c8;
+
+    border: 1px solid #cfe3f7;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.edit-profile-btn:hover {
+    background: #2589c8;
+    color: white;
+    border-color: #2589c8;
+
+    transform: translateY(-1px);
+}
 
 /* RESPONSIVE */
 
@@ -275,6 +306,79 @@
     }
 }
 
+.profile-topbar {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-left: auto;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.workspace-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 19px;
+
+    background: #08a67a;
+    color: white;
+
+    border: 1px solid #08a67a;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+
+    box-shadow:
+        0 6px 16px rgba(8, 166, 122, 0.14);
+}
+
+.workspace-btn:hover {
+    background: #078b67;
+    color: white;
+
+    border-color: #078b67;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(8, 166, 122, 0.20);
+}
+
+.workspace-btn:visited {
+    color: white;
+}
 
         /* HERO */
 
@@ -672,11 +776,9 @@
 <div class="page">
 
 
-    <!-- TOP BAR -->
+ <div class="profile-topbar">
 
-   <div class="profile-topbar">
-
-    <!-- LEFT SIDE -->
+    <!-- LEFT -->
     <div class="brand-area">
 
         <img
@@ -685,44 +787,58 @@
             class="brand-logo"
         >
 
-        <div class="portal-info">
+        <div class="navbar-divider"></div>
 
+        <div class="portal-info">
             <div class="topbar-title">
                 Doctor Portal
             </div>
 
             <div class="topbar-subtitle">
-                Medical profile & professional information
+                Medical Profile & Clinical Credentials
             </div>
-
         </div>
 
     </div>
 
 
-    <!-- RIGHT SIDE -->
+    <!-- RIGHT -->
     <div class="topbar-actions">
 
         <a
-            href="{{ route('doctor.dashboard') }}"
-            class="dashboard-btn"
+            href="{{ route('doctor.profile.edit') }}"
+            class="edit-profile-btn"
         >
-            <svg
-                width="17"
-                height="17"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-            >
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
+            <svg width="17" height="17" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
             </svg>
 
-           Clinical Workspace
+            Edit Profile
         </a>
+
+
+        <a
+    href="{{ route('doctor.dashboard') }}"
+    class="workspace-btn"
+>
+    <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+    >
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+    </svg>
+
+    Clinical Workspace
+</a>
 
 
         <form
@@ -732,18 +848,10 @@
         >
             @csrf
 
-            <button
-                type="submit"
-                class="logout-btn"
-            >
-                <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                >
+            <button type="submit" class="logout-btn">
+
+                <svg width="17" height="17" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                     <polyline points="16 17 21 12 16 7"></polyline>
                     <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -751,12 +859,27 @@
 
                 Logout
             </button>
-
         </form>
 
     </div>
 
 </div>
+
+@if(session('success'))
+
+    <div style="
+        background:#def8ea;
+        color:#086b4b;
+        border:1px solid #c3ead7;
+        padding:14px 17px;
+        border-radius:12px;
+        margin-bottom:20px;
+        font-weight:600;
+    ">
+        ✓ {{ session('success') }}
+    </div>
+
+@endif
 
     <!-- PROFILE HERO -->
 
