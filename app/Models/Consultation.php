@@ -19,16 +19,33 @@ class Consultation extends Model
 
     public function appointment()
     {
-        return $this->belongsTo(Appointment::class);
+        return $this->belongsTo(
+            Appointment::class,
+            'appointment_id'
+        );
     }
 
     public function doctor()
     {
-        return $this->belongsTo(Doctor::class);
+        return $this->belongsTo(
+            Doctor::class,
+            'doctor_id'
+        );
     }
 
     public function patient()
     {
-        return $this->belongsTo(User::class, 'patient_id');
+        return $this->belongsTo(
+            User::class,
+            'patient_id'
+        );
+    }
+
+    public function prescription()
+    {
+        return $this->hasOne(
+            Prescription::class,
+            'consultation_id'
+        );
     }
 }

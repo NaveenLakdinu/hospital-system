@@ -109,6 +109,11 @@ Route::get(
     '/doctor/profile',
     [DashboardController::class, 'profile']
 )->name('doctor.profile');
+
+Route::get(
+    '/doctor/appointments/{appointment}/patients/{patient}/history',
+    [ConsultationController::class, 'history']
+)->name('doctor.patient.history');
 });
 
 
