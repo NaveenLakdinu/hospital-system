@@ -23,7 +23,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-lab-bookings', [LabTestController::class, 'myBookings'])->name('lab.my_bookings');
     Route::patch('/lab-tests/{id}/cancel', [LabTestController::class, 'cancel'])->name('lab.cancel');
 });
+/*
+|--------------------------------------------------------------------------
+| skin-info
+|--------------------------------------------------------------------------
+*/
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/skin-info', function () {
+        return view('skin.info');
+    })->name('skin.info');
+});
+/*
+|--------------------------------------------------------------------------
+| pregnancy.info
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['auth'])->group(function () {
     Route::get('/pregnancy-info', function () {
         return view('pregnancy.info');
