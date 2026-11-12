@@ -36,6 +36,14 @@
             margin-bottom: 25px;
         }
 
+        .success {
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -77,37 +85,46 @@
             display: inline-block;
             background: #198754;
             color: white;
-            padding: 8px 14px;
-            border-radius: 6px;
+            padding: 9px 15px;
+            border-radius: 7px;
             text-decoration: none;
         }
-.btn-delete {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 40px;
-    height: 40px;
-
-    background: #fff;
-    color: #dc3545;
-
-    border: 1px solid #dc3545;
-    border-radius: 8px;
-
-    cursor: pointer;
-    margin-left: 8px;
-
-    transition: 0.2s ease;
-}
-
-.btn-delete:hover {
-    background: #dc3545;
-    color: #fff;
-}
 
         .btn:hover {
             background: #157347;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-buttons form {
+            margin: 0;
+        }
+
+        .btn-delete {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 40px;
+            height: 40px;
+
+            background: white;
+            color: #dc3545;
+
+            border: 1px solid #dc3545;
+            border-radius: 8px;
+
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn-delete:hover {
+            background: #dc3545;
+            color: white;
         }
 
         .empty {
@@ -130,6 +147,12 @@
         <p class="subtitle">
             Today's Patient Queue
         </p>
+
+        @if(session('success'))
+            <div class="success">
+                ✅ {{ session('success') }}
+            </div>
+        @endif
 
         <table>
 
@@ -177,75 +200,118 @@
                         </span>
                     </td>
 
+
                     <td>
 
-    @if(strtolower($appointment->status) === 'confirmed')
+                        {{-- Confirmed = Nurse must add vitals --}}
+                        @if(strtolower($appointment->status) === 'confirmed')
 
-        <a
-            href="{{ route('nurse.vitals.create', $appointment->id) }}"
-            class="btn"
-        >
-            Add Vitals
-        </a>
+                            <a
+                                href="{{ route('nurse.vitals.create', $appointment->id) }}"
+                                class="btn"
+                            >
+                                Add Vitals
+                            </a>
 
-    @elseif(
-        in_array(strtolower($appointment->status), ['waiting', 'completed'])
-        && $appointment->vitalSign
-    )
 
-        <a
-            href="{{ route('nurse.vitals.summary', $appointment->id) }}"
-            class="btn"
-        >
-            View Summary
-        </a>
+                        {{-- Waiting + vitals = Summary available --}}
+                        @elseif(
+                            strtolower($appointment->status) === 'waiting'
+                            && $appointment->vitalSign
+                        )
 
-        @if(strtolower($appointment->status) === 'waiting')
+                            <div class="action-buttons">
 
-            <form
-                method="POST"
-                action="{{ route('nurse.vitals.destroy', $appointment->id) }}"
-                style="display:inline;"
-                onsubmit="return confirm('Are you sure you want to delete these vital signs?');"
-            >
-                @csrf
-                @method('DELETE')
+                                <a
+                                    href="{{ route('nurse.vitals.summary', $appointment->id) }}"
+                                    class="btn"
+                                >
+                                    View Summary
+                                </a>
 
-               <button
-    type="submit"
-    class="btn-delete"
-    title="Delete Vitals"
-    aria-label="Delete Vitals"
->
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-    >
-        <polyline points="3 6 5 6 21 6"></polyline>
-        <path d="M19 6l-1 14H6L5 6"></path>
-        <path d="M10 11v6"></path>
-        <path d="M14 11v6"></path>
-        <path d="M9 6V4h6v2"></path>
-    </svg>
-</button>
-            </form>
 
-        @endif
+                                <form
+                                    method="POST"
+                                    action="{{ route('nurse.vitals.destroy', $appointment->id) }}"
+                                    onsubmit="return confirm('Are you sure you want to delete these vital signs?');"
+                                >
 
-    @else
+                                    @csrf
+                                    @method('DELETE')
 
-        {{ ucfirst($appointment->status) }}
+                                    <button
+                                        type="submit"
+                                        class="btn-delete"
+                                        title="Delete Vitals"
+                                        aria-label="Delete Vitals"
+                                    >
 
-    @endif
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="18"
+                                            height="18"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6l-1 14H6L5 6"></path>
+                                            <path d="M10 11v6"></path>
+                                            <path d="M14 11v6"></path>
+                                            <path d="M9 6V4h6v2"></path>
+                                        </svg>
 
-</td>
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+
+                        {{-- Waiting but no vitals = allow Nurse to add --}}
+                        @elseif(
+                            strtolower($appointment->status) === 'waiting'
+                            && !$appointment->vitalSign
+                        )
+
+                            <a
+                                href="{{ route('nurse.vitals.create', $appointment->id) }}"
+                                class="btn"
+                            >
+                                Add Vitals
+                            </a>
+
+
+                        {{-- Completed + vitals = Summary can still be viewed --}}
+                        @elseif(
+                            strtolower($appointment->status) === 'completed'
+                            && $appointment->vitalSign
+                        )
+
+                            <a
+                                href="{{ route('nurse.vitals.summary', $appointment->id) }}"
+                                class="btn"
+                            >
+                                View Summary
+                            </a>
+
+
+                        {{-- Completed old record without vitals --}}
+                        @elseif(strtolower($appointment->status) === 'completed')
+
+                            Completed
+
+
+                        @else
+
+                            {{ ucfirst($appointment->status) }}
+
+                        @endif
+
+                    </td>
 
                 </tr>
 
@@ -253,7 +319,7 @@
 
                 <tr>
                     <td colspan="7" class="empty">
-                        No appointments available for today.
+                        No appointments available.
                     </td>
                 </tr>
 
