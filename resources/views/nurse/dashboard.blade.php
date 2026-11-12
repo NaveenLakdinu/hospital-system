@@ -132,6 +132,48 @@
             color: #777;
             padding: 30px;
         }
+
+        .dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 8px;
+}
+
+.dashboard-header .subtitle {
+    margin: 0;
+}
+
+.profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #eef8f4;
+    color: #198754;
+
+    padding: 10px 16px;
+
+    border: 1px solid #cdeadd;
+    border-radius: 9px;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.profile-btn:hover {
+    background: #198754;
+    color: white;
+}
     </style>
 
 </head>
@@ -142,11 +184,39 @@
 
     <div class="card">
 
+       <div class="dashboard-header">
+
+    <div>
         <h1>Nurse Dashboard</h1>
 
         <p class="subtitle">
             Today's Patient Queue
         </p>
+    </div>
+
+
+    <a
+        href="{{ route('nurse.profile') }}"
+        class="profile-btn"
+    >
+
+        <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <path d="M20 21a8 8 0 0 0-16 0"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+
+        My Profile
+
+    </a>
+
+</div>
 
         @if(session('success'))
             <div class="success">

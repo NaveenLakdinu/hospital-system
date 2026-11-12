@@ -179,6 +179,13 @@ Route::post(
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.vitals.destroy');
 
+    Route::get(
+    '/nurse/profile',
+    [NurseDashboardController::class, 'profile']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.profile');
+
     /*
 |--------------------------------------------------------------------------
 | Default Authenticated Dashboard
