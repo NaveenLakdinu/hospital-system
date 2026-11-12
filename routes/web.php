@@ -25,6 +25,16 @@ Route::middleware(['auth'])->group(function () {
 });
 /*
 |--------------------------------------------------------------------------
+|depression_anxiety.info
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/depression-anxiety-info', function () {
+        return view('depression_anxiety.info');
+    })->name('depression_anxiety.info');
+});
+/*
+|--------------------------------------------------------------------------
 |child_feeding.info
 |--------------------------------------------------------------------------
 */
