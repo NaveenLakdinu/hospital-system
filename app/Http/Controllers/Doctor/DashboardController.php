@@ -12,28 +12,32 @@ class DashboardController extends Controller
      * Doctor Dashboard
      */
     public function dashboard()
-    {
-        $doctor = Auth::user()->doctor;
+{
+    $doctor = Auth::user()->doctor;
 
-        if (!$doctor) {
-            abort(403, 'Doctor profile not found.');
-        }
-
-        $appointments = Appointment::with([
-            'patient',
-            'prescription',
-            'vitalSign'
-        ])
-            ->where('doctor_id', $doctor->id)
-            ->orderBy('appointment_date')
-            ->orderBy('token_number')
-            ->get();
-
-        return view(
-            'doctor.dashboard',
-            compact('appointments')
-        );
+    if (!$doctor) {
+        abort(403, 'Doctor profile not found.');
     }
+
+    $appointments = Appointment::with([
+        'patient',
+        'prescription',
+        'vitalSign'
+    ])
+        ->where('doctor_id', $doctor->id)
+
+        // Today + future appointments
+        ->whereDate('appointment_date', '>=', now()->toDateString())
+
+        ->orderBy('appointment_date', 'asc')
+        ->orderBy('token_number', 'asc')
+        ->get();
+
+    return view(
+        'doctor.dashboard',
+        compact('appointments')
+    );
+}
 
 
     /**

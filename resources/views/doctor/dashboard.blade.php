@@ -492,6 +492,52 @@
             border-radius: 8px;
         }
 
+        .date-row td {
+    padding: 20px 10px 10px;
+    border-bottom: none;
+    background: transparent;
+}
+
+.date-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: linear-gradient(
+        90deg,
+        #e7f9f2,
+        #eef7ff
+    );
+
+    border: 1px solid #dcefe8;
+    border-radius: 10px;
+
+    padding: 12px 16px;
+
+    color: #263244;
+}
+
+.today-label {
+    display: inline-block;
+
+    background: #198754;
+    color: white;
+
+    padding: 5px 10px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    margin-right: 8px;
+}
+
+.patient-count {
+    color: #718096;
+    font-size: 13px;
+    font-weight: 600;
+}
+
         .empty {
             text-align: center;
             padding: 35px;
@@ -870,209 +916,243 @@
                 </thead>
 
 
-                <tbody>
+               <tbody>
 
-                @forelse($appointments as $appointment)
-
-                    <tr>
-
-                        <td>
-                            <span class="token">
-                                #{{ $appointment->token_number }}
-                            </span>
-                        </td>
+@php
+    $groupedAppointments = $appointments->groupBy(function ($appointment) {
+        return \Carbon\Carbon::parse(
+            $appointment->appointment_date
+        )->format('Y-m-d');
+    });
+@endphp
 
 
-                        <td>
-                            <span class="patient-name">
-                                {{ $appointment->patient?->name ?? 'Unknown Patient' }}
-                            </span>
-                        </td>
+@forelse($groupedAppointments as $date => $dayAppointments)
+
+    @php
+        $appointmentDate = \Carbon\Carbon::parse($date);
+        $isToday = $appointmentDate->isToday();
+    @endphp
 
 
-                        <td>
-                            {{ $appointment->reason_for_visit }}
-                        </td>
+    <!-- DATE HEADER -->
+
+    <tr class="date-row">
+
+        <td colspan="5">
+
+            <div class="date-heading">
+
+                <div>
+
+                    @if($isToday)
+
+                        <span class="today-label">
+                            Today
+                        </span>
+
+                    @endif
+
+                    <strong>
+                        {{ $appointmentDate->format('d/m/Y') }}
+                    </strong>
+
+                </div>
 
 
-                        <td>
+                <span class="patient-count">
 
-                            <span class="status {{ strtolower($appointment->status) }}">
+                    {{ $dayAppointments->count() }}
 
-                                {{ ucfirst($appointment->status) }}
+                    {{ $dayAppointments->count() === 1 ? 'Patient' : 'Patients' }}
 
-                            </span>
+                </span>
 
-                        </td>
+            </div>
 
+        </td>
 
-                        <td>
-
-                            <!-- CONFIRMED -->
-
-                            @if(strtolower($appointment->status) === 'confirmed')
-
-                                <span class="waiting-nurse">
-
-                                    <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <circle cx="12" cy="12" r="9"></circle>
-                                        <path d="M12 7v5"></path>
-                                        <path d="M12 16h.01"></path>
-                                    </svg>
-
-                                    Waiting for Nurse
-
-                                </span>
+    </tr>
 
 
-                            <!-- WAITING -->
+    <!-- PATIENTS FOR THIS DATE -->
 
-                            @elseif(strtolower($appointment->status) === 'waiting')
+    @foreach($dayAppointments as $appointment)
 
-                                <a
-                                    href="{{ route('doctor.consultation.show', $appointment->id) }}"
-                                    class="btn"
+        <tr>
+
+            <!-- TOKEN -->
+
+            <td>
+
+                <span class="token">
+                    #{{ $appointment->token_number }}
+                </span>
+
+            </td>
+
+
+            <!-- PATIENT -->
+
+            <td>
+
+                <span class="patient-name">
+                    {{ $appointment->patient?->name ?? 'Unknown Patient' }}
+                </span>
+
+            </td>
+
+
+            <!-- REASON -->
+
+            <td>
+                {{ $appointment->reason_for_visit }}
+            </td>
+
+
+            <!-- STATUS -->
+
+            <td>
+
+                <span class="status {{ strtolower($appointment->status) }}">
+
+                    {{ ucfirst($appointment->status) }}
+
+                </span>
+
+            </td>
+
+
+            <!-- ACTION -->
+
+            <td>
+
+                @if(strtolower($appointment->status) === 'confirmed')
+
+                    <span class="waiting-nurse">
+
+                        Waiting for Nurse
+
+                    </span>
+
+
+                @elseif(strtolower($appointment->status) === 'waiting')
+
+                    <a
+                        href="{{ route(
+                            'doctor.consultation.show',
+                            $appointment->id
+                        ) }}"
+                        class="btn"
+                    >
+
+                        Start Consultation
+
+                    </a>
+
+
+                @elseif(
+                    strtolower($appointment->status) === 'completed'
+                    && $appointment->prescription
+                )
+
+                    <div class="action-buttons">
+
+                        <a
+                            href="{{ route(
+                                'doctor.prescription.summary',
+                                $appointment->prescription->id
+                            ) }}"
+                            class="btn"
+                        >
+
+                            View Summary
+
+                        </a>
+
+
+                        <form
+                            method="POST"
+                            action="{{ route(
+                                'doctor.consultation.destroy',
+                                $appointment->id
+                            ) }}"
+                            onsubmit="return confirm(
+                                'Are you sure you want to delete this consultation and prescription?'
+                            );"
+                        >
+
+                            @csrf
+                            @method('DELETE')
+
+
+                            <button
+                                type="submit"
+                                class="btn-delete"
+                                title="Delete Consultation"
+                            >
+
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
                                 >
 
-                                    <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path d="M12 5v14"></path>
-                                        <path d="M5 12h14"></path>
-                                    </svg>
+                                    <polyline points="3 6 5 6 21 6"></polyline>
 
-                                    Start Consultation
+                                    <path d="M19 6l-1 14H6L5 6"></path>
 
-                                </a>
+                                    <path d="M10 11v6"></path>
 
+                                    <path d="M14 11v6"></path>
 
-                            <!-- COMPLETED -->
+                                    <path d="M9 6V4h6v2"></path>
 
-                            @elseif(
-                                strtolower($appointment->status) === 'completed'
-                                && $appointment->prescription
-                            )
+                                </svg>
 
-                                <div class="action-buttons">
+                            </button>
 
-                                    <a
-                                        href="{{ route(
-                                            'doctor.prescription.summary',
-                                            $appointment->prescription->id
-                                        ) }}"
-                                        class="btn"
-                                    >
+                        </form>
 
-                                        <svg
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                        >
-                                            <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
-
-                                        View Summary
-
-                                    </a>
+                    </div>
 
 
-                                    <form
-                                        method="POST"
-                                        action="{{ route(
-                                            'doctor.consultation.destroy',
-                                            $appointment->id
-                                        ) }}"
-                                        onsubmit="return confirm(
-                                            'Are you sure you want to delete this consultation and prescription?'
-                                        );"
-                                    >
+                @elseif(strtolower($appointment->status) === 'completed')
 
-                                        @csrf
-                                        @method('DELETE')
+                    Completed
 
 
-                                        <button
-                                            type="submit"
-                                            class="btn-delete"
-                                            title="Delete Consultation"
-                                            aria-label="Delete Consultation"
-                                        >
+                @else
 
-                                            <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            >
+                    {{ ucfirst($appointment->status) }}
 
-                                                <polyline points="3 6 5 6 21 6"></polyline>
+                @endif
 
-                                                <path d="M19 6l-1 14H6L5 6"></path>
+            </td>
 
-                                                <path d="M10 11v6"></path>
+        </tr>
 
-                                                <path d="M14 11v6"></path>
-
-                                                <path d="M9 6V4h6v2"></path>
-
-                                            </svg>
-
-                                        </button>
-
-                                    </form>
-
-                                </div>
+    @endforeach
 
 
-                            @elseif(strtolower($appointment->status) === 'completed')
+@empty
 
-                                Completed
+    <tr>
 
+        <td colspan="5" class="empty">
 
-                            @else
+            No upcoming appointments available.
 
-                                {{ ucfirst($appointment->status) }}
+        </td>
 
-                            @endif
+    </tr>
 
-                        </td>
+@endforelse
 
-                    </tr>
-
-                @empty
-
-                    <tr>
-
-                        <td colspan="5" class="empty">
-                            No patients currently assigned.
-                        </td>
-
-                    </tr>
-
-                @endforelse
-
-                </tbody>
-
+</tbody>
             </table>
 
         </div>
