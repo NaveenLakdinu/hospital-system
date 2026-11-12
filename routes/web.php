@@ -114,6 +114,10 @@ Route::get(
     '/doctor/appointments/{appointment}/patients/{patient}/history',
     [ConsultationController::class, 'history']
 )->name('doctor.patient.history');
+Route::get(
+    '/doctor/appointments/{appointment}/patients/{patient}/history',
+    [ConsultationController::class, 'history']
+)->name('doctor.patient.history');
 });
 
 
