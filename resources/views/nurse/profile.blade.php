@@ -36,42 +36,85 @@
             padding: 28px;
         }
 
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255,255,255,.95);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 18px 22px;
-            margin-bottom: 22px;
-        }
+       .topbar {
+    background: rgba(255, 255, 255, 0.96);
 
-        .title {
-            font-size: 22px;
-            font-weight: 800;
-        }
+    border: 1px solid #e7edf1;
+    border-radius: 18px;
 
-        .subtitle {
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 13px;
-        }
+    padding: 18px 24px;
 
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 11px 16px;
-            border-radius: 12px;
-            border: 1px solid #ccebdd;
-            background: #effaf5;
-            color: var(--primary);
-            font-weight: 700;
-            text-decoration: none;
-            transition: .2s ease;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    margin-bottom: 24px;
+
+    box-shadow: 0 8px 28px rgba(31, 41, 55, 0.04);
+}
+
+.topbar-title {
+    font-size: 22px;
+    font-weight: 800;
+
+    color: #182236;
+}
+
+.topbar-subtitle {
+    margin-top: 5px;
+
+    color: #8a95a6;
+
+    font-size: 13px;
+}
+
+.dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #08a67a;
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+
+    box-shadow: 0 6px 16px rgba(8, 166, 122, 0.18);
+}
+
+.dashboard-btn:hover {
+    background: #078b67;
+
+    transform: translateY(-1px);
+}
+
+.dashboard-btn svg {
+    flex-shrink: 0;
+}
+
+@media(max-width: 700px) {
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 14px;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+    }
+}
         .back-btn:hover {
             background: var(--primary);
             color: white;
@@ -280,6 +323,37 @@
             .name {
                 font-size: 28px;
             }
+            .back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 10px 15px;
+
+    background: #f3faf7;
+    color: #0a9368;
+
+    border: 1px solid #cae9dc;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #0a9368;
+    color: white;
+    border-color: #0a9368;
+}
+
+.back-btn svg {
+    flex-shrink: 0;
+}
         }
     </style>
 </head>
@@ -292,19 +366,40 @@
 <div class="page">
 
     <div class="topbar">
-        <div>
-            <div class="title">Nurse Profile</div>
-            <div class="subtitle">Professional details and account information</div>
+
+    <div>
+        <div class="topbar-title">
+            Nurse Portal
         </div>
 
-        <a href="{{ route('nurse.dashboard') }}" class="back-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5"></path>
-                <path d="M12 19l-7-7 7-7"></path>
-            </svg>
-            Back to Dashboard
-        </a>
+        <div class="topbar-subtitle">
+            Nursing profile & clinical support information
+        </div>
     </div>
+
+
+    <a
+        href="{{ route('nurse.dashboard') }}"
+        class="dashboard-btn"
+    >
+        <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+        </svg>
+
+        Dashboard
+    </a>
+
+</div>
 
     <div class="profile-grid">
 
