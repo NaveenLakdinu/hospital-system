@@ -12,16 +12,23 @@
             font-family: Arial, sans-serif;
             background: #f4f6f8;
             margin: 0;
-            padding: 30px;
         }
 
         .container {
-            max-width: 1100px;
-            margin: auto;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
         }
 
         h1 {
-            margin-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 10px;
         }
 
         .subtitle {
@@ -29,10 +36,12 @@
             margin-bottom: 25px;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
+        .success {
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         table {
@@ -43,30 +52,96 @@
         th,
         td {
             padding: 14px;
-            text-align: left;
             border-bottom: 1px solid #ddd;
+            text-align: left;
+            vertical-align: middle;
         }
 
         th {
-            background: #f8f9fa;
+            background: #eef8f7;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .pending {
+            color: #6c757d;
+        }
+
+        .confirmed {
+            color: #0d6efd;
         }
 
         .waiting {
-            color: #d58a00;
-            font-weight: bold;
+            color: #fd7e14;
         }
 
         .completed {
-            color: green;
-            font-weight: bold;
+            color: #198754;
+        }
+
+        .cancelled {
+            color: #dc3545;
         }
 
         .btn {
+            display: inline-block;
             background: #198754;
             color: white;
-            padding: 8px 12px;
+            padding: 9px 15px;
+            border-radius: 7px;
             text-decoration: none;
-            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #157347;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-buttons form {
+            margin: 0;
+        }
+
+        .btn-delete {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 40px;
+            height: 40px;
+
+            background: white;
+            color: #dc3545;
+
+            border: 1px solid #dc3545;
+            border-radius: 8px;
+
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn-delete:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .waiting-nurse {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 30px;
         }
     </style>
 
@@ -76,101 +151,197 @@
 
 <div class="container">
 
-    <h1>Doctor Dashboard</h1>
-
-    <p class="subtitle">
-        Today's Patient Queue
-    </p>
-
-@if(session('success'))
-    <div style="
-        background: #d1fae5;
-        color: #065f46;
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    ">
-        {{ session('success') }}
-    </div>
-@endif
-
     <div class="card">
+
+        <h1>Doctor Dashboard</h1>
+
+        <p class="subtitle">
+            Patient Queue
+        </p>
+
+        @if(session('success'))
+            <div class="success">
+                ✅ {{ session('success') }}
+            </div>
+        @endif
 
         <table>
 
             <thead>
-               
+
+                <tr>
+                    <th>Token</th>
+                    <th>Patient</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
             </thead>
 
-  <tbody>
+            <tbody>
 
-@forelse($appointments as $appointment)
+            @forelse($appointments as $appointment)
 
-    <tr>
+                <tr>
 
-        <td>
-            #{{ $appointment->token_number }}
-        </td>
+                    <td>
+                        #{{ $appointment->token_number }}
+                    </td>
 
-        <td>
-            {{ $appointment->patient->name }}
-        </td>
 
-        <td>
-            {{ $appointment->reason_for_visit }}
-        </td>
+                    <td>
+                        {{ $appointment->patient?->name ?? 'Unknown Patient' }}
+                    </td>
 
-        <td>
-            <span class="{{ strtolower($appointment->status) }}">
-                {{ ucfirst($appointment->status) }}
-            </span>
-        </td>
 
-        <td>
+                    <td>
+                        {{ $appointment->reason_for_visit }}
+                    </td>
 
-            @if(in_array(strtolower($appointment->status), ['waiting', 'confirmed']))
 
-    <a
-        href="{{ route('doctor.consultation.show', $appointment->id) }}"
-        class="btn"
-    >
-        Start Consultation
-    </a>
+                    <td>
 
-@elseif(strtolower($appointment->status) == 'completed' && $appointment->prescription)
+                        <span class="status {{ strtolower($appointment->status) }}">
 
-    <a
-        href="{{ route('doctor.prescription.summary', $appointment->prescription->id) }}"
-        class="btn"
-    >
-        View Summary
-    </a>
+                            {{ ucfirst($appointment->status) }}
 
-@elseif(strtolower($appointment->status) == 'completed')
+                        </span>
 
-    Completed
+                    </td>
 
-@else
 
-    {{ ucfirst($appointment->status) }}
+                    <td>
 
-@endif
+                        {{-- Nurse has not checked vital signs yet --}}
+                        @if(strtolower($appointment->status) === 'confirmed')
 
-        </td>
+                            <span class="waiting-nurse">
+                                Waiting for Nurse Check
+                            </span>
 
-    </tr>
 
-@empty
+                        {{-- Nurse completed vital signs --}}
+                        @elseif(strtolower($appointment->status) === 'waiting')
 
-    <tr>
-        <td colspan="5" style="text-align: center; padding: 30px;">
-            No appointments available.
-        </td>
-    </tr>
+                            <a
+                                href="{{ route('doctor.consultation.show', $appointment->id) }}"
+                                class="btn"
+                            >
+                                Start Consultation
+                            </a>
 
-@endforelse
 
-</tbody>
+                        {{-- Doctor completed consultation and prescription --}}
+                        @elseif(
+                            strtolower($appointment->status) === 'completed'
+                            && $appointment->prescription
+                        )
+
+                            <div class="action-buttons">
+
+                                <a
+                                    href="{{ route(
+                                        'doctor.prescription.summary',
+                                        $appointment->prescription->id
+                                    ) }}"
+                                    class="btn"
+                                >
+                                    View Summary
+                                </a>
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ route(
+                                        'doctor.consultation.destroy',
+                                        $appointment->id
+                                    ) }}"
+                                    onsubmit="return confirm(
+                                        'Are you sure you want to delete this consultation and prescription?'
+                                    );"
+                                >
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button
+                                        type="submit"
+                                        class="btn-delete"
+                                        title="Delete Consultation"
+                                        aria-label="Delete Consultation"
+                                    >
+
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="18"
+                                            height="18"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+
+                                            <polyline
+                                                points="3 6 5 6 21 6"
+                                            ></polyline>
+
+                                            <path
+                                                d="M19 6l-1 14H6L5 6"
+                                            ></path>
+
+                                            <path
+                                                d="M10 11v6"
+                                            ></path>
+
+                                            <path
+                                                d="M14 11v6"
+                                            ></path>
+
+                                            <path
+                                                d="M9 6V4h6v2"
+                                            ></path>
+
+                                        </svg>
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+
+                        @elseif(strtolower($appointment->status) === 'completed')
+
+                            Completed
+
+
+                        @else
+
+                            {{ ucfirst($appointment->status) }}
+
+                        @endif
+
+                    </td>
+
+                </tr>
+
+            @empty
+
+                <tr>
+
+                    <td colspan="5" class="empty">
+                        No appointments available.
+                    </td>
+
+                </tr>
+
+            @endforelse
+
+            </tbody>
+
         </table>
 
     </div>
@@ -178,4 +349,5 @@
 </div>
 
 </body>
+
 </html>

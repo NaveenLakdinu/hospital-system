@@ -130,4 +130,42 @@ class PrescriptionController extends Controller
             compact('prescription')
         );
     }
+
+    public function destroy($appointmentId)
+{
+    $doctor = Auth::user()->doctor;
+
+    if (!$doctor) {
+        abort(403, 'Doctor profile not found.');
+    }
+
+    $appointment = \App\Models\Appointment::where('doctor_id', $doctor->id)
+        ->findOrFail($appointmentId);
+
+    DB::transaction(function () use ($appointment) {
+
+        $prescription = Prescription::where(
+            'appointment_id',
+            $appointment->id
+        )->first();
+
+        if ($prescription) {
+            $prescription->items()->delete();
+            $prescription->delete();
+        }
+
+        Consultation::where(
+            'appointment_id',
+            $appointment->id
+        )->delete();
+
+        $appointment->update([
+            'status' => 'waiting'
+        ]);
+    });
+
+    return redirect()
+        ->route('doctor.dashboard')
+        ->with('success', 'Consultation and prescription deleted successfully.');
+}
 }

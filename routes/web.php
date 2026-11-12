@@ -95,6 +95,11 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
     [PrescriptionController::class, 'summary']
 )->name('doctor.prescription.summary');
 
+Route::delete(
+    '/doctor/appointments/{appointment}/consultation',
+    [PrescriptionController::class, 'destroy']
+)->name('doctor.consultation.destroy');
+
 });
 
 
