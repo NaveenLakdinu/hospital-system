@@ -11,7 +11,8 @@ class DashboardController extends Controller
     {
         $appointments = Appointment::with([
             'patient',
-            'doctor.user'
+            'doctor.user',
+            'vitalSign'
         ])
         ->orderBy('appointment_date')
         ->orderBy('token_number')

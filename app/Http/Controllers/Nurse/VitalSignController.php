@@ -55,7 +55,38 @@ class VitalSignController extends Controller
         ]);
 
         return redirect()
-            ->route('nurse.dashboard')
-            ->with('success', 'Vital signs saved. Patient is ready for the doctor.');
+    ->route('nurse.vitals.summary', $appointment->id)
+    ->with('success', 'Vital signs saved. Patient is ready for the doctor.');
     }
+
+    public function summary($appointmentId)
+{
+    $appointment = Appointment::with([
+        'patient',
+        'doctor.user',
+        'vitalSign.nurse'
+    ])->findOrFail($appointmentId);
+
+    return view(
+        'nurse.vitals.summary',
+        compact('appointment')
+    );
+}
+public function destroy($appointmentId)
+{
+    $appointment = Appointment::with('vitalSign')
+        ->findOrFail($appointmentId);
+
+    if ($appointment->vitalSign) {
+        $appointment->vitalSign->delete();
+    }
+
+    $appointment->update([
+        'status' => 'confirmed',
+    ]);
+
+    return redirect()
+        ->route('nurse.dashboard')
+        ->with('success', 'Vital signs deleted successfully.');
+}
 }

@@ -81,6 +81,30 @@
             border-radius: 6px;
             text-decoration: none;
         }
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    background: #fff;
+    color: #dc3545;
+
+    border: 1px solid #dc3545;
+    border-radius: 8px;
+
+    cursor: pointer;
+    margin-left: 8px;
+
+    transition: 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: #dc3545;
+    color: #fff;
+}
 
         .btn:hover {
             background: #157347;
@@ -155,22 +179,73 @@
 
                     <td>
 
-                        @if(strtolower($appointment->status) !== 'completed')
+    @if(strtolower($appointment->status) === 'confirmed')
 
-                            <a
-                                href="{{ route('nurse.vitals.create', $appointment->id) }}"
-                                class="btn"
-                            >
-                                Add Vitals
-                            </a>
+        <a
+            href="{{ route('nurse.vitals.create', $appointment->id) }}"
+            class="btn"
+        >
+            Add Vitals
+        </a>
 
-                        @else
+    @elseif(
+        in_array(strtolower($appointment->status), ['waiting', 'completed'])
+        && $appointment->vitalSign
+    )
 
-                            Completed
+        <a
+            href="{{ route('nurse.vitals.summary', $appointment->id) }}"
+            class="btn"
+        >
+            View Summary
+        </a>
 
-                        @endif
+        @if(strtolower($appointment->status) === 'waiting')
 
-                    </td>
+            <form
+                method="POST"
+                action="{{ route('nurse.vitals.destroy', $appointment->id) }}"
+                style="display:inline;"
+                onsubmit="return confirm('Are you sure you want to delete these vital signs?');"
+            >
+                @csrf
+                @method('DELETE')
+
+               <button
+    type="submit"
+    class="btn-delete"
+    title="Delete Vitals"
+    aria-label="Delete Vitals"
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6l-1 14H6L5 6"></path>
+        <path d="M10 11v6"></path>
+        <path d="M14 11v6"></path>
+        <path d="M9 6V4h6v2"></path>
+    </svg>
+</button>
+            </form>
+
+        @endif
+
+    @else
+
+        {{ ucfirst($appointment->status) }}
+
+    @endif
+
+</td>
 
                 </tr>
 

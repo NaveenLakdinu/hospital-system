@@ -151,6 +151,20 @@ Route::post(
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.vitals.store');
 
+    Route::get(
+    '/nurse/appointments/{appointment}/vitals/summary',
+    [VitalSignController::class, 'summary']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.vitals.summary');
+
+    Route::delete(
+    '/nurse/appointments/{appointment}/vitals',
+    [VitalSignController::class, 'destroy']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.vitals.destroy');
+
     /*
 |--------------------------------------------------------------------------
 | Default Authenticated Dashboard
