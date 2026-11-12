@@ -130,20 +130,31 @@
 
             @if(in_array(strtolower($appointment->status), ['waiting', 'confirmed']))
 
-                <a href="{{ route('doctor.consultation.show', $appointment->id) }}"
-                   class="btn">
-                    Start Consultation
-                </a>
+    <a
+        href="{{ route('doctor.consultation.show', $appointment->id) }}"
+        class="btn"
+    >
+        Start Consultation
+    </a>
 
-            @elseif(strtolower($appointment->status) == 'completed')
+@elseif(strtolower($appointment->status) == 'completed' && $appointment->prescription)
 
-                Completed
+    <a
+        href="{{ route('doctor.prescription.summary', $appointment->prescription->id) }}"
+        class="btn"
+    >
+        View Summary
+    </a>
 
-            @else
+@elseif(strtolower($appointment->status) == 'completed')
 
-                {{ ucfirst($appointment->status) }}
+    Completed
 
-            @endif
+@else
+
+    {{ ucfirst($appointment->status) }}
+
+@endif
 
         </td>
 

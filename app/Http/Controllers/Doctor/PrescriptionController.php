@@ -81,7 +81,14 @@ class PrescriptionController extends Controller
                 'frequency' => $request->frequency,
                 'duration' => $request->duration,
                 'instructions' => $request->instructions,
+
+                
             ]);
+            Appointment::where('id', $consultation->appointment_id)
+    ->update([
+        'status' => 'completed'
+    ]);
+
 
             return $prescription;
         });
