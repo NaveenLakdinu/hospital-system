@@ -12,7 +12,7 @@ use App\Http\Controllers\Doctor\ConsultationController;
 use App\Http\Controllers\Doctor\PrescriptionController;
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-
+use App\Http\Controllers\Nurse\DashboardController as NurseDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +124,20 @@ Route::get('/pharmacist/dashboard', function () {
 
 
 /*
+|--------------------------------------------------------------------------
+| Nurse Dashboard
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/nurse/dashboard',
+    [NurseDashboardController::class, 'index']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.dashboard');
+
+
+    /*
 |--------------------------------------------------------------------------
 | Default Authenticated Dashboard
 |--------------------------------------------------------------------------
