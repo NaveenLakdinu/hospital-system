@@ -1828,7 +1828,8 @@
                     <p>
                         Professional treatment and
                         appropriate support can help
-                        many people improve.
+                        many people improve.   
+
                     </p>
 
                 </div>
