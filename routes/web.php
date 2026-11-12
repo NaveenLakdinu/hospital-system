@@ -127,12 +127,45 @@ Route::get(
 |--------------------------------------------------------------------------
 */
 
-Route::get(
-    '/admin/dashboard',
-    [AdminDashboardController::class, 'index']
-)
-    ->middleware(['auth', 'role:admin'])
-    ->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+
+    // Dashboard
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+        ->name('dashboard');
+
+    // Doctors
+    Route::get('/doctors', [AdminDoctorController::class, 'index'])
+        ->name('doctors.index');
+    Route::get('/doctors/create', [AdminDoctorController::class, 'create'])
+        ->name('doctors.create');
+    Route::post('/doctors', [AdminDoctorController::class, 'store'])
+        ->name('doctors.store');
+    Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])
+        ->name('doctors.destroy');
+
+    // Pharmacists
+    Route::get('/pharmacists', [AdminPharmacistController::class, 'index'])
+        ->name('pharmacists.index');
+    Route::get('/pharmacists/create', [AdminPharmacistController::class, 'create'])
+        ->name('pharmacists.create');
+    Route::post('/pharmacists', [AdminPharmacistController::class, 'store'])
+        ->name('pharmacists.store');
+    Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])
+        ->name('pharmacists.destroy');
+
+    // Appointments
+    Route::get('/appointments', [AdminAppointmentController::class, 'index'])
+        ->name('appointments.index');
+    Route::patch('/appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])
+        ->name('appointments.updateStatus');
+
+    // Reports
+    Route::get('/reports', [AdminReportController::class, 'index'])
+        ->name('reports.index');
+    Route::get('/reports/export-csv', [AdminReportController::class, 'exportCsv'])
+        ->name('reports.exportCsv');
+
+});
 
 
 /*
