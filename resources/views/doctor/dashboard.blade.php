@@ -13,43 +13,49 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
             margin: 0;
-            color: #1f2937;
+            font-family: Arial, sans-serif;
+            color: #172033;
+
+            background:
+                radial-gradient(circle at top left, #dcfaf0 0%, transparent 28%),
+                radial-gradient(circle at top right, #edf4ff 0%, transparent 30%),
+                #f5f7fa;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .page {
+            max-width: 1400px;
+            margin: auto;
+            padding: 25px;
         }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-        }
+        /* TOP BAR */
 
-        /* Header */
+        .topbar {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid #edf1f4;
+            border-radius: 18px;
 
-        .dashboard-header {
+            padding: 16px 22px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 25px;
+
+            box-shadow: 0 8px 30px rgba(31,41,55,0.04);
+
+            margin-bottom: 22px;
         }
 
-        .dashboard-title h1 {
-            margin: 0 0 8px;
-            font-size: 32px;
+        .brand-title {
+            font-size: 20px;
+            font-weight: 700;
         }
 
-        .subtitle {
-            color: #666;
-            margin: 0;
+        .brand-subtitle {
+            color: #8993a4;
+            font-size: 13px;
+            margin-top: 4px;
         }
 
         .profile-btn {
@@ -57,102 +63,384 @@
             align-items: center;
             gap: 8px;
 
-            background: #eef8f4;
-            color: #198754;
+            background: #eef9f5;
+            color: #078d64;
 
-            padding: 10px 16px;
+            border: 1px solid #c8eadc;
+            border-radius: 11px;
 
-            border: 1px solid #cdeadd;
-            border-radius: 9px;
+            padding: 11px 17px;
 
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
 
-            transition: 0.2s ease;
+            transition: 0.2s;
         }
 
         .profile-btn:hover {
-            background: #198754;
+            background: #0a9d71;
             color: white;
         }
 
-        /* Success Message */
+        /* HERO */
 
-        .success {
-            background: #d1e7dd;
-            color: #0f5132;
-            padding: 14px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+        .hero {
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(220,251,240,0.95),
+                    rgba(239,249,255,0.95),
+                    rgba(246,241,255,0.9)
+                );
+
+            border: 1px solid #ddf1e9;
+            border-radius: 25px;
+
+            padding: 35px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 22px;
+            overflow: hidden;
         }
 
-        /* Table */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            background: #d8f9eb;
+            color: #087d5b;
+
+            padding: 7px 12px;
+            border-radius: 50px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 14px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #14bd83;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        .hero-description {
+            color: #6f7c8e;
+            margin: 10px 0 0;
+            line-height: 1.6;
+        }
+
+        .heartbeat {
+            width: 320px;
+            opacity: 0.55;
+        }
+
+        .heartbeat-label {
+            text-align: right;
+            color: #5da88f;
+            letter-spacing: 2px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* STATS */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.96);
+            border: 1px solid #edf0f3;
+            border-radius: 18px;
+            padding: 22px;
+
+            box-shadow: 0 8px 28px rgba(31,41,55,0.035);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .green-icon {
+            background: #dcf8ed;
+            color: #07966b;
+        }
+
+        .orange-icon {
+            background: #fff0dc;
+            color: #f28a14;
+        }
+
+        .blue-icon {
+            background: #e2f4ff;
+            color: #168ac4;
+        }
+
+        .purple-icon {
+            background: #f0e7ff;
+            color: #8147dc;
+        }
+
+        .tag {
+            padding: 6px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            background: #f0f6f4;
+            color: #528273;
+        }
+
+        .stat-number {
+            font-size: 30px;
+            font-weight: 750;
+        }
+
+        .stat-label {
+            color: #697586;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        /* SUCCESS */
+
+        .success {
+            background: #dff7ea;
+            color: #0d684c;
+
+            padding: 14px 18px;
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+
+            border: 1px solid #c3ebd8;
+        }
+
+        /* QUEUE CARD */
+
+        .queue-card {
+            background: rgba(255,255,255,0.97);
+
+            border: 1px solid #edf0f3;
+            border-radius: 20px;
+
+            padding: 28px;
+
+            box-shadow: 0 8px 30px rgba(31,41,55,0.035);
+        }
+
+        .queue-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .title-mark {
+            width: 5px;
+            height: 26px;
+            border-radius: 10px;
+
+            background: linear-gradient(
+                #14c88f,
+                #25a7dd
+            );
+        }
+
+        .queue-subtitle {
+            color: #8a94a6;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
 
         table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        th,
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-            vertical-align: middle;
-        }
-
         th {
-            background: #eef8f7;
-            font-weight: 700;
-        }
+            padding: 15px;
+            text-align: left;
 
-        /* Status */
+            background: #edf9f7;
 
-        .status {
-            font-weight: bold;
-        }
-
-        .pending {
-            color: #6c757d;
-        }
-
-        .confirmed {
-            color: #0d6efd;
-        }
-
-        .waiting {
-            color: #fd7e14;
-        }
-
-        .completed {
-            color: #198754;
-        }
-
-        .cancelled {
-            color: #dc3545;
-        }
-
-        .waiting-nurse {
-            color: #6c757d;
-            font-weight: 600;
-        }
-
-        /* Buttons */
-
-        .btn {
-            display: inline-block;
-            background: #198754;
-            color: white;
-            padding: 9px 15px;
-            border-radius: 7px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
+            color: #263244;
             font-size: 14px;
         }
 
+        th:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+
+        th:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        td {
+            padding: 18px 15px;
+            border-bottom: 1px solid #edf0f2;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fbfdfd;
+        }
+
+        .patient-name {
+            font-weight: 700;
+        }
+
+        .token {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 42px;
+            height: 34px;
+
+            background: #eef8f5;
+            color: #087e5d;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 7px 11px;
+
+            border-radius: 50px;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .status::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .confirmed {
+            background: #eaf2ff;
+            color: #246bd7;
+        }
+
+        .confirmed::before {
+            background: #246bd7;
+        }
+
+        .waiting {
+            background: #fff2df;
+            color: #df7b08;
+        }
+
+        .waiting::before {
+            background: #f59b23;
+        }
+
+        .completed {
+            background: #e2f8ed;
+            color: #128459;
+        }
+
+        .completed::before {
+            background: #11a36b;
+        }
+
+        .cancelled {
+            background: #ffe8eb;
+            color: #cc3544;
+        }
+
+        .cancelled::before {
+            background: #dc3545;
+        }
+
+        .pending {
+            background: #f1f3f5;
+            color: #6c757d;
+        }
+
+        .pending::before {
+            background: #6c757d;
+        }
+
+        /* BUTTONS */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            background: #0b9369;
+            color: white;
+
+            padding: 10px 15px;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
         .btn:hover {
-            background: #157347;
+            background: #087a58;
+            transform: translateY(-1px);
         }
 
         .action-buttons {
@@ -165,326 +453,629 @@
             margin: 0;
         }
 
-        /* Delete button */
-
         .btn-delete {
+            width: 40px;
+            height: 40px;
+
             display: inline-flex;
             align-items: center;
             justify-content: center;
 
-            width: 40px;
-            height: 40px;
-
             background: white;
-            color: #dc3545;
+            color: #e63946;
 
-            border: 1px solid #dc3545;
-            border-radius: 8px;
+            border: 1px solid #e63946;
+            border-radius: 9px;
 
             cursor: pointer;
-            transition: 0.2s ease;
+
+            transition: 0.2s;
         }
 
         .btn-delete:hover {
-            background: #dc3545;
+            background: #e63946;
             color: white;
+        }
+
+        .waiting-nurse {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #707b8c;
+            font-size: 13px;
+            font-weight: 600;
+
+            background: #f3f5f7;
+
+            padding: 8px 11px;
+            border-radius: 8px;
         }
 
         .empty {
             text-align: center;
-            color: #777;
-            padding: 30px;
+            padding: 35px;
+            color: #8993a4;
         }
 
-        /* Mobile */
+        @media(max-width: 950px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-        @media(max-width: 700px) {
+            .heartbeat-area {
+                display: none;
+            }
+        }
 
-            .dashboard-header {
+        @media(max-width: 650px) {
+            .page {
+                padding: 14px;
+            }
+
+            .topbar {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 14px;
             }
 
-            .card {
-                padding: 20px;
-                overflow-x: auto;
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
 
-            table {
-                min-width: 750px;
+            .hero {
+                padding: 24px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .queue-card {
+                padding: 18px;
             }
         }
-
     </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<div class="page">
 
-    <div class="card">
+    <!-- TOP BAR -->
 
-        <!-- Dashboard Header -->
+    <div class="topbar">
 
-        <div class="dashboard-header">
-
-            <div class="dashboard-title">
-
-                <h1>
-                    Doctor Dashboard
-                </h1>
-
-                <p class="subtitle">
-                    Patient Queue
-                </p>
-
+        <div>
+            <div class="brand-title">
+                Doctor Portal
             </div>
 
+            <div class="brand-subtitle">
+                Clinical consultations & patient care
+            </div>
+        </div>
 
-            <!-- My Profile Button -->
 
-            <a
-                href="{{ route('doctor.profile') }}"
-                class="profile-btn"
+        <a
+            href="{{ route('doctor.profile') }}"
+            class="profile-btn"
+        >
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
             >
+                <path d="M20 21a8 8 0 0 0-16 0"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
 
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path d="M20 21a8 8 0 0 0-16 0"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
+            My Profile
+        </a>
 
-                My Profile
+    </div>
 
-            </a>
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div>
+
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                Doctor Active
+            </div>
+
+            <h1>
+                Welcome, Dr. {{ Auth::user()->name }}
+            </h1>
+
+            <p class="hero-description">
+                Review patients, begin consultations and manage completed clinical records.
+            </p>
 
         </div>
 
 
-        <!-- Success Message -->
+        <div class="heartbeat-area">
 
-        @if(session('success'))
+            <svg
+                class="heartbeat"
+                viewBox="0 0 400 100"
+                fill="none"
+            >
+                <path
+                    d="
+                    M0 55
+                    H50
+                    L62 52
+                    L70 55
+                    L78 18
+                    L86 88
+                    L94 55
+                    H145
+                    L157 52
+                    L165 55
+                    L173 22
+                    L181 84
+                    L189 55
+                    H240
+                    L250 52
+                    L258 55
+                    L266 20
+                    L274 86
+                    L282 55
+                    H335
+                    L345 52
+                    L353 55
+                    L361 25
+                    L369 82
+                    L377 55
+                    H400
+                    "
+                    stroke="#37bb93"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
 
-            <div class="success">
-                ✅ {{ session('success') }}
+            <div class="heartbeat-label">
+                PATIENT MONITOR
             </div>
 
-        @endif
+        </div>
+
+    </div>
 
 
-        <!-- Patient Queue -->
+    <!-- STAT CARDS -->
 
-        <table>
+    <div class="stats-grid">
 
-            <thead>
+        <!-- Total Patients -->
 
-                <tr>
-                    <th>Token</th>
-                    <th>Patient</th>
-                    <th>Reason</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
+        <div class="stat-card">
 
-            </thead>
+            <div class="stat-header">
 
+                <div class="icon-box blue-icon">
 
-            <tbody>
+                    <svg
+                        width="25"
+                        height="25"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                    </svg>
 
-            @forelse($appointments as $appointment)
+                </div>
 
-                <tr>
+                <span class="tag">
+                    Queue
+                </span>
 
-                    <!-- Token -->
+            </div>
 
-                    <td>
-                        #{{ $appointment->token_number }}
-                    </td>
+            <div class="stat-number">
+                {{ $appointments->count() }}
+            </div>
 
+            <div class="stat-label">
+                Total Patients
+            </div>
 
-                    <!-- Patient -->
-
-                    <td>
-                        {{ $appointment->patient?->name ?? 'Unknown Patient' }}
-                    </td>
-
-
-                    <!-- Reason -->
-
-                    <td>
-                        {{ $appointment->reason_for_visit }}
-                    </td>
-
-
-                    <!-- Status -->
-
-                    <td>
-
-                        <span class="status {{ strtolower($appointment->status) }}">
-
-                            {{ ucfirst($appointment->status) }}
-
-                        </span>
-
-                    </td>
+        </div>
 
 
-                    <!-- Actions -->
+        <!-- Waiting -->
 
-                    <td>
+        <div class="stat-card">
 
-                        {{-- Confirmed = Waiting for Nurse --}}
+            <div class="stat-header">
 
-                        @if(strtolower($appointment->status) === 'confirmed')
+                <div class="icon-box orange-icon">
 
-                            <span class="waiting-nurse">
-                                Waiting for Nurse Check
+                    <svg
+                        width="25"
+                        height="25"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M12 7v5l3 2"></path>
+                    </svg>
+
+                </div>
+
+                <span class="tag">
+                    Ready
+                </span>
+
+            </div>
+
+            <div class="stat-number">
+                {{ $appointments->where('status', 'waiting')->count() }}
+            </div>
+
+            <div class="stat-label">
+                Waiting for Consultation
+            </div>
+
+        </div>
+
+
+        <!-- Completed -->
+
+        <div class="stat-card">
+
+            <div class="stat-header">
+
+                <div class="icon-box green-icon">
+
+                    <svg
+                        width="25"
+                        height="25"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M8 12l3 3 5-6"></path>
+                    </svg>
+
+                </div>
+
+                <span class="tag">
+                    Done
+                </span>
+
+            </div>
+
+            <div class="stat-number">
+                {{ $appointments->where('status', 'completed')->count() }}
+            </div>
+
+            <div class="stat-label">
+                Completed Consultations
+            </div>
+
+        </div>
+
+
+        <!-- Nurse Check -->
+
+        <div class="stat-card">
+
+            <div class="stat-header">
+
+                <div class="icon-box purple-icon">
+
+                    <svg
+                        width="25"
+                        height="25"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+                        <path d="M9 8h6"></path>
+                        <path d="M9 12h6"></path>
+                    </svg>
+
+                </div>
+
+                <span class="tag">
+                    Nurse
+                </span>
+
+            </div>
+
+            <div class="stat-number">
+                {{ $appointments->where('status', 'confirmed')->count() }}
+            </div>
+
+            <div class="stat-label">
+                Awaiting Nurse Check
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUCCESS -->
+
+    @if(session('success'))
+
+        <div class="success">
+            ✓ {{ session('success') }}
+        </div>
+
+    @endif
+
+
+    <!-- PATIENT QUEUE -->
+
+    <div class="queue-card">
+
+        <div class="queue-header">
+
+            <div>
+
+                <div class="section-title">
+
+                    <span class="title-mark"></span>
+
+                    Patient Queue
+
+                </div>
+
+                <div class="queue-subtitle">
+                    Patients assigned to your consultation list
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Token</th>
+                        <th>Patient</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                @forelse($appointments as $appointment)
+
+                    <tr>
+
+                        <td>
+                            <span class="token">
+                                #{{ $appointment->token_number }}
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="patient-name">
+                                {{ $appointment->patient?->name ?? 'Unknown Patient' }}
+                            </span>
+                        </td>
+
+
+                        <td>
+                            {{ $appointment->reason_for_visit }}
+                        </td>
+
+
+                        <td>
+
+                            <span class="status {{ strtolower($appointment->status) }}">
+
+                                {{ ucfirst($appointment->status) }}
+
                             </span>
 
-
-                        {{-- Waiting = Nurse completed vitals --}}
-
-                        @elseif(strtolower($appointment->status) === 'waiting')
-
-                            <a
-                                href="{{ route('doctor.consultation.show', $appointment->id) }}"
-                                class="btn"
-                            >
-                                Start Consultation
-                            </a>
+                        </td>
 
 
-                        {{-- Completed + Prescription --}}
+                        <td>
 
-                        @elseif(
-                            strtolower($appointment->status) === 'completed'
-                            && $appointment->prescription
-                        )
+                            <!-- CONFIRMED -->
 
-                            <div class="action-buttons">
+                            @if(strtolower($appointment->status) === 'confirmed')
 
-                                <!-- View Summary -->
+                                <span class="waiting-nurse">
+
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <path d="M12 7v5"></path>
+                                        <path d="M12 16h.01"></path>
+                                    </svg>
+
+                                    Waiting for Nurse
+
+                                </span>
+
+
+                            <!-- WAITING -->
+
+                            @elseif(strtolower($appointment->status) === 'waiting')
 
                                 <a
-                                    href="{{ route(
-                                        'doctor.prescription.summary',
-                                        $appointment->prescription->id
-                                    ) }}"
+                                    href="{{ route('doctor.consultation.show', $appointment->id) }}"
                                     class="btn"
                                 >
-                                    View Summary
+
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path d="M12 5v14"></path>
+                                        <path d="M5 12h14"></path>
+                                    </svg>
+
+                                    Start Consultation
+
                                 </a>
 
 
-                                <!-- Delete Consultation -->
+                            <!-- COMPLETED -->
 
-                                <form
-                                    method="POST"
-                                    action="{{ route(
-                                        'doctor.consultation.destroy',
-                                        $appointment->id
-                                    ) }}"
-                                    onsubmit="return confirm(
-                                        'Are you sure you want to delete this consultation and prescription?'
-                                    );"
-                                >
+                            @elseif(
+                                strtolower($appointment->status) === 'completed'
+                                && $appointment->prescription
+                            )
 
-                                    @csrf
-                                    @method('DELETE')
+                                <div class="action-buttons">
 
-
-                                    <button
-                                        type="submit"
-                                        class="btn-delete"
-                                        title="Delete Consultation"
-                                        aria-label="Delete Consultation"
+                                    <a
+                                        href="{{ route(
+                                            'doctor.prescription.summary',
+                                            $appointment->prescription->id
+                                        ) }}"
+                                        class="btn"
                                     >
 
                                         <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="18"
-                                            height="18"
+                                            width="16"
+                                            height="16"
                                             viewBox="0 0 24 24"
                                             fill="none"
                                             stroke="currentColor"
                                             stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
                                         >
-
-                                            <polyline
-                                                points="3 6 5 6 21 6"
-                                            ></polyline>
-
-                                            <path
-                                                d="M19 6l-1 14H6L5 6"
-                                            ></path>
-
-                                            <path
-                                                d="M10 11v6"
-                                            ></path>
-
-                                            <path
-                                                d="M14 11v6"
-                                            ></path>
-
-                                            <path
-                                                d="M9 6V4h6v2"
-                                            ></path>
-
+                                            <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
                                         </svg>
 
-                                    </button>
+                                        View Summary
 
-                                </form>
-
-                            </div>
+                                    </a>
 
 
-                        {{-- Completed but no prescription --}}
+                                    <form
+                                        method="POST"
+                                        action="{{ route(
+                                            'doctor.consultation.destroy',
+                                            $appointment->id
+                                        ) }}"
+                                        onsubmit="return confirm(
+                                            'Are you sure you want to delete this consultation and prescription?'
+                                        );"
+                                    >
 
-                        @elseif(strtolower($appointment->status) === 'completed')
+                                        @csrf
+                                        @method('DELETE')
 
-                            Completed
+
+                                        <button
+                                            type="submit"
+                                            class="btn-delete"
+                                            title="Delete Consultation"
+                                            aria-label="Delete Consultation"
+                                        >
+
+                                            <svg
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+
+                                                <path d="M19 6l-1 14H6L5 6"></path>
+
+                                                <path d="M10 11v6"></path>
+
+                                                <path d="M14 11v6"></path>
+
+                                                <path d="M9 6V4h6v2"></path>
+
+                                            </svg>
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
 
 
-                        {{-- Other status --}}
+                            @elseif(strtolower($appointment->status) === 'completed')
 
-                        @else
+                                Completed
 
-                            {{ ucfirst($appointment->status) }}
 
-                        @endif
+                            @else
 
-                    </td>
+                                {{ ucfirst($appointment->status) }}
 
-                </tr>
+                            @endif
 
-            @empty
+                        </td>
 
-                <tr>
+                    </tr>
 
-                    <td colspan="5" class="empty">
-                        No appointments available.
-                    </td>
+                @empty
 
-                </tr>
+                    <tr>
 
-            @endforelse
+                        <td colspan="5" class="empty">
+                            No patients currently assigned.
+                        </td>
 
-            </tbody>
+                    </tr>
 
-        </table>
+                @endforelse
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
