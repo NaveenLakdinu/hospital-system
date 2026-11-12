@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -13,11 +12,13 @@
     --pink-light: #fff0f6;
     --blue: #2675ed;
     --blue-light: #edf5ff;
-    --green: #20ae79;
-    --green-light: #eaf9f1;
+    --green: #159b62;
+    --green-light: #eaf8f0;
+    --green-dark: #116b43;
+    --green-deep: #0c5034;
     --dark: #172b50;
     --muted: #72819a;
-    --background: #f5f8fd;
+    --background: #f2f9f4;
 }
 
 .pregnancy-page {
@@ -36,7 +37,7 @@
     background: white;
     border-radius: 26px;
     overflow: hidden;
-    box-shadow: 0 12px 45px rgba(31, 59, 100, .07);
+    box-shadow: 0 12px 45px rgba(21, 107, 67, .09);
 }
 
 .pregnancy-header {
@@ -44,7 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #edf0f7;
+    border-bottom: 1px solid #e1eee5;
 }
 
 .pregnancy-brand {
@@ -57,8 +58,8 @@
     width: 48px;
     height: 48px;
     border-radius: 16px;
-    background: #ffe7f0;
-    color: #e94f8c;
+    background: #e0f5e8;
+    color: #159b62;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,6 +70,7 @@
     font-weight: 800;
     font-size: 18px;
     margin: 0;
+    color: #164b32;
 }
 
 .pregnancy-brand p {
@@ -80,10 +82,10 @@
 .close-gallery {
     width: 42px;
     height: 42px;
-    border: 1px solid #e7ebf3;
+    border: 1px solid #dcece1;
     border-radius: 50%;
     background: white;
-    color: var(--dark);
+    color: var(--green-dark);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +95,7 @@
 }
 
 .close-gallery:hover {
-    background: var(--pink);
+    background: var(--green);
     color: white;
 }
 
@@ -109,13 +111,13 @@
     position: relative;
     background:
         linear-gradient(90deg,
-        rgba(240, 247, 255, .98) 0%,
-        rgba(240, 247, 255, .93) 43%,
-        rgba(240, 247, 255, .12) 100%),
+        rgba(232, 248, 238, .98) 0%,
+        rgba(232, 248, 238, .93) 43%,
+        rgba(232, 248, 238, .12) 100%),
         url('https://images.unsplash.com/photo-1773243086593-d36487e39a0b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
     background-position: center;
     background-size: cover;
-    border: 1px solid #dce9ff;
+    border: 1px solid #cde8d5;
 }
 
 .hero-content {
@@ -127,7 +129,8 @@
 
 .hero-badge {
     background: white;
-    color: #20a978;
+    color: #159b62;
+    border: 1px solid #d4eddd;
     border-radius: 50px;
     padding: 9px 17px;
     display: inline-block;
@@ -141,15 +144,15 @@
     line-height: 1.15;
     font-weight: 800;
     letter-spacing: -1.7px;
-    color: #142c56;
+    color: #164b32;
 }
 
 .hero-content h1 span {
-    color: #a343cc;
+    color: #159b62;
 }
 
 .hero-content p {
-    color: #536d91;
+    color: #536d60;
     font-size: 15px;
     line-height: 1.8;
     max-width: 510px;
@@ -159,8 +162,8 @@
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    background: #ffe1f0;
-    color: #d83e83;
+    background: #d9f3e2;
+    color: #116b43;
     padding: 11px 18px;
     border-radius: 50px;
     font-size: 12px;
@@ -181,7 +184,7 @@
 .section-heading h3 {
     font-size: 22px;
     font-weight: 800;
-    color: var(--dark);
+    color: #164b32;
     margin-bottom: 7px;
 }
 
@@ -192,7 +195,7 @@
 }
 
 .section-label {
-    color: var(--pink);
+    color: #159b62;
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.4px;
@@ -222,11 +225,30 @@
     margin: 0;
 }
 
-.info-blue { background: #edf5ff; border-color: #dceaff; }
-.info-pink { background: #fff0f6; border-color: #ffe0ed; }
-.info-green { background: #eaf9f1; border-color: #d5f0e1; }
-.info-yellow { background: #fff8e8; border-color: #f8edcf; }
-.info-purple { background: #f5efff; border-color: #e9ddff; }
+.info-blue {
+    background: #edf5ff;
+    border-color: #dceaff;
+}
+
+.info-pink {
+    background: #fff0f6;
+    border-color: #ffe0ed;
+}
+
+.info-green {
+    background: #eaf8f0;
+    border-color: #ccebd7;
+}
+
+.info-yellow {
+    background: #fff8e8;
+    border-color: #f8edcf;
+}
+
+.info-purple {
+    background: #f5efff;
+    border-color: #e9ddff;
+}
 
 .info-icon {
     width: 45px;
@@ -242,7 +264,7 @@
 
 .pink-text { color: #e74e8c; }
 .blue-text { color: #2778ed; }
-.green-text { color: #20aa77; }
+.green-text { color: #159b62; }
 
 /* IMAGE CARDS */
 
@@ -251,13 +273,14 @@
     border-radius: 18px;
     overflow: hidden;
     height: 100%;
-    border: 1px solid #edf0f6;
+    border: 1px solid #e3eee6;
     transition: .3s;
 }
 
 .photo-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 28px rgba(30, 65, 110, .12);
+    box-shadow: 0 12px 28px rgba(21, 107, 67, .12);
+    border-color: #b8dfc5;
 }
 
 .photo-card img {
@@ -275,6 +298,7 @@
     font-size: 14px;
     font-weight: 800;
     margin-bottom: 8px;
+    color: #164b32;
 }
 
 .photo-content p {
@@ -287,10 +311,18 @@
 /* TIMELINE */
 
 .timeline-card {
-    background: linear-gradient(120deg, #f5f0ff, #eaf5ff);
-    border: 1px solid #e3e6fa;
+    background: linear-gradient(120deg, #eaf8f0, #f5fbf6);
+    border: 1px solid #d2ead9;
     border-radius: 22px;
     padding: 25px;
+}
+
+.timeline-card h5 {
+    color: #164b32;
+}
+
+.timeline-card h5 i {
+    color: #159b62 !important;
 }
 
 .timeline-item {
@@ -304,13 +336,14 @@
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,.07);
+    box-shadow: 0 5px 15px rgba(21, 107, 67, .12);
     margin-bottom: 12px;
 }
 
 .timeline-item h6 {
     font-size: 13px;
     font-weight: 800;
+    color: #164b32;
 }
 
 .timeline-item p {
@@ -338,7 +371,7 @@
 }
 
 .pregnancy-list i {
-    color: #24b477;
+    color: #159b62;
     font-size: 15px;
     margin-top: 2px;
 }
@@ -349,8 +382,15 @@
     border-radius: 21px;
     overflow: hidden;
     background: white;
-    border: 1px solid #edf0f6;
+    border: 1px solid #e3eee6;
     height: 100%;
+    transition: .3s;
+}
+
+.trimester-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(21, 107, 67, .10);
+    border-color: #b8dfc5;
 }
 
 .trimester-card img {
@@ -366,6 +406,7 @@
 .trimester-content h5 {
     font-weight: 800;
     font-size: 16px;
+    color: #164b32;
 }
 
 .trimester-content p {
@@ -381,13 +422,15 @@
     padding: 15px 8px;
     background: white;
     border-radius: 18px;
-    border: 1px solid #edf0f6;
+    border: 1px solid #e3eee6;
     height: 100%;
     transition: .3s;
 }
 
 .food-card:hover {
     transform: translateY(-4px);
+    border-color: #a9d9bb;
+    box-shadow: 0 8px 20px rgba(21, 107, 67, .08);
 }
 
 .food-card img {
@@ -396,11 +439,13 @@
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 12px;
+    border: 3px solid #e5f5e9;
 }
 
 .food-card h6 {
     font-size: 12px;
     font-weight: 800;
+    color: #164b32;
 }
 
 .food-card p {
@@ -460,7 +505,7 @@
 .gallery-photo {
     overflow: hidden;
     border-radius: 17px;
-    background: #f0f3f8;
+    background: #eaf8f0;
 }
 
 /* FOOTER */
@@ -468,9 +513,10 @@
 .pregnancy-footer {
     margin: 15px 24px 24px;
     padding: 24px;
-    background: linear-gradient(110deg, #3779ed, #7b65db);
+    background: linear-gradient(110deg, #116b43, #159b62);
     border-radius: 20px;
     color: white;
+    box-shadow: 0 8px 20px rgba(21, 107, 67, .15);
 }
 
 .pregnancy-footer h5 {
@@ -482,6 +528,32 @@
     font-size: 12px;
     margin: 0;
     opacity: .9;
+}
+
+/* SMALL GREEN TOUCHES */
+
+.badge.bg-success-subtle {
+    background: #e1f5e8 !important;
+    color: #116b43 !important;
+}
+
+.text-success {
+    color: #159b62 !important;
+}
+
+.text-danger {
+    color: #dc4b4b !important;
+}
+
+.section-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 3px;
+    background: #159b62;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin-right: 7px;
 }
 
 /* RESPONSIVE */
@@ -510,8 +582,8 @@
         background-position: center;
         background-image:
             linear-gradient(90deg,
-            rgba(240,247,255,.96),
-            rgba(240,247,255,.76)),
+            rgba(232,248,238,.96),
+            rgba(232,248,238,.76)),
             url('https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=1000&auto=format&fit=crop');
     }
 
@@ -545,9 +617,7 @@
     }
 
 }
-
 </style>
-
 
 <div class="pregnancy-page">
 
@@ -580,7 +650,6 @@
 
     </div>
 
-
     <!-- HERO -->
 
     <div class="pregnancy-hero">
@@ -611,7 +680,6 @@
         </div>
 
     </div>
-
 
     <!-- ABOUT PREGNANCY -->
 
@@ -645,7 +713,7 @@
                 <div class="timeline-card">
 
                     <h5 class="fw-bold mb-4">
-                        <i class="bi bi-calendar-heart text-danger me-2"></i>
+                        <i class="bi bi-calendar-heart me-2"></i>
                         Your Baby's Development Journey
                     </h5>
 
@@ -702,7 +770,6 @@
 
     </div>
 
-
     <!-- PREGNANCY STAGES -->
 
     <div class="gallery-section">
@@ -750,12 +817,11 @@
 
             </div>
 
-
             <div class="col-lg-4 col-md-6">
 
                 <div class="trimester-card">
 
-                    <img src="https://images.unsplash.com/photo-1654931800911-7a9cfb3b7c17?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+                    <img src="https://images.unsplash.com/photo-1634856434683-6da6493a936f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Second trimester pregnancy">
 
                     <div class="trimester-content">
@@ -785,7 +851,6 @@
                 </div>
 
             </div>
-
 
             <div class="col-lg-4 col-md-6">
 
@@ -825,7 +890,6 @@
 
     </div>
 
-
     <!-- BABY DEVELOPMENT -->
 
     <div class="gallery-section">
@@ -842,7 +906,7 @@
 
                 <div class="photo-card">
 
-                    <img src="https://images.unsplash.com/photo-1578496781379-7dcfb995293d?w=600&q=80"
+                    <img src="https://images.unsplash.com/photo-1617331140180-e8262094733a?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Early prenatal development">
 
                     <div class="photo-content">
@@ -918,7 +982,6 @@
 
     </div>
 
-
     <!-- NUTRITION GUIDE -->
 
     <div class="gallery-section">
@@ -989,7 +1052,6 @@
 
     </div>
 
-
     <!-- IMPORTANT NUTRIENTS -->
 
     <div class="gallery-section">
@@ -1039,7 +1101,6 @@
 
             </div>
 
-
             <div class="col-lg-6">
 
                 <div class="info-card info-yellow">
@@ -1086,7 +1147,6 @@
         </div>
 
     </div>
-
 
     <!-- HEALTHY LIFESTYLE -->
 
@@ -1155,7 +1215,6 @@
         </div>
 
     </div>
-
 
     <!-- MEDICAL CHECKUPS -->
 
@@ -1234,7 +1293,6 @@
 
     </div>
 
-
     <!-- COMMON SYMPTOMS -->
 
     <div class="gallery-section">
@@ -1290,7 +1348,6 @@
         </div>
 
     </div>
-
 
     <!-- WARNING SIGNS -->
 
@@ -1362,7 +1419,6 @@
 
     </div>
 
-
     <!-- PREPARING FOR DELIVERY -->
 
     <div class="gallery-section">
@@ -1425,7 +1481,6 @@
         </div>
 
     </div>
-
 
     <!-- AFTER DELIVERY -->
 
@@ -1491,7 +1546,6 @@
 
     </div>
 
-
     <!-- FINAL IMAGE GALLERY -->
 
     <div class="gallery-section">
@@ -1553,7 +1607,7 @@
             <div class="col-6 col-lg-4">
                 <div class="gallery-photo">
                     <img class="gallery-image"
-                         src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=700&q=85"
+                         src="https://images.unsplash.com/photo-1552819289-824d37ca69d2?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                          alt="Motherhood">
                 </div>
             </div>
@@ -1561,7 +1615,6 @@
         </div>
 
     </div>
-
 
     <!-- MEDICAL INFORMATION DISCLAIMER -->
 
@@ -1587,7 +1640,6 @@
 
     </div>
 
-
     <!-- FOOTER -->
 
     <div class="pregnancy-footer">
@@ -1611,7 +1663,6 @@
         </div>
 
     </div>
-
 
 </div>
 </div>
