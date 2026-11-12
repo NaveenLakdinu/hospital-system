@@ -115,6 +115,97 @@
             cursor: pointer;
             font-size: 16px;
 }
+
+.vitals-card {
+    background: linear-gradient(135deg, #f0fbf7, #f4f9ff);
+    border: 1px solid #dcefe8;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 25px;
+}
+
+.vitals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.vitals-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.vitals-status {
+    background: #d9f8e9;
+    color: #087b58;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.vitals-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.vital-box {
+    background: white;
+    border: 1px solid #edf0f2;
+    border-radius: 12px;
+    padding: 16px;
+
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.vital-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+
+    background: #e6f7f1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #0a946b;
+    font-size: 20px;
+}
+
+.vital-label {
+    color: #7b8795;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.vital-value {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.recorded-by {
+    margin-top: 15px;
+    color: #667085;
+    font-size: 13px;
+}
+
+.no-vitals {
+    color: #777;
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+@media(max-width: 800px) {
+    .vitals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
     </style>
 </head>
 
@@ -188,6 +279,128 @@
     action="{{ route('doctor.consultation.store', $appointment->id) }}"
 >
     @csrf
+
+    <div class="vitals-card">
+
+    <div class="vitals-header">
+
+        <h2>Patient Vital Signs</h2>
+
+        @if($appointment->vitalSign)
+            <span class="vitals-status">
+                Nurse Checked
+            </span>
+        @endif
+
+    </div>
+
+
+    @if($appointment->vitalSign)
+
+        <div class="vitals-grid">
+
+            <div class="vital-box">
+
+                <div class="vital-icon">
+                    🌡
+                </div>
+
+                <div>
+                    <div class="vital-label">
+                        Temperature
+                    </div>
+
+                    <div class="vital-value">
+                        {{ $appointment->vitalSign->temperature }} °C
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="vital-box">
+
+                <div class="vital-icon">
+                    ♥
+                </div>
+
+                <div>
+                    <div class="vital-label">
+                        Blood Pressure
+                    </div>
+
+                    <div class="vital-value">
+
+                        {{ $appointment->vitalSign->systolic_bp }}
+                        /
+                        {{ $appointment->vitalSign->diastolic_bp }}
+
+                        mmHg
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="vital-box">
+
+                <div class="vital-icon">
+                    ♡
+                </div>
+
+                <div>
+                    <div class="vital-label">
+                        Pulse
+                    </div>
+
+                    <div class="vital-value">
+                        {{ $appointment->vitalSign->pulse }} bpm
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="vital-box">
+
+                <div class="vital-icon">
+                    ⚖
+                </div>
+
+                <div>
+                    <div class="vital-label">
+                        Weight
+                    </div>
+
+                    <div class="vital-value">
+                        {{ $appointment->vitalSign->weight }} kg
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="recorded-by">
+
+            Recorded by:
+            <strong>
+                {{ $appointment->vitalSign->nurse?->name ?? 'Nurse' }}
+            </strong>
+
+        </div>
+
+    @else
+
+        <div class="no-vitals">
+            No vital signs recorded for this patient.
+        </div>
+
+    @endif
+
+</div>
 
     <label>Diagnosis</label>
 

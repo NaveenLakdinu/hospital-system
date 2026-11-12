@@ -8,26 +8,30 @@ use App\Models\Consultation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class ConsultationController extends Controller
 {
     public function show($appointmentId)
-    {
-        $doctor = Auth::user()->doctor;
+{
+    $doctor = Auth::user()->doctor;
 
-        if (!$doctor) {
-            abort(403, 'Doctor profile not found.');
-        }
-
-        $appointment = Appointment::with('patient')
-            ->where('doctor_id', $doctor->id)
-            ->where('id', $appointmentId)
-            ->firstOrFail();
-
-        return view(
-            'doctor.consultations.show',
-            compact('appointment')
-        );
+    if (!$doctor) {
+        abort(403, 'Doctor profile not found.');
     }
+
+    $appointment = Appointment::with([
+        'patient',
+        'vitalSign.nurse'
+    ])
+        ->where('doctor_id', $doctor->id)
+        ->where('id', $appointmentId)
+        ->firstOrFail();
+
+    return view(
+        'doctor.consultations.show',
+        compact('appointment')
+    );
+}
 
     public function store(Request $request, $appointmentId)
     {
