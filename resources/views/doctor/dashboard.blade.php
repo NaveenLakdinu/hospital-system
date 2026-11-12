@@ -8,10 +8,15 @@
     <title>Doctor Dashboard</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background: #f4f6f8;
             margin: 0;
+            color: #1f2937;
         }
 
         .container {
@@ -23,18 +28,55 @@
         .card {
             background: white;
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
         }
 
-        h1 {
-            margin-top: 0;
-            margin-bottom: 10px;
+        /* Header */
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-title h1 {
+            margin: 0 0 8px;
+            font-size: 32px;
         }
 
         .subtitle {
             color: #666;
-            margin-bottom: 25px;
+            margin: 0;
         }
+
+        .profile-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #eef8f4;
+            color: #198754;
+
+            padding: 10px 16px;
+
+            border: 1px solid #cdeadd;
+            border-radius: 9px;
+
+            text-decoration: none;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .profile-btn:hover {
+            background: #198754;
+            color: white;
+        }
+
+        /* Success Message */
 
         .success {
             background: #d1e7dd;
@@ -44,6 +86,8 @@
             margin-bottom: 20px;
         }
 
+        /* Table */
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -51,7 +95,7 @@
 
         th,
         td {
-            padding: 14px;
+            padding: 15px;
             border-bottom: 1px solid #ddd;
             text-align: left;
             vertical-align: middle;
@@ -59,7 +103,10 @@
 
         th {
             background: #eef8f7;
+            font-weight: 700;
         }
+
+        /* Status */
 
         .status {
             font-weight: bold;
@@ -85,6 +132,13 @@
             color: #dc3545;
         }
 
+        .waiting-nurse {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+
         .btn {
             display: inline-block;
             background: #198754;
@@ -94,6 +148,7 @@
             text-decoration: none;
             border: none;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .btn:hover {
@@ -109,6 +164,8 @@
         .action-buttons form {
             margin: 0;
         }
+
+        /* Delete button */
 
         .btn-delete {
             display: inline-flex;
@@ -133,16 +190,31 @@
             color: white;
         }
 
-        .waiting-nurse {
-            color: #6c757d;
-            font-weight: 600;
-        }
-
         .empty {
             text-align: center;
             color: #777;
             padding: 30px;
         }
+
+        /* Mobile */
+
+        @media(max-width: 700px) {
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card {
+                padding: 20px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 750px;
+            }
+        }
+
     </style>
 
 </head>
@@ -153,17 +225,64 @@
 
     <div class="card">
 
-        <h1>Doctor Dashboard</h1>
+        <!-- Dashboard Header -->
 
-        <p class="subtitle">
-            Patient Queue
-        </p>
+        <div class="dashboard-header">
+
+            <div class="dashboard-title">
+
+                <h1>
+                    Doctor Dashboard
+                </h1>
+
+                <p class="subtitle">
+                    Patient Queue
+                </p>
+
+            </div>
+
+
+            <!-- My Profile Button -->
+
+            <a
+                href="{{ route('doctor.profile') }}"
+                class="profile-btn"
+            >
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+
+                My Profile
+
+            </a>
+
+        </div>
+
+
+        <!-- Success Message -->
 
         @if(session('success'))
+
             <div class="success">
                 ✅ {{ session('success') }}
             </div>
+
         @endif
+
+
+        <!-- Patient Queue -->
 
         <table>
 
@@ -179,26 +298,35 @@
 
             </thead>
 
+
             <tbody>
 
             @forelse($appointments as $appointment)
 
                 <tr>
 
+                    <!-- Token -->
+
                     <td>
                         #{{ $appointment->token_number }}
                     </td>
 
+
+                    <!-- Patient -->
 
                     <td>
                         {{ $appointment->patient?->name ?? 'Unknown Patient' }}
                     </td>
 
 
+                    <!-- Reason -->
+
                     <td>
                         {{ $appointment->reason_for_visit }}
                     </td>
 
+
+                    <!-- Status -->
 
                     <td>
 
@@ -211,9 +339,12 @@
                     </td>
 
 
+                    <!-- Actions -->
+
                     <td>
 
-                        {{-- Nurse has not checked vital signs yet --}}
+                        {{-- Confirmed = Waiting for Nurse --}}
+
                         @if(strtolower($appointment->status) === 'confirmed')
 
                             <span class="waiting-nurse">
@@ -221,7 +352,8 @@
                             </span>
 
 
-                        {{-- Nurse completed vital signs --}}
+                        {{-- Waiting = Nurse completed vitals --}}
+
                         @elseif(strtolower($appointment->status) === 'waiting')
 
                             <a
@@ -232,13 +364,16 @@
                             </a>
 
 
-                        {{-- Doctor completed consultation and prescription --}}
+                        {{-- Completed + Prescription --}}
+
                         @elseif(
                             strtolower($appointment->status) === 'completed'
                             && $appointment->prescription
                         )
 
                             <div class="action-buttons">
+
+                                <!-- View Summary -->
 
                                 <a
                                     href="{{ route(
@@ -250,6 +385,8 @@
                                     View Summary
                                 </a>
 
+
+                                <!-- Delete Consultation -->
 
                                 <form
                                     method="POST"
@@ -264,6 +401,7 @@
 
                                     @csrf
                                     @method('DELETE')
+
 
                                     <button
                                         type="submit"
@@ -313,10 +451,14 @@
                             </div>
 
 
+                        {{-- Completed but no prescription --}}
+
                         @elseif(strtolower($appointment->status) === 'completed')
 
                             Completed
 
+
+                        {{-- Other status --}}
 
                         @else
 

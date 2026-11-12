@@ -104,6 +104,11 @@ Route::get(
     '/doctor/profile',
     [DashboardController::class, 'profile']
 )->name('doctor.profile');
+
+Route::get(
+    '/doctor/profile',
+    [DashboardController::class, 'profile']
+)->name('doctor.profile');
 });
 
 
