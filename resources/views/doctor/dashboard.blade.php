@@ -109,6 +109,176 @@
             color: white;
         }
 
+        /* ================================
+   MAIN DOCTOR NAVBAR
+================================ */
+
+.main-navbar {
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border: 1px solid #e7edf1;
+    border-radius: 20px;
+
+    padding: 18px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 8px 28px rgba(31, 41, 55, 0.04);
+}
+
+
+/* LEFT */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.navbar-logo {
+    width: 180px;
+    height: 60px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    display: block;
+}
+
+
+.navbar-divider {
+    width: 1px;
+    height: 58px;
+
+    background: #e4e9ed;
+}
+
+
+.navbar-title {
+    font-size: 21px;
+    font-weight: 800;
+
+    color: #182236;
+}
+
+
+.navbar-subtitle {
+    margin-top: 6px;
+
+    color: #8a95a6;
+
+    font-size: 13px;
+}
+
+
+/* RIGHT */
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+}
+
+
+.profile-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    height: 48px;
+
+    padding: 0 19px;
+
+    background: #effaf6;
+    color: #0a9368;
+
+    border: 1px solid #c8e9dc;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+
+.profile-nav-btn:hover {
+    background: #0a9368;
+    color: white;
+
+    border-color: #0a9368;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 16px rgba(10, 147, 104, 0.16);
+}
+
+
+.profile-nav-btn svg {
+    flex-shrink: 0;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width: 750px) {
+
+    .main-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding: 18px;
+    }
+
+
+    .navbar-brand {
+        width: 100%;
+    }
+
+
+    .navbar-logo {
+        width: 145px;
+        height: auto;
+    }
+
+
+    .navbar-divider {
+        display: none;
+    }
+
+
+    .navbar-portal {
+        display: none;
+    }
+
+
+    .navbar-actions {
+        width: 100%;
+        margin-left: 0;
+    }
+
+
+    .profile-nav-btn {
+        width: 100%;
+    }
+}
+
         /* DOCTOR HEADER */
 
         .doctor-header {
@@ -867,26 +1037,41 @@
 
     <!-- TOP BAR -->
 
-    <div class="topbar">
+    <div class="main-navbar">
 
-        <div>
+    <!-- LEFT SIDE -->
+    <div class="navbar-brand">
 
-            <div class="brand-title">
-                Family Care Medical Center
+        <img
+            src="{{ asset('images/medicare24-logo.png') }}"
+            alt="MediCare24"
+            class="navbar-logo"
+        >
+
+        <div class="navbar-divider"></div>
+
+        <div class="navbar-portal">
+
+            <div class="navbar-title">
+                Doctor Portal
             </div>
 
-            <div class="brand-subtitle">
-                Doctor Workspace
+            <div class="navbar-subtitle">
+                Patient Consultations & Clinical Records
             </div>
 
         </div>
 
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="navbar-actions">
 
         <a
             href="{{ route('doctor.profile') }}"
-            class="profile-btn"
+            class="profile-nav-btn"
         >
-
             <svg
                 width="18"
                 height="18"
@@ -894,17 +1079,19 @@
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
             >
                 <path d="M20 21a8 8 0 0 0-16 0"></path>
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
 
             My Profile
-
         </a>
 
     </div>
 
+</div>
 
     <!-- DOCTOR HEADER -->
 
@@ -1264,17 +1451,36 @@
 
                         <!-- PATIENT -->
 
-                        <div>
+                       <div>
 
-                            <div class="patient-name">
-                                {{ $appointment->patient?->name ?? 'Unknown Patient' }}
-                            </div>
+    <div class="patient-name">
+        {{ $appointment->patient?->name ?? 'Unknown Patient' }}
+    </div>
 
-                            <div class="patient-sub">
-                                Patient
-                            </div>
+    @if($appointment->is_walk_in)
 
-                        </div>
+        <span style="
+            display:inline-block;
+            margin-top:5px;
+            padding:4px 7px;
+            background:#fff3df;
+            color:#d97808;
+            border-radius:20px;
+            font-size:10px;
+            font-weight:700;
+        ">
+            WALK-IN
+        </span>
+
+    @else
+
+        <div class="patient-sub">
+            Patient
+        </div>
+
+    @endif
+
+</div>
 
 
                         <!-- REASON -->

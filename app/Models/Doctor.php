@@ -19,6 +19,7 @@ class Doctor extends Model
         'consultation_fee',
         'room_number',
         'bio',
+        'profile_photo',
     ];
 
     /**

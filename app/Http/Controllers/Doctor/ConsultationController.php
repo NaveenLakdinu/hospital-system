@@ -9,29 +9,65 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+
 class ConsultationController extends Controller
 {
-    public function show($appointmentId)
-    {
-        $doctor = Auth::user()->doctor;
+   public function show($appointmentId)
+{
+    $doctor = Auth::user()->doctor;
 
-        if (!$doctor) {
-            abort(403, 'Doctor profile not found.');
-        }
-
-        $appointment = Appointment::with([
-            'patient',
-            'vitalSign.nurse'
-        ])
-            ->where('doctor_id', $doctor->id)
-            ->where('id', $appointmentId)
-            ->firstOrFail();
-
-        return view(
-            'doctor.consultations.show',
-            compact('appointment')
-        );
+    if (!$doctor) {
+        abort(403, 'Doctor profile not found.');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Load Appointment First
+    |--------------------------------------------------------------------------
+    */
+
+    $appointment = Appointment::with([
+        'patient',
+        'vitalSign.nurse',
+        'prescription'
+    ])
+        ->where('doctor_id', $doctor->id)
+        ->where('id', $appointmentId)
+        ->firstOrFail();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mark Consultation As Started
+    |--------------------------------------------------------------------------
+    |
+    | Once the doctor opens the consultation,
+    | nurse-side vital editing becomes locked.
+    |
+    */
+
+    if (
+        $appointment->status === 'waiting' &&
+        !$appointment->consultation_started_at
+    ) {
+        $appointment->update([
+            'consultation_started_at' => now(),
+        ]);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Show Consultation Page
+    |--------------------------------------------------------------------------
+    */
+
+    return view(
+        'doctor.consultations.show',
+        compact('appointment')
+    );
+}
 
 
     public function store(Request $request, $appointmentId)

@@ -19,7 +19,16 @@ class Appointment extends Model
         'token_number',
         'reason_for_visit',
         'status',
+        'is_walk_in',
+        'consultation_started_at',
     ];
+
+    protected $casts = [
+    'appointment_date' => 'date',
+    'is_walk_in' => 'boolean',
+    'consultation_started_at' => 'datetime',
+
+];
 
     /**
      * Get the patient (User) who booked the appointment.
@@ -43,7 +52,9 @@ class Appointment extends Model
 }
 public function vitalSign()
 {
-    return $this->hasOne(VitalSign::class);
+    return $this->hasOne(
+        VitalSign::class
+    );
 }
 
 }

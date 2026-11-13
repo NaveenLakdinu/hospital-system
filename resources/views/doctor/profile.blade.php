@@ -81,35 +81,304 @@
             background: #078b63;
         }
 
-        .logout-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+.profile-topbar {
+    width: 100%;
 
-            background: #fff0f1;
-            color: #d0333f;
+    background: rgba(255, 255, 255, 0.96);
 
-            padding: 11px 17px;
-            border-radius: 11px;
-            border: 1px solid #f5c6c9;
+    border: 1px solid #e7edf1;
+    border-radius: 20px;
 
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
+    padding: 16px 22px;
 
-            transition: 0.2s ease;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-        .logout-btn:hover {
-            background: #dc3545;
-            color: white;
-            border-color: #dc3545;
-        }
+    gap: 24px;
 
-        .logout-form {
-            margin: 0;
-        }
+    margin-bottom: 24px;
 
+    box-shadow: 0 8px 28px rgba(31, 41, 55, 0.04);
+}
+
+
+/* LEFT SIDE */
+
+.brand-area {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.brand-logo {
+    width: 165px;
+    height: 62px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    display: block;
+}
+
+.portal-info {
+    border-left: 1px solid #e6eaee;
+    padding-left: 20px;
+}
+
+.topbar-title {
+    font-size: 19px;
+    font-weight: 800;
+
+    color: #182236;
+}
+
+.topbar-subtitle {
+    margin-top: 5px;
+
+    color: #8a95a6;
+
+    font-size: 12px;
+}
+
+
+/* RIGHT SIDE */
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-left: auto;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+
+/* DASHBOARD */
+
+.dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    height: 46px;
+
+    padding: 0 17px;
+
+    background: #08a67a;
+    color: white;
+
+    border-radius: 11px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.dashboard-btn:hover {
+    background: #078b67;
+
+    transform: translateY(-1px);
+}
+
+
+/* LOGOUT */
+
+.logout-btn {
+    height: 46px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 17px;
+
+    background: #fff4f5;
+    color: #dc3545;
+
+    border: 1px solid #f0b8bd;
+    border-radius: 11px;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #dc3545;
+    color: white;
+
+    border-color: #dc3545;
+
+    transform: translateY(-1px);
+}
+
+.edit-profile-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 0 18px;
+
+    background: #eef6ff;
+    color: #2589c8;
+
+    border: 1px solid #cfe3f7;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.edit-profile-btn:hover {
+    background: #2589c8;
+    color: white;
+    border-color: #2589c8;
+
+    transform: translateY(-1px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 850px) {
+
+    .profile-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .brand-area {
+        width: 100%;
+    }
+
+    .topbar-actions {
+        margin-left: 0;
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    .brand-area {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .portal-info {
+        border-left: 0;
+        padding-left: 0;
+    }
+
+    .topbar-actions {
+        width: 100%;
+    }
+
+    .dashboard-btn,
+    .logout-form {
+        flex: 1;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+}
+
+.profile-topbar {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-left: auto;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.workspace-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 19px;
+
+    background: #08a67a;
+    color: white;
+
+    border: 1px solid #08a67a;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+
+    box-shadow:
+        0 6px 16px rgba(8, 166, 122, 0.14);
+}
+
+.workspace-btn:hover {
+    background: #078b67;
+    color: white;
+
+    border-color: #078b67;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(8, 166, 122, 0.20);
+}
+
+.workspace-btn:visited {
+    color: white;
+}
 
         /* HERO */
 
@@ -146,23 +415,45 @@
         }
 
         .avatar {
-            width: 115px;
-            height: 115px;
-            border-radius: 28px;
+    width: 115px;
+    height: 115px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    min-width: 115px;
 
-            background: linear-gradient(145deg, #0ba87a, #087f68);
-            color: white;
+    border-radius: 28px;
 
-            font-size: 42px;
-            font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            box-shadow: 0 15px 35px rgba(10, 162, 115, 0.24);
-            border: 5px solid rgba(255,255,255,0.8);
-        }
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        #0ba87a,
+        #087f68
+    );
+
+    color: white;
+
+    font-size: 42px;
+    font-weight: 700;
+
+    box-shadow:
+        0 15px 35px rgba(10, 162, 115, 0.24);
+
+    border: 5px solid rgba(255,255,255,0.8);
+}
+
+.doctor-profile-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+}
 
         .online-badge {
             display: inline-flex;
@@ -507,71 +798,110 @@
 <div class="page">
 
 
-    <!-- TOP BAR -->
+ <div class="profile-topbar">
 
-    <div class="topbar">
+    <!-- LEFT -->
+    <div class="brand-area">
 
-        <div>
-            <div class="brand-title">
+        <img
+            src="{{ asset('images/medicare24-logo.png') }}"
+            alt="MediCare24"
+            class="brand-logo"
+        >
+
+        <div class="navbar-divider"></div>
+
+        <div class="portal-info">
+            <div class="topbar-title">
                 Doctor Portal
             </div>
 
-            <div class="brand-subtitle">
-                Medical profile & professional information
+            <div class="topbar-subtitle">
+                Medical Profile & Clinical Credentials
             </div>
-        </div>
-
-
-        <div class="top-actions">
-
-            <a
-                href="{{ route('doctor.dashboard') }}"
-                class="dashboard-btn"
-            >
-
-                <svg width="18" height="18"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2">
-
-                    <rect x="3" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="3" width="7" height="7"></rect>
-                    <rect x="3" y="14" width="7" height="7"></rect>
-                    <rect x="14" y="14" width="7" height="7"></rect>
-
-                </svg>
-
-                Dashboard
-
-            </a>
-
-            <form method="POST" action="{{ route('logout') }}" class="logout-form">
-                @csrf
-                <button type="submit" class="logout-btn">
-
-                    <svg width="17" height="17"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                        <polyline points="16 17 21 12 16 7"></polyline>
-                        <line x1="21" y1="12" x2="9" y2="12"></line>
-                    </svg>
-
-                    Logout
-
-                </button>
-            </form>
-
         </div>
 
     </div>
 
 
+    <!-- RIGHT -->
+    <div class="topbar-actions">
+
+        <a
+            href="{{ route('doctor.profile.edit') }}"
+            class="edit-profile-btn"
+        >
+            <svg width="17" height="17" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+            </svg>
+
+            Edit Profile
+        </a>
+
+
+        <a
+    href="{{ route('doctor.dashboard') }}"
+    class="workspace-btn"
+>
+    <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+    >
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+    </svg>
+
+    Clinical Workspace
+</a>
+
+
+        <form
+            method="POST"
+            action="{{ route('logout') }}"
+            class="logout-form"
+        >
+            @csrf
+
+            <button type="submit" class="logout-btn">
+
+                <svg width="17" height="17" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+
+                Logout
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+@if(session('success'))
+
+    <div style="
+        background:#def8ea;
+        color:#086b4b;
+        border:1px solid #c3ead7;
+        padding:14px 17px;
+        border-radius:12px;
+        margin-bottom:20px;
+        font-weight:600;
+    ">
+        ✓ {{ session('success') }}
+    </div>
+
+@endif
 
     <!-- PROFILE HERO -->
 
@@ -579,11 +909,31 @@
 
         <div class="doctor-main">
 
-            <div class="avatar">
+           <div class="avatar">
 
-                {{ strtoupper(substr($doctor->user->name, 0, 1)) }}
+    @if($doctor->profile_photo)
 
-            </div>
+        <img
+            src="{{ asset('storage/' . $doctor->profile_photo) }}"
+            alt="{{ $doctor->user->name }}"
+            class="doctor-profile-image"
+        >
+
+    @else
+
+        <span>
+            {{ strtoupper(
+                substr(
+                    str_replace('Dr. ', '', $doctor->user->name),
+                    0,
+                    1
+                )
+            ) }}
+        </span>
+
+    @endif
+
+</div>
 
 
             <div>

@@ -1,517 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Nurse Profile</title>
 
     <style>
-        * {
-            box-sizing: border-box;
+        * { box-sizing: border-box; }
+
+        :root {
+            --primary: #0a9368;
+            --primary-dark: #087553;
+            --primary-soft: #e9f8f3;
+            --text: #182236;
+            --muted: #758197;
+            --border: #e6edf1;
+            --bg: #f5f7fa;
+            --surface: #ffffff;
+            --blue-soft: #edf6ff;
         }
 
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-
+            color: var(--text);
             background:
-                radial-gradient(circle at top left, #dff9f1 0%, transparent 28%),
-                radial-gradient(circle at top right, #eef2ff 0%, transparent 30%),
-                #f5f7fa;
-
-            color: #172033;
+                radial-gradient(circle at top left, #dcfaf0 0%, transparent 26%),
+                radial-gradient(circle at top right, #edf4ff 0%, transparent 28%),
+                var(--bg);
         }
 
         .page {
-            max-width: 1300px;
-            margin: auto;
-            padding: 24px;
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 28px;
+        }
+/* =========================
+   NURSE PROFILE NAVBAR
+========================= */
+
+.profile-topbar {
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border: 1px solid #e7edf1;
+    border-radius: 20px;
+
+    padding: 16px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 8px 28px rgba(31, 41, 55, 0.04);
+}
+
+
+/* LEFT SIDE */
+
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand-logo {
+    width: 165px;
+    height: 62px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    display: block;
+}
+
+.navbar-divider {
+    width: 1px;
+    height: 58px;
+
+    background: #e4e9ed;
+}
+
+.portal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.topbar-title {
+    font-size: 20px;
+    font-weight: 800;
+
+    color: #182236;
+}
+
+.topbar-subtitle {
+    margin-top: 5px;
+
+    color: #8a95a6;
+
+    font-size: 13px;
+}
+
+
+/* RIGHT SIDE */
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-left: auto;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+
+/* NURSE WORKSPACE BUTTON */
+
+.workspace-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 19px;
+
+    background: #08a67a;
+    color: white;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+
+    box-shadow:
+        0 6px 16px rgba(8, 166, 122, 0.14);
+}
+
+.workspace-btn:hover {
+    background: #078b67;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(8, 166, 122, 0.20);
+}
+
+
+/* LOGOUT */
+
+.logout-btn {
+    height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 18px;
+
+    background: #fff5f5;
+    color: #dc3545;
+
+    border: 1px solid #f0b8bd;
+    border-radius: 12px;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #dc3545;
+    color: white;
+
+    border-color: #dc3545;
+
+    transform: translateY(-1px);
+}
+
+
+/* MOBILE */
+
+@media(max-width: 850px) {
+
+    .profile-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topbar-actions {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .brand-area {
+        width: 100%;
+    }
+
+    .brand-logo {
+        width: 140px;
+        height: auto;
+    }
+
+    .navbar-divider {
+        display: none;
+    }
+
+    .portal-info {
+        display: none;
+    }
+
+    .topbar-actions {
+        width: 100%;
+    }
+
+    .workspace-btn,
+    .logout-form {
+        flex: 1;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+}
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
         }
 
-        /* TOP BAR */
-
-        .topbar {
-            background: rgba(255, 255, 255, 0.94);
-            border: 1px solid #edf1f4;
-            border-radius: 18px;
-
-            padding: 16px 22px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            box-shadow: 0 8px 30px rgba(31, 41, 55, 0.04);
-
-            margin-bottom: 22px;
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 22px;
         }
 
-        .brand-title {
-            font-size: 20px;
-            font-weight: 700;
+        .card {
+            background: rgba(255,255,255,.98);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 10px 35px rgba(31,41,55,.04);
         }
 
-        .brand-subtitle {
-            color: #8993a4;
-            font-size: 13px;
-            margin-top: 4px;
+        .hero-card {
+            background: linear-gradient(120deg, rgba(223,250,242,.98), rgba(236,246,255,.98));
+            border: 1px solid #dcefe8;
         }
 
-        .dashboard-btn {
+        .badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
-            background: #0aa273;
-            color: white;
-
-            padding: 11px 17px;
-
-            border-radius: 11px;
-
-            text-decoration: none;
-            font-weight: 600;
-
-            box-shadow: 0 5px 15px rgba(10, 162, 115, 0.18);
-        }
-
-        .dashboard-btn:hover {
-            background: #078b63;
-        }
-
-        /* HERO */
-
-        .profile-hero {
-            position: relative;
-
-            min-height: 240px;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    rgba(219, 252, 240, 0.95),
-                    rgba(237, 248, 255, 0.95),
-                    rgba(243, 237, 255, 0.90)
-                );
-
-            border: 1px solid #e5f2ed;
-            border-radius: 26px;
-
-            padding: 38px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 24px;
-
-            overflow: hidden;
-        }
-
-        .nurse-main {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            z-index: 2;
-        }
-
-        .avatar {
-            width: 115px;
-            height: 115px;
-
-            border-radius: 28px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: linear-gradient(145deg, #0ba87a, #087f68);
-
-            color: white;
-
-            font-size: 42px;
-            font-weight: 700;
-
-            box-shadow: 0 15px 35px rgba(10, 162, 115, 0.24);
-
-            border: 5px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .online-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-
-            background: #d9faec;
-            color: #087a59;
-
+            background: #daf8eb;
+            color: #087d5a;
             padding: 7px 12px;
-            border-radius: 50px;
-
-            font-size: 13px;
-            font-weight: 600;
-
-            margin-bottom: 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
-        .dot {
+        .badge-dot {
             width: 8px;
             height: 8px;
-
-            background: #12bd82;
             border-radius: 50%;
+            background: #0fb179;
         }
 
-        .nurse-name {
+        .name {
             margin: 0;
-
             font-size: 34px;
-            letter-spacing: -0.5px;
+            letter-spacing: -.5px;
         }
 
-        .nurse-role {
+        .role {
             margin-top: 8px;
-
-            color: #667085;
-            font-size: 17px;
-        }
-
-        .nurse-email {
-            margin-top: 9px;
-
-            color: #8a94a6;
-            font-size: 14px;
-
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-
-        /* HEARTBEAT */
-
-        .heartbeat {
-            width: 330px;
-            opacity: 0.55;
-        }
-
-        .heartbeat-label {
-            text-align: right;
-
-            color: #5eae93;
-
-            font-size: 11px;
-            letter-spacing: 2px;
-            font-weight: 700;
-
-            margin-top: 7px;
-        }
-
-        /* STATS */
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 18px;
-
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: rgba(255,255,255,0.94);
-
-            border: 1px solid #edf0f3;
-            border-radius: 18px;
-
-            padding: 22px;
-
-            box-shadow: 0 8px 28px rgba(31,41,55,0.035);
-        }
-
-        .stat-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            margin-bottom: 22px;
-        }
-
-        .icon-box {
-            width: 52px;
-            height: 52px;
-
-            border-radius: 14px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .green-icon {
-            background: #def9ed;
-            color: #07966c;
-        }
-
-        .blue-icon {
-            background: #e2f4ff;
-            color: #168ac4;
-        }
-
-        .purple-icon {
-            background: #f0e7ff;
-            color: #8147db;
-        }
-
-        .small-tag {
-            padding: 6px 10px;
-
-            border-radius: 50px;
-
-            background: #edf9f4;
-            color: #178965;
-
-            font-size: 12px;
+            color: #5d6d82;
+            font-size: 15px;
             font-weight: 600;
         }
 
-        .stat-value {
-            font-size: 23px;
-            font-weight: 700;
-        }
-
-        .stat-label {
-            color: #697586;
-
-            margin-top: 6px;
-
+        .intro {
+            margin-top: 15px;
+            color: #657387;
             font-size: 14px;
-        }
-
-        /* CONTENT */
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-
-            gap: 20px;
-        }
-
-        .content-card {
-            background: rgba(255,255,255,0.95);
-
-            border: 1px solid #edf0f3;
-            border-radius: 20px;
-
-            padding: 28px;
-
-            box-shadow: 0 8px 30px rgba(31,41,55,0.035);
+            line-height: 1.7;
+            max-width: 750px;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 10px;
-
-            font-size: 19px;
-            font-weight: 700;
-
-            margin-bottom: 22px;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
         }
 
-        .title-mark {
+        .section-mark {
             width: 5px;
-            height: 25px;
-
-            border-radius: 10px;
-
-            background: linear-gradient(#17c995, #25a7dd);
+            height: 28px;
+            border-radius: 20px;
+            background: linear-gradient(to bottom, #16c991, #26a4dc);
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 14px;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
         }
 
-        .info-item {
-            border: 1px solid #edf0f3;
-
-            border-radius: 14px;
-
-            padding: 17px;
-
-            display: flex;
-            align-items: center;
-            gap: 14px;
-
+        .info-box {
             background: #fbfcfd;
+            border: 1px solid #e9eef2;
+            border-radius: 18px;
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
         }
 
         .info-icon {
-            min-width: 42px;
-            height: 42px;
-
-            border-radius: 11px;
-
-            background: #eaf8f3;
-            color: #0a9c71;
-
+            min-width: 54px;
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            background: #e9f8f3;
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .info-label {
-            color: #8b95a5;
-
-            font-size: 12px;
-
-            margin-bottom: 5px;
-        }
-
-        .info-value {
-            font-size: 14px;
+        .label {
+            color: #8a96a8;
+            font-size: 13px;
+            margin-bottom: 7px;
             font-weight: 600;
-
-            word-break: break-word;
         }
 
-        /* STATUS */
+        .value {
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.5;
+        }
 
-        .profile-status {
+        .bio-box {
+            background: linear-gradient(120deg, #eefaf5, #f3f8ff);
+            border-radius: 18px;
+            padding: 22px;
+            color: #5b6a80;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .status-card {
             text-align: center;
         }
 
-        .large-icon {
-            width: 80px;
-            height: 80px;
-
-            margin: 5px auto 18px;
-
-            border-radius: 22px;
-
-            background: linear-gradient(145deg, #dff8ef, #e7f5ff);
-
+        .verified-icon {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 18px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #dff8ef, #edf5ff);
             display: flex;
-            justify-content: center;
             align-items: center;
-
-            color: #099a70;
+            justify-content: center;
+            color: var(--primary);
         }
 
-        .verified-title {
-            font-size: 20px;
-            font-weight: 700;
+        .status-card h3 {
+            margin: 0 0 12px;
+            font-size: 22px;
         }
 
-        .verified-text {
-            color: #8993a4;
-
-            font-size: 13px;
-
-            margin: 8px 0 22px;
-
-            line-height: 1.6;
+        .status-card p {
+            color: #7b8798;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 20px;
         }
 
-        .status-row {
+        .detail-list {
+            margin-top: 22px;
+            border-top: 1px solid #edf1f3;
+        }
+
+        .detail-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #edf1f3;
+        }
 
-            padding: 14px 0;
-
-            border-top: 1px solid #edf0f3;
-
+        .detail-name {
+            color: #7b8798;
             font-size: 14px;
         }
 
-        .status-name {
-            color: #7b8798;
+        .detail-value {
+            font-weight: 800;
+            font-size: 16px;
         }
 
-        .active-text {
-            color: #079c6e;
-            font-weight: 600;
+        .active {
+            color: var(--primary);
         }
 
-        @media(max-width: 900px) {
-
-            .stats-grid {
+        @media(max-width: 950px) {
+            .profile-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .heartbeat-area {
-                display: none;
-            }
-        }
-
-        @media(max-width: 650px) {
-
-            .page {
-                padding: 14px;
-            }
-
-            .profile-hero {
-                padding: 25px;
-            }
-
-            .nurse-main {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .nurse-email {
-                justify-content: center;
             }
 
             .info-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        @media(max-width: 700px) {
+            .page { padding: 14px; }
 
             .topbar {
                 flex-direction: column;
                 align-items: flex-start;
-
                 gap: 14px;
             }
+
+            .name {
+                font-size: 28px;
+            }
+            .back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 10px 15px;
+
+    background: #f3faf7;
+    color: #0a9368;
+
+    border: 1px solid #cae9dc;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #0a9368;
+    color: white;
+    border-color: #0a9368;
+}
+
+.back-btn svg {
+    flex-shrink: 0;
+}
         }
     </style>
-
 </head>
-
 <body>
+
+@php
+    $user = Auth::user();
+@endphp
 
 <div class="page">
 
-    <!-- TOP BAR -->
+   <div class="profile-topbar">
 
-    <div class="topbar">
+    <!-- LEFT SIDE -->
+    <div class="brand-area">
 
-        <div>
+        <img
+            src="{{ asset('images/medicare24-logo.png') }}"
+            alt="MediCare24"
+            class="brand-logo"
+        >
 
-            <div class="brand-title">
+        <div class="navbar-divider"></div>
+
+        <div class="portal-info">
+
+            <div class="topbar-title">
                 Nurse Portal
             </div>
 
-            <div class="brand-subtitle">
-                Clinical profile & patient care
+            <div class="topbar-subtitle">
+                Patient Preparation & Clinical Support
             </div>
 
         </div>
 
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="topbar-actions">
 
         <a
             href="{{ route('nurse.dashboard') }}"
-            class="dashboard-btn"
+            class="workspace-btn"
         >
-
             <svg
                 width="18"
                 height="18"
@@ -520,539 +544,187 @@
                 stroke="currentColor"
                 stroke-width="2"
             >
-
                 <rect x="3" y="3" width="7" height="7"></rect>
                 <rect x="14" y="3" width="7" height="7"></rect>
                 <rect x="3" y="14" width="7" height="7"></rect>
                 <rect x="14" y="14" width="7" height="7"></rect>
-
             </svg>
 
-            Dashboard
-
+            Nurse Workspace
         </a>
 
-    </div>
 
+        <form
+            method="POST"
+            action="{{ route('logout') }}"
+            class="logout-form"
+        >
+            @csrf
 
-    <!-- HERO -->
-
-    <div class="profile-hero">
-
-        <div class="nurse-main">
-
-            <div class="avatar">
-
-                {{ strtoupper(substr($nurse->name, 0, 1)) }}
-
-            </div>
-
-
-            <div>
-
-                <div class="online-badge">
-
-                    <span class="dot"></span>
-
-                    Active Nurse
-
-                </div>
-
-
-                <h1 class="nurse-name">
-
-                    {{ $nurse->name }}
-
-                </h1>
-
-
-                <div class="nurse-role">
-
-                    Registered Nursing Staff
-
-                </div>
-
-
-                <div class="nurse-email">
-
-                    <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-
-                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                        <path d="M3 7l9 6 9-6"></path>
-
-                    </svg>
-
-                    {{ $nurse->email }}
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- Heartbeat -->
-
-        <div class="heartbeat-area">
-
-            <svg
-                class="heartbeat"
-                viewBox="0 0 400 100"
-                fill="none"
+            <button
+                type="submit"
+                class="logout-btn"
             >
-
-                <path
-                    d="
-                    M0 55
-                    H50
-                    L62 52
-                    L70 55
-                    L78 18
-                    L86 88
-                    L94 55
-                    H145
-                    L157 52
-                    L165 55
-                    L173 22
-                    L181 84
-                    L189 55
-                    H240
-                    L250 52
-                    L258 55
-                    L266 20
-                    L274 86
-                    L282 55
-                    H335
-                    L345 52
-                    L353 55
-                    L361 25
-                    L369 82
-                    L377 55
-                    H400
-                    "
-                    stroke="#37bb93"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-
-            </svg>
-
-            <div class="heartbeat-label">
-                PATIENT CARE MONITOR
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- STAT CARDS -->
-
-    <div class="stats-grid">
-
-
-        <div class="stat-card">
-
-            <div class="stat-top">
-
-                <div class="icon-box green-icon">
-
-                    <svg
-                        width="25"
-                        height="25"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-
-                    </svg>
-
-                </div>
-
-                <span class="small-tag">
-                    Active
-                </span>
-
-            </div>
-
-
-            <div class="stat-value">
-                Nurse
-            </div>
-
-            <div class="stat-label">
-                Staff Role
-            </div>
-
-        </div>
-
-
-
-        <div class="stat-card">
-
-            <div class="stat-top">
-
-                <div class="icon-box blue-icon">
-
-                    <svg
-                        width="25"
-                        height="25"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-
-                        <path d="M12 2v20"></path>
-                        <path d="M2 12h20"></path>
-
-                    </svg>
-
-                </div>
-
-                <span class="small-tag">
-                    Care
-                </span>
-
-            </div>
-
-
-            <div class="stat-value">
-                Vital Signs
-            </div>
-
-            <div class="stat-label">
-                Patient Assessment
-            </div>
-
-        </div>
-
-
-
-        <div class="stat-card">
-
-            <div class="stat-top">
-
-                <div class="icon-box purple-icon">
-
-                    <svg
-                        width="25"
-                        height="25"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-
-                        <path d="M9 12l2 2 4-4"></path>
-                        <circle cx="12" cy="12" r="9"></circle>
-
-                    </svg>
-
-                </div>
-
-                <span class="small-tag">
-                    Verified
-                </span>
-
-            </div>
-
-
-            <div class="stat-value">
-                Active
-            </div>
-
-            <div class="stat-label">
-                Account Status
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- CONTENT -->
-
-    <div class="content-grid">
-
-
-        <!-- PROFILE INFO -->
-
-        <div class="content-card">
-
-            <div class="section-title">
-
-                <span class="title-mark"></span>
-
-                Nurse Information
-
-            </div>
-
-
-            <div class="info-grid">
-
-
-                <div class="info-item">
-
-                    <div class="info-icon">
-
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-
-                            <path d="M20 21a8 8 0 0 0-16 0"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="info-label">
-                            Full Name
-                        </div>
-
-                        <div class="info-value">
-                            {{ $nurse->name }}
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="info-item">
-
-                    <div class="info-icon">
-
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-
-                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                            <path d="M3 7l9 6 9-6"></path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="info-label">
-                            Email Address
-                        </div>
-
-                        <div class="info-value">
-                            {{ $nurse->email }}
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="info-item">
-
-                    <div class="info-icon">
-
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-
-                            <path d="M12 2v20"></path>
-                            <path d="M5 9h14"></path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="info-label">
-                            System Role
-                        </div>
-
-                        <div class="info-value">
-                            {{ ucfirst($nurse->role) }}
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="info-item">
-
-                    <div class="info-icon">
-
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-
-                            <rect x="3" y="4" width="18" height="17" rx="2"></rect>
-                            <path d="M8 2v4"></path>
-                            <path d="M16 2v4"></path>
-                            <path d="M3 9h18"></path>
-
-                        </svg>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="info-label">
-                            Joined System
-                        </div>
-
-                        <div class="info-value">
-
-                            {{ $nurse->created_at
-                                ? $nurse->created_at->format('M d, Y')
-                                : 'Not available'
-                            }}
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- STATUS CARD -->
-
-        <div class="content-card profile-status">
-
-
-            <div class="large-icon">
-
                 <svg
-                    width="42"
-                    height="42"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                 >
-
-                    <path d="M9 12l2 2 4-4"></path>
-                    <circle cx="12" cy="12" r="9"></circle>
-
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
                 </svg>
 
-            </div>
+                Logout
+            </button>
 
-
-            <div class="verified-title">
-                Nursing Staff
-            </div>
-
-
-            <div class="verified-text">
-                Authorized nursing staff member responsible for recording patient vital signs before doctor consultation.
-            </div>
-
-
-            <div class="status-row">
-
-                <span class="status-name">
-                    Account
-                </span>
-
-                <span class="active-text">
-                    Active
-                </span>
-
-            </div>
-
-
-            <div class="status-row">
-
-                <span class="status-name">
-                    Role
-                </span>
-
-                <strong>
-                    Nurse
-                </strong>
-
-            </div>
-
-
-            <div class="status-row">
-
-                <span class="status-name">
-                    Patient Care
-                </span>
-
-                <strong>
-                    Enabled
-                </strong>
-
-            </div>
-
-
-            <div class="status-row">
-
-                <span class="status-name">
-                    Vital Signs
-                </span>
-
-                <strong>
-                    Authorized
-                </strong>
-
-            </div>
-
-        </div>
+        </form>
 
     </div>
 
 </div>
 
-</body>
+    <div class="profile-grid">
 
+        <div>
+            <div class="card hero-card">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    Active Nurse
+                </div>
+
+                <h1 class="name">{{ $user->name }}</h1>
+                <div class="role">Nurse • Patient Preparation & Vital Signs</div>
+
+                <div class="intro">
+                    Responsible for patient intake, vital sign recording, and preparing
+                    patients before doctor consultation. This profile summarizes the nurse’s
+                    account and current portal access information.
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 22px;">
+                <div class="section-title">
+                    <span class="section-mark"></span>
+                    <span>Professional Information</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16v16H4z"></path>
+                                <path d="M4 8h16"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="label">Email Address</div>
+                            <div class="value">{{ $user->email }}</div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v20"></path>
+                                <path d="M5 9h14"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="label">Department</div>
+                            <div class="value">Patient Preparation Unit</div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M12 7v5l3 2"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="label">Primary Responsibility</div>
+                            <div class="value">Vitals & Pre-Consultation Checks</div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3h12v18H6z"></path>
+                                <path d="M9 7h6"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="label">Staff ID</div>
+                            <div class="value">{{ 'NUR-' . str_pad($user->id, 3, '0', STR_PAD_LEFT) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 22px;">
+                <div class="section-title">
+                    <span class="section-mark"></span>
+                    <span>About Nurse</span>
+                </div>
+
+                <div class="bio-box">
+                    Dedicated nursing staff member supporting smooth clinic operations through
+                    accurate vital sign documentation, patient handling, and efficient
+                    coordination before doctor consultations.
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="card status-card">
+                <div class="verified-icon">
+                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M12 3l2.6 2.2 3.4.4 1.3 3.2 2.4 2.3-1.1 3.3.4 3.4-3.2 1.3-2.3 2.4-3.3-1.1-3.4.4-1.3-3.2-2.4-2.3 1.1-3.3-.4-3.4 3.2-1.3L12 3z"></path>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                </div>
+
+                <h3>Verified Nurse</h3>
+
+                <p>
+                    This nursing account is active in the clinic portal and can manage
+                    patient preparation and vital sign records.
+                </p>
+
+                <div class="detail-list">
+                    <div class="detail-row">
+                        <span class="detail-name">Account</span>
+                        <span class="detail-value active">Active</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-name">Role</span>
+                        <span class="detail-value">{{ ucfirst($user->role) }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-name">Workspace</span>
+                        <span class="detail-value">Nurse Portal</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-name">Access Level</span>
+                        <span class="detail-value">Clinical Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
 </html>

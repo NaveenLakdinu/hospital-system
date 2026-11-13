@@ -20,6 +20,10 @@ use App\Http\Controllers\Nurse\DashboardController as NurseDashboardController;
 
 use App\Http\Controllers\Nurse\VitalSignController;
 
+use App\Http\Controllers\Nurse\WalkInController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Public Welcome Page
@@ -118,6 +122,16 @@ Route::get(
     '/doctor/appointments/{appointment}/patients/{patient}/history',
     [ConsultationController::class, 'history']
 )->name('doctor.patient.history');
+Route::get(
+    '/doctor/appointments/{appointment}/patients/{patient}/history',
+    [ConsultationController::class, 'history']
+)->name('doctor.patient.history');
+
+Route::get('/doctor/profile/edit', [DashboardController::class, 'editProfile'])
+    ->name('doctor.profile.edit');
+
+Route::put('/doctor/profile', [DashboardController::class, 'updateProfile'])
+    ->name('doctor.profile.update');
 });
 
 
@@ -227,6 +241,55 @@ Route::post(
 )
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.profile');
+
+    Route::get('/nurse/profile', [App\Http\Controllers\Nurse\DashboardController::class, 'profile'])
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.profile');
+
+    Route::get(
+    '/nurse/walk-ins/create',
+    [WalkInController::class, 'create']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.walkins.create');
+
+
+Route::post(
+    '/nurse/walk-ins',
+    [WalkInController::class, 'store']
+)
+    ->middleware(['auth', 'role:nurse'])
+    ->name('nurse.walkins.store');
+
+    Route::middleware([
+    'auth',
+    'role:nurse'
+])->group(function () {
+
+    Route::get(
+        '/nurse/appointments/{appointment}/vitals',
+        [VitalSignController::class, 'create']
+    )->name('nurse.vitals.create');
+
+
+    Route::post(
+        '/nurse/appointments/{appointment}/vitals',
+        [VitalSignController::class, 'store']
+    )->name('nurse.vitals.store');
+
+
+    Route::get(
+        '/nurse/appointments/{appointment}/vitals/summary',
+        [VitalSignController::class, 'summary']
+    )->name('nurse.vitals.summary');
+
+
+    Route::delete(
+        '/nurse/appointments/{appointment}/vitals',
+        [VitalSignController::class, 'destroy']
+    )->name('nurse.vitals.destroy');
+
+});
 
     /*
 |--------------------------------------------------------------------------
