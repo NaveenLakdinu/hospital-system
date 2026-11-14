@@ -23,3 +23,16 @@ use Illuminate\Database\Seeder;
 use App\Models\PharmacyProfile;
 use App\Models\Medicine;
 use App\Models\DoctorMedicineNote;
+
+class PharmacySeeder extends Seeder
+{
+    public function run(): void
+    {
+        PharmacyProfile::firstOrCreate(
+            ['email' => 'pharmacy@medicare.lk'],
+            [
+                'pharmacy_name' => 'MediCare Pharmacy',
+                'contact_number' => '0771234567',
+                'address' => 'No. 123, Health Avenue, Colombo 07',
+            ]
+        );
