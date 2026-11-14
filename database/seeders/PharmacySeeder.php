@@ -56,4 +56,12 @@ class PharmacySeeder extends Seeder
                 'instructions' => 'Take 1 tablet every 8 hours after meals for fever.',
                 'received_at' => '2026-11-12 10:30:00',
                 'status' => 'Received',
+            ],[
+                'doctor_name' => 'Dr. Nimal Perera',
+                'patient_name' => 'K. Silva',
+                'medicine_details' => 'Amoxicillin 500mg (Capsules)',
+                'quantity' => 50,
+                'instructions' => '1 capsule 3 times daily for 5 days.',
+                'received_at' => '2026-11-11 14:15:00',
+                'status' => 'Received',
             ],
