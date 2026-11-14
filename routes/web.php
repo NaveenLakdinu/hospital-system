@@ -41,8 +41,11 @@ use App\Http\Controllers\PharmacyController;
 Route::get('/', fn() => view('welcome'))->name('welcome');
 Route::get('/home', fn() => view('home'))->name('home');
 
+
+
 // Public doctor listing
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -60,11 +63,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/doctors',         [AdminDoctorController::class, 'store'])->name('doctors.store');
     Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
 
+/*
+| Doctor Search - Public / Patient
+|--------------------------------------------------------------------------
+*/
+
+
     // Pharmacists
     Route::get('/pharmacists',              [AdminPharmacistController::class, 'index'])->name('pharmacists.index');
     Route::get('/pharmacists/create',       [AdminPharmacistController::class, 'create'])->name('pharmacists.create');
     Route::post('/pharmacists',             [AdminPharmacistController::class, 'store'])->name('pharmacists.store');
     Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])->name('pharmacists.destroy');
+
 
     // Appointments
     Route::get('/appointments', [AdminAppointmentController::class, 'index'])->name('appointments.index');

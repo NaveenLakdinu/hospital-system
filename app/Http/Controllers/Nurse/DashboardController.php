@@ -12,126 +12,116 @@ class DashboardController extends Controller
     /**
      * Nurse Dashboard
      */
-    public function index(Request $request)
-    {
-        $search = trim(
-            $request->get('search', '')
-        );
+   public function index(Request $request)
+{
+    $search = trim($request->get('search', ''));
+    $sort = $request->get('sort', 'token');
 
-        $sort = $request->get(
-            'sort',
-            'token'
-        );
+    /*
+    |--------------------------------------------------------------------------
+    | Include yesterday + today + future appointments
+    |--------------------------------------------------------------------------
+    */
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Base Appointment Query
-        |--------------------------------------------------------------------------
-        */
-
-        $query = Appointment::with([
-            'patient',
-            'doctor.user',
-            'vitalSign',
-        ])
-            ->whereDate(
-                'appointment_date',
-                '>=',
-                now()->toDateString()
-            );
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Patient Search
-        |--------------------------------------------------------------------------
-        */
-
-        if ($search !== '') {
-
-            $query->where(function ($appointmentQuery) use ($search) {
-
-                $appointmentQuery
-
-                    ->where(
-                        'appointment_number',
-                        'like',
-                        "%{$search}%"
-                    )
-
-                    ->orWhereHas(
-                        'patient',
-                        function ($patientQuery) use ($search) {
-
-                            $patientQuery
-                                ->where(
-                                    'name',
-                                    'like',
-                                    "%{$search}%"
-                                )
-                                ->orWhere(
-                                    'email',
-                                    'like',
-                                    "%{$search}%"
-                                );
-                        }
-                    );
-            });
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Queue Sorting
-        |--------------------------------------------------------------------------
-        */
-
-        $query->orderBy(
+    $query = Appointment::with([
+        'patient',
+        'doctor.user',
+        'vitalSign',
+    ])
+        ->whereDate(
             'appointment_date',
-            'asc'
+            '>=',
+            now()->subDay()->toDateString()
         );
 
 
-        if ($sort === 'time') {
+    /*
+    |--------------------------------------------------------------------------
+    | Search
+    |--------------------------------------------------------------------------
+    */
 
-            $query
-                ->orderBy(
-                    'appointment_time',
-                    'asc'
-                )
-                ->orderBy(
-                    'token_number',
-                    'asc'
-                );
+    if ($search !== '') {
 
-        } else {
+        $query->where(function ($q) use ($search) {
 
-            $query
-                ->orderBy(
-                    'token_number',
-                    'asc'
-                )
-                ->orderBy(
-                    'appointment_time',
-                    'asc'
-                );
-        }
-
-
-        $appointments = $query->get();
-
-
-        return view(
-            'nurse.dashboard',
-            compact(
-                'appointments',
-                'search',
-                'sort'
+            $q->where(
+                'appointment_number',
+                'like',
+                "%{$search}%"
             )
-        );
+
+            ->orWhereHas(
+                'patient',
+                function ($patientQuery) use ($search) {
+
+                    $patientQuery
+                        ->where(
+                            'name',
+                            'like',
+                            "%{$search}%"
+                        )
+                        ->orWhere(
+                            'email',
+                            'like',
+                            "%{$search}%"
+                        );
+                }
+            );
+        });
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sort
+    |--------------------------------------------------------------------------
+    */
+
+    $query->orderBy(
+        'appointment_date',
+        'asc'
+    );
+
+
+    if ($sort === 'time') {
+
+        $query
+            ->orderBy(
+                'appointment_time',
+                'asc'
+            )
+            ->orderBy(
+                'token_number',
+                'asc'
+            );
+
+    } else {
+
+        $query
+            ->orderBy(
+                'token_number',
+                'asc'
+            )
+            ->orderBy(
+                'appointment_time',
+                'asc'
+            );
+    }
+
+
+    $appointments = $query->get();
+
+
+    return view(
+        'nurse.dashboard',
+        compact(
+            'appointments',
+            'search',
+            'sort'
+        )
+    );
+}
 
     /**
      * Nurse Profile
