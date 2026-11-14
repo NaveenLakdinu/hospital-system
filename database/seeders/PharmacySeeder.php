@@ -42,33 +42,8 @@ class PharmacySeeder extends Seeder
                 'received_at' => '2026-11-12 10:30:00',
                 'status' => 'Received',
             ],
-            [
-                'doctor_name' => 'Dr. Nimal Perera',
-                'patient_name' => 'K. Silva',
-                'medicine_details' => 'Amoxicillin 500mg (Capsules)',
-                'quantity' => 50,
-                'instructions' => '1 capsule 3 times daily for 5 days.',
-                'received_at' => '2026-11-11 14:15:00',
-                'status' => 'Received',
-            ],
-            [
-                'doctor_name' => 'Dr. Thilini Fernando',
-                'patient_name' => 'S. Jayawardena',
-                'medicine_details' => 'Metformin 500mg (Tablets)',
-                'quantity' => 80,
-                'instructions' => '1 tablet morning and night with meals.',
-                'received_at' => '2026-11-10 11:20:00',
-                'status' => 'Received',
-            ],
-            [
-                'doctor_name' => 'Dr. Samantha Jayawardena',
-                'patient_name' => 'R. Perera',
-                'medicine_details' => 'Ibuprofen 400mg (Tablets)',
-                'quantity' => 60,
-                'instructions' => 'Take 1 tablet when pain occurs after food.',
-                'received_at' => '2026-11-09 16:45:00',
-                'status' => 'Received',
-            ],
+           
+           
             [
                 'doctor_name' => 'Dr. Suresh Kasthuriarachchi',
                 'patient_name' => 'N. Kumari',
