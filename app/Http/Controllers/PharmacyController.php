@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class PharmacyController extends Controller
 {
-private function getProfile()
+    private function getProfile()
     {
         return PharmacyProfile::firstOrCreate(
             ['id' => 1],
@@ -22,6 +22,7 @@ private function getProfile()
         );
     }
 
+    // 1. Main Pharmacy Admin Panel Dashboard
     public function dashboard()
     {
         $profile = $this->getProfile();
@@ -47,7 +48,9 @@ private function getProfile()
             'address' => 'required|string|max:500',
             'email' => 'required|email|max:255',
             'avatar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ]);$profile = $this->getProfile();
+        ]);
+
+        $profile = $this->getProfile();
 
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
@@ -66,7 +69,61 @@ private function getProfile()
         return redirect()->back()->with('success', 'Pharmacy profile updated successfully!');
     }
 
-    // 4. Medicinepublic function destroyMedicine($id)
+    // 4. Medicine Inventory Page
+    public function inventory()
+    {
+        $medicines = Medicine::orderBy('id', 'asc')->get();
+        return view('pharmacy.inventory', compact('medicines'));
+    }
+
+    // 5. Add New Medicine
+    public function storeMedicine(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'dosage_form' => 'required|string|max:100',
+            'stock_qty' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        Medicine::create([
+            'name' => $request->name,
+            'category' => $request->dosage_form,
+            'dosage_form' => $request->dosage_form,
+            'stock_qty' => $request->stock_qty,
+            'stock_quantity' => $request->stock_qty,
+            'price' => $request->price,
+            'unit_price' => $request->price,
+        ]);
+
+        return redirect()->back()->with('success', 'New medicine added to inventory!');
+    }
+
+    // 6. Update Medicine (Edit Button)
+    public function updateMedicine(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'dosage_form' => 'required|string|max:100',
+            'stock_qty' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $medicine = Medicine::findOrFail($id);
+        $medicine->update([
+            'name' => $request->name,
+            'dosage_form' => $request->dosage_form,
+            'stock_qty' => $request->stock_qty,
+            'stock_quantity' => $request->stock_qty,
+            'price' => $request->price,
+            'unit_price' => $request->price,
+        ]);
+
+        return redirect()->back()->with('success', 'Medicine updated successfully!');
+    }
+
+    // 7. Delete Medicine (Delete Button)
+    public function destroyMedicine($id)
     {
         try {
             Medicine::findOrFail($id)->delete();
@@ -88,3 +145,43 @@ private function getProfile()
     {
         $note = DoctorMedicineNote::findOrFail($id);
         $note->update(['status' => 'Issued']);
+
+        // Inventory Stock එකෙන් අදාළ බෙහෙත් ප්‍රමාණය අඩු කිරීම
+        $medicineName = trim(explode('(', $note->medicine_details)[0]);
+        $medicine = Medicine::where('name', 'LIKE', '%' . $medicineName . '%')->first();
+        
+        if ($medicine) {
+            $currentStock = $medicine->display_stock;
+            $newStock = max(0, $currentStock - $note->quantity);
+            $medicine->update([
+                'stock_qty' => $newStock,
+                'stock_quantity' => $newStock,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Medicine issued to patient & stock updated!');
+    }
+
+    // 10. Doctor Records
+    public function doctorRecords()
+    {
+        $doctors = DoctorMedicineNote::select('doctor_name')
+            ->selectRaw('COUNT(*) as total_prescriptions')
+            ->selectRaw('SUM(quantity) as total_units')
+            ->groupBy('doctor_name')
+            ->get();
+
+        return view('pharmacy.doctor-records', compact('doctors'));
+    }
+
+    // 11. Reports
+    public function reports()
+    {
+        $totalMedicines = Medicine::count();
+        $lowStockCount = Medicine::where('stock_qty', '<=', 80)->count();
+        $totalIssued = DoctorMedicineNote::where('status', 'Issued')->count();
+        $pendingNotes = DoctorMedicineNote::where('status', 'Received')->count();
+
+        return view('pharmacy.reports', compact('totalMedicines', 'lowStockCount', 'totalIssued', 'pendingNotes'));
+    }
+}
