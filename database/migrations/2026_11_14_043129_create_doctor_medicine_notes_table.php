@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+      /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('doctor_medicine_notes', function (Blueprint $table) {
+            $table->id();
+            $table->string('doctor_name');
+            $table->string('patient_name')->default('Outpatient');
+            $table->string('medicine_details');
+            $table->integer('quantity');
+            $table->text('instructions')->nullable();
+            $table->dateTime('received_at');
+            $table->enum('status', ['Received', 'Issued'])->default('Received');
+            $table->timestamps();
+        });
+    }
+
+     /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('doctor_medicine_notes');
+    }
+};
