@@ -5,11 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-    /**
-     * Medi Note
-     */
-
-
 class DoctorMedicineNote extends Model
 {
     use HasFactory;
