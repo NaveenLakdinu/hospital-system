@@ -73,4 +73,11 @@ class PharmacySeeder extends Seeder
                 'instructions' => 'Take 1 tablet when pain occurs after food.',
                 'received_at' => '2026-11-09 16:45:00',
                 'status' => 'Received',
-            ],
+            ],foreach ($notes as $note) {
+            DoctorMedicineNote::firstOrCreate(
+                ['doctor_name' => $note['doctor_name'], 'medicine_details' => $note['medicine_details']],
+                $note
+            );
+        }
+    }
+}
