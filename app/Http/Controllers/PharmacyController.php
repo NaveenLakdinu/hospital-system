@@ -30,3 +30,21 @@ private function getProfile()
 
         return view('pharmacy.dashboard', compact('profile', 'receivedNotes', 'medicines'));
     }
+
+    // 2. Edit Profile Page (Sidebar එකේ Edit Profile click කළ විට)
+    public function editProfile()
+    {
+        $profile = $this->getProfile();
+        return view('pharmacy.edit-profile', compact('profile'));
+    }
+
+    // 3. Update Profile Action
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'pharmacy_name' => 'required|string|max:255',
+            'contact_number' => 'required|string|max:25',
+            'address' => 'required|string|max:500',
+            'email' => 'required|email|max:255',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
