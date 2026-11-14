@@ -13,8 +13,6 @@
             background-color: #eef7f6;
             color: #1e293b;
         }
-        color: #1e293b;
-        }
         .sidebar {
             width: 245px;
             min-height: 100vh;
@@ -28,7 +26,7 @@
             top: 0;
             left: 0;
             z-index: 1000;
-        }}
+        }
         .main-wrapper {
             margin-left: 245px;
             padding: 1.5rem 2rem;
@@ -38,11 +36,6 @@
             margin-bottom: 1.8rem;
         }
         .brand-cross {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #10b981, #059669);
-
-            .brand-cross {
             width: 44px;
             height: 44px;
             background: linear-gradient(135deg, #10b981, #059669);
@@ -156,7 +149,9 @@
         }
     </style>
 </head>
-<!-- Left Sidebar (Settings & Logout Removed) -->
+<body>
+
+    <!-- Left Sidebar (Settings & Logout Removed) -->
     <aside class="sidebar">
         <div>
             <div class="brand-logo">
@@ -245,3 +240,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif
+
+        @yield('content')
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
