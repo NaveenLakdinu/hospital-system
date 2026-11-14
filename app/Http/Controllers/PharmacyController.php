@@ -66,4 +66,25 @@ private function getProfile()
         return redirect()->back()->with('success', 'Pharmacy profile updated successfully!');
     }
 
-    // 4. Medicine
+    // 4. Medicinepublic function destroyMedicine($id)
+    {
+        try {
+            Medicine::findOrFail($id)->delete();
+            return redirect()->back()->with('success', 'Medicine deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Cannot delete this medicine because it is linked to existing patient records.');
+        }
+    }
+
+    // 8. Received Notes Page (Sidebar එකේ Received Notes click කළ විට)
+    public function receivedNotes()
+    {
+        $receivedNotes = DoctorMedicineNote::orderBy('received_at', 'desc')->get();
+        return view('pharmacy.received-notes', compact('receivedNotes'));
+    }
+
+    // 9. Issue Medicine (Doctor එවූ බෙහෙත් Issue කිරීම)
+    public function issueMedicineNote($id)
+    {
+        $note = DoctorMedicineNote::findOrFail($id);
+        $note->update(['status' => 'Issued']);
