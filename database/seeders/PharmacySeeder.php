@@ -9,9 +9,6 @@ use App\Models\DoctorMedicineNote;
 
 class PharmacySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         PharmacyProfile::firstOrCreate(
@@ -19,16 +16,16 @@ class PharmacySeeder extends Seeder
             [
                 'pharmacy_name' => 'MediCare Pharmacy',
                 'contact_number' => '0771234567',
-                'address' => 'No. 123, Medicare, Mahwa Yapahuwa',
+                'address' => 'No. 123, Health Avenue, Colombo 07',
             ]
         );
 
         $medicines = [
-            ['name' => 'Paracetamol 500mg', 'dosage_form' => 'Tablets', 'stock_qty' => 200, 'price' => 25.00],
-            ['name' => 'Amoxicillin 500mg', 'dosage_form' => 'Capsules', 'stock_qty' => 120, 'price' => 150.00],
-            ['name' => 'Metformin 500mg', 'dosage_form' => 'Tablets', 'stock_qty' => 80, 'price' => 100.00],
-            ['name' => 'Omeprazole 20mg', 'dosage_form' => 'Capsules', 'stock_qty' => 150, 'price' => 80.00],
-            ['name' => 'Ibuprofen 400mg', 'dosage_form' => 'Tablets', 'stock_qty' => 50, 'price' => 60.00],
+            ['name' => 'Paracetamol 500mg', 'category' => 'Pain Relief', 'dosage_form' => 'Tablets', 'stock_qty' => 200, 'price' => 25.00],
+            ['name' => 'Amoxicillin 500mg', 'category' => 'Antibiotics', 'dosage_form' => 'Capsules', 'stock_qty' => 120, 'price' => 150.00],
+            ['name' => 'Metformin 500mg', 'category' => 'Diabetes', 'dosage_form' => 'Tablets', 'stock_qty' => 80, 'price' => 100.00],
+            ['name' => 'Omeprazole 20mg', 'category' => 'Gastric', 'dosage_form' => 'Capsules', 'stock_qty' => 150, 'price' => 80.00],
+            ['name' => 'Ibuprofen 400mg', 'category' => 'Pain Relief', 'dosage_form' => 'Tablets', 'stock_qty' => 50, 'price' => 60.00],
         ];
 
         foreach ($medicines as $med) {
