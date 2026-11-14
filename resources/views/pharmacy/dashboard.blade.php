@@ -13,3 +13,19 @@
             background-color: #eef7f6;
             color: #1e293b;
         }
+        color: #1e293b;
+        }
+        .sidebar {
+            width: 245px;
+            min-height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
