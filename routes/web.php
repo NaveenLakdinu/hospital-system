@@ -38,6 +38,20 @@ Route::get('/home', function () {
 
 /*
 |--------------------------------------------------------------------------
+
+| Admin Portal Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/doctors', [AdminDoctorController::class, 'index'])->name('doctors.index');
+    Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
+    Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
+    Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
+
 | Doctor Search - Public / Patient
 |--------------------------------------------------------------------------
 */
