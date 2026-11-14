@@ -21,3 +21,12 @@ private function getProfile()
             ]
         );
     }
+
+    public function dashboard()
+    {
+        $profile = $this->getProfile();
+        $receivedNotes = DoctorMedicineNote::orderBy('received_at', 'desc')->get();
+        $medicines = Medicine::orderBy('id', 'asc')->get();
+
+        return view('pharmacy.dashboard', compact('profile', 'receivedNotes', 'medicines'));
+    }
