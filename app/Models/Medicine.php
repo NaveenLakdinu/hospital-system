@@ -14,10 +14,21 @@ class Medicine extends Model
         'category',
         'dosage_form',
         'stock_qty',
+        'stock_quantity',
         'price',
     ];
 
     protected $attributes = [
         'category' => 'General',
+        'stock_quantity' => 0,
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (Medicine $medicine) {
+            if (!is_null($medicine->stock_qty)) {
+                $medicine->stock_quantity = $medicine->stock_qty;
+            }
+        });
+    }
 }
