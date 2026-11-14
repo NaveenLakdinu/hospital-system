@@ -41,3 +41,118 @@
             width: 44px;
             height: 44px;
             background: linear-gradient(135deg, #10b981, #059669);
+
+            .brand-cross {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
+        }
+        .nav-item-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 16px;
+            border-radius: 12px;
+            color: #475569;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            margin-bottom: 6px;
+            transition: all 0.2s ease;
+        }
+        .nav-item-link i {
+            font-size: 17px;
+            color: #10b981;
+        }
+        .nav-item-link:hover {
+            background-color: #ecfdf5;
+            color: #059669;
+        }
+        .nav-item-link.active {
+            background-color: #d1fae5;
+            color: #047857;
+            font-weight: 700;
+        }
+        .sidebar-footer-card {
+            background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .top-header {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 1.5rem;
+        }
+        .btn-teal {
+            background-color: #10b981;
+            border-color: #10b981;
+            color: #fff;
+            font-weight: 600;
+        }
+        .btn-teal:hover {
+            background-color: #059669;
+            border-color: #059669;
+            color: #fff;
+        }
+        .card-modern {
+            background: #ffffff;
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.035);
+        }
+        .info-summary-card {
+            background: linear-gradient(135deg, #dcfce7 0%, #e0f2fe 100%);
+            border-radius: 18px;
+            border: 1px solid #bbf7d0;
+            position: relative;
+            overflow: hidden;
+        }
+        .badge-received {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .badge-issued {
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .badge-instock {
+            background-color: #dcfce7;
+            color: #15803d;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .badge-lowstock {
+            background-color: #fef3c7;
+            color: #b45309;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        @media (max-width: 991px) {
+            .sidebar { position: relative; width: 100%; min-height: auto; }
+            .main-wrapper { margin-left: 0; padding: 1rem; }
+        }
+    </style>
+</head>
