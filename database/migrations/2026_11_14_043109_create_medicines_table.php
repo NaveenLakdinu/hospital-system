@@ -24,10 +24,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('medicines');
     }
-};
 
 
-<?php
+
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
