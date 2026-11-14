@@ -71,23 +71,4 @@
                 @forelse($receivedNotes as $index => $note)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td class="fw-bold text-dark">{{ $note->doctor_name }}</td>
-                    <td>{{ $note->patient_name }}</td>
-                    <td class="fw-semibold text-primary">{{ $note->medicine_details }}</td>
-                    <td class="fw-bold">{{ $note->quantity }}</td>
-                    <td class="text-muted small">{{ $note->received_at->format('Y-m-d (h:i A)') }}</td>
-                    <td>
-                        @if($note->status === 'Received')
-                            <span class="badge-received">Received</span>
-                        @else
-                            <span class="badge-issued">Issued</span>
-                        @endif
-                    </td>
-                    <td class="text-end">
-                        @if($note->status === 'Received')
-                            <form action="{{ route('pharmacy.notes.issue', $note->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit" class="btn btn-teal btn-sm rounded-3 px-3">
-                 
-@endsection
+                    <t
