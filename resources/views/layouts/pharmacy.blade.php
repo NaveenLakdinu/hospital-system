@@ -59,6 +59,11 @@
             text-decoration: none;
             margin-bottom: 6px;
             transition: all 0.2s ease;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
         }
         .nav-item-link i {
             font-size: 17px;
@@ -72,6 +77,16 @@
             background-color: #d1fae5;
             color: #047857;
             font-weight: 700;
+        }
+        .logout-link {
+            color: #dc2626;
+        }
+        .logout-link i {
+            color: #dc2626;
+        }
+        .logout-link:hover {
+            background-color: #fef2f2;
+            color: #b91c1c;
         }
         .sidebar-footer-card {
             background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
@@ -151,7 +166,7 @@
 </head>
 <body>
 
-    <!-- Left Sidebar (Settings & Logout Removed) -->
+    <!-- Left Sidebar (Doctor Records & Reports Removed, Logout Added) -->
     <aside class="sidebar">
         <div>
             <div class="brand-logo">
@@ -172,15 +187,19 @@
                 <a href="{{ route('pharmacy.inventory.index') }}" class="nav-item-link {{ request()->routeIs('pharmacy.inventory.index') ? 'active' : '' }}">
                     <i class="bi bi-capsule"></i> Medicine Inventory
                 </a>
-                <a href="{{ route('pharmacy.doctors.index') }}" class="nav-item-link {{ request()->routeIs('pharmacy.doctors.index') ? 'active' : '' }}">
-                    <i class="bi bi-heart-pulse"></i> Doctor Records
-                </a>
                 <a href="{{ route('pharmacy.notes.index') }}" class="nav-item-link {{ request()->routeIs('pharmacy.notes.index') ? 'active' : '' }}">
                     <i class="bi bi-file-earmark-medical"></i> Received Notes
                 </a>
-                <a href="{{ route('pharmacy.reports.index') }}" class="nav-item-link {{ request()->routeIs('pharmacy.reports.index') ? 'active' : '' }}">
-                    <i class="bi bi-bar-chart-line"></i> Reports
-                </a>
+
+                <hr class="my-2 text-muted opacity-25">
+
+                <!-- Logout Button -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="nav-item-link logout-link">
+                        <i class="bi bi-box-arrow-left"></i> Logout
+                    </button>
+                </form>
             </nav>
         </div>
 
@@ -216,13 +235,31 @@
                     </span>
                 </a>
 
-                <!-- Admin Profile Info -->
-                <div class="d-flex align-items-center gap-2 bg-light px-3 py-1 rounded-pill border">
-                    <img src="https://ui-avatars.com/api/?name=Pharmacy+Admin&background=10b981&color=fff" class="rounded-circle" width="34" height="34" alt="Admin">
-                    <div class="lh-1">
-                        <div class="fw-bold text-dark" style="font-size: 13px;">Pharmacy Admin</div>
-                        <small class="text-muted" style="font-size: 11px;">Administrator</small>
-                    </div>
+                <!-- Admin Profile Dropdown with Logout -->
+                <div class="dropdown">
+                    <button class="btn d-flex align-items-center gap-2 bg-light px-3 py-1 rounded-pill border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://ui-avatars.com/api/?name=Pharmacy+Admin&background=10b981&color=fff" class="rounded-circle" width="34" height="34" alt="Admin">
+                        <div class="lh-1 text-start">
+                            <div class="fw-bold text-dark" style="font-size: 13px;">Pharmacy Admin</div>
+                            <small class="text-muted" style="font-size: 11px;">Administrator</small>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2">
+                        <li>
+                            <a class="dropdown-item small py-2" href="{{ route('pharmacy.profile.edit') }}">
+                                <i class="bi bi-person-gear me-2 text-success"></i> Edit Profile
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item small py-2 text-danger fw-semibold">
+                                    <i class="bi bi-box-arrow-left me-2"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </header>

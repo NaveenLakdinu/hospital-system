@@ -42,8 +42,6 @@ class PharmacySeeder extends Seeder
                 'received_at' => '2026-11-12 10:30:00',
                 'status' => 'Received',
             ],
-           
-           
             [
                 'doctor_name' => 'Dr. Suresh Kasthuriarachchi',
                 'patient_name' => 'N. Kumari',
@@ -51,7 +49,7 @@ class PharmacySeeder extends Seeder
                 'quantity' => 70,
                 'instructions' => '1 capsule daily after breakfast.',
                 'received_at' => '2026-11-08 09:30:00',
-                'status' => 'Received',
+                'status' => 'Issued',
             ],
         ];
 
