@@ -65,3 +65,12 @@ class PharmacySeeder extends Seeder
                 'received_at' => '2026-11-11 14:15:00',
                 'status' => 'Received',
             ],
+            [
+                'doctor_name' => 'Dr. Samantha Jayawardena',
+                'patient_name' => 'R. Perera',
+                'medicine_details' => 'Ibuprofen 400mg (Tablets)',
+                'quantity' => 60,
+                'instructions' => 'Take 1 tablet when pain occurs after food.',
+                'received_at' => '2026-11-09 16:45:00',
+                'status' => 'Received',
+            ],
