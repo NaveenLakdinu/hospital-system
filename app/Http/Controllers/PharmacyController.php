@@ -47,4 +47,23 @@ private function getProfile()
             'address' => 'required|string|max:500',
             'email' => 'required|email|max:255',
             'avatar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);$profile = $this->getProfile();
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $filename = 'pharmacy_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/pharmacy'), $filename);
+            $profile->avatar = 'uploads/pharmacy/' . $filename;
+        }
+
+        $profile->update([
+            'pharmacy_name' => $request->pharmacy_name,
+            'contact_number' => $request->contact_number,
+            'address' => $request->address,
+            'email' => $request->email,
         ]);
+
+        return redirect()->back()->with('success', 'Pharmacy profile updated successfully!');
+    }
+
+    // 4. Medicine
