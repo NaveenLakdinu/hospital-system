@@ -36,3 +36,11 @@ class PharmacySeeder extends Seeder
                 'address' => 'No. 123, Health Avenue, Colombo 07',
             ]
         );
+
+        medicines = [
+            ['name' => 'Paracetamol 500mg', 'dosage_form' => 'Tablets', 'stock_qty' => 200, 'price' => 25.00],
+            ['name' => 'Amoxicillin 500mg', 'dosage_form' => 'Capsules', 'stock_qty' => 120, 'price' => 150.00],
+            ['name' => 'Metformin 500mg', 'dosage_form' => 'Tablets', 'stock_qty' => 80, 'price' => 100.00],
+            ['name' => 'Omeprazole 20mg', 'dosage_form' => 'Capsules', 'stock_qty' => 150, 'price' => 80.00],
+            ['name' => 'Ibuprofen 400mg', 'dosage_form' => 'Tablets', 'stock_qty' => 50, 'price' => 60.00],
+        ];
