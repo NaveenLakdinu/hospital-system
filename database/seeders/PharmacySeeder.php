@@ -19,7 +19,7 @@ class PharmacySeeder extends Seeder
             [
                 'pharmacy_name' => 'MediCare Pharmacy',
                 'contact_number' => '0771234567',
-                'address' => 'No. 123, Health Avenue, Colombo 07',
+                'address' => 'No. 123, Medicare, Mahwa Yapahuwa',
             ]
         );
 
