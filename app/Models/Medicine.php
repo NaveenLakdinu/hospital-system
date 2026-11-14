@@ -26,6 +26,18 @@ class Medicine extends Model
         'unit_price' => 0.00,
     ];
 
+    // පැරණි rows වල stock_qty 0 නම් stock_quantity අගය ලබා ගැනීම
+    public function getDisplayStockAttribute()
+    {
+        return $this->stock_qty > 0 ? $this->stock_qty : ($this->stock_quantity ?? 0);
+    }
+
+    // පැරණි rows වල price 0 නම් unit_price අගය ලබා ගැනීම
+    public function getDisplayPriceAttribute()
+    {
+        return $this->price > 0 ? $this->price : ($this->unit_price ?? 0);
+    }
+
     protected static function booted(): void
     {
         static::saving(function (Medicine $medicine) {
