@@ -28,4 +28,16 @@
             top: 0;
             left: 0;
             z-index: 1000;
+        }}
+        .main-wrapper {
+            margin-left: 245px;
+            padding: 1.5rem 2rem;
         }
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 1.8rem;
+        }
+        .brand-cross {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #10b981, #059669);
