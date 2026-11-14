@@ -43,4 +43,6 @@ class PharmacySeeder extends Seeder
             ['name' => 'Metformin 500mg', 'dosage_form' => 'Tablets', 'stock_qty' => 80, 'price' => 100.00],
             ['name' => 'Omeprazole 20mg', 'dosage_form' => 'Capsules', 'stock_qty' => 150, 'price' => 80.00],
             ['name' => 'Ibuprofen 400mg', 'dosage_form' => 'Tablets', 'stock_qty' => 50, 'price' => 60.00],
-        ];
+        ];foreach ($medicines as $med) {
+            Medicine::firstOrCreate(['name' => $med['name']], $med);
+        }
