@@ -12,10 +12,64 @@ use App\Http\Controllers\Doctor\ConsultationController;
 use App\Http\Controllers\Doctor\PrescriptionController;
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+
 use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
-use App\Http\Controllers\Admin\PharmacistController as AdminPharmacistController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
+use App\Http\Controllers\Admin\PharmacistController as AdminPharmacistController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Doctor\ConsultationController as DoctorConsultationController;
+use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\LabTestController;
+
+/*
+|--------------------------------------------------------------------------
+| Lab Tests Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/lab-tests', [LabTestController::class, 'index'])->name('lab.index');
+    Route::post('/lab-tests/book', [LabTestController::class, 'store'])->name('lab.store');
+    Route::get('/my-lab-bookings', [LabTestController::class, 'myBookings'])->name('lab.my_bookings');
+    Route::patch('/lab-tests/{id}/cancel', [LabTestController::class, 'cancel'])->name('lab.cancel');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Health & Wellness Information Pages
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/depression-anxiety-info', function () {
+        return view('depression_anxiety.info');
+    })->name('depression_anxiety.info');
+
+    Route::get('/child-feeding-info', function () {
+        return view('child_feeding.info');
+    })->name('child_feeding.info');
+
+    Route::get('/cold-cough-fever-info', function () {
+        return view('cold_cough_fever.info');
+    })->name('cold_cough_fever.info');
+
+    Route::get('/joint-pain-info', function () {
+        return view('joint_pain.info');
+    })->name('joint_pain.info');
+
+    Route::get('/skin-info', function () {
+        return view('skin.info');
+    })->name('skin.info');
+
+    Route::get('/pregnancy-info', function () {
+        return view('pregnancy.info');
+    })->name('pregnancy.info');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Public Welcome & Home Pages
+
 use App\Http\Controllers\Nurse\DashboardController as NurseDashboardController;
 
 use App\Http\Controllers\Nurse\VitalSignController;
@@ -27,6 +81,7 @@ use App\Http\Controllers\Nurse\WalkInController;
 /*
 |--------------------------------------------------------------------------
 | Public Welcome Page
+
 |--------------------------------------------------------------------------
 */
 
@@ -35,11 +90,13 @@ Route::get('/', function () {
 })->name('welcome');
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Main Home Page
 |--------------------------------------------------------------------------
 */
+
 
 Route::get('/home', function () {
     return view('home');
@@ -48,6 +105,20 @@ Route::get('/home', function () {
 
 /*
 |--------------------------------------------------------------------------
+
+| Admin Portal Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/doctors', [AdminDoctorController::class, 'index'])->name('doctors.index');
+    Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
+    Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
+    Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
+
 | Doctor Search - Public / Patient
 |--------------------------------------------------------------------------
 */
@@ -62,7 +133,19 @@ Route::get('/doctors', [DoctorController::class, 'index'])
 |--------------------------------------------------------------------------
 */
 
+
 Route::middleware(['auth', 'role:doctor'])->group(function () {
+
+
+    // Administrator Reports & Analytics
+    Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/export', [AdminReportController::class, 'exportCsv'])->name('reports.export');
+
+    // Administrator Pharmacist Management
+    Route::get('/pharmacists', [AdminPharmacistController::class, 'index'])->name('pharmacists.index');
+    Route::get('/pharmacists/create', [AdminPharmacistController::class, 'create'])->name('pharmacists.create');
+    Route::post('/pharmacists', [AdminPharmacistController::class, 'store'])->name('pharmacists.store');
+    Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])->name('pharmacists.destroy');
 
     // Doctor Dashboard
     Route::get(
@@ -132,6 +215,7 @@ Route::get('/doctor/profile/edit', [DashboardController::class, 'editProfile'])
 
 Route::put('/doctor/profile', [DashboardController::class, 'updateProfile'])
     ->name('doctor.profile.update');
+
 });
 
 
@@ -141,49 +225,64 @@ Route::put('/doctor/profile', [DashboardController::class, 'updateProfile'])
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::get(
+    '/admin/dashboard',
+    [AdminDashboardController::class, 'index']
+)
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
 
-    // Dashboard
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])
-        ->name('dashboard');
 
-    // Doctors
-    Route::get('/doctors', [AdminDoctorController::class, 'index'])
-        ->name('doctors.index');
-    Route::get('/doctors/create', [AdminDoctorController::class, 'create'])
-        ->name('doctors.create');
-    Route::post('/doctors', [AdminDoctorController::class, 'store'])
-        ->name('doctors.store');
-    Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])
-        ->name('doctors.destroy');
-
-    // Pharmacists
-    Route::get('/pharmacists', [AdminPharmacistController::class, 'index'])
-        ->name('pharmacists.index');
-    Route::get('/pharmacists/create', [AdminPharmacistController::class, 'create'])
-        ->name('pharmacists.create');
-    Route::post('/pharmacists', [AdminPharmacistController::class, 'store'])
-        ->name('pharmacists.store');
-    Route::delete('/pharmacists/{pharmacist}', [AdminPharmacistController::class, 'destroy'])
-        ->name('pharmacists.destroy');
-
-    // Appointments
-    Route::get('/appointments', [AdminAppointmentController::class, 'index'])
-        ->name('appointments.index');
-    Route::patch('/appointments/{appointment}/status', [AdminAppointmentController::class, 'updateStatus'])
-        ->name('appointments.updateStatus');
-
-    // Reports
-    Route::get('/reports', [AdminReportController::class, 'index'])
-        ->name('reports.index');
-    Route::get('/reports/export-csv', [AdminReportController::class, 'exportCsv'])
-        ->name('reports.exportCsv');
-
+// Doctor Send Medicine Note to Pharmacy
+Route::middleware(['auth'])->group(function () {
+    Route::get('/doctor/prescribe', [PharmacyController::class, 'createDoctorNote'])->name('doctor.prescribe.create');
+    Route::post('/doctor/prescribe', [PharmacyController::class, 'storeDoctorNote'])->name('doctor.prescribe.store');
 });
-
 
 /*
 |--------------------------------------------------------------------------
+
+| Pharmacist & Pharmacy Admin Portal Routes (Updated New UI)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    // Pharmacist Role Login Redirect Routes (/pharmacist/...)
+    Route::prefix('pharmacist')->name('pharmacist.')->group(function () {
+        Route::get('/dashboard', [PharmacyController::class, 'dashboard'])->name('dashboard');
+        Route::get('/medicines', [PharmacyController::class, 'inventory'])->name('medicines.index');
+        Route::post('/medicines', [PharmacyController::class, 'storeMedicine'])->name('medicines.store');
+        Route::get('/prescriptions', [PharmacyController::class, 'receivedNotes'])->name('prescriptions.index');
+        Route::patch('/prescriptions/{id}/dispense', [PharmacyController::class, 'issueMedicineNote'])->name('prescriptions.dispense');
+    });
+
+    // Pharmacy Portal Full Routes (/pharmacy/...)
+    Route::prefix('pharmacy')->name('pharmacy.')->group(function () {
+        Route::get('/dashboard', [PharmacyController::class, 'dashboard'])->name('dashboard');
+
+        // Edit Profile
+        Route::get('/edit-profile', [PharmacyController::class, 'editProfile'])->name('profile.edit');
+        Route::post('/edit-profile', [PharmacyController::class, 'updateProfile'])->name('profile.update');
+
+        // Medicine Inventory (Add, Update, Delete)
+        Route::get('/inventory', [PharmacyController::class, 'inventory'])->name('inventory.index');
+        Route::post('/inventory', [PharmacyController::class, 'storeMedicine'])->name('inventory.store');
+        Route::put('/inventory/{id}', [PharmacyController::class, 'updateMedicine'])->name('inventory.update');
+        Route::delete('/inventory/{id}', [PharmacyController::class, 'destroyMedicine'])->name('inventory.destroy');
+
+        // Doctor Received Medicine Notes & Issue Medicine
+        Route::get('/received-notes', [PharmacyController::class, 'receivedNotes'])->name('notes.index');
+        Route::patch('/received-notes/{id}/issue', [PharmacyController::class, 'issueMedicineNote'])->name('notes.issue');
+
+        // Doctor Records & Reports
+        Route::get('/doctor-records', [PharmacyController::class, 'doctorRecords'])->name('doctors.index');
+        Route::get('/reports', [PharmacyController::class, 'reports'])->name('reports.index');
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Authenticated Dashboard & Profile
+
 | Pharmacist Dashboard
 |--------------------------------------------------------------------------
 */
@@ -198,6 +297,7 @@ Route::get('/pharmacist/dashboard', function () {
 /*
 |--------------------------------------------------------------------------
 | Nurse Dashboard
+
 |--------------------------------------------------------------------------
 */
 
@@ -306,7 +406,11 @@ Route::get('/dashboard', function () {
 
 /*
 |--------------------------------------------------------------------------
+
+| Patient Appointment Booking & Management
+
 | Profile
+
 |--------------------------------------------------------------------------
 */
 
@@ -332,6 +436,9 @@ Route::middleware('auth')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+
+| Chatbot Module Routes
+
 | Social Login
 |--------------------------------------------------------------------------
 */
@@ -354,10 +461,20 @@ Route::middleware('guest')->group(function () {
 /*
 |--------------------------------------------------------------------------
 | Patient Appointment Booking & Management (Auth Required)
+
 |--------------------------------------------------------------------------
 */
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::post('/chatbot/ask', [ChatbotController::class, 'ask'])->name('chatbot.ask');
+    Route::get('/chatbot', function () {
+        return view('chatbot.index');
+    })->name('chatbot.index');
+});
+
+require __DIR__.'/auth.php';
+
 
     Route::get(
         '/appointments/book/{doctor}',
