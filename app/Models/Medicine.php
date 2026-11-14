@@ -16,11 +16,14 @@ class Medicine extends Model
         'stock_qty',
         'stock_quantity',
         'price',
+        'unit_price',
+        'expiry_date',
     ];
 
     protected $attributes = [
         'category' => 'General',
         'stock_quantity' => 0,
+        'unit_price' => 0.00,
     ];
 
     protected static function booted(): void
@@ -28,6 +31,12 @@ class Medicine extends Model
         static::saving(function (Medicine $medicine) {
             if (!is_null($medicine->stock_qty)) {
                 $medicine->stock_quantity = $medicine->stock_qty;
+            }
+            if (!is_null($medicine->price)) {
+                $medicine->unit_price = $medicine->price;
+            }
+            if (empty($medicine->expiry_date)) {
+                $medicine->expiry_date = now()->addYears(2)->format('Y-m-d');
             }
         });
     }
