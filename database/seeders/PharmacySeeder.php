@@ -15,3 +15,11 @@ class PharmacySeeder extends Seeder
         //
     }
 }
+
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\PharmacyProfile;
+use App\Models\Medicine;
+use App\Models\DoctorMedicineNote;
