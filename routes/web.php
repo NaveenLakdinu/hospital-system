@@ -90,7 +90,6 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Main Home Page
@@ -118,7 +117,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
     Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
     Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
-
+/*
 | Doctor Search - Public / Patient
 |--------------------------------------------------------------------------
 */
