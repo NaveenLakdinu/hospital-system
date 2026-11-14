@@ -46,3 +46,14 @@ class PharmacySeeder extends Seeder
         ];foreach ($medicines as $med) {
             Medicine::firstOrCreate(['name' => $med['name']], $med);
         }
+
+        $notes = [
+            [
+                'doctor_name' => 'Dr. Suresh Kasthuriarachchi',
+                'patient_name' => 'M.A.D Thennakoon',
+                'medicine_details' => 'Paracetamol 500mg (Tablets)',
+                'quantity' => 100,
+                'instructions' => 'Take 1 tablet every 8 hours after meals for fever.',
+                'received_at' => '2026-11-12 10:30:00',
+                'status' => 'Received',
+            ],
