@@ -11,8 +11,13 @@ class Medicine extends Model
 
     protected $fillable = [
         'name',
+        'category',
         'dosage_form',
         'stock_qty',
         'price',
+    ];
+
+    protected $attributes = [
+        'category' => 'General',
     ];
 }
