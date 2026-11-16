@@ -175,3 +175,12 @@
             justify-content: flex-end;
             overflow: hidden;
         }
+        .clinic-bg-illustration img {
+            width: 100%;
+            height: 95%;
+            object-fit: cover;
+            object-position: center top;
+            mask-image: linear-gradient(to right, transparent 0%, black 28%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);
+            opacity: 0.92;
+        }
