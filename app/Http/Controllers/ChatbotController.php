@@ -10,115 +10,94 @@ class ChatbotController extends Controller
 {
     public function ask(Request $request)
     {
-        $validated = $request->validate([
-            'message' => 'required|string|max:2000',
-        ]);
+        $userMessage = $request->input('message')
+            ?? $request->input('prompt')
+            ?? $request->input('question')
+            ?? $request->input('query');
 
-        $apiKey = config('services.gemini.key');
-        $model = config('services.gemini.model', 'gemini-3.8-flash');
+        if (empty(trim((string) $userMessage))) {
+            $msg = 'කරුණාකර ඔබගේ පණිවිඩය ඇතුළත් කරන්න.';
+            return response()->json([
+                'reply' => $msg,
+                'response' => $msg,
+                'answer' => $msg,
+                'message' => $msg,
+            ], 422);
+        }
+
+        $apiKey = trim((string) (env('GEMINI_API_KEY') ?: config('services.gemini.key')));
 
         if (empty($apiKey)) {
+            $msg = '.env ගොනුවේ GEMINI_API_KEY ඇතුළත් කර නොමැත.';
             return response()->json([
-                'reply' => 'Gemini API Key එක සකසා නොමැත.'
+                'reply' => $msg,
+                'response' => $msg,
+                'answer' => $msg,
+                'message' => $msg,
             ], 500);
         }
 
-        $systemPrompt = '
-            You are the AI assistant for Family Care Medical Center & Pharmacy.
-
-            Reply in Sinhala when the patient uses Sinhala.
-            Reply in English when the patient uses English.
-            Be polite, friendly and helpful.
-            Give short and clear answers.
-            Never invent clinic information.
-            Never provide a definite medical diagnosis.
-            Never prescribe medicines or dosages.
-            Recommend a qualified doctor for medical concerns.
-            For emergencies, advise immediate medical attention.
-        ';
-
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent";
-
         try {
+            $model = trim((string) env('GEMINI_MODEL', 'gemini-2.5-flash'));
 
-            $response = Http::withHeaders([
-                    'x-goog-api-key' => $apiKey,
+            // AQ. වලින් පටන් ගන්නා Vertex AI Keys සහ AIza වලින් පටන් ගන්නා AI Studio Keys දෙකම සඳහා
+            if (str_starts_with($apiKey, 'AQ.')) {
+                $url = "https://aiplatform.googleapis.com/v1/publishers/google/models/{$model}:generateContent?key={$apiKey}";
+            } else {
+                $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}";
+            }
+
+            $systemPrompt = "You are MediCare24 AI Health Assistant, a helpful and polite medical support assistant for MediCare24 Hospital. Answer clearly in the same language the user asks (Sinhala or English). Provide general health guidance and remind patients to consult a qualified MediCare24 doctor for an official diagnosis.";
+
+            $response = Http::withoutVerifying()
+                ->timeout(30)
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
                 ])
-                ->acceptJson()
-                ->connectTimeout(10)
-                ->timeout(25)
-                ->retry(1, 1100, throw: false)
                 ->post($url, [
-                    'systemInstruction' => [
-                        'parts' => [
-                            ['text' => $systemPrompt]
-                        ]
-                    ],
                     'contents' => [
                         [
                             'role' => 'user',
                             'parts' => [
-                                ['text' => $validated['message']]
+                                ['text' => $systemPrompt . "\n\nPatient Question: " . $userMessage]
                             ]
                         ]
-                    ],
-                    'generationConfig' => [
-                        'temperature' => 0.4,
-                        'maxOutputTokens' => 500,
-                    ],
+                    ]
                 ]);
 
-            if (!$response->successful()) {
-
-                $status = $response->status();
-
-                $error = $response->json('error.message')
-                    ?? 'Unknown Gemini API error';
-
-                Log::error('Gemini API Error', [
-                    'status' => $status,
-                    'error' => $error,
-                    'model' => $model,
-                ]);
-
-                if ($status === 429 || $status === 503) {
-                    return response()->json([
-                        'reply' => 'AI සේවාව මේ මොහොතේ කාර්යබහුලයි. කරුණාකර තත්පර කිහිපයකින් නැවත උත්සාහ කරන්න.'
-                    ], 503);
-                }
+            if ($response->successful()) {
+                $data = $response->json();
+                $reply = $data['candidates'][0]['content']['parts'][0]['text']
+                    ?? 'පිළිතුරක් ලබා ගැනීමට නොහැකි විය. නැවත උත්සාහ කරන්න.';
 
                 return response()->json([
-                    'reply' => 'Gemini API Error: ' . $error
-                ], 500);
-            }
-
-            $reply = $response->json(
-                'candidates.0.content.parts.0.text'
-            );
-
-            if (empty($reply)) {
-                Log::warning('Gemini returned empty response', [
-                    'model' => $model,
+                    'reply' => $reply,
+                    'response' => $reply,
+                    'answer' => $reply,
+                    'message' => $reply,
                 ]);
-
-                return response()->json([
-                    'reply' => 'සමාවන්න, දැනට පිළිතුරක් ලබාගැනීමට නොහැකි විය.'
-                ], 500);
             }
 
-            return response()->json([
-                'reply' => $reply
-            ]);
-
-        } catch (\Throwable $e) {
-
-            Log::error('Chatbot Exception', [
-                'error' => $e->getMessage(),
-                'model' => $model,
-            ]);
+            Log::error('Gemini API Error: ' . $response->status() . ' - ' . $response->body());
+            $googleError = $response->json('error.message') ?? 'API Error (' . $response->status() . ')';
+            $errorMsg = 'AI දෝෂයකි: ' . $googleError;
 
             return response()->json([
-                'reply' => 'AI සේවාව සමඟ සම්බන්ධ වීමේ ගැටලුවක් ඇත. කරුණාකර නැවත උත්සාහ කරන්න.'
+                'reply' => $errorMsg,
+                'response' => $errorMsg,
+                'answer' => $errorMsg,
+                'message' => $errorMsg,
+            ], 500);
+
+        } catch (\Exception $e) {
+            Log::error('Chatbot Exception: ' . $e->getMessage());
+            $errorMsg = 'සම්බන්ධතා දෝෂයකි: ' . $e->getMessage();
+
+            return response()->json([
+                'reply' => $errorMsg,
+                'response' => $errorMsg,
+                'answer' => $errorMsg,
+                'message' => $errorMsg,
             ], 500);
         }
     }
