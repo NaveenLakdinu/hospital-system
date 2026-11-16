@@ -107,3 +107,12 @@
             text-align: center;
             padding: 1rem 0.5rem;
         }
+        /* Chat Card Top Emerald Header */
+        .clinic-chat-header {
+            background: var(--chat-header-bg);
+            padding: 1rem 1.75rem;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
