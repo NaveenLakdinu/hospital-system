@@ -29,3 +29,11 @@
             --send-btn-bg: linear-gradient(135deg, #22c55e 0%, #0d9488 100%);
             --page-bg: #eef7f4;
         }
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans Sinhala', sans-serif;
+            background-color: var(--page-bg);
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
