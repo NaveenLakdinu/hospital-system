@@ -146,3 +146,12 @@
             box-shadow: 0 10px 25px rgba(16, 185, 129, 0.18);
             margin-bottom: 1.75rem;
         }
+
+        .disclaimer-alert-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 6px solid #f59e0b;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.08);
+            margin-bottom: 1.75rem;
+        }
