@@ -316,3 +316,125 @@
             </form>
         </div>
     </header>
+
+
+
+<!-- ======================================================================
+         2. MAIN WORKSPACE (Left Dark Green Sidebar + Right AI Chat Card)
+         ====================================================================== -->
+    <div class="workspace-wrapper">
+
+        <!-- Left Dark Green Sidebar (With "AI Info" replacing "Health Information") -->
+        <aside class="left-green-sidebar">
+            <div>
+                <!-- Active Chat Bot Tab -->
+                <a href="{{ route('chatbot.index') }}" class="sidebar-nav-link active">
+                    <i class="bi bi-robot fs-5"></i>
+                    <span>AI Chat Bot</span>
+                </a>
+
+                <!-- AI Info Page Link (Opens AI Usage & Medical Disclaimer Page) -->
+                <a href="{{ route('chatbot.info') }}" class="sidebar-nav-link">
+                    <i class="bi bi-info-circle-fill fs-5"></i>
+                    <span>AI Info</span>
+                </a>
+            </div>
+
+            <!-- Bottom Hospital Health Emblem -->
+            <div class="sidebar-footer-brand">
+                <div class="heart-glow-orb">
+                    <i class="bi bi-heart-pulse-fill text-white fs-3"></i>
+                </div>
+                <h6 class="fw-bold mb-1">Your Health<br>Our Priority</h6>
+                <small class="fst-italic text-white-50" style="font-size: 11px;">Together for a<br>Healthier Life</small>
+            </div>
+        </aside>
+
+        <!-- Right Main Chat Card Area -->
+        <main class="chat-stage-container">
+            <div class="clinic-chat-card">
+
+                <!-- Chat Card Emerald Header -->
+                <div class="clinic-chat-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <!-- Cute Friendly 3D-Style Robot SVG Avatar -->
+                        <div class="header-bot-avatar">
+                            <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="29" y="4" width="6" height="10" rx="3" fill="#0d9488"/>
+                                <circle cx="32" cy="4" r="4" fill="#10b981"/>
+                                <rect x="12" y="14" width="40" height="34" rx="14" fill="#0f766e"/>
+                                <rect x="17" y="20" width="30" height="20" rx="9" fill="#0f172a"/>
+                                <circle cx="25" cy="30" r="3.5" fill="#38bdf8"/>
+                                <circle cx="39" cy="30" r="3.5" fill="#38bdf8"/>
+                                <path d="M27 35C28.5 37 35.5 37 37 35" stroke="#34d399" stroke-width="2.5" stroke-linecap="round"/>
+                                <rect x="20" y="50" width="24" height="8" rx="4" fill="#14b8a6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Family Care Clinic - AI Assistant</h5>
+                            <small class="text-white-50">Your friendly health assistant, available 24/7</small>
+                        </div>
+                    </div>
+
+                    <!-- Online Status Badge -->
+                    <div class="online-status-pill">
+                        <span class="online-pulse-dot"></span> Online
+                    </div>
+                </div>
+
+                <!-- Chat Messages Canvas -->
+                <div class="clinic-chat-body" id="chatMessagesContainer">
+
+                    <!-- Top-Right Floating Medical Heart Cross Icon -->
+                    <div class="floating-clinic-emblem">
+                        <i class="bi bi-heart-pulse-fill text-success fs-2"></i>
+                    </div>
+
+                    <!-- Right-Side Decorative Doctor & Child Illustration -->
+                    <div class="clinic-bg-illustration">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=80"
+                             alt="Family Doctor Caring">
+                    </div>
+
+                    <!-- Active Chat Messages Stream -->
+                    <div class="messages-stream" id="messagesStream">
+
+                        <!-- Initial Welcome Bot Message -->
+                        <div class="bot-msg-row">
+                            <div class="msg-bot-icon">
+                                <i class="bi bi-robot text-success fs-5"></i>
+                            </div>
+                            <div class="bot-speech-bubble">
+                                <div class="fw-bold mb-1">ආයුබෝවන්! 👋</div>
+                                <div>
+                                    <strong>MediCare24 Family Care Clinic AI</strong> සහායක වෙත සාදරයෙන් පිළිගනිමු. ඔබගේ සෞඛ්‍ය ගැටලු සඳහා Clinic එක පිළිබඳ ඕනෑම ප්‍රශ්නයක් තිබේද? මට උදව් කරන්න පුළුවන්.
+                                </div>
+                                <div class="mt-2 pt-2 border-top border-success-subtle small text-muted">
+                                    <i class="bi bi-info-circle text-success me-1"></i>
+                                    <em>සටහන: මෙම AI මඟින් සාමාන්‍ය සෞඛ්‍ය තොරතුරු පමණක් ලබා දෙන අතර ඖෂධ නියම කිරීම සිදු නොකරයි.</em>
+                                </div>
+                                <span class="msg-timestamp" id="welcomeTimestamp"></span>
+                            </div>
+                        </div>
+
+                        <!-- Quick Suggestion Chips -->
+                        <div class="quick-chips-wrapper" id="quickChipsRow">
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('Clinic එකේ සේවාවන් මොනවාද?')">
+                                <i class="bi bi-hospital text-success"></i> Clinic සේවාවන්
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('උණ සහ සෙම්ප්‍රතිශ්‍යාව රෝග ලක්ෂණ මොනවාද?')">
+                                <i class="bi bi-plus-square-fill text-success"></i> රෝග ලක්ෂණ
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('වෛද්‍යවරයෙකු හමුවීමට Appointment එකක් දාන්නේ කොහොමද?')">
+                                <i class="bi bi-calendar-check text-success"></i> Appointment
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('නිරෝගීව සිටීමට සෞඛ්‍ය උපදෙස් කිහිපයක් දෙන්න')">
+                                <i class="bi bi-info-circle-fill text-success"></i> සෞඛ්‍ය උපදෙස්
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="focusChatInput()">
+                                <i class="bi bi-question-circle-fill text-success"></i> වෙනත් ප්‍රශ්නයක්
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
