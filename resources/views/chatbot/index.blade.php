@@ -47,3 +47,15 @@
             z-index: 1030;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
         }
+        nav-menu-item {
+            color: #475569;
+            font-weight: 600;
+            font-size: 13.5px;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
