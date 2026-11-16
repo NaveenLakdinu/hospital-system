@@ -97,22 +97,7 @@ class ChatbotController extends Controller
             );
 
             if (empty($reply)) {
-                Log::warning('Gemini returned empty response', [
-                    'model' => $model,
-                ]);
-
-                return response()->json([
-                    'reply' => 'සමාවන්න, දැනට පිළිතුරක් ලබාගැනීමට නොහැකි විය.'
-                ], 500);
-            }
-
-            return response()->json([
-                'reply' => $reply
-            ]);
-
-        } catch (\Throwable $e) {
-
-            Log::error('Chatbot Exception', [
+                Log::wa
                 'error' => $e->getMessage(),
                 'model' => $model,
             ]);
