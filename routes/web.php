@@ -23,6 +23,27 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\LabTestController;
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Chatbot & AI Information Module Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    // Main AI Chatbot Interface Route
+    Route::get('/chatbot', function () {
+        return view('chatbot.index');
+    })->name('chatbot.index');
+
+});
+
+
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Lab Tests Routes
