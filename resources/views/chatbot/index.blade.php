@@ -964,6 +964,252 @@
                 });
             }
         });
+
+
+<!-- Card 3: Privacy & Data Protection -->
+                <div class="col-md-4">
+                    <div class="guide-photo-card">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80"
+                             alt="Patient Data Security" class="guide-card-image">
+                        <div class="p-3 d-flex flex-column flex-grow-1 justify-content-between">
+                            <div>
+                                <span class="guide-pill-badge">දත්ත ආරක්ෂාව</span>
+                                <h6 class="fw-bold text-dark mb-1">රෝගී තොරතුරු ආරක්ෂාව</h6>
+                                <p class="text-secondary small mb-2">
+                                    ඔබ AI සමඟ බෙදාගන්නා සෞඛ්‍ය ගැටලු 100% ක් පෞද්ගලිකව හා ආරක්ෂිතව සුරැකේ.
+                                </p>
+                            </div>
+                            <div class="text-end">
+                                <a href="{{ route('chatbot.index') }}" class="text-success fw-bold text-decoration-none">
+                                    <i class="bi bi-arrow-right fs-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 SECTION D: 4 MINI HORIZONTAL QUICK FEATURE PILLS
+                 ============================================================== -->
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="mini-feature-pill">
+                        <div class="mini-pill-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <div class="lh-sm">
+                            <div class="fw-bold text-dark small">ආරක්ෂිත AI භාවිතය</div>
+                            <small class="text-muted" style="font-size: 11px;">(සිංහල සහ English)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="mini-feature-pill">
+                        <div class="mini-pill-icon">
+                            <i class="bi bi-capsule"></i>
+                        </div>
+                        <div class="lh-sm">
+                            <div class="fw-bold text-dark small">ඖෂධ නියම නොකරයි</div>
+                            <small class="text-muted" style="font-size: 11px;">(තොරතුරු පමණක් ලබා දේ)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="mini-feature-pill">
+                        <div class="mini-pill-icon">
+                            <i class="bi bi-calendar2-check"></i>
+                        </div>
+                        <div class="lh-sm">
+                            <div class="fw-bold text-dark small">Clinic සේවා විස්තර</div>
+                            <small class="text-muted" style="font-size: 11px;">(වෛද්‍ය හමුවීම් සඳහා)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="mini-feature-pill">
+                        <div class="mini-pill-icon">
+                            <i class="bi bi-info-circle-fill"></i>
+                        </div>
+                        <div class="lh-sm">
+                            <div class="fw-bold text-dark small">වැදගත් නිවේදන</div>
+                            <small class="text-muted" style="font-size: 11px;">(පැය 24 පුරා සේවාව)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 SECTION E: SPLIT ILLUSTRATION & AI SAFETY CHECKLIST CARD
+                 ============================================================== -->
+            <div class="safety-split-card">
+                <div class="row g-4 align-items-center">
+                    <!-- Left Illustration: AI Medical Shield & Security Graphic -->
+                    <div class="col-lg-5">
+                        <div class="illustration-mint-frame">
+                            <svg width="210" height="190" viewBox="0 0 240 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Background Soft Circle -->
+                                <circle cx="120" cy="105" r="88" fill="#ffffff" fill-opacity="0.75"/>
+                                <!-- Medical Shield Body -->
+                                <path d="M120 26L182 52V104C182 145.5 155.6 182.8 120 194C84.4 182.8 58 145.5 58 104V52L120 26Z" fill="#0d9488"/>
+                                <path d="M120 36L172 58V104C172 139.5 149.5 171.5 120 182C90.5 171.5 68 139.5 68 104V58L120 36Z" fill="#10b981"/>
+                                <!-- White Medical Cross Inside Shield -->
+                                <rect x="110" y="74" width="20" height="60" rx="5" fill="#ffffff"/>
+                                <rect x="90" y="94" width="60" height="20" rx="5" fill="#ffffff"/>
+                                <!-- Floating AI Chat Badge -->
+                                <rect x="144" y="132" width="66" height="42" rx="12" fill="#064e3b"/>
+                                <circle cx="166" cy="153" r="4" fill="#34d399"/>
+                                <circle cx="177" cy="153" r="4" fill="#34d399"/>
+                                <circle cx="188" cy="153" r="4" fill="#34d399"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Right Checklist: AI Usage Rules -->
+                    <div class="col-lg-7">
+                        <h4 class="fw-bold text-dark mb-2">
+                            AI සෞඛ්‍ය සහායකයා පිළිබඳ නිවැරදි අවබෝධය (AI Usage & Safety)
+                        </h4>
+                        <p class="text-secondary fw-semibold small mb-3">
+                            MediCare24 AI පද්ධතිය වඩාත් ආරක්ෂිතව සහ ඵලදායීව භාවිතා කිරීමට පහත ක්‍රම අනුගමනය කරන්න:
+                        </p>
+
+                        <ul class="list-unstyled mb-3">
+                            <li class="mb-2 d-flex align-items-center gap-2 fw-semibold text-dark small">
+                                <i class="bi bi-check-lg text-success fs-5"></i>
+                                <span>ඔබගේ රෝග ලක්ෂණ පැහැදිලිව සඳහන් කර සාමාන්‍ය තොරතුරු විමසන්න.</span>
+                            </li>
+                            <li class="mb-2 d-flex align-items-center gap-2 fw-semibold text-dark small">
+                                <i class="bi bi-check-lg text-success fs-5"></i>
+                                <span>AI මඟින් ලබා දෙන තොරතුරු වෛද්‍ය උපදෙස් (Prescription) ලෙස නොසලකන්න.</span>
+                            </li>
+                            <li class="mb-2 d-flex align-items-center gap-2 fw-semibold text-dark small">
+                                <i class="bi bi-check-lg text-success fs-5"></i>
+                                <span>ඔබගේ බැංකු තොරතුරු හෝ මුරපද (Passwords) Chat එක තුළ ඇතුළත් නොකරන්න.</span>
+                            </li>
+                            <li class="d-flex align-items-center gap-2 fw-semibold text-dark small">
+                                <i class="bi bi-check-lg text-success fs-5"></i>
+                                <span>ඖෂධ ලබා ගැනීමට අවශ්‍ය නම් MediCare24 වෛද්‍යවරයෙකු වෙන් කරගන්න.</span>
+                            </li>
+                        </ul>
+
+                        <p class="fw-bold text-success small mb-0">
+                            නිවැරදි තොරතුරු සමඟ සෞඛ්‍ය සම්පන්න දිවියක් ගත කරන්න!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 SECTION F: EMERGENCY HELPLINE SPLIT ROW
+                 ============================================================== -->
+            <div class="row g-3 mb-4">
+                <!-- Left Card: 1990 Suwaseriya Ambulance Helpline -->
+                <div class="col-md-6">
+                    <div class="emergency-phone-card">
+                        <div class="rounded-circle bg-success-subtle text-success d-flex align-items-center justify-content-center flex-shrink-0" style="width: 54px; height: 54px;">
+                            <i class="bi bi-telephone-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold text-dark fs-5">හදිසි ගිලන්රථ සේවාව සඳහා</div>
+                            <div class="fw-bold text-success fs-4">අමතන්න – 1990</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Card: Red Emergency Alert Banner -->
+                <div class="col-md-6">
+                    <a href="tel:1990" class="emergency-red-banner">
+                        <i class="bi bi-bell-fill fs-1"></i>
+                        <div>
+                            <div class="fw-bold fs-4">හදිසි අවස්ථාවක්</div>
+                            <div class="fw-semibold opacity-90">(Emergency - Call 1990 / 119)</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 SECTION G: MINISTRY OF HEALTH SRI LANKA INFO CARD
+                 ============================================================== -->
+            <div class="moh-info-card">
+                <div class="row g-4 align-items-center">
+                    <!-- Left Column: Ministry Title & Custom Hospital Building SVG -->
+                    <div class="col-lg-6 text-center">
+                        <h5 class="fw-bold text-dark mb-1">ශ්‍රී ලංකා සෞඛ්‍ය අමාත්‍යාංශය</h5>
+                        <p class="text-secondary fw-semibold small mb-3">(Ministry of Health - Sri Lanka)</p>
+
+                        <!-- Clean Hospital Building Vector Illustration -->
+                        <svg width="260" height="170" viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Ground Line -->
+                            <rect x="20" y="164" width="240" height="6" rx="3" fill="#10b981"/>
+                            <!-- Side Wings -->
+                            <rect x="35" y="75" width="55" height="89" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+                            <rect x="190" y="75" width="55" height="89" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+                            <!-- Main Central Hospital Tower -->
+                            <rect x="85" y="42" width="110" height="122" rx="6" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+                            <!-- Top Medical Cross Emblem -->
+                            <circle cx="140" cy="30" r="22" fill="#ffffff" stroke="#059669" stroke-width="3"/>
+                            <rect x="135" y="18" width="10" height="24" rx="2" fill="#10b981"/>
+                            <rect x="128" y="25" width="24" height="10" rx="2" fill="#10b981"/>
+                            <!-- Windows Grid -->
+                            <rect x="102" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
+                            <rect x="131" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
+                            <rect x="160" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
+                            <rect x="102" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
+                            <rect x="131" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
+                            <rect x="160" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
+                            <!-- Entrance Door -->
+                            <rect x="122" y="126" width="36" height="38" rx="4" fill="#059669"/>
+                        </svg>
+                    </div>
+
+                    <!-- Right Column: National Health Helplines & Official Portal -->
+                    <div class="col-lg-6">
+                        <div class="moh-helpline-row">
+                            <div class="moh-icon-box">
+                                <i class="bi bi-ambulance"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold text-dark">1990 – සුවසැරිය හදිසි ගිලන්රථ සේවාව</div>
+                                <small class="text-muted">24/7 Free Pre-Hospital Emergency Ambulance Service</small>
+                            </div>
+                        </div>
+
+                        <div class="moh-helpline-row">
+                            <div class="moh-icon-box">
+                                <i class="bi bi-headset"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold text-dark">1926 – ජාතික සෞඛ්‍ය උපදෙස් දුරකථන අංකය</div>
+                                <small class="text-muted">National Mental Health & Medical Helpline</small>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 
     <!-- Bootstrap 5 JS Bundle -->
