@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediCare24 - AI Assistant Information & Safety Guidelines</title>
+    <!-- CSRF Token for Secure Laravel AJAX Requests -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>MediCare24 - Family Care Clinic AI Assistant</title>
 
-    <!-- Bootstrap 5.3 CSS & Bootstrap Icons -->
+    <!-- Bootstrap 5 CSS & Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- Google Fonts: Plus Jakarta Sans (English) & Noto Sans Sinhala (Sinhala) -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans, Noto Sans Sinhala & Dancing Script (for cursive footer) -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================================================
-           1. GLOBAL THEME VARIABLES & BASE TYPOGRAPHY
+           GLOBAL THEME COLORS & TYPOGRAPHY
            ========================================================================== */
         :root {
             --emerald-primary: #10b981;
             --emerald-dark: #064e3b;
-            --sidebar-gradient: linear-gradient(180deg, #0b5d3b 0%, #053b25 100%);
-            --banner-gradient: linear-gradient(90deg, #0b6e44 0%, #10945d 60%, #15a86a 100%);
+            --sidebar-bg: linear-gradient(180deg, #0b5d3b 0%, #053b25 100%);
+            --chat-header-bg: linear-gradient(90deg, #0c7c4d 0%, #16a366 55%, #10b981 100%);
+            --bot-bubble-bg: #e6f7ef;
+            --user-bubble-bg: linear-gradient(135deg, #c7f2e3 0%, #b5ece0 100%);
+            --send-btn-bg: linear-gradient(135deg, #22c55e 0%, #0d9488 100%);
             --page-bg: #eef7f4;
-            --card-shadow: 0 6px 22px rgba(15, 23, 42, 0.05);
         }
 
         body {
@@ -30,10 +34,11 @@
             color: #1e293b;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         /* ==========================================================================
-           2. TOP NAVIGATION BAR (Consistent with MediCare24 Header)
+           1. TOP NAVIGATION BAR
            ========================================================================== */
         .top-navbar {
             background: #ffffff;
@@ -45,7 +50,7 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
         }
 
-        .brand-logo-circle {
+        .brand-logo-icon {
             width: 38px;
             height: 38px;
             border-radius: 50%;
@@ -55,9 +60,10 @@
             justify-content: center;
             color: #ffffff;
             font-size: 18px;
+            box-shadow: 0 3px 10px rgba(13, 148, 136, 0.25);
         }
 
-        .top-nav-item {
+        .nav-menu-item {
             color: #475569;
             font-weight: 600;
             font-size: 13.5px;
@@ -70,21 +76,22 @@
             gap: 6px;
         }
 
-        .top-nav-item:hover, .top-nav-item.active {
+        .nav-menu-item:hover, .nav-menu-item.active {
             color: #059669;
             background-color: #ecfdf5;
         }
 
-        .badge-new-tag {
+        .badge-new-pill {
             background: linear-gradient(135deg, #14b8a6, #0d9488);
             color: #ffffff;
             font-size: 10px;
             font-weight: 700;
-            padding: 3px 8px;
+            padding: 3px 9px;
             border-radius: 20px;
+            letter-spacing: 0.5px;
         }
 
-        .user-initial-avatar {
+        .profile-initial-badge {
             width: 34px;
             height: 34px;
             border-radius: 50%;
@@ -98,25 +105,26 @@
         }
 
         /* ==========================================================================
-           3. WORKSPACE LAYOUT & LEFT DARK GREEN SIDEBAR
+           2. MAIN WORKSPACE & LEFT DARK GREEN SIDEBAR
            ========================================================================== */
-        .workspace-container {
+        .workspace-wrapper {
             display: flex;
             min-height: calc(100vh - 64px);
         }
 
         .left-green-sidebar {
             width: 225px;
-            background: var(--sidebar-gradient);
+            background: var(--sidebar-bg);
             color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             padding: 1.5rem 1rem;
             flex-shrink: 0;
+            position: relative;
         }
 
-        .sidebar-menu-link {
+        .sidebar-nav-link {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -130,272 +138,410 @@
             transition: all 0.2s ease;
         }
 
-        .sidebar-menu-link:hover {
+        .sidebar-nav-link:hover {
             background: rgba(255, 255, 255, 0.14);
             color: #ffffff;
         }
 
-        .sidebar-menu-link.active {
-            background: rgba(255, 255, 255, 0.2);
+        .sidebar-nav-link.active {
+            background: rgba(255, 255, 255, 0.18);
             color: #ffffff;
             border-left: 4px solid #34d399;
         }
 
-        .sidebar-emblem-box {
+        .sidebar-footer-brand {
             text-align: center;
             padding: 1rem 0.5rem;
         }
 
-        .shield-glow-circle {
-            width: 64px;
-            height: 64px;
+        .heart-glow-orb {
+            width: 66px;
+            height: 66px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(52, 211, 153, 0.35) 0%, rgba(16, 185, 129, 0.08) 70%);
             border: 1px solid rgba(52, 211, 153, 0.45);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 10px;
-            box-shadow: 0 0 25px rgba(52, 211, 153, 0.3);
+            margin-bottom: 12px;
+            box-shadow: 0 0 28px rgba(52, 211, 153, 0.35);
         }
 
         /* ==========================================================================
-           4. AI INFO PAGE SPECIFIC SECTIONS (HERO, WARNING, CARDS, HELPLINES)
+           3. MAIN CHAT CONTAINER CARD
            ========================================================================== */
-        .info-main-content {
+        .chat-stage-container {
             flex-grow: 1;
-            padding: 1.5rem 2rem;
-            max-width: 1220px;
-            margin: 0 auto;
-        }
-
-        /* Top Dark Green Hero Banner */
-        .ai-hero-banner {
-            background: var(--banner-gradient);
-            border-radius: 18px;
-            padding: 1.5rem 2rem;
-            color: #ffffff;
-            box-shadow: 0 8px 24px rgba(11, 110, 68, 0.18);
-            margin-bottom: 1.25rem;
-        }
-
-        .hero-icon-badge {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.16);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-        }
-
-        /* Yellow Medical Disclaimer Notice Box */
-        .important-notice-box {
-            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
-            border: 1px solid #fde047;
-            border-left: 6px solid #eab308;
-            border-radius: 16px;
-            padding: 1.35rem 1.75rem;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 1.5rem;
-        }
-
-        .warning-triangle-wrap {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            background: #fef08a;
-            color: #ca8a04;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            flex-shrink: 0;
-        }
-
-        /* 3-Column Illustrated Guide Cards */
-        .guide-photo-card {
-            background: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border: 1px solid #e2e8f0;
-            height: 100%;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 1.25rem 1.75rem;
             display: flex;
             flex-direction: column;
         }
 
-        .guide-photo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.09);
-        }
-
-        .guide-card-image {
-            width: 100%;
-            height: 165px;
-            object-fit: cover;
-        }
-
-        .guide-pill-badge {
-            background-color: #10b981;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        /* 4-Column Quick Mini Feature Pills */
-        .mini-feature-pill {
+        .clinic-chat-card {
             background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06);
             border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 0.9rem 1rem;
+            overflow: hidden;
             display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-height: 620px;
+        }
+
+        /* Chat Card Top Emerald Header */
+        .clinic-chat-header {
+            background: var(--chat-header-bg);
+            padding: 1rem 1.75rem;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-            height: 100%;
-            transition: border-color 0.2s ease;
         }
 
-        .mini-feature-pill:hover {
-            border-color: #10b981;
-        }
-
-        .mini-pill-icon {
-            width: 40px;
-            height: 40px;
+        .header-bot-avatar {
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
-            background-color: #d1fae5;
-            color: #059669;
+            background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             flex-shrink: 0;
         }
 
-        /* Split Illustration & Safety Checklist Card */
-        .safety-split-card {
+        .online-status-pill {
             background: #ffffff;
-            border-radius: 20px;
-            padding: 1.75rem;
-            box-shadow: var(--card-shadow);
-            border: 1px solid #e2e8f0;
-            margin-bottom: 1.5rem;
-        }
-
-        .illustration-mint-frame {
-            background: linear-gradient(135deg, #d1fae5 0%, #e0f2fe 100%);
-            border-radius: 16px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            min-height: 230px;
-        }
-
-        /* Emergency Callout Row */
-        .emergency-phone-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: var(--card-shadow);
-            height: 100%;
-        }
-
-        .emergency-red-banner {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: #ffffff;
-            border-radius: 16px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.25);
-            height: 100%;
-            text-decoration: none;
-            transition: transform 0.2s ease;
-        }
-
-        .emergency-red-banner:hover {
-            transform: translateY(-2px);
-            color: #ffffff;
-        }
-
-        /* Ministry of Health Sri Lanka Card */
-        .moh-info-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 1.75rem;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 1.5rem;
-        }
-
-        .moh-helpline-row {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 10px;
-        }
-
-        .moh-icon-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            background: #d1fae5;
-            color: #047857;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        /* Bottom Dark Green Action Button */
-        .btn-bottom-cta {
-            background: linear-gradient(90deg, #0b6e44 0%, #0f8a56 100%);
-            color: #ffffff;
+            color: #065f46;
             font-weight: 700;
-            font-size: 16px;
-            padding: 14px 36px;
-            border-radius: 14px;
-            text-decoration: none;
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 30px;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 8px 20px rgba(11, 110, 68, 0.22);
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .online-pulse-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+        }
+
+        /* ==========================================================================
+           4. CHAT BODY WITH RIGHT-SIDE DOCTOR & CHILD ILLUSTRATION
+           ========================================================================== */
+        .clinic-chat-body {
+            position: relative;
+            flex-grow: 1;
+            background: linear-gradient(135deg, #ffffff 0%, #f4fbf8 60%, #e8f6f0 100%);
+            padding: 1.5rem 1.75rem;
+            overflow-y: auto;
+            max-height: 490px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Decorative Right-Side Family Doctor Illustration */
+        .clinic-bg-illustration {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 340px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            overflow: hidden;
+        }
+
+        .clinic-bg-illustration img {
+            width: 100%;
+            height: 95%;
+            object-fit: cover;
+            object-position: center top;
+            mask-image: linear-gradient(to right, transparent 0%, black 28%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);
+            opacity: 0.92;
+        }
+
+        /* Floating Green Medical Heart Emblem on Top Right of Chat Canvas */
+        .floating-clinic-emblem {
+            position: absolute;
+            top: 18px;
+            right: 26px;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Chat Messages Column (Stays above background illustration) */
+        .messages-stream {
+            position: relative;
+            z-index: 3;
+            max-width: 74%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Bot Message Row */
+        .bot-msg-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .msg-bot-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e0f2fe;
+            border: 2px solid #ffffff;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bot-speech-bubble {
+            background: var(--bot-bubble-bg);
+            border: 1px solid #cceee0;
+            border-radius: 18px;
+            border-top-left-radius: 4px;
+            padding: 1rem 1.25rem;
+            color: #1e293b;
+            font-size: 14px;
+            line-height: 1.65;
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.05);
+            position: relative;
+            min-width: 260px;
+        }
+
+        .msg-timestamp {
+            font-size: 11px;
+            color: #64748b;
+            display: block;
+            text-align: right;
+            margin-top: 6px;
+        }
+
+        /* Quick Suggestion Chips Row */
+        .quick-chips-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-left: 54px;
+        }
+
+        .quick-chip-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 25px;
+            padding: 7px 14px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #1e293b;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
             transition: all 0.2s ease;
         }
 
-        .btn-bottom-cta:hover {
-            background: linear-gradient(90deg, #085735 0%, #0b6e44 100%);
+        .quick-chip-btn:hover {
+            background: #ecfdf5;
+            border-color: #10b981;
+            color: #047857;
+            transform: translateY(-1px);
+        }
+
+        /* User Message Row (Right Aligned) */
+        .user-msg-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            align-self: flex-end;
+        }
+
+        .user-speech-bubble {
+            background: var(--user-bubble-bg);
+            border: 1px solid #99e6cf;
+            border-radius: 22px;
+            border-bottom-right-radius: 4px;
+            padding: 0.75rem 1.25rem;
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 3px 10px rgba(13, 148, 136, 0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-msg-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #10b981;
             color: #ffffff;
-            transform: translateY(-2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Typing Indicator Dots */
+        .typing-dots span {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background-color: #10b981;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounceTyping 1.3s infinite ease-in-out both;
+        }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounceTyping {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* ==========================================================================
+           5. CHAT INPUT BAR & TRUST FOOTER
+           ========================================================================== */
+        .chat-input-section {
+            background: #f8fafc;
+            padding: 0.9rem 1.5rem 0.6rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .chat-input-pill {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 50px;
+            padding: 6px 8px 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .chat-input-pill:focus-within {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .input-action-icon {
+            background: transparent;
+            border: none;
+            color: #0d9488;
+            font-size: 18px;
+            padding: 4px 6px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .input-action-icon:hover {
+            color: #047857;
+        }
+
+        .chat-text-input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            font-size: 14px;
+            color: #1e293b;
+            background: transparent;
+        }
+
+        .btn-send-message {
+            background: var(--send-btn-bg);
+            color: #ffffff;
+            border: none;
+            border-radius: 40px;
+            padding: 9px 24px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-send-message:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-send-message:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* Bottom Trust Badges & Cursive Tagline */
+        .chat-trust-footer {
+            background: #ffffff;
+            padding: 0.65rem 1.75rem;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .trust-badges-group {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .trust-badge-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cursive-slogan {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            font-weight: 700;
+            color: #065f46;
         }
 
         @media (max-width: 991px) {
-            .workspace-container { flex-direction: column; }
-            .left-green-sidebar { width: 100%; flex-direction: row; align-items: center; padding: 0.85rem 1rem; }
-            .sidebar-emblem-box { display: none; }
-            .info-main-content { padding: 1rem; }
+            .workspace-wrapper { flex-direction: column; }
+            .left-green-sidebar { width: 100%; flex-direction: row; align-items: center; padding: 0.8rem 1rem; }
+            .sidebar-footer-brand { display: none; }
+            .messages-stream { max-width: 100%; }
+            .clinic-bg-illustration { display: none; }
+            .chat-stage-container { padding: 0.75rem; }
         }
     </style>
 </head>
@@ -407,7 +553,7 @@
     <header class="top-navbar d-flex justify-content-between align-items-center flex-wrap gap-3">
         <!-- Brand Logo -->
         <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-2 text-decoration-none">
-            <span class="brand-logo-circle">
+            <span class="brand-logo-icon">
                 <i class="bi bi-heart-pulse-fill"></i>
             </span>
             <span class="fw-bold fs-5 text-dark">MediCare<span style="color: #0d9488;">24</span></span>
@@ -415,21 +561,21 @@
 
         <!-- Center Navigation Links -->
         <nav class="d-none d-xl-flex align-items-center gap-2">
-            <a href="{{ Route::has('doctors.index') ? route('doctors.index') : '#' }}" class="top-nav-item">Find Doctors</a>
-            <a href="#" class="top-nav-item">Video Consult</a>
-            <a href="{{ Route::has('lab.index') ? route('lab.index') : '#' }}" class="top-nav-item">Lab Tests</a>
-            <a href="#" class="top-nav-item">Surgeries</a>
-            <a href="{{ route('chatbot.index') }}" class="top-nav-item">
-                AI Chat Bot <span class="badge-new-tag">NEW</span>
+            <a href="{{ Route::has('doctors.index') ? route('doctors.index') : '#' }}" class="nav-menu-item">Find Doctors</a>
+            <a href="#" class="nav-menu-item">Video Consult</a>
+            <a href="{{ Route::has('lab.index') ? route('lab.index') : '#' }}" class="nav-menu-item">Lab Tests</a>
+            <a href="#" class="nav-menu-item">Surgeries</a>
+            <a href="{{ route('chatbot.index') }}" class="nav-menu-item active">
+                AI Chat Bot <span class="badge-new-pill">NEW</span>
             </a>
-            <a href="#" class="top-nav-item">For Providers</a>
-            <a href="{{ route('chatbot.info') }}" class="top-nav-item active">AI Info & Help</a>
+            <a href="#" class="nav-menu-item">For Providers</a>
+            <a href="{{ route('chatbot.info') }}" class="nav-menu-item">AI Info & Help</a>
         </nav>
 
         <!-- Right User Profile & Logout -->
         <div class="d-flex align-items-center gap-3">
             <div class="d-flex align-items-center gap-2">
-                <span class="user-initial-avatar">
+                <span class="profile-initial-badge">
                     {{ strtoupper(substr(Auth::user()->name ?? 'M', 0, 1)) }}
                 </span>
                 <span class="fw-semibold text-dark small">{{ Auth::user()->name ?? 'M.A.D Thennakoon' }}</span>
@@ -445,397 +591,383 @@
     </header>
 
     <!-- ======================================================================
-         2. MAIN WORKSPACE (Left Dark Green Sidebar + Right AI Info Content)
+         2. MAIN WORKSPACE (Left Dark Green Sidebar + Right AI Chat Card)
          ====================================================================== -->
-    <div class="workspace-container">
+    <div class="workspace-wrapper">
 
-        <!-- Left Dark Green Sidebar -->
+        <!-- Left Dark Green Sidebar (With "AI Info" replacing "Health Information") -->
         <aside class="left-green-sidebar">
             <div>
-                <!-- Link to AI Chatbot Interface -->
-                <a href="{{ route('chatbot.index') }}" class="sidebar-menu-link">
+                <!-- Active Chat Bot Tab -->
+                <a href="{{ route('chatbot.index') }}" class="sidebar-nav-link active">
                     <i class="bi bi-robot fs-5"></i>
                     <span>AI Chat Bot</span>
                 </a>
 
-                <!-- Active Link: AI Info & Guidelines -->
-                <a href="{{ route('chatbot.info') }}" class="sidebar-menu-link active">
-                    <i class="bi bi-journal-medical fs-5"></i>
+                <!-- AI Info Page Link (Opens AI Usage & Medical Disclaimer Page) -->
+                <a href="{{ route('chatbot.info') }}" class="sidebar-nav-link">
+                    <i class="bi bi-info-circle-fill fs-5"></i>
                     <span>AI Info</span>
                 </a>
             </div>
 
-            <!-- Bottom Safety & Health Shield Emblem -->
-            <div class="sidebar-emblem-box">
-                <div class="shield-glow-circle">
-                    <i class="bi bi-shield-fill-check text-white fs-3"></i>
+            <!-- Bottom Hospital Health Emblem -->
+            <div class="sidebar-footer-brand">
+                <div class="heart-glow-orb">
+                    <i class="bi bi-heart-pulse-fill text-white fs-3"></i>
                 </div>
                 <h6 class="fw-bold mb-1">Your Health<br>Our Priority</h6>
-                <small class="text-white-50" style="font-size: 11px;">Safe AI Guidance</small>
+                <small class="fst-italic text-white-50" style="font-size: 11px;">Together for a<br>Healthier Life</small>
             </div>
         </aside>
 
-        <!-- Right Main Content Area -->
-        <main class="info-main-content">
+        <!-- Right Main Chat Card Area -->
+        <main class="chat-stage-container">
+            <div class="clinic-chat-card">
 
-            <!-- ==============================================================
-                 SECTION A: TOP DARK GREEN HERO BANNER
-                 ============================================================== -->
-            <div class="ai-hero-banner d-flex justify-content-between align-items-center flex-wrap gap-3">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="hero-icon-badge">
-                        <i class="bi bi-robot"></i>
-                    </div>
-                    <div>
-                        <h4 class="fw-bold mb-1">ආරක්ෂිත සෞඛ්‍ය තොරතුරු සඳහා AI සහාය ලබා ගනිමු...</h4>
-                        <small class="text-white-50">MediCare24 AI Health Assistant භාවිතා කරන නිවැරදි ආකාරය සහ සීමාවන්</small>
-                    </div>
-                </div>
-
-                <!-- Action Button to Open AI Chat Bot -->
-                <a href="{{ route('chatbot.index') }}" class="btn btn-light text-success fw-bold rounded-3 px-4 py-2 shadow-sm">
-                    <i class="bi bi-play-fill me-1"></i> AI Chat Bot බලන්න
-                </a>
-            </div>
-
-            <!-- ==============================================================
-                 SECTION B: YELLOW IMPORTANT NOTICE BOX (NO PRESCRIPTIONS)
-                 ============================================================== -->
-            <div class="important-notice-box">
-                <div class="d-flex align-items-start gap-3 flex-wrap flex-md-nowrap">
-                    <div class="warning-triangle-wrap">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-bold text-dark mb-1">වැදගත් දැනුම්දීමක්! (Important Medical Disclaimer)</h5>
-                        <p class="text-dark small fw-semibold mb-2">
-                            MediCare24 AI සහායකයා භාවිතා කිරීමට පෙර, අනිවාර්යයෙන්ම පහත කරුණු පිළිබඳව සැලකිලිමත් වන්න:
-                        </p>
-                        <ul class="list-unstyled mb-0 small text-dark">
-                            <li class="mb-1 d-flex align-items-center gap-2">
-                                <i class="bi bi-check-circle-fill text-success"></i>
-                                <span><strong>AI මඟින් බෙහෙත් නියම කිරීම (Prescriptions) සිදු නොකරයි</strong> — මෙමඟින් ලබා දෙන්නේ සාමාන්‍ය සෞඛ්‍ය තොරතුරු (Health Information) පමණි.</span>
-                            </li>
-                            <li class="mb-1 d-flex align-items-center gap-2">
-                                <i class="bi bi-check-circle-fill text-success"></i>
-                                <span>කිසිදු ඖෂධයක් AI පිළිතුරු මත පදනම්ව තනිවම ලබා නොගන්න; සෑම විටම සුදුසුකම් ලත් වෛද්‍යවරයෙකු හමුවන්න.</span>
-                            </li>
-                            <li class="d-flex align-items-center gap-2">
-                                <i class="bi bi-check-circle-fill text-success"></i>
-                                <span>හදිසි රෝගී තත්ත්වයකදී AI Chat භාවිතා නොකර වහාම 1990 හෝ ළඟම ඇති රෝහල වෙත යොමු වන්න.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==============================================================
-                 SECTION C: 3 ILLUSTRATED AI GUIDE CARDS
-                 ============================================================== -->
-            <div class="row g-3 mb-3">
-                <!-- Card 1: General Health Info -->
-                <div class="col-md-4">
-                    <div class="guide-photo-card">
-                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80"
-                             alt="AI Health Information" class="guide-card-image">
-                        <div class="p-3 d-flex flex-column flex-grow-1 justify-content-between">
-                            <div>
-                                <span class="guide-pill-badge">මූලික තොරතුරු</span>
-                                <h6 class="fw-bold text-dark mb-1">සෞඛ්‍ය තොරතුරු පමණයි</h6>
-                                <p class="text-secondary small mb-2">
-                                    රෝග ලක්ෂණ සහ සෞඛ්‍ය පුරුදු පිළිබඳ නිවැරදි මූලික තොරතුරු AI මඟින් ලබා ගන්නා ආකාරය.
-                                </p>
-                            </div>
-                            <div class="text-end">
-                                <a href="{{ route('chatbot.index') }}" class="text-success fw-bold text-decoration-none">
-                                    <i class="bi bi-arrow-right fs-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2: Digital Health & Stethoscope -->
-                <div class="col-md-4">
-                    <div class="guide-photo-card">
-                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80"
-                             alt="Doctor Consultation" class="guide-card-image">
-                        <div class="p-3 d-flex flex-column flex-grow-1 justify-content-between">
-                            <div>
-                                <span class="guide-pill-badge">සෞඛ්‍ය උපදෙස්</span>
-                                <h6 class="fw-bold text-dark mb-1">ඩිජිටල් සෞඛ්‍ය සහාය</h6>
-                                <p class="text-secondary small mb-2">
-                                    වෛද්‍යවරයෙකු හමුවීමට පෙර ඔබගේ ගැටලුව නිරවුල්ව තේරුම් ගැනීමට AI සහාය ලබා ගන්න.
-                                </p>
-                            </div>
-                            <div class="text-end">
-                                <a href="{{ route('chatbot.index') }}" class="text-success fw-bold text-decoration-none">
-                                    <i class="bi bi-arrow-right fs-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Privacy & Data Protection -->
-                <div class="col-md-4">
-                    <div class="guide-photo-card">
-                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80"
-                             alt="Patient Data Security" class="guide-card-image">
-                        <div class="p-3 d-flex flex-column flex-grow-1 justify-content-between">
-                            <div>
-                                <span class="guide-pill-badge">දත්ත ආරක්ෂාව</span>
-                                <h6 class="fw-bold text-dark mb-1">රෝගී තොරතුරු ආරක්ෂාව</h6>
-                                <p class="text-secondary small mb-2">
-                                    ඔබ AI සමඟ බෙදාගන්නා සෞඛ්‍ය ගැටලු 100% ක් පෞද්ගලිකව හා ආරක්ෂිතව සුරැකේ.
-                                </p>
-                            </div>
-                            <div class="text-end">
-                                <a href="{{ route('chatbot.index') }}" class="text-success fw-bold text-decoration-none">
-                                    <i class="bi bi-arrow-right fs-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==============================================================
-                 SECTION D: 4 MINI HORIZONTAL QUICK FEATURE PILLS
-                 ============================================================== -->
-            <div class="row g-3 mb-4">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="mini-feature-pill">
-                        <div class="mini-pill-icon">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-                        <div class="lh-sm">
-                            <div class="fw-bold text-dark small">ආරක්ෂිත AI භාවිතය</div>
-                            <small class="text-muted" style="font-size: 11px;">(සිංහල සහ English)</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="mini-feature-pill">
-                        <div class="mini-pill-icon">
-                            <i class="bi bi-capsule"></i>
-                        </div>
-                        <div class="lh-sm">
-                            <div class="fw-bold text-dark small">ඖෂධ නියම නොකරයි</div>
-                            <small class="text-muted" style="font-size: 11px;">(තොරතුරු පමණක් ලබා දේ)</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="mini-feature-pill">
-                        <div class="mini-pill-icon">
-                            <i class="bi bi-calendar2-check"></i>
-                        </div>
-                        <div class="lh-sm">
-                            <div class="fw-bold text-dark small">Clinic සේවා විස්තර</div>
-                            <small class="text-muted" style="font-size: 11px;">(වෛද්‍ය හමුවීම් සඳහා)</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="mini-feature-pill">
-                        <div class="mini-pill-icon">
-                            <i class="bi bi-info-circle-fill"></i>
-                        </div>
-                        <div class="lh-sm">
-                            <div class="fw-bold text-dark small">වැදගත් නිවේදන</div>
-                            <small class="text-muted" style="font-size: 11px;">(පැය 24 පුරා සේවාව)</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==============================================================
-                 SECTION E: SPLIT ILLUSTRATION & AI SAFETY CHECKLIST CARD
-                 ============================================================== -->
-            <div class="safety-split-card">
-                <div class="row g-4 align-items-center">
-                    <!-- Left Illustration: AI Medical Shield & Security Graphic -->
-                    <div class="col-lg-5">
-                        <div class="illustration-mint-frame">
-                            <svg width="210" height="190" viewBox="0 0 240 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Background Soft Circle -->
-                                <circle cx="120" cy="105" r="88" fill="#ffffff" fill-opacity="0.75"/>
-                                <!-- Medical Shield Body -->
-                                <path d="M120 26L182 52V104C182 145.5 155.6 182.8 120 194C84.4 182.8 58 145.5 58 104V52L120 26Z" fill="#0d9488"/>
-                                <path d="M120 36L172 58V104C172 139.5 149.5 171.5 120 182C90.5 171.5 68 139.5 68 104V58L120 36Z" fill="#10b981"/>
-                                <!-- White Medical Cross Inside Shield -->
-                                <rect x="110" y="74" width="20" height="60" rx="5" fill="#ffffff"/>
-                                <rect x="90" y="94" width="60" height="20" rx="5" fill="#ffffff"/>
-                                <!-- Floating AI Chat Badge -->
-                                <rect x="144" y="132" width="66" height="42" rx="12" fill="#064e3b"/>
-                                <circle cx="166" cy="153" r="4" fill="#34d399"/>
-                                <circle cx="177" cy="153" r="4" fill="#34d399"/>
-                                <circle cx="188" cy="153" r="4" fill="#34d399"/>
+                <!-- Chat Card Emerald Header -->
+                <div class="clinic-chat-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <!-- Cute Friendly 3D-Style Robot SVG Avatar -->
+                        <div class="header-bot-avatar">
+                            <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="29" y="4" width="6" height="10" rx="3" fill="#0d9488"/>
+                                <circle cx="32" cy="4" r="4" fill="#10b981"/>
+                                <rect x="12" y="14" width="40" height="34" rx="14" fill="#0f766e"/>
+                                <rect x="17" y="20" width="30" height="20" rx="9" fill="#0f172a"/>
+                                <circle cx="25" cy="30" r="3.5" fill="#38bdf8"/>
+                                <circle cx="39" cy="30" r="3.5" fill="#38bdf8"/>
+                                <path d="M27 35C28.5 37 35.5 37 37 35" stroke="#34d399" stroke-width="2.5" stroke-linecap="round"/>
+                                <rect x="20" y="50" width="24" height="8" rx="4" fill="#14b8a6"/>
                             </svg>
                         </div>
-                    </div>
-
-                    <!-- Right Checklist: AI Usage Rules -->
-                    <div class="col-lg-7">
-                        <h4 class="fw-bold text-dark mb-2">
-                            AI සෞඛ්‍ය සහායකයා පිළිබඳ නිවැරදි අවබෝධය (AI Usage & Safety)
-                        </h4>
-                        <p class="text-secondary fw-semibold small mb-3">
-                            MediCare24 AI පද්ධතිය වඩාත් ආරක්ෂිතව සහ ඵලදායීව භාවිතා කිරීමට පහත ක්‍රම අනුගමනය කරන්න:
-                        </p>
-
-                        <ul class="list-unstyled mb-3">
-                            <li class="mb-2 d-flex align-items-center gap-2 fw-semibold text-dark small">
-                                <i class="bi bi-check-lg text-success fs-5"></i>
-                                <span>ඔබගේ රෝග ලක්ෂණ පැහැදිලිව සඳහන් කර සාමාන්‍ය තොරතුරු විමසන්න.</span>
-                            </li>
-                            <li class="mb-2 d-flex align-items-center gap-2 fw-semibold text-dark small">
-                                <i class="bi bi-check-lg text-success fs-5"></i>
-                                <span>AI මඟින් ලබා දෙන තොරතුරු වෛද්‍ය උපදෙස් (Prescription) ලෙස නොසලකන්න.</span>
-                            </li>
-                            <li class="mb-2 d-flex align-items-center gap-2 fw-semibold text-dark small">
-                                <i class="bi bi-check-lg text-success fs-5"></i>
-                                <span>ඔබගේ බැංකු තොරතුරු හෝ මුරපද (Passwords) Chat එක තුළ ඇතුළත් නොකරන්න.</span>
-                            </li>
-                            <li class="d-flex align-items-center gap-2 fw-semibold text-dark small">
-                                <i class="bi bi-check-lg text-success fs-5"></i>
-                                <span>ඖෂධ ලබා ගැනීමට අවශ්‍ය නම් MediCare24 වෛද්‍යවරයෙකු වෙන් කරගන්න.</span>
-                            </li>
-                        </ul>
-
-                        <p class="fw-bold text-success small mb-0">
-                            නිවැරදි තොරතුරු සමඟ සෞඛ්‍ය සම්පන්න දිවියක් ගත කරන්න!
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==============================================================
-                 SECTION F: EMERGENCY HELPLINE SPLIT ROW
-                 ============================================================== -->
-            <div class="row g-3 mb-4">
-                <!-- Left Card: 1990 Suwaseriya Ambulance Helpline -->
-                <div class="col-md-6">
-                    <div class="emergency-phone-card">
-                        <div class="rounded-circle bg-success-subtle text-success d-flex align-items-center justify-content-center flex-shrink-0" style="width: 54px; height: 54px;">
-                            <i class="bi bi-telephone-fill fs-3"></i>
-                        </div>
                         <div>
-                            <div class="fw-bold text-dark fs-5">හදිසි ගිලන්රථ සේවාව සඳහා</div>
-                            <div class="fw-bold text-success fs-4">අමතන්න – 1990</div>
+                            <h5 class="fw-bold mb-0">Family Care Clinic - AI Assistant</h5>
+                            <small class="text-white-50">Your friendly health assistant, available 24/7</small>
                         </div>
+                    </div>
+
+                    <!-- Online Status Badge -->
+                    <div class="online-status-pill">
+                        <span class="online-pulse-dot"></span> Online
                     </div>
                 </div>
 
-                <!-- Right Card: Red Emergency Alert Banner -->
-                <div class="col-md-6">
-                    <a href="tel:1990" class="emergency-red-banner">
-                        <i class="bi bi-bell-fill fs-1"></i>
-                        <div>
-                            <div class="fw-bold fs-4">හදිසි අවස්ථාවක්</div>
-                            <div class="fw-semibold opacity-90">(Emergency - Call 1990 / 119)</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                <!-- Chat Messages Canvas -->
+                <div class="clinic-chat-body" id="chatMessagesContainer">
 
-            <!-- ==============================================================
-                 SECTION G: MINISTRY OF HEALTH SRI LANKA INFO CARD
-                 ============================================================== -->
-            <div class="moh-info-card">
-                <div class="row g-4 align-items-center">
-                    <!-- Left Column: Ministry Title & Custom Hospital Building SVG -->
-                    <div class="col-lg-6 text-center">
-                        <h5 class="fw-bold text-dark mb-1">ශ්‍රී ලංකා සෞඛ්‍ය අමාත්‍යාංශය</h5>
-                        <p class="text-secondary fw-semibold small mb-3">(Ministry of Health - Sri Lanka)</p>
-
-                        <!-- Clean Hospital Building Vector Illustration -->
-                        <svg width="260" height="170" viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Ground Line -->
-                            <rect x="20" y="164" width="240" height="6" rx="3" fill="#10b981"/>
-                            <!-- Side Wings -->
-                            <rect x="35" y="75" width="55" height="89" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
-                            <rect x="190" y="75" width="55" height="89" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
-                            <!-- Main Central Hospital Tower -->
-                            <rect x="85" y="42" width="110" height="122" rx="6" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
-                            <!-- Top Medical Cross Emblem -->
-                            <circle cx="140" cy="30" r="22" fill="#ffffff" stroke="#059669" stroke-width="3"/>
-                            <rect x="135" y="18" width="10" height="24" rx="2" fill="#10b981"/>
-                            <rect x="128" y="25" width="24" height="10" rx="2" fill="#10b981"/>
-                            <!-- Windows Grid -->
-                            <rect x="102" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="131" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="160" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="102" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="131" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="160" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <!-- Entrance Door -->
-                            <rect x="122" y="126" width="36" height="38" rx="4" fill="#059669"/>
-                        </svg>
+                    <!-- Top-Right Floating Medical Heart Cross Icon -->
+                    <div class="floating-clinic-emblem">
+                        <i class="bi bi-heart-pulse-fill text-success fs-2"></i>
                     </div>
 
-                    <!-- Right Column: National Health Helplines & Official Portal -->
-                    <div class="col-lg-6">
-                        <div class="moh-helpline-row">
-                            <div class="moh-icon-box">
-                                <i class="bi bi-ambulance"></i>
+                    <!-- Right-Side Decorative Doctor & Child Illustration -->
+                    <div class="clinic-bg-illustration">
+                        <img src="https://plus.unsplash.com/premium_photo-1661777752178-fa6055526eb8?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+                             alt="Family Doctor Caring">
+                    </div>
+
+                    <!-- Active Chat Messages Stream -->
+                    <div class="messages-stream" id="messagesStream">
+
+                        <!-- Initial Welcome Bot Message -->
+                        <div class="bot-msg-row">
+                            <div class="msg-bot-icon">
+                                <i class="bi bi-robot text-success fs-5"></i>
                             </div>
-                            <div>
-                                <div class="fw-bold text-dark">1990 – සුවසැරිය හදිසි ගිලන්රථ සේවාව</div>
-                                <small class="text-muted">24/7 Free Pre-Hospital Emergency Ambulance Service</small>
+                            <div class="bot-speech-bubble">
+                                <div class="fw-bold mb-1">ආයුබෝවන්! 👋</div>
+                                <div>
+                                    <strong>MediCare24 Family Care Clinic AI</strong> සහායක වෙත සාදරයෙන් පිළිගනිමු. ඔබගේ සෞඛ්‍ය ගැටලු සඳහා Clinic එක පිළිබඳ ඕනෑම ප්‍රශ්නයක් තිබේද? මට උදව් කරන්න පුළුවන්.
+                                </div>
+                                <div class="mt-2 pt-2 border-top border-success-subtle small text-muted">
+                                    <i class="bi bi-info-circle text-success me-1"></i>
+                                    <em>සටහන: මෙම AI මඟින් සාමාන්‍ය සෞඛ්‍ය තොරතුරු පමණක් ලබා දෙන අතර ඖෂධ නියම කිරීම සිදු නොකරයි.</em>
+                                </div>
+                                <span class="msg-timestamp" id="welcomeTimestamp"></span>
                             </div>
                         </div>
 
-                        <div class="moh-helpline-row">
-                            <div class="moh-icon-box">
-                                <i class="bi bi-headset"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold text-dark">1926 – ජාතික සෞඛ්‍ය උපදෙස් දුරකථන අංකය</div>
-                                <small class="text-muted">National Mental Health & Medical Helpline</small>
-                            </div>
+                        <!-- Quick Suggestion Chips -->
+                        <div class="quick-chips-wrapper" id="quickChipsRow">
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('Clinic එකේ සේවාවන් මොනවාද?')">
+                                <i class="bi bi-hospital text-success"></i> Clinic සේවාවන්
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('උණ සහ සෙම්ප්‍රතිශ්‍යාව රෝග ලක්ෂණ මොනවාද?')">
+                                <i class="bi bi-plus-square-fill text-success"></i> රෝග ලක්ෂණ
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('වෛද්‍යවරයෙකු හමුවීමට Appointment එකක් දාන්නේ කොහොමද?')">
+                                <i class="bi bi-calendar-check text-success"></i> Appointment
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="sendQuickPrompt('නිරෝගීව සිටීමට සෞඛ්‍ය උපදෙස් කිහිපයක් දෙන්න')">
+                                <i class="bi bi-info-circle-fill text-success"></i> සෞඛ්‍ය උපදෙස්
+                            </button>
+                            <button type="button" class="quick-chip-btn" onclick="focusChatInput()">
+                                <i class="bi bi-question-circle-fill text-success"></i> වෙනත් ප්‍රශ්නයක්
+                            </button>
                         </div>
 
-                        <div class="moh-helpline-row">
-                            <div class="moh-icon-box">
-                                <i class="bi bi-heart-pulse-fill"></i>
-                            </div>
-                            <div>
-                                <div class="fw-bold text-dark">MOH සේවාව – මව සහ ළදරු සඳහා උපදෙස්</div>
-                                <small class="text-muted">Maternal & Child Health Clinic Guidance</small>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 ps-2 d-flex align-items-center gap-2">
-                            <i class="bi bi-globe2 text-success fs-5"></i>
-                            <span class="fw-bold text-dark small">වෙබ් අඩවිය:</span>
-                            <a href="https://www.health.gov.lk" target="_blank" rel="noopener" class="fw-bold text-success text-decoration-none small">
-                                www.health.gov.lk
-                            </a>
-                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ==============================================================
-                 SECTION H: BOTTOM CALL-TO-ACTION BUTTON
-                 ============================================================== -->
-            <div class="text-center pb-3">
-                <a href="{{ route('chatbot.index') }}" class="btn-bottom-cta">
-                    <i class="bi bi-chat-dots-fill"></i>
-                    <span>AI Chat Bot වෙත ගොස් සෞඛ්‍ය තොරතුරු විමසන්න</span>
-                    <i class="bi bi-arrow-right"></i>
-                </a>
-            </div>
+                <!-- Chat Bottom Input Area -->
+                <div class="chat-input-section">
+                    <form id="aiChatForm" class="chat-input-pill">
+                        <!-- Voice Input Button (Uses Browser Speech Recognition if supported) -->
+                        <button type="button" class="input-action-icon" id="voiceInputBtn" title="Speak your question">
+                            <i class="bi bi-mic-fill"></i>
+                        </button>
 
+                        <!-- Info Shortcut Button -->
+                        <a href="{{ route('chatbot.info') }}" class="input-action-icon" title="AI Usage & Medical Info">
+                            <i class="bi bi-paperclip"></i>
+                        </a>
+
+                        <!-- User Message Text Input -->
+                        <input type="text"
+                               id="userMessageInput"
+                               class="chat-text-input"
+                               placeholder="ඔබගේ ප්‍රශ්නය මෙතන ටයිප් කරන්න..."
+                               autocomplete="off"
+                               required>
+
+                        <!-- Send Button -->
+                        <button type="submit" class="btn-send-message" id="sendMessageBtn">
+                            <i class="bi bi-send-fill"></i> Send
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Bottom Trust Badges & Cursive Slogan -->
+                <div class="chat-trust-footer">
+                    <div class="trust-badges-group">
+                        <span class="trust-badge-item">
+                            <i class="bi bi-shield-fill-check text-success fs-6"></i> 100% Secure
+                        </span>
+                        <span class="text-muted opacity-25">|</span>
+                        <span class="trust-badge-item">
+                            <i class="bi bi-lightning-charge-fill text-success fs-6"></i> Instant Support
+                        </span>
+                        <span class="text-muted opacity-25">|</span>
+                        <span class="trust-badge-item">
+                            <i class="bi bi-heart-fill text-success fs-6"></i> Caring Always
+                        </span>
+                    </div>
+
+                    <div class="cursive-slogan">
+                        Healthy Community, Healthy Sri Lanka
+                    </div>
+                </div>
+
+            </div>
         </main>
     </div>
 
-    <!-- Bootstrap 5.3 JS Bundle -->
+    <!-- ======================================================================
+         JAVASCRIPT: REAL-TIME AI CHAT INTERACTION & UI HELPERS
+         ====================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatForm = document.getElementById('aiChatForm');
+            const messageInput = document.getElementById('userMessageInput');
+            const sendBtn = document.getElementById('sendMessageBtn');
+            const messagesStream = document.getElementById('messagesStream');
+            const chatContainer = document.getElementById('chatMessagesContainer');
+            const welcomeTimestamp = document.getElementById('welcomeTimestamp');
+            const voiceBtn = document.getElementById('voiceInputBtn');
+
+            // Set initial welcome message time
+            welcomeTimestamp.textContent = getCurrentFormattedTime();
+
+            // Helper: Format current local time (e.g., 10:15 PM)
+            function getCurrentFormattedTime() {
+                const now = new Date();
+                return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            // Helper: Smoothly scroll chat container to the latest message
+            function scrollToBottom() {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            // Helper: Format AI text response (converts bullet points & bold text into clean HTML)
+            function formatAiResponseText(rawText) {
+                let escaped = rawText
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+
+                // Convert **bold** markdown to <strong>
+                escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                // Convert bullet lines (* or -) to green checkmark items
+                const lines = escaped.split('\n');
+                const formattedLines = lines.map(line => {
+                    const trimmed = line.trim();
+                    if (trimmed.startsWith('* ') || trimmed.startsWith('- ')) {
+                        return `<div class="d-flex align-items-start gap-2 my-1">
+                                    <i class="bi bi-check-square-fill text-success mt-1"></i>
+                                    <span>${trimmed.substring(2)}</span>
+                                </div>`;
+                    }
+                    return line;
+                });
+
+                return formattedLines.join('<br>');
+            }
+
+            // Append User Message Bubble to the Chat Stream
+            function appendUserMessage(text) {
+                const row = document.createElement('div');
+                row.className = 'user-msg-row';
+                row.innerHTML = `
+                    <div class="user-speech-bubble">
+                        <span>${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>
+                        <small class="text-muted fw-normal" style="font-size: 11px;">
+                            ${getCurrentFormattedTime()} <i class="bi bi-check2-all text-success"></i>
+                        </small>
+                    </div>
+                    <div class="user-msg-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                `;
+                messagesStream.appendChild(row);
+                scrollToBottom();
+            }
+
+            // Show Animated Typing Indicator while waiting for Gemini API
+            function showTypingIndicator() {
+                const typingRow = document.createElement('div');
+                typingRow.className = 'bot-msg-row';
+                typingRow.id = 'aiTypingIndicator';
+                typingRow.innerHTML = `
+                    <div class="msg-bot-icon">
+                        <i class="bi bi-robot text-success fs-5"></i>
+                    </div>
+                    <div class="bot-speech-bubble py-2 px-3" style="min-width: auto;">
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                `;
+                messagesStream.appendChild(typingRow);
+                scrollToBottom();
+            }
+
+            // Remove Typing Indicator
+            function removeTypingIndicator() {
+                const indicator = document.getElementById('aiTypingIndicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+
+            // Append AI Assistant Response Bubble
+            function appendBotMessage(replyText) {
+                const row = document.createElement('div');
+                row.className = 'bot-msg-row';
+                row.innerHTML = `
+                    <div class="msg-bot-icon">
+                        <i class="bi bi-robot text-success fs-5"></i>
+                    </div>
+                    <div class="bot-speech-bubble">
+                        <div>${formatAiResponseText(replyText)}</div>
+                        <span class="msg-timestamp">${getCurrentFormattedTime()}</span>
+                    </div>
+                `;
+                messagesStream.appendChild(row);
+                scrollToBottom();
+            }
+
+            // Core Function: Send Question to Laravel ChatbotController
+            async function submitChatMessage(messageText) {
+                const cleanMessage = messageText.trim();
+                if (!cleanMessage) return;
+
+                // Disable input while processing
+                messageInput.value = '';
+                messageInput.disabled = true;
+                sendBtn.disabled = true;
+
+                appendUserMessage(cleanMessage);
+                showTypingIndicator();
+
+                try {
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    const response = await fetch("{{ route('chatbot.ask') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({ message: cleanMessage })
+                    });
+
+                    const data = await response.json();
+                    removeTypingIndicator();
+
+                    const botReply = data.reply || data.response || data.message || 'පිළිතුරක් ලබා ගැනීමට නොහැකි විය.';
+                    appendBotMessage(botReply);
+
+                } catch (error) {
+                    removeTypingIndicator();
+                    appendBotMessage('සම්බන්ධතා දෝෂයකි. කරුණාකර අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න.');
+                } finally {
+                    messageInput.disabled = false;
+                    sendBtn.disabled = false;
+                    messageInput.focus();
+                }
+            }
+
+            // Handle Form Submit
+            chatForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                submitChatMessage(messageInput.value);
+            });
+
+            // Expose Quick Chip Function Globally
+            window.sendQuickPrompt = function (promptText) {
+                submitChatMessage(promptText);
+            };
+
+            // Expose Input Focus Helper Globally
+            window.focusChatInput = function () {
+                messageInput.focus();
+            };
+
+            // Optional Voice-to-Text Support via Browser Web Speech API
+            if (voiceBtn) {
+                voiceBtn.addEventListener('click', function () {
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    if (!SpeechRecognition) {
+                        alert('Voice input is not supported in this browser. Please type your question.');
+                        return;
+                    }
+                    const recognition = new SpeechRecognition();
+                    recognition.lang = 'en-US';
+                    voiceBtn.classList.add('text-danger');
+
+                    recognition.onresult = function (event) {
+                        const transcript = event.results[0][0].transcript;
+                        messageInput.value = transcript;
+                        voiceBtn.classList.remove('text-danger');
+                        messageInput.focus();
+                    };
+
+                    recognition.onerror = function () {
+                        voiceBtn.classList.remove('text-danger');
+                    };
+
+                    recognition.start();
+                });
+            }
+        });
+      
+    </script>
+
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
