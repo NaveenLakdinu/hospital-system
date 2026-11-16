@@ -147,3 +147,31 @@
             background-color: #22c55e;
             box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
         }
+        /* ==========================================================================
+           4. CHAT BODY WITH RIGHT-SIDE DOCTOR & CHILD ILLUSTRATION
+           ========================================================================== */
+        .clinic-chat-body {
+            position: relative;
+            flex-grow: 1;
+            background: linear-gradient(135deg, #ffffff 0%, #f4fbf8 60%, #e8f6f0 100%);
+            padding: 1.5rem 1.75rem;
+            overflow-y: auto;
+            max-height: 490px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Decorative Right-Side Family Doctor Illustration */
+        .clinic-bg-illustration {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 340px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            overflow: hidden;
+        }
