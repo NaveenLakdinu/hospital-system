@@ -175,3 +175,15 @@
             height: 180px;
             object-fit: cover;
         }
+        .step-number-badge {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #d1fae5;
+            color: #047857;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
