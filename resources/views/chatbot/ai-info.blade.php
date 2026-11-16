@@ -61,3 +61,7 @@
             align-items: center;
             gap: 6px;
         }
+        .top-nav-link:hover, .top-nav-link.active {
+            color: #059669;
+            background-color: #ecfdf5;
+        }
