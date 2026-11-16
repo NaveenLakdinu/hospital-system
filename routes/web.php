@@ -26,6 +26,10 @@ use App\Http\Controllers\LabTestController;
 
 
 
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Chatbot & AI Information Module Routes
