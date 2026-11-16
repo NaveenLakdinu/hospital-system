@@ -187,3 +187,15 @@
             justify-content: center;
             flex-shrink: 0;
         }
+       
+        <!-- ======================================================================
+         TOP NAVIGATION BAR (Matches MediCare24 Dashboard Header)
+         ====================================================================== -->
+    <header class="top-navbar d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <!-- Brand Logo -->
+        <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-2 text-decoration-none">
+            <span class="brand-badge">
+                <i class="bi bi-heart-pulse-fill"></i>
+            </span>
+            <span class="fw-bold fs-5 text-dark">MediCare<span style="color: #0d9488;">24</span></span>
+        </a>
