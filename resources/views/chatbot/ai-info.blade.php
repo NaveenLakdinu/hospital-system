@@ -74,3 +74,10 @@
             border-radius: 20px;
             letter-spacing: 0.4px;
         }
+        /* ==========================================================================
+           LEFT DARK GREEN SIDEBAR STYLES
+           ========================================================================== */
+        .app-layout {
+            display: flex;
+            min-height: calc(100vh - 65px);
+        }
