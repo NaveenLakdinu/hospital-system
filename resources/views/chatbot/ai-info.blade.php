@@ -65,3 +65,12 @@
             color: #059669;
             background-color: #ecfdf5;
         }
+        .badge-new {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+        }
