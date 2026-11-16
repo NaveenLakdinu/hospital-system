@@ -109,3 +109,13 @@
             background: rgba(255, 255, 255, 0.12);
             color: #ffffff;
         }
+        .sidebar-menu-btn.active {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            border-left: 4px solid #34d399;
+        }
+
+        .sidebar-bottom-emblem {
+            text-align: center;
+            padding: 1rem 0.5rem;
+        }
