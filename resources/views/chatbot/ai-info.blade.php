@@ -13,7 +13,7 @@
 
     <style>
         /* ==========================================================================
-           1. GLOBAL STYLES & COLOR VARIABLES (Original UI Preserved)
+           1. GLOBAL STYLES & COLOR VARIABLES
            ========================================================================== */
         :root {
             --primary-green: #10b981;
@@ -33,7 +33,7 @@
         }
 
         /* ==========================================================================
-           2. TOP NAVIGATION BAR STYLES (Original UI Preserved)
+           2. TOP NAVIGATION BAR STYLES
            ========================================================================== */
         .top-navbar {
             background: #ffffff;
@@ -99,7 +99,7 @@
         }
 
         /* ==========================================================================
-           3. LEFT DARK GREEN SIDEBAR STYLES (Original UI Preserved)
+           3. LEFT DARK GREEN SIDEBAR STYLES
            ========================================================================== */
         .app-layout {
             display: flex;
@@ -202,7 +202,7 @@
 
         .feature-card-img {
             width: 100%;
-            height: 180px;
+            height: 185px;
             object-fit: cover;
         }
 
@@ -220,9 +220,8 @@
         }
 
         /* ==========================================================================
-           5. NEWLY APPENDED SECTIONS: PRIVACY & SECURITY, EMERGENCY & MOH INFO
+           5. PRIVACY & SECURITY, EMERGENCY & MINISTRY OF HEALTH REAL PHOTO CARDS
            ========================================================================== */
-        /* Privacy & Security Split Card */
         .privacy-security-card {
             background: #ffffff;
             border-radius: 18px;
@@ -232,15 +231,13 @@
             margin-bottom: 1.75rem;
         }
 
-        .privacy-illustration-frame {
-            background: linear-gradient(135deg, #d1fae5 0%, #e0f2fe 100%);
+        /* Real Unsplash Photo Styling for Privacy & Hospital Sections */
+        .section-real-photo {
+            width: 100%;
+            height: 245px;
+            object-fit: cover;
             border-radius: 16px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            min-height: 230px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
         }
 
         /* Emergency Helpline Split Cards */
@@ -343,7 +340,7 @@
 <body>
 
     <!-- ======================================================================
-         TOP NAVIGATION BAR (Original Layout Preserved)
+         TOP NAVIGATION BAR
          ====================================================================== -->
     <header class="top-navbar d-flex justify-content-between align-items-center flex-wrap gap-3">
         <!-- Brand Logo -->
@@ -420,7 +417,7 @@
         <main class="main-content-area">
 
             <!-- ==============================================================
-                 1. ORIGINAL HERO HEADER BANNER
+                 1. HERO HEADER BANNER
                  ============================================================== -->
             <div class="info-hero-banner d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <div>
@@ -438,7 +435,7 @@
             </div>
 
             <!-- ==============================================================
-                 2. ORIGINAL IMPORTANT MEDICAL DISCLAIMER BOX
+                 2. IMPORTANT MEDICAL DISCLAIMER BOX
                  ============================================================== -->
             <div class="disclaimer-alert-card">
                 <div class="d-flex align-items-start gap-3">
@@ -462,14 +459,14 @@
             </div>
 
             <!-- ==============================================================
-                 3. ORIGINAL 3 ILLUSTRATED INFO CARDS ON HOW AI WORKS
+                 3. 3 REAL UNSPLASH PHOTO CARDS ON HOW AI WORKS
                  ============================================================== -->
             <div class="row g-4 mb-4">
-                <!-- Card 1: General Health Info Only -->
+                <!-- Card 1: Real Photo of Digital Healthcare Tablet -->
                 <div class="col-md-4">
                     <div class="feature-guide-card">
                         <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
-                             alt="Digital Health Information" class="feature-card-img">
+                             alt="Doctor reviewing digital health information on tablet" class="feature-card-img">
                         <div class="p-4">
                             <span class="badge bg-success-subtle text-success mb-2">Health Information Only</span>
                             <h6 class="fw-bold text-dark">සෞඛ්‍ය තොරතුරු පමණක් ලබා දීම</h6>
@@ -480,11 +477,11 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Doctor Consultation Guidance -->
+                <!-- Card 2: Real Photo of Medical Stethoscope & Consultation -->
                 <div class="col-md-4">
                     <div class="feature-guide-card">
                         <img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=800&q=80"
-                             alt="Doctor Consultation" class="feature-card-img">
+                             alt="Stethoscope on medical chart for specialist consultation" class="feature-card-img">
                         <div class="p-4">
                             <span class="badge bg-info-subtle text-info mb-2">Specialist Guidance</span>
                             <h6 class="fw-bold text-dark">වෛද්‍යවරුන් හා සායන සේවාවන්</h6>
@@ -495,11 +492,11 @@
                     </div>
                 </div>
 
-                <!-- Card 3: 100% Private & 24/7 Available -->
+                <!-- Card 3: Real Photo of Hospital Medical Care Team -->
                 <div class="col-md-4">
                     <div class="feature-guide-card">
                         <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=800&q=80"
-                             alt="24/7 Secure Support" class="feature-card-img">
+                             alt="Hospital medical team providing 24/7 healthcare support" class="feature-card-img">
                         <div class="p-4">
                             <span class="badge bg-primary-subtle text-primary mb-2">24/7 Secure Support</span>
                             <h6 class="fw-bold text-dark">පැය 24 පුරා ආරක්ෂිත සේවාව</h6>
@@ -512,7 +509,7 @@
             </div>
 
             <!-- ==============================================================
-                 4. ORIGINAL STEP-BY-STEP USER INSTRUCTIONS CARD
+                 4. STEP-BY-STEP USER INSTRUCTIONS CARD
                  ============================================================== -->
             <div class="card border-0 rounded-4 shadow-sm p-4 mb-4">
                 <h5 class="fw-bold text-dark mb-3">
@@ -544,29 +541,15 @@
             </div>
 
             <!-- ==============================================================
-                 5. APPENDED SECTION: PRIVACY & SECURITY AWARENESS CARD
+                 5. PRIVACY & SECURITY AWARENESS CARD (WITH REAL UNSPLASH PHOTO)
                  ============================================================== -->
             <div class="privacy-security-card">
                 <div class="row g-4 align-items-center">
-                    <!-- Left Column: Medical Data Privacy & Padlock Shield Illustration -->
+                    <!-- Left Column: Real Unsplash Cybersecurity & Data Privacy Photo -->
                     <div class="col-lg-5">
-                        <div class="privacy-illustration-frame">
-                            <svg width="215" height="190" viewBox="0 0 240 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Soft Backdrop Circle -->
-                                <circle cx="120" cy="105" r="88" fill="#ffffff" fill-opacity="0.85"/>
-                                <!-- Security Shield -->
-                                <path d="M120 26L182 52V104C182 145.5 155.6 182.8 120 194C84.4 182.8 58 145.5 58 104V52L120 26Z" fill="#0d9488"/>
-                                <path d="M120 36L172 58V104C172 139.5 149.5 171.5 120 182C90.5 171.5 68 139.5 68 104V58L120 36Z" fill="#10b981"/>
-                                <!-- Padlock Icon Inside Shield -->
-                                <path d="M104 94V82C104 73.163 111.163 66 120 66C128.837 66 136 73.163 136 82V94" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
-                                <rect x="94" y="92" width="52" height="44" rx="8" fill="#ffffff"/>
-                                <circle cx="120" cy="111" r="5" fill="#065f46"/>
-                                <path d="M120 115V124" stroke="#065f46" stroke-width="4" stroke-linecap="round"/>
-                                <!-- Floating Verified Check Badge -->
-                                <circle cx="168" cy="150" r="22" fill="#064e3b"/>
-                                <path d="M159 150L165 156L178 143" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80"
+                             alt="Digital data privacy and online account security"
+                             class="section-real-photo">
                     </div>
 
                     <!-- Right Column: Privacy & Security Guidelines Checklist -->
@@ -605,7 +588,7 @@
             </div>
 
             <!-- ==============================================================
-                 6. APPENDED SECTION: EMERGENCY HELPLINE SPLIT ROW
+                 6. EMERGENCY HELPLINE SPLIT ROW
                  ============================================================== -->
             <div class="row g-4 mb-4">
                 <!-- Left Card: 1990 Suwaseriya Emergency Ambulance Helpline -->
@@ -634,45 +617,28 @@
             </div>
 
             <!-- ==============================================================
-                 7. APPENDED SECTION: MINISTRY OF HEALTH SRI LANKA INFO CARD
+                 7. MINISTRY OF HEALTH SRI LANKA INFO CARD (WITH REAL HOSPITAL PHOTO)
                  ============================================================== -->
             <div class="moh-info-card">
                 <div class="row g-4 align-items-center">
-                    <!-- Left Column: Ministry Title & Hospital Building Vector Illustration -->
-                    <div class="col-lg-6 text-center">
-                        <h5 class="fw-bold text-dark mb-1">ශ්‍රී ලංකා සෞඛ්‍ය අමාත්‍යාංශය</h5>
-                        <p class="text-secondary fw-semibold small mb-3">(Ministry of Health - Sri Lanka)</p>
+                    <!-- Left Column: Ministry Title & Real Unsplash Hospital Building Photo -->
+                    <div class="col-lg-6">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold text-dark mb-1">ශ්‍රී ලංකා සෞඛ්‍ය අමාත්‍යාංශය</h5>
+                            <p class="text-secondary fw-semibold small mb-0">(Ministry of Health - Sri Lanka)</p>
+                        </div>
 
-                        <!-- Clean Hospital Building SVG Illustration -->
-                        <svg width="260" height="170" viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Ground Line -->
-                            <rect x="20" y="164" width="240" height="6" rx="3" fill="#10b981"/>
-                            <!-- Side Wings -->
-                            <rect x="35" y="75" width="55" height="89" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
-                            <rect x="190" y="75" width="55" height="89" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
-                            <!-- Main Central Hospital Tower -->
-                            <rect x="85" y="42" width="110" height="122" rx="6" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
-                            <!-- Top Medical Cross Emblem -->
-                            <circle cx="140" cy="30" r="22" fill="#ffffff" stroke="#059669" stroke-width="3"/>
-                            <rect x="135" y="18" width="10" height="24" rx="2" fill="#10b981"/>
-                            <rect x="128" y="25" width="24" height="10" rx="2" fill="#10b981"/>
-                            <!-- Windows Grid -->
-                            <rect x="102" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="131" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="160" y="64" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="102" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="131" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <rect x="160" y="92" width="18" height="16" rx="2" fill="#6ee7b7"/>
-                            <!-- Entrance Door -->
-                            <rect x="122" y="126" width="36" height="38" rx="4" fill="#059669"/>
-                        </svg>
+                        <!-- Real Hospital Building Photograph from Unsplash -->
+                        <img src="https://media.licdn.com/dms/image/v2/D561BAQEXdQIN2mi9Pw/company-background_10000/company-background_10000/0/1659758622766/ministry_of_health_sri_lanka_cover?e=2147483647&v=beta&t=OShMqJ07cPEFmjJuF-G3BtQBRjFuk8FnpPMqgaZo8N8"
+                             alt="Modern Hospital and Healthcare Facility"
+                             class="section-real-photo">
                     </div>
 
                     <!-- Right Column: National Health Helplines & Official Portal -->
                     <div class="col-lg-6">
                         <div class="moh-helpline-row">
                             <div class="moh-icon-box">
-                                <i class="bi bi-ambulance"></i>
+                                <i class="bi bi-bell-fill fs-1"></i>
                             </div>
                             <div>
                                 <div class="fw-bold text-dark">1990 – සුවසැරිය හදිසි ගිලන්රථ සේවාව</div>
@@ -712,7 +678,7 @@
             </div>
 
             <!-- ==============================================================
-                 8. APPENDED SECTION: BOTTOM CALL-TO-ACTION BUTTON
+                 8. BOTTOM CALL-TO-ACTION BUTTON
                  ============================================================== -->
             <div class="text-center pb-3">
                 <a href="{{ route('chatbot.index') }}" class="btn-bottom-cta">
