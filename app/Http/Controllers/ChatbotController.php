@@ -88,17 +88,5 @@ class ChatbotController extends Controller
                 }
 
                 return response()->json([
-                    'reply' => 'Gemini API Error: ' . $error
-                ], 500);
-            }
-
-            $reply = $response->json(
-                'candidates.0.content.parts.0.text'
-            );
-
-            if (empty($reply)) {
-                Log::wa
-                'error' => $e->getMessage(),
-                'model' => $model,
-            ]);
+         
 
