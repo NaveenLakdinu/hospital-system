@@ -184,3 +184,17 @@
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);
             opacity: 0.92;
         }
+        
+
+        .msg-bot-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e0f2fe;
+            border: 2px solid #ffffff;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
