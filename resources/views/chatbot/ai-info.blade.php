@@ -81,3 +81,13 @@
             display: flex;
             min-height: calc(100vh - 65px);
         }
+        .left-sidebar {
+            width: 225px;
+            background: var(--sidebar-gradient);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem 1rem;
+            flex-shrink: 0;
+        }
