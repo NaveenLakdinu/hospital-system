@@ -230,3 +230,12 @@
             </form>
         </div>
     </header
+
+    <!-- Bottom Hospital Health Emblem -->
+            <div class="sidebar-bottom-emblem">
+                <div class="glowing-heart-circle">
+                    <i class="bi bi-heart-pulse-fill text-white fs-3"></i>
+                </div>
+                <h6 class="fw-bold mb-1">Your Health<br>Our Priority</h6>
+                <small class="fst-italic text-white-50" style="font-size: 11px;">Together for a<br>Healthier Life</small>
+            </div>
