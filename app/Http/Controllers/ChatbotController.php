@@ -25,7 +25,7 @@ class ChatbotController extends Controller
             ], 422);
         }
 
-        $apiKey = env('GEMINI_API_KEY') ?: config('services.gemini.key');
+        $apiKey = trim((string) (env('GEMINI_API_KEY') ?: config('services.gemini.key')));
 
         if (empty($apiKey)) {
             $msg = '.env ගොනුවේ GEMINI_API_KEY ඇතුළත් කර නොමැත.';
@@ -38,8 +38,14 @@ class ChatbotController extends Controller
         }
 
         try {
-            $model = env('GEMINI_MODEL', 'gemini-2.5-flash');
-            $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}";
+            $model = trim((string) env('GEMINI_MODEL', 'gemini-2.5-flash'));
+
+            // AQ. වලින් පටන් ගන්නා Vertex AI Keys සහ AIza වලින් පටන් ගන්නා AI Studio Keys දෙකම සඳහා
+            if (str_starts_with($apiKey, 'AQ.')) {
+                $url = "https://aiplatform.googleapis.com/v1/publishers/google/models/{$model}:generateContent?key={$apiKey}";
+            } else {
+                $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}";
+            }
 
             $systemPrompt = "You are MediCare24 AI Health Assistant, a helpful and polite medical support assistant for MediCare24 Hospital. Answer clearly in the same language the user asks (Sinhala or English). Provide general health guidance and remind patients to consult a qualified MediCare24 doctor for an official diagnosis.";
 
@@ -51,6 +57,7 @@ class ChatbotController extends Controller
                 ->post($url, [
                     'contents' => [
                         [
+                            'role' => 'user',
                             'parts' => [
                                 ['text' => $systemPrompt . "\n\nPatient Question: " . $userMessage]
                             ]
@@ -71,7 +78,6 @@ class ChatbotController extends Controller
                 ]);
             }
 
-            // Google API එකෙන් එන සැබෑ දෝෂය Log කිරීම සහ පෙන්වීම
             Log::error('Gemini API Error: ' . $response->status() . ' - ' . $response->body());
             $googleError = $response->json('error.message') ?? 'API Error (' . $response->status() . ')';
             $errorMsg = 'AI දෝෂයකි: ' . $googleError;
