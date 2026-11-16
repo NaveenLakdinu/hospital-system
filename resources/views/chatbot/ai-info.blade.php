@@ -49,3 +49,15 @@
             color: #ffffff;
             font-size: 18px;
         }
+        .top-nav-link {
+            color: #475569;
+            font-weight: 600;
+            font-size: 13.5px;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
