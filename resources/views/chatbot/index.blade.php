@@ -491,3 +491,17 @@
         </main>
     </div>
                 </div>
+
+
+                <!-- ======================================================================
+         JAVASCRIPT: REAL-TIME AI CHAT INTERACTION & UI HELPERS
+         ====================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatForm = document.getElementById('aiChatForm');
+            const messageInput = document.getElementById('userMessageInput');
+            const sendBtn = document.getElementById('sendMessageBtn');
+            const messagesStream = document.getElementById('messagesStream');
+            const chatContainer = document.getElementById('chatMessagesContainer');
+            const welcomeTimestamp = document.getElementById('welcomeTimestamp');
+            const voiceBtn = document.getElementById('voiceInputBtn')
