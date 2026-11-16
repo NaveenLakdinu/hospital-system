@@ -38,4 +38,14 @@
             z-index: 1030;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
         }
-      
+      .brand-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2dd4bf, #0d9488);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 18px;
+        }
