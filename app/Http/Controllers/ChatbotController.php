@@ -83,10 +83,3 @@ class ChatbotController extends Controller
 
                 if ($status === 429 || $status === 503) {
                     return response()->json([
-                        'reply' => 'AI සේවාව මේ මොහොතේ කාර්යබහුලයි. කරුණාකර තත්පර කිහිපයකින් නැවත උත්සාහ කරන්න.'
-                    ], 503);
-                }
-
-                return response()->json([
-         
-
