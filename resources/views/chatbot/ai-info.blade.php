@@ -22,6 +22,7 @@
             --header-gradient: linear-gradient(90deg, #0d7a4e 0%, #16a366 55%, #10b981 100%);
             --soft-mint-bg: #eef7f4;
         }
+
         body {
             font-family: 'Plus Jakarta Sans', 'Noto Sans Sinhala', sans-serif;
             background-color: var(--soft-mint-bg);
@@ -29,6 +30,10 @@
             margin: 0;
             padding: 0;
         }
+
+        /* ==========================================================================
+           TOP NAVIGATION BAR STYLES
+           ========================================================================== */
         .top-navbar {
             background: #ffffff;
             border-bottom: 1px solid #e2e8f0;
@@ -38,7 +43,8 @@
             z-index: 1030;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
         }
-      .brand-badge {
+
+        .brand-badge {
             width: 38px;
             height: 38px;
             border-radius: 50%;
@@ -49,6 +55,7 @@
             color: #ffffff;
             font-size: 18px;
         }
+
         .top-nav-link {
             color: #475569;
             font-weight: 600;
@@ -61,10 +68,12 @@
             align-items: center;
             gap: 6px;
         }
+
         .top-nav-link:hover, .top-nav-link.active {
             color: #059669;
             background-color: #ecfdf5;
         }
+
         .badge-new {
             background: linear-gradient(135deg, #14b8a6, #0d9488);
             color: #fff;
@@ -74,6 +83,20 @@
             border-radius: 20px;
             letter-spacing: 0.4px;
         }
+
+        .user-avatar-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #0d9488;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* ==========================================================================
            LEFT DARK GREEN SIDEBAR STYLES
            ========================================================================== */
@@ -81,6 +104,7 @@
             display: flex;
             min-height: calc(100vh - 65px);
         }
+
         .left-sidebar {
             width: 225px;
             background: var(--sidebar-gradient);
@@ -91,6 +115,7 @@
             padding: 1.5rem 1rem;
             flex-shrink: 0;
         }
+
         .sidebar-menu-btn {
             display: flex;
             align-items: center;
@@ -109,6 +134,7 @@
             background: rgba(255, 255, 255, 0.12);
             color: #ffffff;
         }
+
         .sidebar-menu-btn.active {
             background: rgba(255, 255, 255, 0.18);
             color: #ffffff;
@@ -119,15 +145,18 @@
             text-align: center;
             padding: 1rem 0.5rem;
         }
-        .sidebar-menu-btn.active {
-            background: rgba(255, 255, 255, 0.18);
-            color: #ffffff;
-            border-left: 4px solid #34d399;
-        }
 
-        .sidebar-bottom-emblem {
-            text-align: center;
-            padding: 1rem 0.5rem;
+        .glowing-heart-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.35) 0%, rgba(16, 185, 129, 0.1) 70%);
+            border: 1px solid rgba(52, 211, 153, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            box-shadow: 0 0 25px rgba(52, 211, 153, 0.3);
         }
 
         /* ==========================================================================
@@ -175,6 +204,7 @@
             height: 180px;
             object-fit: cover;
         }
+
         .step-number-badge {
             width: 34px;
             height: 34px;
@@ -187,8 +217,18 @@
             justify-content: center;
             flex-shrink: 0;
         }
-       
-        <!-- ======================================================================
+
+        @media (max-width: 991px) {
+            .app-layout { flex-direction: column; }
+            .left-sidebar { width: 100%; flex-direction: row; align-items: center; padding: 1rem; }
+            .sidebar-bottom-emblem { display: none; }
+            .main-content-area { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======================================================================
          TOP NAVIGATION BAR (Matches MediCare24 Dashboard Header)
          ====================================================================== -->
     <header class="top-navbar d-flex justify-content-between align-items-center flex-wrap gap-3">
@@ -229,15 +269,78 @@
                 </button>
             </form>
         </div>
-    </header
+    </header>
 
-    <!-- Bottom Hospital Health Emblem -->
+    <!-- ======================================================================
+         MAIN LAYOUT WRAPPER (Left Dark Green Sidebar + Right AI Info Content)
+         ====================================================================== -->
+    <div class="app-layout">
+
+        <!-- Left Dark Green Sidebar -->
+        <aside class="left-sidebar">
+            <div>
+                <!-- Navigation Link Back to AI Chatbot -->
+                <a href="{{ route('chatbot.index') }}" class="sidebar-menu-btn">
+                    <i class="bi bi-robot fs-5"></i>
+                    <span>AI Chat Bot</span>
+                </a>
+
+                <!-- Active AI Info Page Link -->
+                <a href="{{ route('chatbot.info') }}" class="sidebar-menu-btn active">
+                    <i class="bi bi-info-circle-fill fs-5"></i>
+                    <span>AI Info</span>
+                </a>
+            </div>
+
+            <!-- Bottom Hospital Health Emblem -->
             <div class="sidebar-bottom-emblem">
                 <div class="glowing-heart-circle">
                     <i class="bi bi-heart-pulse-fill text-white fs-3"></i>
                 </div>
                 <h6 class="fw-bold mb-1">Your Health<br>Our Priority</h6>
                 <small class="fst-italic text-white-50" style="font-size: 11px;">Together for a<br>Healthier Life</small>
+            </div>
+        </aside>
+
+        <!-- Right Main Content Area: AI Usage Guide & Disclaimers -->
+        <main class="main-content-area">
+
+            <!-- Hero Header Banner -->
+            <div class="info-hero-banner d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <span class="badge bg-white text-success fw-bold px-3 py-1 rounded-pill mb-2">
+                        <i class="bi bi-stars me-1"></i> MediCare24 AI Guide
+                    </span>
+                    <h3 class="fw-bold mb-1">About MediCare24 AI Health Assistant</h3>
+                    <p class="mb-0 text-white-50">
+                        ඔබගේ සෞඛ්‍ය ගැටලු සඳහා ක්ෂණික තොරතුරු සහ මඟපෙන්වීම් ලබා ගන්නා ආකාරය දැනගන්න.
+                    </p>
+                </div>
+                <a href="{{ route('chatbot.index') }}" class="btn btn-light text-success fw-bold rounded-pill px-4 py-2 shadow-sm">
+                    <i class="bi bi-chat-dots-fill me-2"></i> Open AI Chat Bot
+                </a>
+            </div>
+
+            <!-- IMPORTANT MEDICAL DISCLAIMER BOX (No Prescriptions / Information Only) -->
+            <div class="disclaimer-alert-card">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="bg-warning text-dark rounded-circle p-3 d-flex align-items-center justify-content-center flex-shrink-0">
+                        <i class="bi bi-exclamation-triangle-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold text-dark mb-2">
+                            වැදගත් දැනුම්දීමයි: AI සහායකයා මඟින් බෙහෙත් නියම කිරීම (Prescriptions) සිදු නොකරයි!
+                        </h5>
+                        <p class="text-dark mb-2">
+                            <strong>MediCare24 AI Assistant</strong> නිර්මාණය කර ඇත්තේ ඔබට <strong>සාමාන්‍ය සෞඛ්‍ය තොරතුරු (General Health Information)</strong>, රෝග ලක්ෂණ පිළිබඳ මූලික අවබෝධය, සහ සුදුසු වෛද්‍යවරයෙකු වෙත යොමු වීමට මඟපෙන්වීම සඳහා පමණි.
+                        </p>
+                        <ul class="mb-0 text-secondary small fw-semibold">
+                            <li class="mb-1">❌ මෙම AI පද්ධතිය මඟින් කිසිදු ඖෂධයක් (Medicines) නියම කිරීම හෝ මාත්‍රාවන් (Dosage) ලබා දීම සිදු නොකරයි.</li>
+                            <li class="mb-1">✅ ඖෂධ ලබා ගැනීම සඳහා සෑම විටම <strong>MediCare24</strong> සුදුසුකම් ලත් වෛද්‍යවරයෙකු හමුවී නිල වෛද්‍ය උපදෙස් (Prescription) ලබා ගන්න.</li>
+                            <li>🚑 හදිසි රෝගී තත්ත්වයකදී (පපුවේ වේදනාව, හුස්ම ගැනීමේ අපහසුතා ආදිය) වහාම ළඟම ඇති රෝහල වෙත යොමු වන්න.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- 3 Illustrated Info Cards on How AI Works -->
@@ -255,3 +358,73 @@
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Card 2: Doctor Consultation Guidance -->
+                <div class="col-md-4">
+                    <div class="feature-guide-card">
+                        <img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=800&q=80"
+                             alt="Doctor Consultation" class="feature-card-img">
+                        <div class="p-4">
+                            <span class="badge bg-info-subtle text-info mb-2">Specialist Guidance</span>
+                            <h6 class="fw-bold text-dark">වෛද්‍යවරුන් හා සායන සේවාවන්</h6>
+                            <p class="text-secondary small mb-0">
+                                ඔබගේ රෝග ලක්ෂණ අනුව හමුවිය යුතු විශේෂඥ වෛද්‍යවරයා කවුරුන්ද යන්න සහ Clinic Appointments වෙන් කරගන්නා ආකාරය AI මඟින් පෙන්වා දෙයි.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: 100% Private & 24/7 Available -->
+                <div class="col-md-4">
+                    <div class="feature-guide-card">
+                        <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=800&q=80"
+                             alt="24/7 Secure Support" class="feature-card-img">
+                        <div class="p-4">
+                            <span class="badge bg-primary-subtle text-primary mb-2">24/7 Secure Support</span>
+                            <h6 class="fw-bold text-dark">පැය 24 පුරා ආරක්ෂිත සේවාව</h6>
+                            <p class="text-secondary small mb-0">
+                                ඕනෑම වේලාවක ඔබගේ සෞඛ්‍ය ගැටලු විමසිය හැකි අතර, ඔබගේ පෞද්ගලික තොරතුරු 100% ක් ආරක්ෂිතව සුරැකේ.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step-by-Step User Instructions -->
+            <div class="card border-0 rounded-4 shadow-sm p-4">
+                <h5 class="fw-bold text-dark mb-3">
+                    <i class="bi bi-journal-check text-success me-2"></i> AI Chat Bot භාවිතා කරන ආකාරය (How to Use)
+                </h5>
+                <div class="row g-3">
+                    <div class="col-md-4 d-flex align-items-start gap-3">
+                        <span class="step-number-badge">1</span>
+                        <div>
+                            <h6 class="fw-bold mb-1">ඔබගේ ප්‍රශ්නය ටයිප් කරන්න</h6>
+                            <small class="text-secondary">පහළ ඇති Text Box එකේ සිංහලෙන් හෝ English වලින් ඔබගේ සෞඛ්‍ය ගැටලුව ඇතුළත් කරන්න.</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-start gap-3">
+                        <span class="step-number-badge">2</span>
+                        <div>
+                            <h6 class="fw-bold mb-1">Quick Buttons භාවිතා කරන්න</h6>
+                            <small class="text-secondary">"Clinic සේවාවන්", "රෝග ලක්ෂණ", "Appointment" වැනි ඉක්මන් බොත්තම් Click කර ක්ෂණික තොරතුරු ලබා ගන්න.</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-start gap-3">
+                        <span class="step-number-badge">3</span>
+                        <div>
+                            <h6 class="fw-bold mb-1">වෛද්‍යවරයෙකු වෙත යොමු වන්න</h6>
+                            <small class="text-secondary">AI ලබා දෙන තොරතුරු මත පදනම්ව අවශ්‍ය නම් Find Doctors හරහා වෛද්‍යවරයෙකු වෙන් කරගන්න.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
