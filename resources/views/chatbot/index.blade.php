@@ -505,3 +505,80 @@
             const chatContainer = document.getElementById('chatMessagesContainer');
             const welcomeTimestamp = document.getElementById('welcomeTimestamp');
             const voiceBtn = document.getElementById('voiceInputBtn')
+            // Set initial welcome message time
+            welcomeTimestamp.textContent = getCurrentFormattedTime();
+
+            // Helper: Format current local time (e.g., 10:15 PM)
+            function getCurrentFormattedTime() {
+                const now = new Date();
+                return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            // Helper: Smoothly scroll chat container to the latest message
+            function scrollToBottom() {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            // Helper: Format AI text response (converts bullet points & bold text into clean HTML)
+            function formatAiResponseText(rawText) {
+                let escaped = rawText
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+
+                // Convert **bold** markdown to <strong>
+                escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                // Convert bullet lines (* or -) to green checkmark items
+                const lines = escaped.split('\n');
+                const formattedLines = lines.map(line => {
+                    const trimmed = line.trim();
+                    if (trimmed.startsWith('* ') || trimmed.startsWith('- ')) {
+                        return `<div class="d-flex align-items-start gap-2 my-1">
+                                    <i class="bi bi-check-square-fill text-success mt-1"></i>
+                                    <span>${trimmed.substring(2)}</span>
+                                </div>`;
+                    }
+                    return line;
+                });
+
+                return formattedLines.join('<br>');
+            }
+
+            // Append User Message Bubble to the Chat Stream
+            function appendUserMessage(text) {
+                const row = document.createElement('div');
+                row.className = 'user-msg-row';
+                row.innerHTML = `
+                    <div class="user-speech-bubble">
+                        <span>${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>
+                        <small class="text-muted fw-normal" style="font-size: 11px;">
+                            ${getCurrentFormattedTime()} <i class="bi bi-check2-all text-success"></i>
+                        </small>
+                    </div>
+                    <div class="user-msg-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                `;
+                messagesStream.appendChild(row);
+                scrollToBottom();
+            }
+
+            // Show Animated Typing Indicator while waiting for Gemini API
+            function showTypingIndicator() {
+                const typingRow = document.createElement('div');
+                typingRow.className = 'bot-msg-row';
+                typingRow.id = 'aiTypingIndicator';
+                typingRow.innerHTML = `
+                    <div class="msg-bot-icon">
+                        <i class="bi bi-robot text-success fs-5"></i>
+                    </div>
+                    <div class="bot-speech-bubble py-2 px-3" style="min-width: auto;">
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                `;
+                messagesStream.appendChild(typingRow);
+                scrollToBottom();
+            }
