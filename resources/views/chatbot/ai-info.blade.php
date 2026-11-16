@@ -199,3 +199,16 @@
             </span>
             <span class="fw-bold fs-5 text-dark">MediCare<span style="color: #0d9488;">24</span></span>
         </a>
+
+        <!-- Center Navigation Links -->
+        <nav class="d-none d-xl-flex align-items-center gap-2">
+            <a href="{{ Route::has('doctors.index') ? route('doctors.index') : '#' }}" class="top-nav-link">Find Doctors</a>
+            <a href="#" class="top-nav-link">Video Consult</a>
+            <a href="{{ Route::has('lab.index') ? route('lab.index') : '#' }}" class="top-nav-link">Lab Tests</a>
+            <a href="#" class="top-nav-link">Surgeries</a>
+            <a href="{{ route('chatbot.index') }}" class="top-nav-link">
+                AI Chat Bot <span class="badge-new">NEW</span>
+            </a>
+            <a href="#" class="top-nav-link">For Providers</a>
+            <a href="{{ route('chatbot.info') }}" class="top-nav-link active">AI Info & Help</a>
+        </nav>
