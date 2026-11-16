@@ -274,3 +274,28 @@
         .btn-send-message:disabled {
             opacity: 0.65;
             cursor: not-allowed
+
+
+            1. TOP NAVIGATION BAR
+         ====================================================================== -->
+    <header class="top-navbar d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <!-- Brand Logo -->
+        <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-2 text-decoration-none">
+            <span class="brand-logo-icon">
+                <i class="bi bi-heart-pulse-fill"></i>
+            </span>
+            <span class="fw-bold fs-5 text-dark">MediCare<span style="color: #0d9488;">24</span></span>
+        </a>
+
+        <!-- Center Navigation Links -->
+        <nav class="d-none d-xl-flex align-items-center gap-2">
+            <a href="{{ Route::has('doctors.index') ? route('doctors.index') : '#' }}" class="nav-menu-item">Find Doctors</a>
+            <a href="#" class="nav-menu-item">Video Consult</a>
+            <a href="{{ Route::has('lab.index') ? route('lab.index') : '#' }}" class="nav-menu-item">Lab Tests</a>
+            <a href="#" class="nav-menu-item">Surgeries</a>
+            <a href="{{ route('chatbot.index') }}" class="nav-menu-item active">
+                AI Chat Bot <span class="badge-new-pill">NEW</span>
+            </a>
+            <a href="#" class="nav-menu-item">For Providers</a>
+            <a href="{{ route('chatbot.info') }}" class="nav-menu-item">AI Info & Help</a>
+        </nav>
