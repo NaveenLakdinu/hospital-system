@@ -23,11 +23,6 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\LabTestController;
 
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Chatbot & AI Information Module Routes
