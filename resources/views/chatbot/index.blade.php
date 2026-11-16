@@ -92,15 +92,18 @@
             flex-shrink: 0;
             position: relative;
         }
-        display: flex;
-            align-items: center;
-            gap: 12px;
-            color: rgba(255, 255, 255, 0.88);
-            text-decoration: none;
-            padding: 12px 14px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 8px;
-            transition: all 0.2s ease;
+       .sidebar-nav-link:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+        }
+
+        .sidebar-nav-link.active {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            border-left: 4px solid #34d399;
+        }
+
+        .sidebar-footer-brand {
+            text-align: center;
+            padding: 1rem 0.5rem;
         }
