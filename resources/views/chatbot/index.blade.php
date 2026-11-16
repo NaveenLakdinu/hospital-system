@@ -663,7 +663,7 @@
 
                     <!-- Right-Side Decorative Doctor & Child Illustration -->
                     <div class="clinic-bg-illustration">
-                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=80"
+                        <img src="https://images.unsplash.com/photo-1644878601205-4222aa8c4ad0?q=80&w=704&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                              alt="Family Doctor Caring">
                     </div>
 
