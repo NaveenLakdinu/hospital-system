@@ -198,3 +198,15 @@
             justify-content: center;
             flex-shrink: 0;
         }
+        .bot-speech-bubble {
+            background: var(--bot-bubble-bg);
+            border: 1px solid #cceee0;
+            border-radius: 18px;
+            border-top-left-radius: 4px;
+            padding: 1rem 1.25rem;
+            color: #1e293b;
+            font-size: 14px;
+            line-height: 1.65;
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.05);
+            position: relative;
+            min-width: 260px;
