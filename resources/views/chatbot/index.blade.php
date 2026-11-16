@@ -437,4 +437,57 @@
                         </div>
 
                     </div>
+
+                    <!-- Chat Bottom Input Area -->
+                <div class="chat-input-section">
+                    <form id="aiChatForm" class="chat-input-pill">
+                        <!-- Voice Input Button (Uses Browser Speech Recognition if supported) -->
+                        <button type="button" class="input-action-icon" id="voiceInputBtn" title="Speak your question">
+                            <i class="bi bi-mic-fill"></i>
+                        </button>
+
+                        <!-- Info Shortcut Button -->
+                        <a href="{{ route('chatbot.info') }}" class="input-action-icon" title="AI Usage & Medical Info">
+                            <i class="bi bi-paperclip"></i>
+                        </a>
+
+                        <!-- User Message Text Input -->
+                        <input type="text"
+                               id="userMessageInput"
+                               class="chat-text-input"
+                               placeholder="ඔබගේ ප්‍රශ්නය මෙතන ටයිප් කරන්න..."
+                               autocomplete="off"
+                               required>
+
+                        <!-- Send Button -->
+                        <button type="submit" class="btn-send-message" id="sendMessageBtn">
+                            <i class="bi bi-send-fill"></i> Send
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Bottom Trust Badges & Cursive Slogan -->
+                <div class="chat-trust-footer">
+                    <div class="trust-badges-group">
+                        <span class="trust-badge-item">
+                            <i class="bi bi-shield-fill-check text-success fs-6"></i> 100% Secure
+                        </span>
+                        <span class="text-muted opacity-25">|</span>
+                        <span class="trust-badge-item">
+                            <i class="bi bi-lightning-charge-fill text-success fs-6"></i> Instant Support
+                        </span>
+                        <span class="text-muted opacity-25">|</span>
+                        <span class="trust-badge-item">
+                            <i class="bi bi-heart-fill text-success fs-6"></i> Caring Always
+                        </span>
+                    </div>
+
+                    <div class="cursive-slogan">
+                        Healthy Community, Healthy Sri Lanka
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
                 </div>
