@@ -38,3 +38,13 @@
             z-index: 1030;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
         }
+        ========================================================================== */
+        .top-navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 1.75rem;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+        }
