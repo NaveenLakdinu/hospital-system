@@ -35,6 +35,25 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chatbot', function () {
         return view('chatbot.index');
     })->name('chatbot.index');
+    /*
+|--------------------------------------------------------------------------
+| Chatbot & AI Information Module Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    // Main AI Chatbot Interface Route
+    Route::get('/chatbot', function () {
+        return view('chatbot.index');
+    })->name('chatbot.index');
+
+    // AI Chatbot Message Processing API Endpoint
+    Route::post('/chatbot/ask', [ChatbotController::class, 'ask'])->name('chatbot.ask');
+
+    // AI Usage Guide & Medical Disclaimer Information Page
+    Route::get('/ai-info', function () {
+        return view('chatbot.ai-info');
+    })->name('chatbot.info');
+});
 
 });
 
