@@ -117,9 +117,3 @@ class ChatbotController extends Controller
                 'model' => $model,
             ]);
 
-            return response()->json([
-                'reply' => 'AI සේවාව සමඟ සම්බන්ධ වීමේ ගැටලුවක් ඇත. කරුණාකර නැවත උත්සාහ කරන්න.'
-            ], 500);
-        }
-    }
-}
