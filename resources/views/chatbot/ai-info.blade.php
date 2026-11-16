@@ -155,3 +155,23 @@
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.08);
             margin-bottom: 1.75rem;
         }
+
+        .feature-guide-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            height: 100%;
+            transition: transform 0.2s ease;
+        }
+
+        .feature-guide-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
