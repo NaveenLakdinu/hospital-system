@@ -299,3 +299,20 @@
             <a href="#" class="nav-menu-item">For Providers</a>
             <a href="{{ route('chatbot.info') }}" class="nav-menu-item">AI Info & Help</a>
         </nav>
+        <!-- Right User Profile & Logout -->
+        <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-2">
+                <span class="profile-initial-badge">
+                    {{ strtoupper(substr(Auth::user()->name ?? 'M', 0, 1)) }}
+                </span>
+                <span class="fw-semibold text-dark small">{{ Auth::user()->name ?? 'M.A.D Thennakoon' }}</span>
+            </div>
+            <span class="text-muted opacity-50">|</span>
+            <form method="POST" action="{{ route('logout') }}" class="m-0">
+                @csrf
+                <button type="submit" class="btn btn-link text-decoration-none text-secondary fw-semibold small p-0">
+                    Log Out
+                </button>
+            </form>
+        </div>
+    </header>
