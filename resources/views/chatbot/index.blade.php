@@ -73,3 +73,22 @@
             border-radius: 20px;
             letter-spacing: 0.5px;
         }
+        /* ==========================================================================
+           2. MAIN WORKSPACE & LEFT DARK GREEN SIDEBAR
+           ========================================================================== */
+        .workspace-wrapper {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        .left-green-sidebar {
+            width: 225px;
+            background: var(--sidebar-bg);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem 1rem;
+            flex-shrink: 0;
+            position: relative;
+        }
