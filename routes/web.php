@@ -69,19 +69,16 @@ Route::middleware(['auth'])->group(function () {
 /*
 |--------------------------------------------------------------------------
 | Public Welcome & Home Pages
+|--------------------------------------------------------------------------
+*/
 
 use App\Http\Controllers\Nurse\DashboardController as NurseDashboardController;
-
 use App\Http\Controllers\Nurse\VitalSignController;
-
 use App\Http\Controllers\Nurse\WalkInController;
-
-
 
 /*
 |--------------------------------------------------------------------------
 | Public Welcome Page
-
 |--------------------------------------------------------------------------
 */
 
@@ -89,23 +86,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Main Home Page
 |--------------------------------------------------------------------------
 */
 
-
 Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-
 /*
 |--------------------------------------------------------------------------
-
 | Admin Portal Routes
 |--------------------------------------------------------------------------
 */
@@ -118,7 +110,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/doctors/create', [AdminDoctorController::class, 'create'])->name('doctors.create');
     Route::post('/doctors', [AdminDoctorController::class, 'store'])->name('doctors.store');
     Route::delete('/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])->name('doctors.destroy');
+});
 
+/*
+|--------------------------------------------------------------------------
 | Doctor Search - Public / Patient
 |--------------------------------------------------------------------------
 */
@@ -126,16 +121,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::get('/doctors', [DoctorController::class, 'index'])
     ->name('doctors.index');
 
-
 /*
 |--------------------------------------------------------------------------
 | Doctor Portal
 |--------------------------------------------------------------------------
 */
 
-
 Route::middleware(['auth', 'role:doctor'])->group(function () {
-
 
     // Administrator Reports & Analytics
     Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
@@ -153,13 +145,11 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
         [DashboardController::class, 'dashboard']
     )->name('doctor.dashboard');
 
-
     // View Consultation
     Route::get(
         '/doctor/consultations/{appointment}',
         [ConsultationController::class, 'show']
     )->name('doctor.consultation.show');
-
 
     // Save Consultation
     Route::post(
@@ -167,13 +157,11 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
         [ConsultationController::class, 'store']
     )->name('doctor.consultation.store');
 
-
     // Create Prescription using Consultation ID
     Route::get(
         '/doctor/prescriptions/create/{consultation}',
         [PrescriptionController::class, 'create']
     )->name('doctor.prescription.create');
-
 
     // Save Prescription using Consultation ID
     Route::post(
@@ -182,42 +170,42 @@ Route::middleware(['auth', 'role:doctor'])->group(function () {
     )->name('doctor.prescription.store');
 
     Route::get(
-    '/doctor/prescriptions/{prescription}/summary',
-    [PrescriptionController::class, 'summary']
-)->name('doctor.prescription.summary');
+        '/doctor/prescriptions/{prescription}/summary',
+        [PrescriptionController::class, 'summary']
+    )->name('doctor.prescription.summary');
 
-Route::delete(
-    '/doctor/appointments/{appointment}/consultation',
-    [PrescriptionController::class, 'destroy']
-)->name('doctor.consultation.destroy');
+    Route::delete(
+        '/doctor/appointments/{appointment}/consultation',
+        [PrescriptionController::class, 'destroy']
+    )->name('doctor.consultation.destroy');
 
-Route::get(
-    '/doctor/profile',
-    [DashboardController::class, 'profile']
-)->name('doctor.profile');
+    Route::get(
+        '/doctor/profile',
+        [DashboardController::class, 'profile']
+    )->name('doctor.profile');
 
-Route::get(
-    '/doctor/profile',
-    [DashboardController::class, 'profile']
-)->name('doctor.profile');
+    Route::get(
+        '/doctor/profile',
+        [DashboardController::class, 'profile']
+    )->name('doctor.profile');
 
-Route::get(
-    '/doctor/appointments/{appointment}/patients/{patient}/history',
-    [ConsultationController::class, 'history']
-)->name('doctor.patient.history');
-Route::get(
-    '/doctor/appointments/{appointment}/patients/{patient}/history',
-    [ConsultationController::class, 'history']
-)->name('doctor.patient.history');
+    Route::get(
+        '/doctor/appointments/{appointment}/patients/{patient}/history',
+        [ConsultationController::class, 'history']
+    )->name('doctor.patient.history');
 
-Route::get('/doctor/profile/edit', [DashboardController::class, 'editProfile'])
-    ->name('doctor.profile.edit');
+    Route::get(
+        '/doctor/appointments/{appointment}/patients/{patient}/history',
+        [ConsultationController::class, 'history']
+    )->name('doctor.patient.history');
 
-Route::put('/doctor/profile', [DashboardController::class, 'updateProfile'])
-    ->name('doctor.profile.update');
+    Route::get('/doctor/profile/edit', [DashboardController::class, 'editProfile'])
+        ->name('doctor.profile.edit');
+
+    Route::put('/doctor/profile', [DashboardController::class, 'updateProfile'])
+        ->name('doctor.profile.update');
 
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -232,7 +220,6 @@ Route::get(
     ->middleware(['auth', 'role:admin'])
     ->name('admin.dashboard');
 
-
 // Doctor Send Medicine Note to Pharmacy
 Route::middleware(['auth'])->group(function () {
     Route::get('/doctor/prescribe', [PharmacyController::class, 'createDoctorNote'])->name('doctor.prescribe.create');
@@ -241,7 +228,6 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-
 | Pharmacist & Pharmacy Admin Portal Routes (Updated New UI)
 |--------------------------------------------------------------------------
 */
@@ -282,7 +268,6 @@ Route::middleware(['auth'])->group(function () {
 /*
 |--------------------------------------------------------------------------
 | Authenticated Dashboard & Profile
-
 | Pharmacist Dashboard
 |--------------------------------------------------------------------------
 */
@@ -293,11 +278,9 @@ Route::get('/pharmacist/dashboard', function () {
     ->middleware(['auth', 'role:pharmacist'])
     ->name('pharmacist.dashboard');
 
-
 /*
 |--------------------------------------------------------------------------
 | Nurse Dashboard
-
 |--------------------------------------------------------------------------
 */
 
@@ -308,12 +291,13 @@ Route::get(
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.dashboard');
 
-    Route::get(
+Route::get(
     '/nurse/appointments/{appointment}/vitals',
     [VitalSignController::class, 'create']
 )
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.vitals.create');
+
 Route::post(
     '/nurse/appointments/{appointment}/vitals',
     [VitalSignController::class, 'store']
@@ -321,38 +305,37 @@ Route::post(
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.vitals.store');
 
-    Route::get(
+Route::get(
     '/nurse/appointments/{appointment}/vitals/summary',
     [VitalSignController::class, 'summary']
 )
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.vitals.summary');
 
-    Route::delete(
+Route::delete(
     '/nurse/appointments/{appointment}/vitals',
     [VitalSignController::class, 'destroy']
 )
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.vitals.destroy');
 
-    Route::get(
+Route::get(
     '/nurse/profile',
     [NurseDashboardController::class, 'profile']
 )
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.profile');
 
-    Route::get('/nurse/profile', [App\Http\Controllers\Nurse\DashboardController::class, 'profile'])
+Route::get('/nurse/profile', [App\Http\Controllers\Nurse\DashboardController::class, 'profile'])
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.profile');
 
-    Route::get(
+Route::get(
     '/nurse/walk-ins/create',
     [WalkInController::class, 'create']
 )
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.walkins.create');
-
 
 Route::post(
     '/nurse/walk-ins',
@@ -361,7 +344,7 @@ Route::post(
     ->middleware(['auth', 'role:nurse'])
     ->name('nurse.walkins.store');
 
-    Route::middleware([
+Route::middleware([
     'auth',
     'role:nurse'
 ])->group(function () {
@@ -371,18 +354,15 @@ Route::post(
         [VitalSignController::class, 'create']
     )->name('nurse.vitals.create');
 
-
     Route::post(
         '/nurse/appointments/{appointment}/vitals',
         [VitalSignController::class, 'store']
     )->name('nurse.vitals.store');
 
-
     Route::get(
         '/nurse/appointments/{appointment}/vitals/summary',
         [VitalSignController::class, 'summary']
     )->name('nurse.vitals.summary');
-
 
     Route::delete(
         '/nurse/appointments/{appointment}/vitals',
@@ -391,7 +371,7 @@ Route::post(
 
 });
 
-    /*
+/*
 |--------------------------------------------------------------------------
 | Default Authenticated Dashboard
 |--------------------------------------------------------------------------
@@ -403,14 +383,10 @@ Route::get('/dashboard', function () {
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
 /*
 |--------------------------------------------------------------------------
-
 | Patient Appointment Booking & Management
-
 | Profile
-
 |--------------------------------------------------------------------------
 */
 
@@ -433,12 +409,9 @@ Route::middleware('auth')->group(function () {
 
 });
 
-
 /*
 |--------------------------------------------------------------------------
-
 | Chatbot Module Routes
-
 | Social Login
 |--------------------------------------------------------------------------
 */
@@ -457,11 +430,9 @@ Route::middleware('guest')->group(function () {
 
 });
 
-
 /*
 |--------------------------------------------------------------------------
-| Patient Appointment Booking & Management (Auth Required)
-
+| Chatbot & Patient Appointment Booking (Auth Required)
 |--------------------------------------------------------------------------
 */
 
@@ -471,10 +442,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chatbot', function () {
         return view('chatbot.index');
     })->name('chatbot.index');
+
 });
 
-require __DIR__.'/auth.php';
-
+Route::middleware(['auth'])->group(function () {
 
     Route::get(
         '/appointments/book/{doctor}',
@@ -498,6 +469,4 @@ require __DIR__.'/auth.php';
 
 });
 
-
 require __DIR__.'/auth.php';
-
