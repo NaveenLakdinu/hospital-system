@@ -59,3 +59,17 @@
             align-items: center;
             gap: 6px;
         }
+        .nav-menu-item:hover, .nav-menu-item.active {
+            color: #059669;
+            background-color: #ecfdf5;
+        }
+
+        .badge-new-pill {
+            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
