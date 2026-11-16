@@ -14,8 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-
-        style>
         /* ==========================================================================
            GLOBAL THEME COLORS & TYPOGRAPHY
            ========================================================================== */
@@ -29,6 +27,7 @@
             --send-btn-bg: linear-gradient(135deg, #22c55e 0%, #0d9488 100%);
             --page-bg: #eef7f4;
         }
+
         body {
             font-family: 'Plus Jakarta Sans', 'Noto Sans Sinhala', sans-serif;
             background-color: var(--page-bg);
@@ -37,7 +36,10 @@
             padding: 0;
             overflow-x: hidden;
         }
-   
+
+        /* ==========================================================================
+           1. TOP NAVIGATION BAR
+           ========================================================================== */
         .top-navbar {
             background: #ffffff;
             border-bottom: 1px solid #e2e8f0;
@@ -47,7 +49,21 @@
             z-index: 1030;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
         }
-        nav-menu-item {
+
+        .brand-logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2dd4bf, #0d9488);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 18px;
+            box-shadow: 0 3px 10px rgba(13, 148, 136, 0.25);
+        }
+
+        .nav-menu-item {
             color: #475569;
             font-weight: 600;
             font-size: 13.5px;
@@ -59,6 +75,7 @@
             align-items: center;
             gap: 6px;
         }
+
         .nav-menu-item:hover, .nav-menu-item.active {
             color: #059669;
             background-color: #ecfdf5;
@@ -73,6 +90,20 @@
             border-radius: 20px;
             letter-spacing: 0.5px;
         }
+
+        .profile-initial-badge {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #0d9488;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* ==========================================================================
            2. MAIN WORKSPACE & LEFT DARK GREEN SIDEBAR
            ========================================================================== */
@@ -92,7 +123,22 @@
             flex-shrink: 0;
             position: relative;
         }
-       .sidebar-nav-link:hover {
+
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.88);
+            text-decoration: none;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-nav-link:hover {
             background: rgba(255, 255, 255, 0.14);
             color: #ffffff;
         }
@@ -107,6 +153,42 @@
             text-align: center;
             padding: 1rem 0.5rem;
         }
+
+        .heart-glow-orb {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.35) 0%, rgba(16, 185, 129, 0.08) 70%);
+            border: 1px solid rgba(52, 211, 153, 0.45);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            box-shadow: 0 0 28px rgba(52, 211, 153, 0.35);
+        }
+
+        /* ==========================================================================
+           3. MAIN CHAT CONTAINER CARD
+           ========================================================================== */
+        .chat-stage-container {
+            flex-grow: 1;
+            padding: 1.25rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clinic-chat-card {
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-height: 620px;
+        }
+
         /* Chat Card Top Emerald Header */
         .clinic-chat-header {
             background: var(--chat-header-bg);
@@ -116,6 +198,7 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .header-bot-avatar {
             width: 52px;
             height: 52px;
@@ -127,6 +210,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             flex-shrink: 0;
         }
+
         .online-status-pill {
             background: #ffffff;
             color: #065f46;
@@ -147,6 +231,7 @@
             background-color: #22c55e;
             box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
         }
+
         /* ==========================================================================
            4. CHAT BODY WITH RIGHT-SIDE DOCTOR & CHILD ILLUSTRATION
            ========================================================================== */
@@ -175,6 +260,7 @@
             justify-content: flex-end;
             overflow: hidden;
         }
+
         .clinic-bg-illustration img {
             width: 100%;
             height: 95%;
@@ -184,7 +270,40 @@
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);
             opacity: 0.92;
         }
-        
+
+        /* Floating Green Medical Heart Emblem on Top Right of Chat Canvas */
+        .floating-clinic-emblem {
+            position: absolute;
+            top: 18px;
+            right: 26px;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Chat Messages Column (Stays above background illustration) */
+        .messages-stream {
+            position: relative;
+            z-index: 3;
+            max-width: 74%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Bot Message Row */
+        .bot-msg-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
 
         .msg-bot-icon {
             width: 42px;
@@ -198,6 +317,7 @@
             justify-content: center;
             flex-shrink: 0;
         }
+
         .bot-speech-bubble {
             background: var(--bot-bubble-bg);
             border: 1px solid #cceee0;
@@ -210,8 +330,113 @@
             box-shadow: 0 3px 10px rgba(16, 185, 129, 0.05);
             position: relative;
             min-width: 260px;
+        }
 
-            .chat-input-pill {
+        .msg-timestamp {
+            font-size: 11px;
+            color: #64748b;
+            display: block;
+            text-align: right;
+            margin-top: 6px;
+        }
+
+        /* Quick Suggestion Chips Row */
+        .quick-chips-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-left: 54px;
+        }
+
+        .quick-chip-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 25px;
+            padding: 7px 14px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #1e293b;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .quick-chip-btn:hover {
+            background: #ecfdf5;
+            border-color: #10b981;
+            color: #047857;
+            transform: translateY(-1px);
+        }
+
+        /* User Message Row (Right Aligned) */
+        .user-msg-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            align-self: flex-end;
+        }
+
+        .user-speech-bubble {
+            background: var(--user-bubble-bg);
+            border: 1px solid #99e6cf;
+            border-radius: 22px;
+            border-bottom-right-radius: 4px;
+            padding: 0.75rem 1.25rem;
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 3px 10px rgba(13, 148, 136, 0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-msg-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #10b981;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Typing Indicator Dots */
+        .typing-dots span {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background-color: #10b981;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounceTyping 1.3s infinite ease-in-out both;
+        }
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounceTyping {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* ==========================================================================
+           5. CHAT INPUT BAR & TRUST FOOTER
+           ========================================================================== */
+        .chat-input-section {
+            background: #f8fafc;
+            padding: 0.9rem 1.5rem 0.6rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .chat-input-pill {
             background: #ffffff;
             border: 1px solid #cbd5e1;
             border-radius: 50px;
@@ -273,10 +498,57 @@
 
         .btn-send-message:disabled {
             opacity: 0.65;
-            cursor: not-allowed
+            cursor: not-allowed;
+        }
 
+        /* Bottom Trust Badges & Cursive Tagline */
+        .chat-trust-footer {
+            background: #ffffff;
+            padding: 0.65rem 1.75rem;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
-            1. TOP NAVIGATION BAR
+        .trust-badges-group {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .trust-badge-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cursive-slogan {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            font-weight: 700;
+            color: #065f46;
+        }
+
+        @media (max-width: 991px) {
+            .workspace-wrapper { flex-direction: column; }
+            .left-green-sidebar { width: 100%; flex-direction: row; align-items: center; padding: 0.8rem 1rem; }
+            .sidebar-footer-brand { display: none; }
+            .messages-stream { max-width: 100%; }
+            .clinic-bg-illustration { display: none; }
+            .chat-stage-container { padding: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======================================================================
+         1. TOP NAVIGATION BAR
          ====================================================================== -->
     <header class="top-navbar d-flex justify-content-between align-items-center flex-wrap gap-3">
         <!-- Brand Logo -->
@@ -299,6 +571,7 @@
             <a href="#" class="nav-menu-item">For Providers</a>
             <a href="{{ route('chatbot.info') }}" class="nav-menu-item">AI Info & Help</a>
         </nav>
+
         <!-- Right User Profile & Logout -->
         <div class="d-flex align-items-center gap-3">
             <div class="d-flex align-items-center gap-2">
@@ -317,9 +590,7 @@
         </div>
     </header>
 
-
-
-<!-- ======================================================================
+    <!-- ======================================================================
          2. MAIN WORKSPACE (Left Dark Green Sidebar + Right AI Chat Card)
          ====================================================================== -->
     <div class="workspace-wrapper">
@@ -437,8 +708,9 @@
                         </div>
 
                     </div>
+                </div>
 
-                    <!-- Chat Bottom Input Area -->
+                <!-- Chat Bottom Input Area -->
                 <div class="chat-input-section">
                     <form id="aiChatForm" class="chat-input-pill">
                         <!-- Voice Input Button (Uses Browser Speech Recognition if supported) -->
@@ -490,10 +762,8 @@
             </div>
         </main>
     </div>
-                </div>
 
-
-                <!-- ======================================================================
+    <!-- ======================================================================
          JAVASCRIPT: REAL-TIME AI CHAT INTERACTION & UI HELPERS
          ====================================================================== -->
     <script>
@@ -504,7 +774,8 @@
             const messagesStream = document.getElementById('messagesStream');
             const chatContainer = document.getElementById('chatMessagesContainer');
             const welcomeTimestamp = document.getElementById('welcomeTimestamp');
-            const voiceBtn = document.getElementById('voiceInputBtn')
+            const voiceBtn = document.getElementById('voiceInputBtn');
+
             // Set initial welcome message time
             welcomeTimestamp.textContent = getCurrentFormattedTime();
 
@@ -582,3 +853,120 @@
                 messagesStream.appendChild(typingRow);
                 scrollToBottom();
             }
+
+            // Remove Typing Indicator
+            function removeTypingIndicator() {
+                const indicator = document.getElementById('aiTypingIndicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+
+            // Append AI Assistant Response Bubble
+            function appendBotMessage(replyText) {
+                const row = document.createElement('div');
+                row.className = 'bot-msg-row';
+                row.innerHTML = `
+                    <div class="msg-bot-icon">
+                        <i class="bi bi-robot text-success fs-5"></i>
+                    </div>
+                    <div class="bot-speech-bubble">
+                        <div>${formatAiResponseText(replyText)}</div>
+                        <span class="msg-timestamp">${getCurrentFormattedTime()}</span>
+                    </div>
+                `;
+                messagesStream.appendChild(row);
+                scrollToBottom();
+            }
+
+            // Core Function: Send Question to Laravel ChatbotController
+            async function submitChatMessage(messageText) {
+                const cleanMessage = messageText.trim();
+                if (!cleanMessage) return;
+
+                // Disable input while processing
+                messageInput.value = '';
+                messageInput.disabled = true;
+                sendBtn.disabled = true;
+
+                appendUserMessage(cleanMessage);
+                showTypingIndicator();
+
+                try {
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    const response = await fetch("{{ route('chatbot.ask') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({ message: cleanMessage })
+                    });
+
+                    const data = await response.json();
+                    removeTypingIndicator();
+
+                    const botReply = data.reply || data.response || data.message || 'පිළිතුරක් ලබා ගැනීමට නොහැකි විය.';
+                    appendBotMessage(botReply);
+
+                } catch (error) {
+                    removeTypingIndicator();
+                    appendBotMessage('සම්බන්ධතා දෝෂයකි. කරුණාකර අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න.');
+                } finally {
+                    messageInput.disabled = false;
+                    sendBtn.disabled = false;
+                    messageInput.focus();
+                }
+            }
+
+            // Handle Form Submit
+            chatForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                submitChatMessage(messageInput.value);
+            });
+
+            // Expose Quick Chip Function Globally
+            window.sendQuickPrompt = function (promptText) {
+                submitChatMessage(promptText);
+            };
+
+            // Expose Input Focus Helper Globally
+            window.focusChatInput = function () {
+                messageInput.focus();
+            };
+
+            // Optional Voice-to-Text Support via Browser Web Speech API
+            if (voiceBtn) {
+                voiceBtn.addEventListener('click', function () {
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    if (!SpeechRecognition) {
+                        alert('Voice input is not supported in this browser. Please type your question.');
+                        return;
+                    }
+                    const recognition = new SpeechRecognition();
+                    recognition.lang = 'en-US';
+                    voiceBtn.classList.add('text-danger');
+
+                    recognition.onresult = function (event) {
+                        const transcript = event.results[0][0].transcript;
+                        messageInput.value = transcript;
+                        voiceBtn.classList.remove('text-danger');
+                        messageInput.focus();
+                    };
+
+                    recognition.onerror = function () {
+                        voiceBtn.classList.remove('text-danger');
+                    };
+
+                    recognition.start();
+                });
+            }
+        });
+    </script>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
