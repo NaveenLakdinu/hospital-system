@@ -239,3 +239,19 @@
                 <h6 class="fw-bold mb-1">Your Health<br>Our Priority</h6>
                 <small class="fst-italic text-white-50" style="font-size: 11px;">Together for a<br>Healthier Life</small>
             </div>
+
+            <!-- 3 Illustrated Info Cards on How AI Works -->
+            <div class="row g-4 mb-4">
+                <!-- Card 1: General Health Info Only -->
+                <div class="col-md-4">
+                    <div class="feature-guide-card">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
+                             alt="Digital Health Information" class="feature-card-img">
+                        <div class="p-4">
+                            <span class="badge bg-success-subtle text-success mb-2">Health Information Only</span>
+                            <h6 class="fw-bold text-dark">සෞඛ්‍ය තොරතුරු පමණක් ලබා දීම</h6>
+                            <p class="text-secondary small mb-0">
+                                උණ, සෙම්ප්‍රතිශ්‍යාව, දියවැඩියාව වැනි රෝග ලක්ෂණ සහ සෞඛ්‍ය සම්පන්න ජීවන රටාව පිළිබඳ නිවැරදි තොරතුරු සිංහලෙන් හෝ ඉංග්‍රීසියෙන් විමසිය හැක.
+                            </p>
+                        </div>
+                    </div>
