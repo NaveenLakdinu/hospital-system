@@ -129,3 +129,20 @@
             text-align: center;
             padding: 1rem 0.5rem;
         }
+
+        /* ==========================================================================
+           AI INFO MAIN CONTENT CARDS & ILLUSTRATIONS
+           ========================================================================== */
+        .main-content-area {
+            flex-grow: 1;
+            padding: 1.75rem 2rem;
+        }
+
+        .info-hero-banner {
+            background: var(--header-gradient);
+            border-radius: 20px;
+            padding: 2rem;
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.18);
+            margin-bottom: 1.75rem;
+        }
